@@ -17,26 +17,27 @@ img, svg { max-width: 100%; }
    accents. The site keeps this single look on purpose. It does not switch
    to a white theme when the viewer's device or app is in light mode. */
 :root {
-  color-scheme: dark;
+  color-scheme: light;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
 
-  --bg: #7fbb9e;
-  --surface: #5da080;
+  --bg: #f6f1ea;
+  --surface: #efe6d8;
   --surface-2: #28616c;
-  --fg: #16261e;
-  --muted: #1a2d24;
-  --on-dark: #f4f8f6;
+  --fg: #241208;
+  --muted: #6b5847;
+  --on-dark: #f6f1ea;
+  --pop: #7fbb9e;
   --accent: #b7410e;
   --accent-2: #c06c47;
   --on-accent: #fffaf6;
-  --border: rgba(22, 38, 30, 0.18);
-  --border-strong: rgba(22, 38, 30, 0.34);
-  --glow-1: rgba(183, 65, 14, 0.22);
-  --glow-2: rgba(40, 97, 108, 0.30);
-  --glow-3: rgba(192, 108, 71, 0.18);
-  --grid-line: rgba(22, 38, 30, 0.08);
-  --shadow: rgba(10, 26, 19, 0.35);
+  --border: rgba(36, 18, 8, 0.14);
+  --border-strong: rgba(36, 18, 8, 0.26);
+  --glow-1: rgba(183, 65, 14, 0.18);
+  --glow-2: rgba(127, 187, 158, 0.30);
+  --glow-3: rgba(192, 108, 71, 0.16);
+  --grid-line: rgba(36, 18, 8, 0.06);
+  --shadow: rgba(36, 18, 8, 0.18);
 
   --font-display: 'Hanken Grotesk', 'Segoe UI', system-ui, sans-serif;
   --font-body: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
@@ -418,7 +419,7 @@ html[lang="vi"] .brand-sub, html[lang="vi"] .eyebrow, html[lang="vi"] .tag { lin
 .hero-art .link { stroke: var(--accent); stroke-opacity: 0.6; stroke-width: 1.5; }
 .hero-art .link.faint { stroke: var(--accent-2); stroke-opacity: 0.3; stroke-width: 1; }
 .hero-art .node { fill: var(--surface); stroke: var(--accent); stroke-width: 1.8; }
-.hero-art .dot { fill: var(--accent-2); fill-opacity: 0.65; }
+.hero-art .dot { fill: var(--pop); fill-opacity: 0.85; }
 .hero-art .lbl { font-family: var(--font-mono); font-size: 12px; fill: var(--muted); }
 .hero-art .hub-lbl { fill: var(--fg); }
 .hero-art .glow-a { stop-color: var(--accent); stop-opacity: 0.5; }
