@@ -21,22 +21,23 @@ img, svg { max-width: 100%; }
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
 
-  --bg: #7fbb9e;
-  --surface: #5da080;
+  --bg: #0f292e;
+  --surface: #1b444b;
   --surface-2: #28616c;
-  --fg: #16261e;
-  --muted: #1a2d24;
-  --on-dark: #f4f8f6;
+  --fg: #f3f7f4;
+  --muted: #b9d6c9;
+  --on-dark: #f3f7f4;
+  --pop: #7fbb9e;
   --accent: #b7410e;
   --accent-2: #c06c47;
   --on-accent: #fffaf6;
-  --border: rgba(22, 38, 30, 0.18);
-  --border-strong: rgba(22, 38, 30, 0.34);
-  --glow-1: rgba(183, 65, 14, 0.22);
-  --glow-2: rgba(40, 97, 108, 0.30);
+  --border: rgba(243, 247, 244, 0.14);
+  --border-strong: rgba(243, 247, 244, 0.28);
+  --glow-1: rgba(183, 65, 14, 0.26);
+  --glow-2: rgba(127, 187, 158, 0.28);
   --glow-3: rgba(192, 108, 71, 0.18);
-  --grid-line: rgba(22, 38, 30, 0.08);
-  --shadow: rgba(10, 26, 19, 0.35);
+  --grid-line: rgba(243, 247, 244, 0.07);
+  --shadow: rgba(2, 14, 12, 0.5);
 
   --font-display: 'Hanken Grotesk', 'Segoe UI', system-ui, sans-serif;
   --font-body: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
@@ -505,7 +506,7 @@ html[lang="vi"] .brand-sub, html[lang="vi"] .eyebrow, html[lang="vi"] .tag { lin
 .card-foot { margin-top: auto; padding-top: 8px; }
 .card-link { font-family: var(--font-mono); font-size: 0.85rem; text-decoration: none; }
 .card-link:hover { text-decoration: underline; }
-.price { font-family: var(--font-mono); color: var(--accent); font-size: 1.05rem; font-weight: 500; }
+.price { font-family: var(--font-mono); color: var(--pop); font-size: 1.05rem; font-weight: 500; }
 .status, .note { font-family: var(--font-mono); font-size: 0.88rem; color: var(--muted); }
 
 /* ---------- product chips + catalog rows ---------- */
