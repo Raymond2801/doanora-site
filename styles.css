@@ -21,11 +21,11 @@ img, svg { max-width: 100%; }
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
 
-  --bg: #153326;
-  --surface: #2a5a45;
-  --surface-2: #407d62;
-  --fg: #f6f9f8;
-  --muted: #a9d1bf;
+  --bg: #173024;
+  --surface: #5da080;
+  --surface-2: #7fbb9e;
+  --fg: #f4f8f6;
+  --muted: #b3cfc1;
   --accent: #f28115;
   --accent-2: #e82426;
   --on-accent: #2a1002;
