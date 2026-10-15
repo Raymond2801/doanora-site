@@ -12,30 +12,31 @@ html { scroll-behavior: smooth; }
 img, svg { max-width: 100%; }
 [hidden] { display: none !important; }
 
-/* ---------- tokens: one deliberate palette ("Lagoon") ----------
-   Deep petrol teal with amber and coral accents. The site keeps this single
-   look on purpose. It does not switch to a white theme when the viewer's
-   device or app is in light mode. */
+/* ---------- tokens: one deliberate palette ("Neptune Flame") ----------
+   Deep Pantone Neptune Green (14-6017 TCX) with Le Creuset Flame orange-red
+   accents. The site keeps this single look on purpose. It does not switch
+   to a white theme when the viewer's device or app is in light mode. */
 :root {
-  color-scheme: dark;
+  color-scheme: light;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
 
-  --bg: #103a42;
-  --surface: #1b4c55;
+  --bg: #7fbb9e;
+  --surface: #5da080;
   --surface-2: #28616c;
-  --fg: #effcfd;
-  --muted: #b8dae0;
-  --accent: #ffb84d;
-  --accent-2: #ff7a6b;
-  --on-accent: #2b1204;
-  --border: rgba(239, 252, 253, 0.16);
-  --border-strong: rgba(239, 252, 253, 0.32);
-  --glow-1: rgba(255, 184, 77, 0.26);
-  --glow-2: rgba(47, 211, 196, 0.30);
-  --glow-3: rgba(255, 122, 107, 0.18);
-  --grid-line: rgba(239, 252, 253, 0.08);
-  --shadow: rgba(2, 20, 26, 0.50);
+  --fg: #16261e;
+  --muted: #1a2d24;
+  --on-dark: #f4f8f6;
+  --accent: #b7410e;
+  --accent-2: #c06c47;
+  --on-accent: #fffaf6;
+  --border: rgba(22, 38, 30, 0.18);
+  --border-strong: rgba(22, 38, 30, 0.34);
+  --glow-1: rgba(183, 65, 14, 0.22);
+  --glow-2: rgba(40, 97, 108, 0.30);
+  --glow-3: rgba(192, 108, 71, 0.18);
+  --grid-line: rgba(22, 38, 30, 0.08);
+  --shadow: rgba(10, 26, 19, 0.35);
 
   --font-display: 'Hanken Grotesk', 'Segoe UI', system-ui, sans-serif;
   --font-body: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
@@ -249,9 +250,9 @@ nav.links a {
   border: 1px solid transparent;
   transition: background-color 0.15s, color 0.15s, border-color 0.15s;
 }
-nav.links a:hover { color: var(--fg); background: var(--surface-2); }
+nav.links a:hover { color: var(--on-dark); background: var(--surface-2); }
 nav.links a[aria-current="page"] {
-  color: var(--fg);
+  color: var(--on-dark);
   background: var(--surface-2);
   border-color: var(--border-strong);
   box-shadow: inset 0 -3px 0 var(--accent);
@@ -296,7 +297,7 @@ nav.links a[aria-current="page"] {
   cursor: pointer;
   transition: background-color 0.15s, color 0.15s, border-color 0.15s;
 }
-.lang-btn:hover, .lang-btn[aria-expanded="true"] { color: var(--fg); background: var(--surface-2); }
+.lang-btn:hover, .lang-btn[aria-expanded="true"] { color: var(--on-dark); background: var(--surface-2); }
 .lang-globe { flex: none; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .lang-chev {
   flex: none;
@@ -338,8 +339,8 @@ nav.links a[aria-current="page"] {
   padding: 0.7em 0.85em;
   cursor: pointer;
 }
-.lang-opt:hover { background: var(--surface-2); }
-.lang-opt[aria-current="true"] { color: var(--accent); background: var(--surface-2); }
+.lang-opt:hover { background: var(--surface-2); color: var(--on-dark); }
+.lang-opt[aria-current="true"] { color: var(--on-dark); background: var(--surface-2); }
 .lang-opt[aria-current="true"]::after {
   content: "";
   flex: none;
@@ -413,11 +414,11 @@ html[lang="vi"] .brand-sub, html[lang="vi"] .eyebrow, html[lang="vi"] .tag { lin
 /* hero art: Winston's hub-and-spoke agent layout, drawn as quiet background */
 .hero-art { display: none; margin: 0; pointer-events: none; }
 .hero-art svg { display: block; width: 100%; height: auto; overflow: visible; }
-.hero-art .ring { fill: none; stroke: var(--border-strong); stroke-dasharray: 2 7; stroke-linecap: round; }
-.hero-art .link { stroke: var(--accent); stroke-opacity: 0.6; stroke-width: 1.5; }
-.hero-art .link.faint { stroke: var(--accent-2); stroke-opacity: 0.3; stroke-width: 1; }
-.hero-art .node { fill: var(--surface); stroke: var(--accent); stroke-width: 1.8; }
-.hero-art .dot { fill: var(--accent-2); fill-opacity: 0.65; }
+.hero-art .ring { fill: none; stroke: var(--surface-2); stroke-opacity: 0.4; stroke-width: 1.3; stroke-dasharray: 2 7; stroke-linecap: round; }
+.hero-art .link { stroke: var(--accent); stroke-opacity: 0.8; stroke-width: 1.6; }
+.hero-art .link.faint { stroke: var(--surface-2); stroke-opacity: 0.35; stroke-width: 1; }
+.hero-art .node { fill: var(--on-accent); stroke: var(--accent); stroke-width: 2.4; }
+.hero-art .dot { fill: var(--accent); fill-opacity: 0.9; }
 .hero-art .lbl { font-family: var(--font-mono); font-size: 12px; fill: var(--muted); }
 .hero-art .hub-lbl { fill: var(--fg); }
 .hero-art .glow-a { stop-color: var(--accent); stop-opacity: 0.5; }
