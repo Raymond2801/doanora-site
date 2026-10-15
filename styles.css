@@ -414,11 +414,11 @@ html[lang="vi"] .brand-sub, html[lang="vi"] .eyebrow, html[lang="vi"] .tag { lin
 /* hero art: Winston's hub-and-spoke agent layout, drawn as quiet background */
 .hero-art { display: none; margin: 0; pointer-events: none; }
 .hero-art svg { display: block; width: 100%; height: auto; overflow: visible; }
-.hero-art .ring { fill: none; stroke: var(--border-strong); stroke-dasharray: 2 7; stroke-linecap: round; }
-.hero-art .link { stroke: var(--accent); stroke-opacity: 0.6; stroke-width: 1.5; }
-.hero-art .link.faint { stroke: var(--accent-2); stroke-opacity: 0.3; stroke-width: 1; }
-.hero-art .node { fill: var(--surface); stroke: var(--accent); stroke-width: 1.8; }
-.hero-art .dot { fill: var(--accent-2); fill-opacity: 0.65; }
+.hero-art .ring { fill: none; stroke: var(--surface-2); stroke-opacity: 0.4; stroke-width: 1.3; stroke-dasharray: 2 7; stroke-linecap: round; }
+.hero-art .link { stroke: var(--accent); stroke-opacity: 0.8; stroke-width: 1.6; }
+.hero-art .link.faint { stroke: var(--surface-2); stroke-opacity: 0.35; stroke-width: 1; }
+.hero-art .node { fill: var(--on-accent); stroke: var(--accent); stroke-width: 2.4; }
+.hero-art .dot { fill: var(--accent); fill-opacity: 0.9; }
 .hero-art .lbl { font-family: var(--font-mono); font-size: 12px; fill: var(--muted); }
 .hero-art .hub-lbl { fill: var(--fg); }
 .hero-art .glow-a { stop-color: var(--accent); stop-opacity: 0.5; }
