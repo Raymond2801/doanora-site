@@ -17,7 +17,7 @@ img, svg { max-width: 100%; }
    accents. The site keeps this single look on purpose. It does not switch
    to a white theme when the viewer's device or app is in light mode. */
 :root {
-  color-scheme: dark;
+  color-scheme: light;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
 
