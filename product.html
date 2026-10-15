@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title id="page-title">Products | Raymond Doan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+<script src="i18n.js"></script>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">RD</span>
+      <span class="brand-text">
+        <span class="brand-name">Raymond Doan</span>
+        <span class="brand-sub" data-i18n="brand.sub">AI systems &middot; Security</span>
+      </span>
+    </a>
+    <nav class="links" aria-label="Main" data-i18n-aria="nav.main">
+      <a href="index.html" data-i18n="nav.start">Start</a>
+      <a href="products.html" aria-current="page" data-i18n="nav.products">Products</a>
+      <a href="blog.html" data-i18n="nav.blog">Blog</a>
+    </nav>
+    <div class="lang-switch">
+      <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="lang-menu" aria-label="Language: English"><svg class="lang-globe" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.6 2.6 4 5.7 4 9s-1.4 6.4-4 9c-2.6-2.6-4-5.7-4-9s1.4-6.4 4-9z"></path></svg><span class="lang-code">EN</span><span class="lang-chev" aria-hidden="true"></span></button>
+      <ul class="lang-menu" id="lang-menu" hidden>
+        <li><button class="lang-opt" type="button" lang="en" data-lang="en">English</button></li>
+        <li><button class="lang-opt" type="button" lang="vi" data-lang="vi">Ti&#7871;ng Vi&#7879;t</button></li>
+        <li><button class="lang-opt" type="button" lang="es" data-lang="es">Espa&ntilde;ol</button></li>
+      </ul>
+    </div>
+    <a class="nav-cta" href="https://raymonddoan.gumroad.com" target="_blank" rel="noopener"><span class="cta-long" data-i18n="cta.long">Shop on Gumroad</span><span class="cta-short" data-i18n="cta.short">Shop</span><span aria-hidden="true">&#8599;</span></a>
+  </div>
+</header>
+
+<main>
+  <div class="product wrap" id="product-root"></div>
+
+  <div class="wrap" id="not-found" hidden>
+    <div class="empty-state">
+      <p class="eyebrow" data-i18n="product.nf.e">Product not found</p>
+      <p data-i18n="product.nf.p">That link may be out of date.</p>
+      <div class="btn-row" style="justify-content: center;">
+        <a class="btn btn-ghost" href="products.html" data-i18n="product.nf.btn">See all products</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="band related" id="related" hidden>
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="gradient-rule"></div>
+          <h2 data-i18n="product.more">More products</h2>
+        </div>
+        <a class="section-link" href="products.html" data-i18n="featured.all">All products &rarr;</a>
+      </div>
+      <div class="related-grid" id="related-grid"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p data-i18n="foot.line">Raymond Doan &middot; Perth, Australia</p>
+    <nav aria-label="Footer" data-i18n-aria="foot.nav">
+      <a href="index.html" data-i18n="nav.start">Start</a>
+      <a href="products.html" data-i18n="nav.products">Products</a>
+      <a href="blog.html" data-i18n="nav.blog">Blog</a>
+      <a href="https://raymonddoan.gumroad.com" target="_blank" rel="noopener" data-i18n="foot.store">Gumroad store</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="ui-vi.js"></script>
+<script src="ui-es.js"></script>
+<script src="products-data.js"></script>
+<script src="products-vi.js"></script>
+<script src="products-es.js"></script>
+<script src="site.js"></script>
+<script>
+(function () {
+  var S = window.Site;
+  var root = document.getElementById('product-root');
+  var notFound = document.getElementById('not-found');
+  var relatedBand = document.getElementById('related');
+  var relatedGrid = document.getElementById('related-grid');
+  var ARROW_L = String.fromCharCode(8592);
+  var ARROW_R = String.fromCharCode(8594);
+  var ARROW_NE = String.fromCharCode(8599);
+
+  function showNotFound() {
+    document.title = window.I18n ? window.I18n.t('product.nf.title', 'Product not found | Raymond Doan') : 'Product not found | Raymond Doan';
+    root.hidden = true;
+    relatedBand.hidden = true;
+    notFound.hidden = false;
+  }
+  if (!S) { showNotFound(); return; }
+
+  function el(tag, cls, text) { return S.el(tag, cls, text); }
+  function hidden(node) { node.setAttribute('aria-hidden', 'true'); return node; }
+
+  function bySlug(slug) { return S.productBySlug(slug); }
+  function href(slug) { return 'product.html#' + encodeURIComponent(slug); }
+  function priceText(p) { return S.priceText(p); }
+
+  function bullets(items, cls) {
+    var list = el('ul', cls || 'ticks');
+    (items || []).forEach(function (t) { list.appendChild(el('li', null, t)); });
+    return list;
+  }
+
+  function steps(items) {
+    var list = el('ol', 'steps');
+    (items || []).forEach(function (t) {
+      var li = el('li');
+      li.appendChild(el('span', null, t));
+      list.appendChild(li);
+    });
+    return list;
+  }
+
+  function terms(pairs) {
+    var dl = el('dl', 'glance wide');
+    (pairs || []).forEach(function (kv) {
+      var row = el('div');
+      row.appendChild(el('dt', null, kv[0]));
+      row.appendChild(el('dd', null, kv[1]));
+      dl.appendChild(row);
+    });
+    return dl;
+  }
+
+  function included(items) {
+    var list = el('ul', 'catalog');
+    (items || []).forEach(function (it) {
+      /* An item that names a product takes its name, price and link from that product.
+         If the product is switched off or missing, the row stays but says it is not available. */
+      var target = it.slug ? bySlug(it.slug) : null;
+      var missing = !!it.slug && !target;
+      var name = target ? target.name : it.name;
+      var price = target ? (target.status === 'live' ? target.price : '') : (!it.slug && it.status === 'live' ? it.price : '');
+      var li = el('li', 'row' + (price ? '' : ' soon'));
+      var main = el('div', 'row-main');
+      var h3 = el('h3');
+      if (target) {
+        var a = el('a', 'hit', name);
+        a.href = href(it.slug);
+        h3.appendChild(a);
+      } else {
+        h3.appendChild(document.createTextNode(name));
+      }
+      main.appendChild(h3);
+      if (it.blurb) main.appendChild(el('p', null, it.blurb));
+      li.appendChild(main);
+      var side = el('div', 'row-side');
+      if (target) side.appendChild(hidden(el('span', 'more', S.t('details', 'Details') + ' ' + ARROW_R)));
+      if (price) side.appendChild(el('span', 'price', price));
+      else side.appendChild(el('span', 'status', missing ? S.t('product.unavailable', 'Not available now') : (it.status === 'prep' ? S.t('product.prep', 'In preparation') : S.t('status.soon', 'Coming soon'))));
+      li.appendChild(side);
+      list.appendChild(li);
+    });
+    return list;
+  }
+
+  function section(sec) {
+    var box = el('div', 'product-section');
+    box.appendChild(el('h2', null, sec.h));
+    (sec.p || []).forEach(function (t) { box.appendChild(el('p', null, t)); });
+    if (sec.steps) box.appendChild(steps(sec.steps));
+    if (sec.pairs) box.appendChild(terms(sec.pairs));
+    if (sec.items) box.appendChild(included(sec.items));
+    if (sec.list) box.appendChild(bullets(sec.list));
+    if (sec.notList) {
+      box.appendChild(el('h3', null, sec.notH || S.t('product.notfor', 'Not for')));
+      box.appendChild(bullets(sec.notList, 'ticks nots'));
+    }
+    if (sec.after) box.appendChild(el('p', 'after', sec.after));
+    return box;
+  }
+
+  function ctaLink(p, block) {
+    var url = p.cta && S.safeUrl(p.cta.url);
+    if (!url) return null;
+    var a = el('a', 'btn btn-primary' + (block ? ' btn-block' : ''), p.cta.label);
+    a.href = url;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.appendChild(hidden(el('span', null, ARROW_NE)));
+    return a;
+  }
+
+  function render(moveFocus) {
+    var slug = '';
+    try { slug = decodeURIComponent((location.hash || '').replace(/^#/, '')); } catch (e) {}
+    var p = bySlug(slug);
+    root.textContent = '';
+    relatedGrid.textContent = '';
+    if (!p) { showNotFound(); return; }
+
+    notFound.hidden = true;
+    root.hidden = false;
+    document.title = p.name + ' | Raymond Doan';
+
+    /* A product with no translation yet shows in English; say so, and mark the English for screen readers. */
+    var englishOnly = !!p.untranslated && S.lang !== 'en';
+
+    var back = el('a', 'back-link', ARROW_L + ' ' + S.t('product.back', 'All products'));
+    back.href = 'products.html';
+    root.appendChild(back);
+    if (englishOnly) root.appendChild(el('p', 'note english-only', S.t('product.only_en', 'This page is only available in English for now.')));
+
+    var head = el('div', 'product-head');
+    var tags = el('div', 'tag-row');
+    tags.appendChild(el('span', 'tag', S.kindText(p) + ' ' + S.dot + ' ' + S.audienceText(p)));
+    if (p.status === 'soon') tags.appendChild(el('span', 'tag soon', S.t('status.soon', 'Coming soon')));
+    else tags.appendChild(el('span', 'tag ok', p.status === 'free' ? S.t('product.free', 'Free to play') : S.t('product.available', 'Available now')));
+    head.appendChild(tags);
+    var h1 = el('h1', null, p.name);
+    h1.tabIndex = -1;
+    head.appendChild(h1);
+    if (p.tagline) head.appendChild(el('p', 'lede', p.tagline));
+    var buy = el('div', 'buy-row');
+    if (p.status === 'soon') {
+      buy.appendChild(el('p', 'note', p.soonNote || S.t('product.notyet', 'Not on sale yet.')));
+    } else {
+      buy.appendChild(el('span', 'price', priceText(p)));
+      if (p.was && p.status === 'live') {
+        var was = el('span', 'was');
+        was.appendChild(el('span', 'sr-only', S.t('product.usual', 'Usual price') + ' '));
+        was.appendChild(document.createTextNode(p.was));
+        buy.appendChild(was);
+      }
+      var cta = ctaLink(p, false);
+      if (cta) buy.appendChild(cta);
+    }
+    head.appendChild(buy);
+    root.appendChild(head);
+
+    var layout = el('div', 'product-layout');
+    var body = el('div', 'product-body');
+    var intro = el('div', 'intro');
+    (p.intro || []).forEach(function (t) { intro.appendChild(el('p', null, t)); });
+    body.appendChild(intro);
+    (p.sections || []).forEach(function (sec) { if (sec && sec.h) body.appendChild(section(sec)); });
+    layout.appendChild(body);
+
+    var aside = el('aside', 'product-aside');
+    aside.setAttribute('aria-label', S.t('product.details', 'Product details'));
+    var card = el('div', 'aside-card');
+    card.appendChild(el('h2', null, S.t('product.glance', 'At a glance')));
+    var facts = el('dl', 'facts');
+    (p.facts || []).forEach(function (kv) {
+      var row = el('div');
+      row.appendChild(el('dt', null, kv[0]));
+      row.appendChild(el('dd', null, kv[1]));
+      facts.appendChild(row);
+    });
+    card.appendChild(facts);
+    var cta2 = ctaLink(p, true);
+    if (cta2) {
+      card.appendChild(cta2);
+      if (p.cta.note) card.appendChild(el('p', 'note', p.cta.note));
+    }
+    aside.appendChild(card);
+    layout.appendChild(aside);
+    if (englishOnly) { head.setAttribute('lang', 'en'); layout.setAttribute('lang', 'en'); }
+    root.appendChild(layout);
+
+    var rel = (p.related || []).map(bySlug).filter(Boolean).slice(0, 3);
+    if (rel.length) {
+      rel.forEach(function (r) {
+        var a = el('a', 'related-card');
+        a.href = href(r.slug);
+        var top = el('div', 'rc-top');
+        top.appendChild(el('span', null, S.kindText(r)));
+        top.appendChild(el('span', 'rc-price', priceText(r)));
+        a.appendChild(top);
+        a.appendChild(el('h3', null, r.name));
+        if (r.short) a.appendChild(el('p', null, r.short));
+        relatedGrid.appendChild(a);
+      });
+      relatedBand.hidden = false;
+    } else {
+      relatedBand.hidden = true;
+    }
+
+    if (moveFocus) { try { h1.focus({ preventScroll: true }); } catch (e) {} }
+  }
+
+  window.addEventListener('hashchange', function () {
+    render(true);
+    try { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); }
+    catch (e) { try { window.scrollTo(0, 0); } catch (e2) {} }
+  });
+  render(false);
+})();
+</script>
+
+</body>
+</html>

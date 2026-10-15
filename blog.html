@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-i18n="title.blog">Blog | Raymond Doan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+<script src="i18n.js"></script>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">RD</span>
+      <span class="brand-text">
+        <span class="brand-name">Raymond Doan</span>
+        <span class="brand-sub" data-i18n="brand.sub">AI systems &middot; Security</span>
+      </span>
+    </a>
+    <nav class="links" aria-label="Main" data-i18n-aria="nav.main">
+      <a href="index.html" data-i18n="nav.start">Start</a>
+      <a href="products.html" data-i18n="nav.products">Products</a>
+      <a href="blog.html" aria-current="page" data-i18n="nav.blog">Blog</a>
+    </nav>
+    <div class="lang-switch">
+      <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="lang-menu" aria-label="Language: English"><svg class="lang-globe" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.6 2.6 4 5.7 4 9s-1.4 6.4-4 9c-2.6-2.6-4-5.7-4-9s1.4-6.4 4-9z"></path></svg><span class="lang-code">EN</span><span class="lang-chev" aria-hidden="true"></span></button>
+      <ul class="lang-menu" id="lang-menu" hidden>
+        <li><button class="lang-opt" type="button" lang="en" data-lang="en">English</button></li>
+        <li><button class="lang-opt" type="button" lang="vi" data-lang="vi">Ti&#7871;ng Vi&#7879;t</button></li>
+        <li><button class="lang-opt" type="button" lang="es" data-lang="es">Espa&ntilde;ol</button></li>
+      </ul>
+    </div>
+    <a class="nav-cta" href="https://raymonddoan.gumroad.com" target="_blank" rel="noopener"><span class="cta-long" data-i18n="cta.long">Shop on Gumroad</span><span class="cta-short" data-i18n="cta.short">Shop</span><span aria-hidden="true">&#8599;</span></a>
+  </div>
+</header>
+
+<main>
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="blog.eyebrow">Blog</p>
+      <h1 data-i18n="blog.h1">Notes and news</h1>
+      <p class="lede" data-i18n="blog.lede">Two sections: my own notes from building and running things, and a plain-English digest of AI and ICT security news from around the world.</p>
+      <div class="tabs" role="tablist" aria-label="Blog sections" data-i18n-aria="blog.tabs">
+        <button class="tab" role="tab" id="tab-blog" type="button" aria-selected="true" aria-controls="panel-blog">
+          <span class="tab-title" data-i18n="type.blog">Personal blog</span>
+          <span class="tab-sub" data-i18n="blog.tab.blog">Weekly notes from building and learning</span>
+        </button>
+        <button class="tab" role="tab" id="tab-news" type="button" aria-selected="false" aria-controls="panel-news" tabindex="-1">
+          <span class="tab-title" data-i18n="type.news">AI &amp; ICT security news</span>
+          <span class="tab-sub" data-i18n="blog.tab.news">Worldwide, in plain English</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div id="panel-blog" role="tabpanel" aria-labelledby="tab-blog">
+        <p class="panel-intro" data-i18n="blog.panel.blog">Weekly notes from building AI tools and learning security in practice.</p>
+        <div class="list" id="list-blog"></div>
+      </div>
+      <div id="panel-news" role="tabpanel" aria-labelledby="tab-news" hidden>
+        <p class="panel-intro" data-i18n="blog.panel.news">A weekly digest of AI and ICT security news from around the world, summarised in plain English with links to the original sources.</p>
+        <div class="list" id="list-news"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p data-i18n="foot.line">Raymond Doan &middot; Perth, Australia</p>
+    <nav aria-label="Footer" data-i18n-aria="foot.nav">
+      <a href="index.html" data-i18n="nav.start">Start</a>
+      <a href="products.html" data-i18n="nav.products">Products</a>
+      <a href="blog.html" data-i18n="nav.blog">Blog</a>
+      <a href="https://raymonddoan.gumroad.com" target="_blank" rel="noopener" data-i18n="foot.store">Gumroad store</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="ui-vi.js"></script>
+<script src="ui-es.js"></script>
+<script src="posts.js"></script>
+<script src="site.js"></script>
+<script>
+(function () {
+  var S = window.Site;
+  if (!S) return;
+  var posts = S.allPosts();
+  var types = ['blog', 'news'];
+  var tabs = {};
+  var panels = {};
+  var empties = {
+    blog: [S.t('blog.empty.blog.e', 'First post in progress'), S.t('blog.empty.blog.p', "I'm writing the first one now. Check back shortly.")],
+    news: [S.t('blog.empty.news.e', 'First digest in progress'), S.t('blog.empty.news.p', 'The first weekly digest is on its way. Each one links to its sources.')]
+  };
+
+  types.forEach(function (t) {
+    tabs[t] = document.getElementById('tab-' + t);
+    panels[t] = document.getElementById('panel-' + t);
+    var list = document.getElementById('list-' + t);
+    var items = posts.filter(function (p) { return S.typeOf(p) === t; });
+    if (!items.length) {
+      list.appendChild(S.emptyState(empties[t][0], empties[t][1]));
+    } else {
+      items.forEach(function (p) { list.appendChild(S.postRow(p, false)); });
+    }
+  });
+
+  function select(t, opts) {
+    opts = opts || {};
+    types.forEach(function (k) {
+      var on = k === t;
+      tabs[k].setAttribute('aria-selected', on ? 'true' : 'false');
+      tabs[k].tabIndex = on ? 0 : -1;
+      panels[k].hidden = !on;
+    });
+    if (opts.focus) tabs[t].focus();
+    if (opts.updateHash) {
+      try { history.replaceState(null, '', '#' + (t === 'news' ? 'news' : 'personal')); } catch (e) {}
+    }
+  }
+
+  types.forEach(function (t) {
+    tabs[t].addEventListener('click', function () { select(t, { updateHash: true }); });
+    tabs[t].addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        select(t === 'blog' ? 'news' : 'blog', { focus: true, updateHash: true });
+      }
+    });
+  });
+
+  function fromHash() {
+    var h = (location.hash || '').replace(/^#/, '');
+    return h === 'news' ? 'news' : 'blog';
+  }
+  select(fromHash());
+  window.addEventListener('hashchange', function () { select(fromHash()); });
+})();
+</script>
+
+</body>
+</html>

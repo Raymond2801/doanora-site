@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-i18n="title.products">Products | Raymond Doan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+<script src="i18n.js"></script>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">RD</span>
+      <span class="brand-text">
+        <span class="brand-name">Raymond Doan</span>
+        <span class="brand-sub" data-i18n="brand.sub">AI systems &middot; Security</span>
+      </span>
+    </a>
+    <nav class="links" aria-label="Main" data-i18n-aria="nav.main">
+      <a href="index.html" data-i18n="nav.start">Start</a>
+      <a href="products.html" aria-current="page" data-i18n="nav.products">Products</a>
+      <a href="blog.html" data-i18n="nav.blog">Blog</a>
+    </nav>
+    <div class="lang-switch">
+      <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="lang-menu" aria-label="Language: English"><svg class="lang-globe" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.6 2.6 4 5.7 4 9s-1.4 6.4-4 9c-2.6-2.6-4-5.7-4-9s1.4-6.4 4-9z"></path></svg><span class="lang-code">EN</span><span class="lang-chev" aria-hidden="true"></span></button>
+      <ul class="lang-menu" id="lang-menu" hidden>
+        <li><button class="lang-opt" type="button" lang="en" data-lang="en">English</button></li>
+        <li><button class="lang-opt" type="button" lang="vi" data-lang="vi">Ti&#7871;ng Vi&#7879;t</button></li>
+        <li><button class="lang-opt" type="button" lang="es" data-lang="es">Espa&ntilde;ol</button></li>
+      </ul>
+    </div>
+    <a class="nav-cta" href="https://raymonddoan.gumroad.com" target="_blank" rel="noopener"><span class="cta-long" data-i18n="cta.long">Shop on Gumroad</span><span class="cta-short" data-i18n="cta.short">Shop</span><span aria-hidden="true">&#8599;</span></a>
+  </div>
+</header>
+
+<main>
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="products.eyebrow">Products</p>
+      <h1 data-i18n="products.h1">Built to run first, sold second</h1>
+      <p class="lede" data-i18n="products.lede">Every product here started as something I needed myself. I run it in production, fix what breaks, then package it so other small teams can use it without the build process. Open any product to read the full description.</p>
+      <nav class="chips" aria-label="Product sections" data-i18n-aria="products.chips">
+        <a href="#featured" data-i18n="chip.featured">Featured</a>
+        <a href="#personal" data-i18n="chip.personal">Personal</a>
+        <a href="#sme" data-i18n="chip.sme">For SMEs</a>
+      </nav>
+    </div>
+  </section>
+
+  <section id="featured">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="gradient-rule"></div>
+          <p class="eyebrow" data-i18n="products.start">Start here</p>
+          <h2 data-i18n="featured.h">Featured products</h2>
+        </div>
+      </div>
+      <div class="grid-3" data-catalog="featured"></div>
+    </div>
+  </section>
+
+  <section id="personal" class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="gradient-rule"></div>
+          <p class="eyebrow" data-i18n="products.individuals">For individuals</p>
+          <h2 data-i18n="products.personal.h">Personal</h2>
+          <p class="lede" data-i18n="products.personal.lede">Guides and tools for people who build and learn on their own.</p>
+        </div>
+      </div>
+      <ul class="catalog" data-catalog="personal"></ul>
+    </div>
+  </section>
+
+  <section id="sme">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="gradient-rule"></div>
+          <p class="eyebrow" data-i18n="products.business">For small businesses</p>
+          <h2 data-i18n="products.sme.h">For SMEs</h2>
+          <p class="lede" data-i18n="products.sme.lede">Practical AI and security tools for teams without a dedicated IT department.</p>
+        </div>
+      </div>
+      <ul class="catalog" data-catalog="sme"></ul>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p data-i18n="foot.line">Raymond Doan &middot; Perth, Australia</p>
+    <nav aria-label="Footer" data-i18n-aria="foot.nav">
+      <a href="index.html" data-i18n="nav.start">Start</a>
+      <a href="products.html" data-i18n="nav.products">Products</a>
+      <a href="blog.html" data-i18n="nav.blog">Blog</a>
+      <a href="https://raymonddoan.gumroad.com" target="_blank" rel="noopener" data-i18n="foot.store">Gumroad store</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="ui-vi.js"></script>
+<script src="ui-es.js"></script>
+<script src="products-data.js"></script>
+<script src="products-vi.js"></script>
+<script src="products-es.js"></script>
+<script src="site.js"></script>
+<script src="catalog.js"></script>
+
+</body>
+</html>

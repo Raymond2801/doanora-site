@@ -1,0 +1,247 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Raymond Doan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+<script src="i18n.js"></script>
+
+<header class="site-nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">RD</span>
+      <span class="brand-text">
+        <span class="brand-name">Raymond Doan</span>
+        <span class="brand-sub" data-i18n="brand.sub">AI systems &middot; Security</span>
+      </span>
+    </a>
+    <nav class="links" aria-label="Main" data-i18n-aria="nav.main">
+      <a href="index.html" aria-current="page" data-i18n="nav.start">Start</a>
+      <a href="products.html" data-i18n="nav.products">Products</a>
+      <a href="blog.html" data-i18n="nav.blog">Blog</a>
+    </nav>
+    <div class="lang-switch">
+      <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="lang-menu" aria-label="Language: English"><svg class="lang-globe" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.6 2.6 4 5.7 4 9s-1.4 6.4-4 9c-2.6-2.6-4-5.7-4-9s1.4-6.4 4-9z"></path></svg><span class="lang-code">EN</span><span class="lang-chev" aria-hidden="true"></span></button>
+      <ul class="lang-menu" id="lang-menu" hidden>
+        <li><button class="lang-opt" type="button" lang="en" data-lang="en">English</button></li>
+        <li><button class="lang-opt" type="button" lang="vi" data-lang="vi">Ti&#7871;ng Vi&#7879;t</button></li>
+        <li><button class="lang-opt" type="button" lang="es" data-lang="es">Espa&ntilde;ol</button></li>
+      </ul>
+    </div>
+    <a class="nav-cta" href="https://raymonddoan.gumroad.com" target="_blank" rel="noopener"><span class="cta-long" data-i18n="cta.long">Shop on Gumroad</span><span class="cta-short" data-i18n="cta.short">Shop</span><span aria-hidden="true">&#8599;</span></a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="home.eyebrow">AI + security for small teams</p>
+      <h1>Raymond Doan</h1>
+      <p class="role" data-i18n="home.role">AI Systems Builder &middot; Pursuing IT Security</p>
+      <p class="lede" data-i18n="home.lede">I build AI and security tools for small businesses, run them in production myself first, then package what works as guides and ready-to-run bots.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="products.html" data-i18n="home.btn.products">View products</a>
+        <a class="btn btn-ghost" href="blog.html" data-i18n="home.btn.blog">Read the blog</a>
+      </div>
+      <figure class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 400 400" focusable="false">
+          <defs>
+            <radialGradient id="hubGlow" cx="50%" cy="50%" r="50%">
+              <stop class="glow-a" offset="0%"></stop>
+              <stop class="glow-b" offset="100%"></stop>
+            </radialGradient>
+            <linearGradient id="hubFill" x1="0" y1="0" x2="1" y2="1">
+              <stop class="fill-a" offset="0%"></stop>
+              <stop class="fill-b" offset="100%"></stop>
+            </linearGradient>
+          </defs>
+          <circle class="ring" cx="200" cy="200" r="110"></circle>
+          <circle class="ring" cx="200" cy="200" r="175"></circle>
+          <g class="link faint">
+            <line x1="200" y1="25" x2="122" y2="122"></line>
+            <line x1="200" y1="25" x2="278" y2="122"></line>
+            <line x1="375" y1="200" x2="278" y2="122"></line>
+            <line x1="375" y1="200" x2="278" y2="278"></line>
+            <line x1="200" y1="375" x2="278" y2="278"></line>
+            <line x1="200" y1="375" x2="122" y2="278"></line>
+            <line x1="25" y1="200" x2="122" y2="278"></line>
+            <line x1="25" y1="200" x2="122" y2="122"></line>
+          </g>
+          <g class="link">
+            <line x1="200" y1="200" x2="122" y2="122"></line>
+            <line x1="200" y1="200" x2="278" y2="122"></line>
+            <line x1="200" y1="200" x2="278" y2="278"></line>
+            <line x1="200" y1="200" x2="122" y2="278"></line>
+          </g>
+          <g class="dot">
+            <circle cx="200" cy="25" r="4"></circle>
+            <circle cx="375" cy="200" r="4"></circle>
+            <circle cx="200" cy="375" r="4"></circle>
+            <circle cx="25" cy="200" r="4"></circle>
+            <circle cx="324" cy="76" r="3"></circle>
+            <circle cx="324" cy="324" r="3"></circle>
+            <circle cx="76" cy="324" r="3"></circle>
+            <circle cx="76" cy="76" r="3"></circle>
+          </g>
+          <circle cx="200" cy="200" r="48" fill="url(#hubGlow)"></circle>
+          <g class="node">
+            <circle cx="122" cy="122" r="8"></circle>
+            <circle cx="278" cy="122" r="8"></circle>
+            <circle cx="278" cy="278" r="8"></circle>
+            <circle cx="122" cy="278" r="8"></circle>
+          </g>
+          <circle cx="200" cy="200" r="13" fill="url(#hubFill)"></circle>
+          <text class="lbl hub-lbl" x="200" y="241" text-anchor="middle" data-i18n="art.general">General</text>
+          <text class="lbl" x="110" y="110" text-anchor="end" data-i18n="art.dev">Dev</text>
+          <text class="lbl" x="290" y="110" data-i18n="art.marketing">Marketing</text>
+          <text class="lbl" x="290" y="298" data-i18n="art.career">Career</text>
+          <text class="lbl" x="110" y="298" text-anchor="end" data-i18n="art.security">Security+</text>
+        </svg>
+        <figcaption class="art-caption" data-i18n="art.caption">Winston: one hub, specialist agents</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="about" class="band">
+    <div class="wrap about">
+      <div>
+        <div class="gradient-rule"></div>
+        <h2 data-i18n="about.h">Who's behind this</h2>
+        <p data-i18n="about.p1">I'm Raymond, 2IC (Deputy Store Manager) at Macpac Perth. I completed a Master of Commerce (major in Information Systems and Technology) at Curtin University in Perth, and I'm working toward a move into IT security.</p>
+        <p data-i18n="about.p2">Everything on this site comes out of that path. I build a tool to solve a real problem first, then turn it into something other small teams and operators can use.</p>
+      </div>
+      <dl class="glance">
+        <div><dt data-i18n="about.k.role">Role</dt><dd data-i18n="about.v.role">2IC, Macpac Perth</dd></div>
+        <div><dt data-i18n="about.k.study">Study</dt><dd data-i18n="about.v.study">Master of Commerce, major in Information Systems and Technology, Curtin University, Perth (completed)</dd></div>
+        <div><dt data-i18n="about.k.based">Based</dt><dd data-i18n="about.v.based">Perth, Australia</dd></div>
+        <div><dt data-i18n="about.k.building">Building</dt><dd data-i18n="about.v.building">AI tools and security templates for small teams</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="built">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="gradient-rule"></div>
+          <h2 data-i18n="built.h">What I've built</h2>
+        </div>
+      </div>
+      <div class="grid-3">
+        <article class="card">
+          <div class="card-top">
+            <h3>Winston</h3>
+            <span class="tag" data-i18n="built.tag.core">Core project</span>
+          </div>
+          <p data-i18n="built.winston">A multi-agent automation system that runs my own admin work. It reads and replies to email, searches files, delegates tasks between agents, and reports back over Telegram. Built from the ground up and running in production, not a demo.</p>
+        </article>
+        <article class="card">
+          <div class="card-top">
+            <h3>Math Kingdom</h3>
+            <span class="tag" data-i18n="built.tag.game">Browser game</span>
+          </div>
+          <p data-i18n="built.math">A browser-based math tower-defense game, playtested by my own son. No installs, just open the page and play.</p>
+          <div class="card-foot"><a class="card-link" href="https://raymond2801.github.io/math-kingdom/" target="_blank" rel="noopener" data-i18n="built.play">Play it &rarr;</a></div>
+        </article>
+        <article class="card">
+          <div class="card-top">
+            <h3>Koko's Quest</h3>
+            <span class="tag" data-i18n="built.tag.game">Browser game</span>
+          </div>
+          <p data-i18n="built.koko">A literacy platformer built around the NAPLAN curriculum.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="featured" class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="gradient-rule"></div>
+          <h2 data-i18n="featured.h">Featured products</h2>
+          <p class="lede" data-i18n="featured.lede">Built for my own use first, then packaged for sale.</p>
+        </div>
+        <a class="section-link" href="products.html" data-i18n="featured.all">All products &rarr;</a>
+      </div>
+      <div class="grid-3" data-catalog="featured"></div>
+    </div>
+  </section>
+
+  <section id="blog-preview">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="gradient-rule"></div>
+          <h2 data-i18n="blogprev.h">From the blog</h2>
+        </div>
+        <a class="section-link" href="blog.html" data-i18n="blogprev.open">Open the blog &rarr;</a>
+      </div>
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head">
+            <h3 data-i18n="type.blog">Personal blog</h3>
+            <a href="blog.html#personal" data-i18n="blogprev.allposts">All posts &rarr;</a>
+          </div>
+          <div id="preview-blog">
+            <div class="empty-state">
+              <p class="eyebrow" data-i18n="blogprev.blog.e">First post in progress</p>
+              <p data-i18n="blogprev.blog.p">Weekly notes from building AI tools and learning security in practice start here soon.</p>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <h3 data-i18n="type.news">AI &amp; ICT security news</h3>
+            <a href="blog.html#news" data-i18n="blogprev.allnews">All news &rarr;</a>
+          </div>
+          <div id="preview-news">
+            <div class="empty-state">
+              <p class="eyebrow" data-i18n="blogprev.news.e">First digest in progress</p>
+              <p data-i18n="blogprev.news.p">A weekly digest of worldwide AI and ICT security news, with sources, starts here soon.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p data-i18n="foot.line">Raymond Doan &middot; Perth, Australia</p>
+    <nav aria-label="Footer" data-i18n-aria="foot.nav">
+      <a href="index.html" data-i18n="nav.start">Start</a>
+      <a href="products.html" data-i18n="nav.products">Products</a>
+      <a href="blog.html" data-i18n="nav.blog">Blog</a>
+      <a href="https://raymonddoan.gumroad.com" target="_blank" rel="noopener" data-i18n="foot.store">Gumroad store</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="ui-vi.js"></script>
+<script src="ui-es.js"></script>
+<script src="posts.js"></script>
+<script src="products-data.js"></script>
+<script src="products-vi.js"></script>
+<script src="products-es.js"></script>
+<script src="site.js"></script>
+<script src="catalog.js"></script>
+<script>
+(function () {
+  var S = window.Site;
+  if (!S) return;
+  var posts = S.allPosts();
+  ['blog', 'news'].forEach(function (type) {
+    var host = document.getElementById('preview-' + type);
+    if (!host) return;
+    var items = posts.filter(function (p) { return S.typeOf(p) === type; }).slice(0, 3);
+    if (!items.length) return;
+    host.textContent = '';
+    items.forEach(function (p) { host.appendChild(S.postRow(p, true)); });
+  });
+})();
+</script>
+
+
+</body></html>

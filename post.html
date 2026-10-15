@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title id="page-title">Blog | Raymond Doan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+<script src="i18n.js"></script>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">RD</span>
+      <span class="brand-text">
+        <span class="brand-name">Raymond Doan</span>
+        <span class="brand-sub" data-i18n="brand.sub">AI systems &middot; Security</span>
+      </span>
+    </a>
+    <nav class="links" aria-label="Main" data-i18n-aria="nav.main">
+      <a href="index.html" data-i18n="nav.start">Start</a>
+      <a href="products.html" data-i18n="nav.products">Products</a>
+      <a href="blog.html" aria-current="page" data-i18n="nav.blog">Blog</a>
+    </nav>
+    <div class="lang-switch">
+      <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="lang-menu" aria-label="Language: English"><svg class="lang-globe" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.6 2.6 4 5.7 4 9s-1.4 6.4-4 9c-2.6-2.6-4-5.7-4-9s1.4-6.4 4-9z"></path></svg><span class="lang-code">EN</span><span class="lang-chev" aria-hidden="true"></span></button>
+      <ul class="lang-menu" id="lang-menu" hidden>
+        <li><button class="lang-opt" type="button" lang="en" data-lang="en">English</button></li>
+        <li><button class="lang-opt" type="button" lang="vi" data-lang="vi">Ti&#7871;ng Vi&#7879;t</button></li>
+        <li><button class="lang-opt" type="button" lang="es" data-lang="es">Espa&ntilde;ol</button></li>
+      </ul>
+    </div>
+    <a class="nav-cta" href="https://raymonddoan.gumroad.com" target="_blank" rel="noopener"><span class="cta-long" data-i18n="cta.long">Shop on Gumroad</span><span class="cta-short" data-i18n="cta.short">Shop</span><span aria-hidden="true">&#8599;</span></a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <article class="post" id="post"></article>
+    <div id="not-found" class="empty-state" hidden>
+      <p class="eyebrow" data-i18n="post.nf.e">Post not found</p>
+      <p data-i18n="post.nf.p">That link may be out of date.</p>
+      <div class="btn-row" style="justify-content: center;">
+        <a class="btn btn-ghost" href="blog.html" data-i18n="post.nf.btn">Back to the blog</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p data-i18n="foot.line">Raymond Doan &middot; Perth, Australia</p>
+    <nav aria-label="Footer" data-i18n-aria="foot.nav">
+      <a href="index.html" data-i18n="nav.start">Start</a>
+      <a href="products.html" data-i18n="nav.products">Products</a>
+      <a href="blog.html" data-i18n="nav.blog">Blog</a>
+      <a href="https://raymonddoan.gumroad.com" target="_blank" rel="noopener" data-i18n="foot.store">Gumroad store</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="ui-vi.js"></script>
+<script src="ui-es.js"></script>
+<script src="posts.js"></script>
+<script src="site.js"></script>
+<script>
+(function () {
+  var S = window.Site;
+  var articleEl = document.getElementById('post');
+  var notFoundEl = document.getElementById('not-found');
+
+  function showNotFound() {
+    var pt = document.getElementById('page-title');
+    if (pt && window.I18n) pt.textContent = window.I18n.t('title.blog', 'Blog | Raymond Doan');
+    articleEl.hidden = true;
+    notFoundEl.hidden = false;
+  }
+  if (!S) { showNotFound(); return; }
+
+  var slug = '';
+  try { slug = decodeURIComponent((location.hash || '').replace(/^#/, '')); } catch (e) {}
+  var post = S.allPosts().filter(function (p) { return p.slug === slug; })[0];
+  if (!post) { showNotFound(); return; }
+
+  var type = S.typeOf(post);
+  var backHref = 'blog.html#' + (type === 'news' ? 'news' : 'personal');
+  var backText = String.fromCharCode(8592) + ' ' + (type === 'news'
+    ? S.t('post.back.news', 'Back to AI & ICT security news')
+    : S.t('post.back.blog', 'Back to Personal blog'));
+  /* A post with no translation yet shows in English; say so, and mark the English for screen readers. */
+  var englishOnly = !!post.untranslated && S.lang !== 'en';
+
+  document.getElementById('page-title').textContent = post.title + ' | Raymond Doan';
+
+  function backLink(extraClass) {
+    var a = S.el('a', 'back-link' + (extraClass ? ' ' + extraClass : ''), backText);
+    a.href = backHref;
+    return a;
+  }
+
+  articleEl.appendChild(backLink());
+  articleEl.appendChild(S.el('p', 'meta',
+    S.formatDate(post.date) + '  ' + S.dot + '  ' + S.typeLabel(type) + (post.tag ? '  ' + S.dot + '  ' + post.tag : '')));
+  if (englishOnly) articleEl.appendChild(S.el('p', 'note', S.t('post.only_en', 'This post is only available in English.')));
+  var h1 = S.el('h1', null, post.title);
+  if (englishOnly) h1.setAttribute('lang', 'en');
+  articleEl.appendChild(h1);
+
+  var body = S.el('div', 'post-body');
+  if (englishOnly) body.setAttribute('lang', 'en');
+  (Array.isArray(post.body) ? post.body : []).forEach(function (item) {
+    if (typeof item === 'string') {
+      body.appendChild(S.el('p', null, item));
+    } else if (item && item.h) {
+      body.appendChild(S.el('h2', null, item.h));
+    }
+  });
+  articleEl.appendChild(body);
+
+  var sources = (Array.isArray(post.sources) ? post.sources : []).filter(function (s) {
+    return s && s.title && S.safeUrl(s.url);
+  });
+  if (sources.length) {
+    var box = S.el('div', 'sources');
+    box.appendChild(S.el('h2', null, S.t('post.sources', 'Sources')));
+    var ol = S.el('ol');
+    sources.forEach(function (s) {
+      var li = S.el('li');
+      var a = S.el('a', null, s.title);
+      a.href = S.safeUrl(s.url);
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      li.appendChild(a);
+      ol.appendChild(li);
+    });
+    box.appendChild(ol);
+    articleEl.appendChild(box);
+  }
+
+  var end = backLink();
+  end.style.display = 'inline-block';
+  end.style.marginTop = '2em';
+  articleEl.appendChild(end);
+})();
+</script>
+
+</body>
+</html>
