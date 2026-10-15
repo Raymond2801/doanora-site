@@ -403,5 +403,61 @@ window.I18N_PRODUCTS.vi = {
       rowLabel: "Chơi",
       note: "Mở game trong một tab mới."
     }
+  },
+
+  "sme-ai-usage-policy-tool-vetting-kit": {
+    short: "Chính sách sử dụng AI bằng ngôn ngữ dễ hiểu, danh sách kiểm tra công cụ AI và các biểu mẫu để triển khai.",
+    tagline: "Chính sách sử dụng AI bằng ngôn ngữ dễ hiểu, một cách kiểm tra mọi công cụ AI trước khi phê duyệt, cùng các biểu mẫu và câu chữ để triển khai toàn bộ.",
+    row: "Chính sách sử dụng AI bằng ngôn ngữ dễ hiểu, danh sách kiểm tra công cụ AI và các biểu mẫu để triển khai, thiết lập trong khoảng nửa ngày. Tệp Word và Excel chỉnh sửa được.",
+    intro: [
+      "Đội của bạn có lẽ đã dùng công cụ AI để viết email, tóm tắt cuộc họp và soạn tài liệu. Khi chưa có quy định rõ ràng, rất dễ để ai đó dán thông tin khách hàng, hợp đồng hay mật khẩu vào một công cụ chưa bao giờ được thiết kế để giữ những thứ đó.",
+      "Bộ này cho bạn một chính sách sử dụng AI bằng ngôn ngữ dễ hiểu, một cách kiểm tra mọi công cụ AI trước khi phê duyệt, cùng các biểu mẫu và câu chữ để triển khai toàn bộ. Bạn có thể thiết lập xong trong khoảng nửa ngày, không cần thuê tư vấn.",
+      "Chỉ có chính sách thôi là chưa đủ. Mọi người còn cần biết công cụ nào đã được duyệt, một công cụ mới được duyệt ra sao, và phải làm gì khi có sự cố. Bộ này bao gồm cả ba phần đó."
+    ],
+    sections: [
+      {
+        h: "Bên trong có gì",
+        list: [
+          "Chính sách sử dụng AI (Word): 27 quy tắc đánh số bằng ngôn ngữ dễ hiểu, bảng màu hướng dẫn (Xanh lá, Vàng, Đỏ và Không bao giờ) cho những gì được phép đưa vào công cụ AI, ví dụ thực tế hằng ngày, và một trang hướng dẫn nhanh cho nhân viên",
+          "Danh sách kiểm tra công cụ AI (Word): 6 câu hỏi cổng và 35 mục kiểm tra chi tiết để quyết định một công cụ có được dùng hay không, kèm các dấu hiệu cảnh báo cần chú ý, một bản ghi quyết định và một sổ đăng ký có thể in",
+          "Biểu mẫu và câu chữ AI (Word): biểu mẫu Xác nhận của nhân viên, Yêu cầu dùng công cụ AI và Báo cáo sự cố AI, một buổi họp nhóm 20 phút với 8 tình huống, cùng câu chữ có sẵn để dùng cho nhân viên, khách hàng và nhà cung cấp AI",
+          "Sổ đăng ký công cụ AI đã duyệt (Excel): danh sách công cụ đã duyệt đang dùng, có danh sách thả xuống, ngày rà soát lại được tính sẵn, tô màu cho công cụ sắp đến hạn hoặc quá hạn, và nhật ký các trường hợp ngoại lệ đã duyệt",
+          "Hướng dẫn bắt đầu (Word): thiết lập mọi thứ trong năm bước, kèm danh sách các mục có thể tùy chỉnh ở một chỗ",
+          "Ví dụ hoàn chỉnh (Word), phần thưởng thêm: một công cụ AI giả định đi từ bước yêu cầu đến khi vào sổ đăng ký, với mọi biểu mẫu, mục kiểm tra và bản ghi đã điền sẵn, để bạn thấy thành quả hoàn chỉnh trông như thế nào"
+        ]
+      },
+      {
+        h: "Cách thực hiện",
+        steps: [
+          "Điền tên công ty, người phụ trách bảo mật và chủ doanh nghiệp của bạn.",
+          "Tìm hiểu xem nhân viên của bạn đang dùng những công cụ AI nào.",
+          "Kiểm tra các công cụ dùng nhiều nhất bằng danh sách kiểm tra, dùng ví dụ hoàn chỉnh làm mẫu, rồi thêm những công cụ đạt vào sổ đăng ký.",
+          "Ban hành chính sách và tổ chức buổi họp nhóm 20 phút.",
+          "Đặt hướng dẫn nhanh ở nơi mọi người dễ thấy, và đặt hai lời nhắc rà soát lại."
+        ]
+      },
+      {
+        h: "Dành cho ai",
+        p: ["Chủ doanh nghiệp nhỏ, quản lý văn phòng và người phụ trách IT muốn có một cách rõ ràng, lặp lại được để dùng AI an toàn tại nơi làm việc. Không gắn với bất kỳ sản phẩm AI nào, nên vẫn hữu ích khi công cụ thay đổi: bộ này đặt câu hỏi thay vì chấm điểm sản phẩm, để bạn tự quyết định điều gì an toàn cho doanh nghiệp của mình."]
+      },
+      {
+        h: "Định dạng",
+        p: ["Bốn tài liệu Word (.docx) chỉnh sửa được cùng một sổ tính Excel (.xlsx) chỉnh sửa được, và một ví dụ hoàn chỉnh (.docx) tặng kèm. Dùng được trong Microsoft Word, Microsoft Excel và LibreOffice. Chỉ dùng công thức chuẩn: không macro, không tiện ích bổ sung và không cần tài khoản."]
+      },
+      {
+        h: "Cần biết thêm",
+        p: ["Đây là hướng dẫn chung, không phải tư vấn pháp lý. Luật về quyền riêng tư, lao động và ghi âm khác nhau theo quốc gia, bang và ngành nghề, vì vậy hãy kiểm tra quy định áp dụng ở nơi bạn hoạt động. Dùng cho doanh nghiệp của riêng bạn: vui lòng không bán lại hay chia sẻ các tệp này."]
+      }
+    ],
+    facts: [
+      ["Định dạng", "4 tài liệu Word (.docx) và 1 sổ tính Excel (.xlsx)"],
+      ["Dùng được trong", "Word, Excel, LibreOffice"],
+      ["Thời gian thiết lập", "Khoảng nửa ngày"],
+      ["Thiết lập", "Không macro, không tiện ích bổ sung, không cần tài khoản"]
+    ],
+    cta: {
+      label: "Mua trên Gumroad",
+      note: "Gumroad xử lý thanh toán và tải xuống."
+    }
   }
 };

@@ -403,5 +403,61 @@ window.I18N_PRODUCTS.es = {
       rowLabel: "Jugar",
       note: "Abre el juego en una pestaña nueva."
     }
+  },
+
+  "sme-ai-usage-policy-tool-vetting-kit": {
+    short: "Una política de uso de IA en lenguaje claro, una lista de verificación de herramientas de IA y los formularios para aplicarla.",
+    tagline: "Una política de uso de IA en lenguaje claro, una forma de revisar cualquier herramienta de IA antes de aprobarla, y los formularios y textos para ponerlo todo en marcha.",
+    row: "Una política de uso de IA en lenguaje claro, una lista de verificación de herramientas de IA y los formularios para aplicarla, lista en medio día. Archivos editables de Word y Excel.",
+    intro: [
+      "Es probable que tu equipo ya use herramientas de IA para escribir correos, resumir reuniones y redactar documentos. Sin una regla clara, es fácil pegar datos de clientes, contratos o contraseñas en una herramienta que nunca fue pensada para guardarlos.",
+      "Este kit te da una política de uso de IA en lenguaje claro, una forma de revisar cualquier herramienta de IA antes de aprobarla, y los formularios y textos para ponerlo todo en marcha. Puedes dejarlo listo en medio día, sin contratar a un consultor.",
+      "Una política por sí sola no basta. Tu equipo también necesita saber qué herramientas están aprobadas, cómo se aprueba una nueva y qué hacer cuando algo sale mal. Este kit cubre los tres puntos."
+    ],
+    sections: [
+      {
+        h: "Qué incluye",
+        list: [
+          "Política de uso de IA (Word): 27 reglas numeradas en lenguaje claro, una guía de colores (Verde, Ámbar, Rojo y Nunca) sobre qué se puede ingresar en una herramienta de IA, ejemplos del día a día y una guía rápida de una página para el equipo",
+          "Lista de verificación de herramientas de IA (Word): 6 preguntas filtro y 35 verificaciones detalladas para decidir si una herramienta puede usarse, con señales de alerta a tener en cuenta, un registro de la decisión y un listado listo para imprimir",
+          "Formularios y textos de IA (Word): formularios de Reconocimiento del personal, Solicitud de herramienta de IA e Informe de incidente de IA, una reunión de equipo de 20 minutos con 8 escenarios, y textos listos para usar con el personal, los clientes y los proveedores de IA",
+          "Registro de herramientas de IA aprobadas (Excel): la lista de trabajo de herramientas aprobadas, con menús desplegables, fechas de revisión ya calculadas, resaltado para las que están por vencer o vencidas, y un registro de excepciones aprobadas",
+          "Guía de inicio (Word): deja todo listo en cinco pasos, con las opciones que puedes cambiar reunidas en un solo lugar",
+          "Ejemplo resuelto (Word), de regalo: una herramienta de IA inventada, llevada paso a paso desde la solicitud hasta el registro, con cada formulario, verificación y registro ya completado, para que veas cómo se ve el trabajo terminado"
+        ]
+      },
+      {
+        h: "Cómo funciona",
+        steps: [
+          "Completa el nombre de tu empresa, tu responsable de seguridad y tu propietario.",
+          "Averigua qué herramientas de IA ya usa tu equipo.",
+          "Revisa las herramientas más usadas con la lista de verificación, usando el ejemplo resuelto como guía, y añade las que aprueben al registro.",
+          "Publica la política y realiza la reunión de equipo de 20 minutos.",
+          "Coloca la guía rápida donde el equipo la vea, y fija dos recordatorios de revisión."
+        ]
+      },
+      {
+        h: "Para quién es",
+        p: ["Dueños de pequeñas empresas, gerentes de oficina y líderes de IT que quieren una forma clara y repetible de usar la IA de manera segura en el trabajo. No está ligado a ningún producto de IA, así que sigue siendo útil aunque las herramientas cambien: el kit plantea preguntas en lugar de calificar productos, para que tú decidas qué es seguro para tu negocio."]
+      },
+      {
+        h: "Formato",
+        p: ["Cuatro documentos de Word (.docx) editables más un libro de Excel (.xlsx) editable, y un ejemplo resuelto (.docx) de regalo. Funciona en Microsoft Word, Microsoft Excel y LibreOffice. Solo fórmulas estándar: sin macros, sin complementos y sin necesidad de cuenta."]
+      },
+      {
+        h: "Para tener en cuenta",
+        p: ["Esto es orientación general, no asesoría legal. Las leyes de privacidad, empleo y grabación varían según el país, el estado y el sector, así que verifica lo que aplica donde operas. Para uso en tu propio negocio: por favor no revender ni compartir los archivos."]
+      }
+    ],
+    facts: [
+      ["Formato", "4 documentos Word (.docx) y 1 libro Excel (.xlsx)"],
+      ["Funciona en", "Word, Excel, LibreOffice"],
+      ["Tiempo de puesta en marcha", "Alrededor de medio día"],
+      ["Configuración", "Sin macros, sin complementos, sin cuenta"]
+    ],
+    cta: {
+      label: "Comprar en Gumroad",
+      note: "Gumroad se encarga del pago y de la descarga."
+    }
   }
 };

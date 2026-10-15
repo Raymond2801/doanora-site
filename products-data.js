@@ -541,5 +541,74 @@ window.PRODUCTS = [
       note: "Opens the game in a new tab."
     },
     related: ["winston-build-guide", "deskmate"]
+  },
+
+  {
+    slug: "sme-ai-usage-policy-tool-vetting-kit",
+    name: "SME AI Usage Policy and Tool Vetting Kit",
+    kind: "Template",
+    audience: "SME",
+    status: "live",
+    price: "A$19",
+    short: "A plain-English AI usage policy, a tool vetting checklist and the forms to run it.",
+    tagline: "A plain-English AI usage policy, a way to check any AI tool before you approve it, and the forms and wording to run it all.",
+    row: "A plain-English AI usage policy, a tool vetting checklist and the forms to run it, set up in about half a day. Editable Word and Excel files.",
+    intro: [
+      "Your team is probably already using AI tools to write emails, summarise meetings and draft documents. Without a clear rule, it is easy to paste customer details, contracts or passwords into a tool that was never meant to hold them.",
+      "This kit gives you a plain-English AI usage policy, a way to check any AI tool before you approve it, and the forms and wording to run it all. You can set it up in about half a day, without hiring a consultant.",
+      "A policy on its own is not enough. People also need to know which tools are approved, how a new tool gets approved, and what to do when something goes wrong. This kit covers all three."
+    ],
+    sections: [
+      {
+        h: "What's inside",
+        list: [
+          "AI Usage Policy (Word): 27 numbered rules in plain English, a colour guide (Green, Amber, Red and Never) for what may go into an AI tool, everyday examples, and a one-page quick guide for staff",
+          "AI Tool Vetting Checklist (Word): 6 gate questions and 35 detailed checks to decide whether a tool can be used, with red flags to watch for, a decision record and a printable register",
+          "AI Forms and Wording (Word): Staff Acknowledgement, AI Tool Request and AI Incident Report forms, a 20-minute team briefing with 8 scenarios, and wording to copy for staff, customers and AI providers",
+          "Approved AI Tool Register (Excel): the working list of approved tools, with dropdowns, re-check dates worked out for you, highlighting for tools that are due or overdue, and a log of approved exceptions",
+          "Start Here guide (Word): set everything up in five steps, with the settings you can change listed in one place",
+          "Worked Example (Word), a bonus: one made-up AI tool taken from the request to the Register, with every form, check and record filled in, so you can see what finished work looks like"
+        ]
+      },
+      {
+        h: "How it works",
+        steps: [
+          "Fill in your company, Security Lead and Owner names.",
+          "Find out which AI tools your people already use.",
+          "Check your most-used tools with the vetting checklist, using the worked example as a guide, and add the ones that pass to the Register.",
+          "Issue the policy and run the 20-minute team briefing.",
+          "Put the quick guide where people will see it, and set two review reminders."
+        ]
+      },
+      {
+        h: "Who it is for",
+        p: ["Small business owners, office managers and IT leads who want a clear, repeatable way to use AI safely at work. Not tied to any AI product, so it stays useful as the tools change: the kit asks questions instead of rating products, so you decide what is safe for your business."]
+      },
+      {
+        h: "Format",
+        p: ["Four editable Word documents (.docx) plus an editable Excel workbook (.xlsx), and a bonus worked example (.docx). Works in Microsoft Word, Microsoft Excel and LibreOffice. Standard formulas only: no macros, no add-ins and no account needed."]
+      },
+      {
+        h: "Good to know",
+        p: ["General guidance, not legal advice. Privacy, employment and recording laws differ by country, state and industry, so check what applies where you operate. For use in your own business: please do not resell or share the files."]
+      }
+    ],
+    facts: [
+      ["Format", "4 Word documents (.docx) and 1 Excel workbook (.xlsx)"],
+      ["Works in", "Word, Excel, LibreOffice"],
+      ["Setup time", "About half a day"],
+      ["Setup", "No macros, no add-ins, no account"]
+    ],
+    cta: {
+      label: "Get it on Gumroad",
+      url: "https://raymonddoan.gumroad.com/l/nihkc",
+      note: "Checkout and download are handled by Gumroad."
+    },
+    related: ["sme-security-starter-kit", "sme-vendor-risk-assessment-matrix", "sme-security-incident-response-runbook"],
+    gumroad: {
+      permalink: "nihkc",
+      name: "SME AI Usage Policy and Tool Vetting Kit",
+      hash: "76e12398e156"
+    }
   }
 ];
