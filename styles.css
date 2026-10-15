@@ -21,9 +21,9 @@ img, svg { max-width: 100%; }
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
 
-  --bg: #173024;
+  --bg: #7fbb9e;
   --surface: #5da080;
-  --surface-2: #7fbb9e;
+  --surface-2: #28616c;
   --fg: #f4f8f6;
   --muted: #b3cfc1;
   --accent: #f28115;
