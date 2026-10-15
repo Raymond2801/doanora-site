@@ -12,30 +12,30 @@ html { scroll-behavior: smooth; }
 img, svg { max-width: 100%; }
 [hidden] { display: none !important; }
 
-/* ---------- tokens: one deliberate palette ("Lagoon") ----------
-   Deep petrol teal with amber and coral accents. The site keeps this single
-   look on purpose. It does not switch to a white theme when the viewer's
-   device or app is in light mode. */
+/* ---------- tokens: one deliberate palette ("Neptune Flame") ----------
+   Deep Pantone Neptune Green (14-6017 TCX) with Le Creuset Flame orange-red
+   accents. The site keeps this single look on purpose. It does not switch
+   to a white theme when the viewer's device or app is in light mode. */
 :root {
   color-scheme: dark;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
 
-  --bg: #103a42;
-  --surface: #1b4c55;
-  --surface-2: #28616c;
-  --fg: #effcfd;
-  --muted: #b8dae0;
-  --accent: #ffb84d;
-  --accent-2: #ff7a6b;
-  --on-accent: #2b1204;
-  --border: rgba(239, 252, 253, 0.16);
-  --border-strong: rgba(239, 252, 253, 0.32);
-  --glow-1: rgba(255, 184, 77, 0.26);
-  --glow-2: rgba(47, 211, 196, 0.30);
-  --glow-3: rgba(255, 122, 107, 0.18);
-  --grid-line: rgba(239, 252, 253, 0.08);
-  --shadow: rgba(2, 20, 26, 0.50);
+  --bg: #10422c;
+  --surface: #1b553c;
+  --surface-2: #286c4e;
+  --fg: #effdf7;
+  --muted: #b8e0ce;
+  --accent: #f28115;
+  --accent-2: #e82426;
+  --on-accent: #2a1002;
+  --border: rgba(239, 253, 247, 0.16);
+  --border-strong: rgba(239, 253, 247, 0.32);
+  --glow-1: rgba(242, 129, 21, 0.26);
+  --glow-2: rgba(120, 186, 157, 0.30);
+  --glow-3: rgba(232, 36, 38, 0.18);
+  --grid-line: rgba(239, 253, 247, 0.08);
+  --shadow: rgba(2, 24, 16, 0.50);
 
   --font-display: 'Hanken Grotesk', 'Segoe UI', system-ui, sans-serif;
   --font-body: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
