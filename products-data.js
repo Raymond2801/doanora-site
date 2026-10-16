@@ -544,6 +544,49 @@ window.PRODUCTS = [
   },
 
   {
+    slug: "kokos-quest",
+    name: "Koko's Quest",
+    kind: "Browser game",
+    audience: "Personal",
+    status: "free",
+    price: "Free",
+    short: "A literacy platformer built around the NAPLAN curriculum.",
+    tagline: "A literacy platformer that runs in your browser, built around the NAPLAN curriculum. Open the page and play.",
+    row: "A literacy platformer built around the NAPLAN curriculum. Open the page and play.",
+    intro: [
+      "Koko's Quest runs in the browser, so there is nothing to install and no account to make. Guide Koko the monkey through the jungle, answering spelling and grammar questions to open doors and collect bananas along the way."
+    ],
+    sections: [
+      {
+        h: "How it plays",
+        list: [
+          "Choose a difficulty tier for ages 6 to 8, 8 to 10, or 10 to 12.",
+          "Answer spelling and grammar questions to open doors and keep moving.",
+          "Collect bananas and avoid spikes on the way through each world.",
+          "Questions are aligned with Australia's NAPLAN literacy tests."
+        ]
+      },
+      {
+        h: "Built with",
+        p: ["One HTML file with plain JavaScript and Canvas. No frameworks and no dependencies. It is hosted on GitHub Pages."]
+      }
+    ],
+    facts: [
+      ["Price", "Free"],
+      ["Platform", "Any modern browser"],
+      ["Language", "English"],
+      ["Install", "None"]
+    ],
+    cta: {
+      label: "Play Koko's Quest",
+      rowLabel: "Play",
+      url: "https://raymond2801.github.io/kokos-quest/",
+      note: "Opens the game in a new tab."
+    },
+    related: ["math-kingdom", "winston-build-guide"]
+  },
+
+  {
     slug: "sme-ai-usage-policy-tool-vetting-kit",
     name: "SME AI Usage Policy and Tool Vetting Kit",
     kind: "Template",

@@ -405,6 +405,41 @@ window.I18N_PRODUCTS.es = {
     }
   },
 
+  "kokos-quest": {
+    short: "Un juego de plataformas de lectoescritura basado en el currículo NAPLAN.",
+    tagline: "Un juego de plataformas de lectoescritura que se juega en tu navegador, basado en el currículo NAPLAN. Abre la página y juega.",
+    row: "Un juego de plataformas de lectoescritura basado en el currículo NAPLAN. Abre la página y juega.",
+    intro: [
+      "Koko's Quest se juega en el navegador, así que no hay nada que instalar ni cuenta que crear. Guía al mono Koko por la selva, respondiendo preguntas de ortografía y gramática para abrir puertas y recoger plátanos por el camino."
+    ],
+    sections: [
+      {
+        h: "Cómo se juega",
+        list: [
+          "Elige un nivel de dificultad para edades de 6 a 8, 8 a 10, o 10 a 12 años.",
+          "Responde preguntas de ortografía y gramática para abrir puertas y seguir avanzando.",
+          "Recoge plátanos y esquiva los pinchos en el camino por cada mundo.",
+          "Las preguntas siguen las pruebas de lectoescritura NAPLAN de Australia."
+        ]
+      },
+      {
+        h: "Hecho con",
+        p: ["Un solo archivo HTML con JavaScript puro y Canvas. Sin frameworks y sin dependencias. Está alojado en GitHub Pages."]
+      }
+    ],
+    facts: [
+      ["Precio", "Gratis"],
+      ["Plataforma", "Cualquier navegador moderno"],
+      ["Idioma", "Inglés"],
+      ["Instalación", "Ninguna"]
+    ],
+    cta: {
+      label: "Jugar a Koko's Quest",
+      rowLabel: "Jugar",
+      note: "Abre el juego en una pestaña nueva."
+    }
+  },
+
   "sme-ai-usage-policy-tool-vetting-kit": {
     short: "Una política de uso de IA en lenguaje claro, una lista de verificación de herramientas de IA y los formularios para aplicarla.",
     tagline: "Una política de uso de IA en lenguaje claro, una forma de revisar cualquier herramienta de IA antes de aprobarla, y los formularios y textos para ponerlo todo en marcha.",

@@ -405,6 +405,41 @@ window.I18N_PRODUCTS.vi = {
     }
   },
 
+  "kokos-quest": {
+    short: "Game nền tảng luyện đọc viết xây dựng theo chương trình NAPLAN.",
+    tagline: "Game nền tảng luyện đọc viết chạy ngay trên trình duyệt của bạn, xây dựng theo chương trình NAPLAN. Mở trang và chơi.",
+    row: "Game nền tảng luyện đọc viết xây dựng theo chương trình NAPLAN. Mở trang và chơi.",
+    intro: [
+      "Koko's Quest chạy ngay trên trình duyệt, nên không cần cài đặt gì và không cần tạo tài khoản. Dẫn chú khỉ Koko băng qua khu rừng, trả lời các câu hỏi chính tả và ngữ pháp để mở cửa và nhặt chuối trên đường đi."
+    ],
+    sections: [
+      {
+        h: "Cách chơi",
+        list: [
+          "Chọn một mức độ khó cho độ tuổi 6 đến 8, 8 đến 10, hoặc 10 đến 12.",
+          "Trả lời các câu hỏi chính tả và ngữ pháp để mở cửa và tiếp tục di chuyển.",
+          "Nhặt chuối và tránh gai nhọn trên đường qua từng thế giới.",
+          "Câu hỏi bám sát bài kiểm tra đọc viết NAPLAN của Úc."
+        ]
+      },
+      {
+        h: "Được xây bằng",
+        p: ["Một tệp HTML với JavaScript thuần và Canvas. Không dùng framework và không có thư viện phụ thuộc. Game được lưu trữ trên GitHub Pages."]
+      }
+    ],
+    facts: [
+      ["Giá", "Miễn phí"],
+      ["Nền tảng", "Mọi trình duyệt hiện đại"],
+      ["Ngôn ngữ", "Tiếng Anh"],
+      ["Cài đặt", "Không cần"]
+    ],
+    cta: {
+      label: "Chơi Koko's Quest",
+      rowLabel: "Chơi",
+      note: "Mở game trong một tab mới."
+    }
+  },
+
   "sme-ai-usage-policy-tool-vetting-kit": {
     short: "Chính sách sử dụng AI bằng ngôn ngữ dễ hiểu, danh sách kiểm tra công cụ AI và các biểu mẫu để triển khai.",
     tagline: "Chính sách sử dụng AI bằng ngôn ngữ dễ hiểu, một cách kiểm tra mọi công cụ AI trước khi phê duyệt, cùng các biểu mẫu và câu chữ để triển khai toàn bộ.",
