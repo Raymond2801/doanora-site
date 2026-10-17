@@ -889,3 +889,25 @@ footer.site-footer nav a:hover { color: var(--fg); }
 @media (max-width: 860px) {
   .related-grid { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* ---------- arcade ---------- */
+.game-card { position: relative; transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s; }
+.game-card .hit::after { border-radius: 14px; }
+.game-card:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: 0 18px 34px -22px var(--shadow); }
+.game-card:hover .card-link { text-decoration: underline; }
+.game-card .thumb {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 8 / 5;
+  border-radius: 10px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-2);
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}
+.note.english-only { margin: 1.4rem 0 0; }
+@media (prefers-reduced-motion: reduce) {
+  .game-card { transition: none; }
+  .game-card:hover { transform: none; }
+}

@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-i18n="title.arcade">Arcade | Raymond Doan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+<script src="i18n.js"></script>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">RD</span>
+      <span class="brand-text">
+        <span class="brand-name">Raymond Doan</span>
+        <span class="brand-sub" data-i18n="brand.sub">AI systems &middot; Security</span>
+      </span>
+    </a>
+    <nav class="links" aria-label="Main" data-i18n-aria="nav.main">
+      <a href="index.html" data-i18n="nav.start">Start</a>
+      <a href="products.html" data-i18n="nav.products">Products</a>
+      <a href="blog.html" data-i18n="nav.blog">Blog</a>
+      <a href="arcade.html" aria-current="page" data-i18n="nav.arcade">Arcade</a>
+    </nav>
+    <div class="lang-switch">
+      <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="lang-menu" aria-label="Language: English"><svg class="lang-globe" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.6 2.6 4 5.7 4 9s-1.4 6.4-4 9c-2.6-2.6-4-5.7-4-9s1.4-6.4 4-9z"></path></svg><span class="lang-code">EN</span><span class="lang-chev" aria-hidden="true"></span></button>
+      <ul class="lang-menu" id="lang-menu" hidden>
+        <li><button class="lang-opt" type="button" lang="en" data-lang="en">English</button></li>
+        <li><button class="lang-opt" type="button" lang="vi" data-lang="vi">Ti&#7871;ng Vi&#7879;t</button></li>
+        <li><button class="lang-opt" type="button" lang="es" data-lang="es">Espa&ntilde;ol</button></li>
+      </ul>
+    </div>
+    <a class="nav-cta" href="https://raymonddoan.gumroad.com" target="_blank" rel="noopener"><span class="cta-long" data-i18n="cta.long">Shop on Gumroad</span><span class="cta-short" data-i18n="cta.short">Shop</span><span aria-hidden="true">&#8599;</span></a>
+  </div>
+</header>
+
+<main>
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow" data-i18n="arcade.eyebrow">Arcade</p>
+      <h1 data-i18n="arcade.h1">Take five</h1>
+      <p class="lede" data-i18n="arcade.lede">Small games for a break between the news and the products. They run in your browser, they are free, and there is nothing to install.</p>
+      <nav class="chips" aria-label="Arcade sections" data-i18n-aria="arcade.chips">
+        <a href="#adults" data-i18n="arcade.chip.adults">For adults</a>
+        <a href="#kids" data-i18n="arcade.chip.kids">For kids</a>
+      </nav>
+    </div>
+  </section>
+
+  <section id="adults">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="gradient-rule"></div>
+          <p class="eyebrow" data-i18n="arcade.adults.e">For adults</p>
+          <h2 data-i18n="arcade.adults.h">Unwind</h2>
+          <p class="lede" data-i18n="arcade.adults.lede">Two retro pixel games: one to slow your breathing, one to sharpen your eye for scams.</p>
+        </div>
+      </div>
+      <div class="split">
+        <article class="card game-card">
+          <canvas class="thumb" data-thumb="zen" width="64" height="40" aria-hidden="true"></canvas>
+          <div class="card-top">
+            <h3><a class="hit" href="zen-garden.html">Zen Garden</a></h3>
+            <span class="tag ok" data-i18n="arcade.tag.relax">Relax</span>
+          </div>
+          <p data-i18n="arcade.zen.desc">Rake the sand, place stones, pines and lanterns, and watch the day turn to night. No score, no timer, nothing to lose.</p>
+          <div class="card-foot"><span class="card-link" data-i18n="arcade.play">Play now &rarr;</span></div>
+        </article>
+        <article class="card game-card">
+          <canvas class="thumb" data-thumb="phish" width="64" height="40" aria-hidden="true"></canvas>
+          <div class="card-top">
+            <h3><a class="hit" href="phishing-hunter.html">Phishing Hunter</a></h3>
+            <span class="tag ok" data-i18n="arcade.tag.learn">Learn</span>
+          </div>
+          <p data-i18n="arcade.phish.desc">Ten messages: safe or phishing? A relaxed spot-the-scam game with a short explanation after every answer. No timer, no lives.</p>
+          <div class="card-foot"><span class="card-link" data-i18n="arcade.play">Play now &rarr;</span></div>
+        </article>
+      </div>
+      <p class="note english-only" data-i18n="arcade.adults.note">These two games are in English only.</p>
+    </div>
+  </section>
+
+  <section id="kids" class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="gradient-rule"></div>
+          <p class="eyebrow" data-i18n="arcade.kids.e">For kids</p>
+          <h2 data-i18n="arcade.kids.h">Learn and play</h2>
+          <p class="lede" data-i18n="arcade.kids.lede">Learning games for school-age kids, free to play in the browser.</p>
+        </div>
+      </div>
+      <div class="split">
+        <article class="card game-card">
+          <canvas class="thumb" data-thumb="math" width="64" height="40" aria-hidden="true"></canvas>
+          <div class="card-top">
+            <h3><a class="hit" href="https://raymond2801.github.io/math-kingdom/" target="_blank" rel="noopener">Math Kingdom</a></h3>
+            <span class="tag" data-i18n="built.tag.game">Browser game</span>
+          </div>
+          <p data-i18n="built.math">A browser-based math tower-defense game, playtested by my own son. No installs, just open the page and play.</p>
+          <div class="card-foot"><span class="card-link" data-i18n="built.play">Play it &rarr;</span></div>
+        </article>
+        <article class="card game-card">
+          <canvas class="thumb" data-thumb="koko" width="64" height="40" aria-hidden="true"></canvas>
+          <div class="card-top">
+            <h3><a class="hit" href="https://raymond2801.github.io/kokos-quest/" target="_blank" rel="noopener">Koko's Quest</a></h3>
+            <span class="tag" data-i18n="built.tag.game">Browser game</span>
+          </div>
+          <p data-i18n="built.koko">A literacy platformer built around the NAPLAN curriculum.</p>
+          <div class="card-foot"><span class="card-link" data-i18n="built.play">Play it &rarr;</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p data-i18n="foot.line">Raymond Doan &middot; Perth, Australia</p>
+    <nav aria-label="Footer" data-i18n-aria="foot.nav">
+      <a href="index.html" data-i18n="nav.start">Start</a>
+      <a href="products.html" data-i18n="nav.products">Products</a>
+      <a href="blog.html" data-i18n="nav.blog">Blog</a>
+      <a href="arcade.html" data-i18n="nav.arcade">Arcade</a>
+      <a href="https://raymonddoan.gumroad.com" target="_blank" rel="noopener" data-i18n="foot.store">Gumroad store</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="ui-vi.js"></script>
+<script src="ui-es.js"></script>
+<script>
+/* Pixel thumbnails for the four game cards. Each one is drawn from rectangles on a 64 x 40 canvas
+   that the stylesheet scales up with hard edges. Decorative only. */
+(function () {
+  function pen(ctx) {
+    return function (c, x, y, w, h) { ctx.fillStyle = c; ctx.fillRect(x, y, w || 1, h || 1); };
+  }
+
+  function sky(p, top, bottom, rows, bands) {
+    for (var i = 0; i < bands; i++) {
+      var t = bands === 1 ? 0 : i / (bands - 1);
+      var c = [0, 1, 2].map(function (k) { return Math.round(top[k] + (bottom[k] - top[k]) * t); });
+      p('rgb(' + c.join(',') + ')', 0, Math.floor(i * rows / bands), 64, Math.ceil(rows / bands) + 1);
+    }
+  }
+
+  function zen(ctx) {
+    var p = pen(ctx);
+    sky(p, [142, 197, 214], [246, 233, 208], 13, 5);
+    p('#9db9a8', 0, 9, 64, 5);
+    p('#7aa08d', 0, 11, 64, 3);
+    p('#2f6b57', 0, 13, 64, 5);
+    p('#3f8a6f', 0, 13, 64, 1);
+    p('#8a7a6a', 2, 18, 60, 2);
+    p('#5b4b3d', 2, 19, 60, 1);
+    p('#e8dcc6', 3, 20, 58, 17);
+    p('#8a7a6a', 2, 37, 60, 2);
+    p('#241208', 0, 39, 64, 1);
+    var x;
+    for (x = 6; x < 58; x++) {
+      var wave = Math.round(Math.sin(x / 5) * 1.6);
+      p('#c9b896', x, 25 + wave, 1);
+      p('#f4ecdc', x, 26 + wave, 1);
+      p('#c9b896', x, 28 + wave, 1);
+      p('#f4ecdc', x, 29 + wave, 1);
+      p('#c9b896', x, 31 + wave, 1);
+    }
+    p('#c9b896', 41, 21, 14, 1);
+    p('#c9b896', 40, 22, 1, 12);
+    p('#7d6e5e', 44, 25, 6, 4);
+    p('#a99a87', 45, 24, 4, 1);
+    p('#c9bba8', 45, 25, 2, 1);
+    p('#4a3d32', 44, 29, 6, 1);
+    p('#5f9a7a', 11, 29, 10, 3);
+    p('#3f8a6f', 14, 23, 4, 6);
+    p('#2f6b57', 15, 20, 2, 3);
+    p('#7fbb9e', 15, 25, 1, 2);
+    p('#6b4a30', 15, 29, 2, 1);
+    p('#8a7a6a', 26, 29, 4, 1);
+    p('#a99a87', 26, 25, 4, 4);
+    p('#f2c46b', 27, 26, 2, 2);
+    p('#7d6e5e', 25, 24, 6, 1);
+    p('#4a3d32', 27, 23, 2, 1);
+  }
+
+  function phish(ctx) {
+    var p = pen(ctx);
+    p('#28616c', 0, 0, 64, 40);
+    for (var y = 0; y < 40; y += 2) p('rgba(0,0,0,0.12)', 0, y, 64, 1);
+    p('#241208', 7, 4, 50, 32);
+    p('#f6f1ea', 8, 5, 48, 30);
+    p('#b7410e', 8, 5, 48, 5);
+    p('#f6f1ea', 10, 6, 3, 3);
+    p('#f6f1ea', 50, 6, 4, 3);
+    p('#241208', 12, 13, 16, 2);
+    p('#6b5847', 12, 17, 36, 1);
+    p('#6b5847', 12, 20, 30, 1);
+    p('#6b5847', 12, 23, 33, 1);
+    p('#b7410e', 12, 25, 20, 1);
+    p('#28616c', 12, 28, 18, 5);
+    p('#f6f1ea', 16, 30, 10, 1);
+    p('#b7410e', 34, 28, 18, 5);
+    p('#f6f1ea', 38, 30, 10, 1);
+    p('#c06c47', 50, 12, 6, 4);
+    p('#7fbb9e', 52, 13, 1, 1);
+  }
+
+  function math(ctx) {
+    var p = pen(ctx);
+    sky(p, [40, 97, 108], [127, 187, 158], 26, 6);
+    p('#241208', 0, 26, 64, 14);
+    p('#6b5847', 0, 26, 64, 2);
+    p('#8a7a6a', 22, 12, 20, 24);
+    p('#a99a87', 22, 12, 20, 2);
+    var i;
+    for (i = 0; i < 4; i++) p('#8a7a6a', 22 + i * 6, 9, 4, 3);
+    p('#4a3d32', 29, 26, 6, 10);
+    p('#241208', 30, 28, 4, 8);
+    p('#241208', 26, 18, 2, 4);
+    p('#241208', 36, 18, 2, 4);
+    p('#b7410e', 31, 3, 1, 6);
+    p('#b7410e', 32, 3, 5, 3);
+    p('#f6f1ea', 6, 8, 7, 2);
+    p('#f6f1ea', 8, 6, 3, 6);
+    p('#f6f1ea', 49, 6, 8, 2);
+    p('#f6f1ea', 49, 10, 8, 2);
+    p('#f2c46b', 8, 30, 3, 3);
+    p('#c06c47', 50, 30, 3, 3);
+    p('#f2c46b', 54, 30, 3, 3);
+  }
+
+  function koko(ctx) {
+    var p = pen(ctx);
+    sky(p, [142, 197, 214], [246, 233, 208], 40, 7);
+    p('#f6f1ea', 8, 7, 8, 2);
+    p('#f6f1ea', 11, 5, 8, 3);
+    p('#f6f1ea', 44, 11, 8, 2);
+    p('#f6f1ea', 47, 9, 8, 3);
+    p('#3f8a6f', 0, 33, 22, 7);
+    p('#7fbb9e', 0, 33, 22, 2);
+    p('#6b4a30', 0, 36, 22, 4);
+    p('#3f8a6f', 40, 31, 24, 9);
+    p('#7fbb9e', 40, 31, 24, 2);
+    p('#6b4a30', 40, 34, 24, 6);
+    p('#3f8a6f', 24, 21, 12, 3);
+    p('#7fbb9e', 24, 21, 12, 1);
+    p('#6b4a30', 24, 24, 12, 2);
+    p('#f6f1ea', 42, 18, 8, 6);
+    p('#b7410e', 42, 18, 1, 6);
+    p('#241208', 44, 20, 5, 1);
+    p('#241208', 44, 22, 4, 1);
+    p('#c06c47', 10, 26, 6, 7);
+    p('#241208', 11, 28, 1, 1);
+    p('#241208', 14, 28, 1, 1);
+    p('#f2c46b', 29, 12, 3, 3);
+    p('#f2c46b', 28, 13, 5, 1);
+  }
+
+  var art = { zen: zen, phish: phish, math: math, koko: koko };
+  var nodes = document.querySelectorAll('canvas[data-thumb]');
+  for (var i = 0; i < nodes.length; i++) {
+    var draw = art[nodes[i].getAttribute('data-thumb')];
+    var ctx = nodes[i].getContext && nodes[i].getContext('2d');
+    if (draw && ctx) draw(ctx);
+  }
+})();
+</script>
+
+</body>
+</html>
