@@ -59,7 +59,7 @@
           <div class="gradient-rule"></div>
           <p class="eyebrow" data-i18n="arcade.adults.e">For adults</p>
           <h2 data-i18n="arcade.adults.h">Unwind</h2>
-          <p class="lede" data-i18n="arcade.adults.lede">Two retro pixel games: one to slow your breathing, one to sharpen your eye for scams.</p>
+          <p class="lede" data-i18n="arcade.adults.lede">Four retro pixel games: slow your breathing, sharpen your eye for scams, feed some koi, or solve a picture puzzle.</p>
         </div>
       </div>
       <div class="split">
@@ -81,8 +81,26 @@
           <p data-i18n="arcade.phish.desc">Ten messages: safe or phishing? A relaxed spot-the-scam game with a short explanation after every answer. No timer, no lives.</p>
           <div class="card-foot"><span class="card-link" data-i18n="arcade.play">Play now &rarr;</span></div>
         </article>
+        <article class="card game-card">
+          <canvas class="thumb" data-thumb="koi" width="64" height="40" aria-hidden="true"></canvas>
+          <div class="card-top">
+            <h3><a class="hit" href="koi-pond.html">Koi Pond</a></h3>
+            <span class="tag ok" data-i18n="arcade.tag.relax">Relax</span>
+          </div>
+          <p data-i18n="arcade.koi.desc">Scatter food and watch the koi swim up to eat. Day, dusk or night, with lily pads, fireflies and a lantern glow. Nothing to win, nothing to lose.</p>
+          <div class="card-foot"><span class="card-link" data-i18n="arcade.play">Play now &rarr;</span></div>
+        </article>
+        <article class="card game-card">
+          <canvas class="thumb" data-thumb="nono" width="64" height="40" aria-hidden="true"></canvas>
+          <div class="card-top">
+            <h3><a class="hit" href="nonogram.html">Pixel Nonogram</a></h3>
+            <span class="tag ok" data-i18n="arcade.tag.puzzle">Puzzle</span>
+          </div>
+          <p data-i18n="arcade.nono.desc">Use the numbers to uncover a hidden pixel picture. Thirteen pictures from 5 by 5 to 15 by 15, every one solvable by logic alone, so no guessing.</p>
+          <div class="card-foot"><span class="card-link" data-i18n="arcade.play">Play now &rarr;</span></div>
+        </article>
       </div>
-      <p class="note english-only" data-i18n="arcade.adults.note">These two games are in English only.</p>
+      <p class="note english-only" data-i18n="arcade.adults.note">These four games are in English only.</p>
     </div>
   </section>
 
@@ -136,7 +154,7 @@
 <script src="ui-vi.js"></script>
 <script src="ui-es.js"></script>
 <script>
-/* Pixel thumbnails for the four game cards. Each one is drawn from rectangles on a 64 x 40 canvas
+/* Pixel thumbnails for the game cards. Each one is drawn from rectangles on a 64 x 40 canvas
    that the stylesheet scales up with hard edges. Decorative only. */
 (function () {
   function pen(ctx) {
@@ -263,7 +281,53 @@
     p('#f2c46b', 28, 13, 5, 1);
   }
 
-  var art = { zen: zen, phish: phish, math: math, koko: koko };
+  function koi(ctx) {
+    var p = pen(ctx);
+    p('#2f6b6e', 0, 0, 64, 40);
+    p('#3a7f80', 0, 8, 64, 10);
+    p('#2a5c60', 0, 26, 64, 14);
+    p('#7a6a55', 0, 0, 64, 3);
+    p('#4a8a55', 0, 0, 20, 2);
+    p('#4a8a55', 44, 0, 20, 3);
+    p('#6fb08a', 8, 28, 10, 6);
+    p('#8cc7a2', 9, 28, 8, 1);
+    p('#e88aa5', 13, 29, 2, 2);
+    p('#6fb08a', 46, 8, 8, 5);
+    p('#8cc7a2', 47, 8, 6, 1);
+    var i;
+    for (i = 0; i < 7; i++) { p('#f6f1ea', 16 + i * 3, 17 + Math.round(Math.sin(i / 1.4) * 2), 3, 3); }
+    p('#e8742a', 28, 17, 3, 3);
+    p('#f6f1ea', 16, 18, 2, 2);
+    p('#e8742a', 36, 18, 3, 3);
+    p('#241208', 38, 18, 1, 1);
+    for (i = 0; i < 6; i++) { p(i % 2 ? '#e8742a' : '#f6f1ea', 40 + i * 3, 30 - Math.round(Math.sin(i / 1.2) * 2), 3, 3); }
+    p('#241208', 57, 28, 1, 1);
+    p('#f2c46b', 5, 33, 2, 2);
+    p('#f2c46b', 54, 22, 1, 1);
+    p('#241208', 0, 39, 64, 1);
+  }
+
+  function nono(ctx) {
+    var p = pen(ctx);
+    p('#f6f1ea', 0, 0, 64, 40);
+    var heart = ['.##.##.', '#######', '#######', '.#####.', '..###..', '...#...'];
+    var ox = 22, oy = 12, cs = 4, x, y;
+    for (x = 0; x < 7; x++) p(x % 2 ? '#8a7a6a' : '#6b5847', ox + x * cs + 1, 4, 2, 6);
+    for (y = 0; y < 6; y++) p(y % 2 ? '#8a7a6a' : '#6b5847', 8, oy + y * cs + 1, 10, 2);
+    for (y = 0; y < 6; y++) for (x = 0; x < 7; x++) {
+      p('#fffaf2', ox + x * cs, oy + y * cs, cs, cs);
+      p('#cdbfae', ox + x * cs + cs - 1, oy + y * cs, 1, cs);
+      p('#cdbfae', ox + x * cs, oy + y * cs + cs - 1, cs, 1);
+      if (heart[y].charAt(x) === '#') p('#c8452f', ox + x * cs, oy + y * cs, cs - 1, cs - 1);
+    }
+    p('#241208', ox - 1, oy - 1, 29, 1);
+    p('#241208', ox - 1, oy + 24, 29, 1);
+    p('#241208', ox - 1, oy - 1, 1, 26);
+    p('#241208', ox + 28, oy - 1, 1, 26);
+    p('#241208', 0, 39, 64, 1);
+  }
+
+  var art = { zen: zen, phish: phish, math: math, koko: koko, koi: koi, nono: nono };
   var nodes = document.querySelectorAll('canvas[data-thumb]');
   for (var i = 0; i < nodes.length; i++) {
     var draw = art[nodes[i].getAttribute('data-thumb')];

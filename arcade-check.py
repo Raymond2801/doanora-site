@@ -1,5 +1,5 @@
 """Arcade check. Usage: python3 -I arcade-check.py SITE_DIR
-Checks nav on all pages at several widths/languages, the Arcade page, and plays both games."""
+Checks nav on all pages at several widths/languages, the Arcade page, and plays all four games."""
 import os, sys
 from playwright.sync_api import sync_playwright
 SITE = os.path.abspath(sys.argv[1]); BASE = 'file://' + SITE + '/'
@@ -26,8 +26,9 @@ with sync_playwright() as pw:
                 check(ok and not errs, '%s %s %d: no overflow, no errors' % (lang, pg, w), errs[:1])
                 ctx.close()
     ctx, p, errs = open_page(b, 'arcade.html')
-    check(p.locator('a[href="zen-garden.html"]').count() >= 1 and p.locator('a[href="phishing-hunter.html"]').count() >= 1, 'arcade links to both games')
-    check(p.locator('canvas.thumb').count() == 4, 'four thumbnails')
+    check(p.locator('a[href="zen-garden.html"]').count() >= 1 and p.locator('a[href="phishing-hunter.html"]').count() >= 1, 'arcade links to the adult games')
+    check(p.locator('a[href="koi-pond.html"]').count() >= 1 and p.locator('a[href="nonogram.html"]').count() >= 1, 'arcade links to koi and nonogram')
+    check(p.locator('canvas.thumb').count() == 6, 'six thumbnails')
     ctx.close()
     # Zen Garden
     ctx, p, errs = open_page(b, 'zen-garden.html')
@@ -55,6 +56,29 @@ with sync_playwright() as pw:
     check('OF 10' in p.inner_text('#desk'), 'phish: round ends with result screen')
     check(p.evaluate("localStorage.getItem('rd-phishing-hunter-v1')") is not None, 'phish: best score saved')
     check(not errs, 'phish: no errors', errs[:2]); ctx.close()
+    # Koi Pond
+    ctx, p, errs = open_page(b, 'koi-pond.html')
+    check(p.evaluate('window.__koi.fish()') >= 3, 'koi: fish are swimming')
+    box = p.locator('#pond').bounding_box(); sc = box['width'] / 192
+    p.mouse.move(box['x'] + 100 * sc, box['y'] + 60 * sc); p.mouse.down(); p.mouse.move(box['x'] + 120 * sc, box['y'] + 70 * sc, steps=6); p.mouse.up()
+    check(p.evaluate('window.__koi.food()') > 0, 'koi: feeding drops food')
+    p.wait_for_timeout(5000)
+    check(p.evaluate('window.__koi.eaten()') > 0, 'koi: fish eat the food')
+    check(not errs, 'koi: no errors', errs[:2]); ctx.close()
+    # Pixel Nonogram
+    ctx, p, errs = open_page(b, 'nonogram.html')
+    check(p.evaluate('window.__nono.puzzles()') == 13, 'nono: 13 puzzles')
+    sol = p.evaluate('window.__nono.solution()'); m = len(sol[0]); cells = p.locator('.cell')
+    for r in range(len(sol)):
+        for c in range(m):
+            if sol[r][c] == '1':
+                a = cells.nth(r * m + c).bounding_box()
+                p.mouse.click(a['x'] + a['width'] / 2, a['y'] + a['height'] / 2)
+    p.wait_for_timeout(300)
+    check(p.evaluate('window.__nono.solved()'), 'nono: clicking the solution solves the puzzle')
+    p.reload(); p.wait_for_timeout(200)
+    check(p.evaluate('window.__nono.solved()') and p.locator('.pick.done').count() == 1, 'nono: progress persists after reload')
+    check(not errs, 'nono: no errors', errs[:2]); ctx.close()
     b.close()
 print('%d checks, %d failed' % (n, len(fails)))
 if fails: print('FAILED: ' + '; '.join(fails[:12])); sys.exit(1)

@@ -1,0 +1,1025 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Koi Pond | Raymond Doan</title>
+<meta name="description" content="A small pixel koi pond. Scatter food, watch the koi swim among the lily pads, and see the day turn to night. No score, no timer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600&family=Press+Start+2P&display=swap">
+<style>
+:root {
+  color-scheme: light;
+  --cream: #f6f1ea;
+  --sand: #efe6d8;
+  --ink: #241208;
+  --muted: #6b5847;
+  --rust: #b7410e;
+  --terra: #c06c47;
+  --teal: #28616c;
+  --on-accent: #fffaf6;
+  --pixel: 'Press Start 2P', 'Courier New', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.page {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 14px 10px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 14px;
+  flex-wrap: wrap;
+}
+h1 {
+  font: 400 clamp(13px, 3.4vw, 22px)/1.4 var(--pixel);
+  margin: 0;
+  flex: 1 1 auto;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+.pbtn {
+  font: 400 10px/1 var(--pixel);
+  color: var(--ink);
+  background: var(--sand);
+  border: 3px solid var(--ink);
+  border-radius: 0;
+  padding: 13px 12px;
+  min-height: 44px;
+  box-shadow: 0 4px 0 var(--ink);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+.pbtn:hover { background: #fffaf2; }
+.pbtn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--ink); }
+.pbtn[disabled] { opacity: 0.45; cursor: default; box-shadow: 0 4px 0 var(--ink); transform: none; }
+.pbtn[aria-pressed="true"] { background: var(--rust); color: var(--on-accent); }
+.pbtn:focus-visible, canvas:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
+.cabinet {
+  background: var(--ink);
+  padding: clamp(4px, 1.2vw, 10px);
+  box-shadow: 6px 6px 0 var(--terra);
+  line-height: 0;
+  max-width: 100%;
+}
+canvas {
+  display: block;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  touch-action: none;
+  cursor: crosshair;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.tools { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 8px; padding-bottom: 4px; }
+.tools .gap { width: 10px; }
+.hint {
+  font: 500 14px/1.5 'IBM Plex Mono', 'Courier New', monospace;
+  color: var(--muted);
+  text-align: center;
+  margin: 0;
+  min-height: 3em;
+  max-width: 60ch;
+}
+.foot { font-size: 14px; color: var(--muted); text-align: center; margin: 0; }
+.foot a { color: var(--rust); }
+noscript p { text-align: center; color: var(--muted); }
+@media (max-width: 420px) {
+  .pbtn { padding: 12px 9px; font-size: 9px; }
+  .tools .gap { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pbtn:active { transform: none; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="bar">
+    <a class="pbtn" href="arcade.html">&larr; Arcade</a>
+    <h1>KOI POND</h1>
+    <button class="pbtn" id="sound" type="button" aria-pressed="false">Sound: off</button>
+  </header>
+
+  <div class="cabinet">
+    <canvas id="pond" width="192" height="124" tabindex="0" role="application" aria-label="Koi pond. Tap or drag over the water to scatter food. With a keyboard, use the arrow keys to move and the space bar to drop food."></canvas>
+  </div>
+
+  <div class="tools" role="toolbar" aria-label="Pond tools">
+    <button class="pbtn" type="button" data-tool="feed" aria-pressed="true">Feed</button>
+    <button class="pbtn" type="button" data-tool="touch" aria-pressed="false">Touch</button>
+    <span class="gap" aria-hidden="true"></span>
+    <button class="pbtn" type="button" id="koi">Koi: 5</button>
+    <button class="pbtn" type="button" id="time">Time: Auto</button>
+  </div>
+
+  <p class="hint" id="hint" aria-live="polite">Tap or drag over the water to scatter food. The koi will come to eat.</p>
+  <p class="foot">A small game by <a href="index.html">Raymond Doan</a>. More in the <a href="arcade.html">Arcade</a>.</p>
+  <noscript><p>This game needs JavaScript. Turn it on and reload the page.</p></noscript>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- sizes ---------- */
+  var W = 192, H = 124;
+  var PCX = 96, PCY = 62, PRX = 84, PRY = 51;      /* the pond: centre and radii of a wobbly oval */
+  var STORE_KEY = 'rd-koi-pond-v1';
+  var MAX_FOOD = 14;
+  var CYCLE_SECONDS = 240;
+
+  var canvas = document.getElementById('pond');
+  var ctx = canvas.getContext('2d');
+  if (!ctx) return;
+  var image = ctx.createImageData(W, H);
+  var buf = image.data;
+  var lit = new Uint8Array(W * H);
+  var reduceMotion = false;
+  try { reduceMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (e) {}
+
+  /* ---------- small helpers ---------- */
+  function hex(c) { return [parseInt(c.slice(1, 3), 16), parseInt(c.slice(3, 5), 16), parseInt(c.slice(5, 7), 16)]; }
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function smooth(t) { t = clamp(t, 0, 1); return t * t * (3 - 2 * t); }
+  function mix(a, b, t) { return [lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2], b[2], t)]; }
+  function scale3(c, k) { return [c[0] * k, c[1] * k, c[2] * k]; }
+  function rng(seed) {
+    return function () {
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  function hash2(x, y) {
+    var h = (Math.imul(x, 374761393) + Math.imul(y, 668265263)) | 0;
+    h = Math.imul(h ^ (h >>> 13), 1274126177);
+    return (h ^ (h >>> 16)) >>> 0;
+  }
+  function noise(x, y, s) { return (hash2(x + s * 7, y + s * 13) % 1000) / 1000; }
+  var BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+  function bayer(x, y) { return BAYER[(y & 3) * 4 + (x & 3)] / 16; }
+
+  function put(x, y, c, l) {
+    x = Math.round(x); y = Math.round(y);
+    if (x < 0 || y < 0 || x >= W || y >= H) return;
+    var i = y * W + x, j = i * 4;
+    buf[j] = c[0]; buf[j + 1] = c[1]; buf[j + 2] = c[2];
+    lit[i] = l ? 1 : 0;
+  }
+  function blendPx(x, y, c, a) {
+    x = Math.round(x); y = Math.round(y);
+    if (x < 0 || y < 0 || x >= W || y >= H) return;
+    var j = (y * W + x) * 4;
+    buf[j] = buf[j] * (1 - a) + c[0] * a;
+    buf[j + 1] = buf[j + 1] * (1 - a) + c[1] * a;
+    buf[j + 2] = buf[j + 2] * (1 - a) + c[2] * a;
+  }
+  for (var ai = 3; ai < buf.length; ai += 4) buf[ai] = 255;
+
+  /* ---------- the pond shape ---------- */
+  function edgeR(theta) { return 1 + 0.06 * Math.sin(3 * theta + 1) + 0.04 * Math.sin(5 * theta + 2) + 0.025 * Math.sin(8 * theta); }
+  /* 0 at the middle, 1 at the shore, above 1 on land */
+  function pondD(x, y) {
+    var dx = (x - PCX) / PRX, dy = (y - PCY) / PRY;
+    var d = Math.sqrt(dx * dx + dy * dy);
+    return d / edgeR(Math.atan2(dy, dx));
+  }
+  function inPond(x, y, margin) { return pondD(x, y) < 1 - (margin || 0); }
+  var depthMap = new Float32Array(W * H);
+  (function () { for (var y = 0; y < H; y++) for (var x = 0; x < W; x++) depthMap[y * W + x] = pondD(x, y); })();
+
+  /* ---------- sprites for the bank ---------- */
+  var PALS = {
+    o: '#2b2730',
+    1: '#4b4651', 2: '#6c6773', 3: '#8f8a93', 4: '#b3aeb2', 5: '#d8d3d2',
+    s: '#2f5a45', t: '#4a7f5f', u: '#6fae85', v: '#9fd3a4',
+    y: '#7a5428', Y: '#d9964a'
+  };
+  var PAL = {};
+  Object.keys(PALS).forEach(function (k) { PAL[k] = hex(PALS[k]); });
+  function mkGrid(w, h) { var g = []; for (var y = 0; y < h; y++) { var r = []; for (var x = 0; x < w; x++) r.push('.'); g.push(r); } return g; }
+  function rows(g) { return g.map(function (r) { return r.join(''); }); }
+  function outline(g, ch) {
+    var h = g.length, w = g[0].length, add = [];
+    for (var y = 0; y < h; y++) for (var x = 0; x < w; x++) {
+      if (g[y][x] !== '.') continue;
+      var near = (y > 0 && g[y - 1][x] !== '.') || (y < h - 1 && g[y + 1][x] !== '.') || (x > 0 && g[y][x - 1] !== '.') || (x < w - 1 && g[y][x + 1] !== '.');
+      if (near) add.push([x, y]);
+    }
+    add.forEach(function (p) { g[p[1]][p[0]] = ch; });
+  }
+  function makeStone(w, h, seed, mossy) {
+    var g = mkGrid(w + 2, h + 2);
+    for (var y = 0; y < h; y++) for (var x = 0; x < w; x++) {
+      var nx = (x - (w - 1) / 2) / (w / 2), ny = (y - (h - 1) / 2) / (h / 2);
+      var ang = Math.atan2(ny, nx);
+      var lim = 1 + 0.07 * Math.sin(ang * 3 + seed) + 0.05 * Math.sin(ang * 5 + seed * 2);
+      var r2 = nx * nx + (ny > 0 ? ny * ny * 0.8 : ny * ny);
+      if (r2 > lim * lim) continue;
+      var nz = Math.sqrt(Math.max(0, 1 - nx * nx - ny * ny));
+      var L = -0.5 * nx - 0.65 * ny + 0.6 * nz;
+      var n = noise(x, y, seed) - 0.5;
+      var v = (L + 0.6) / 1.8 + n * 0.16;
+      var idx = clamp(Math.floor(v * 5 + (bayer(x, y) - 0.5) * 0.7), 0, 4);
+      if (y >= h - 2) idx = Math.min(idx, 1);
+      var ch = String(idx + 1);
+      if (mossy && ny < 0.15 && (Math.sin(x * 0.8 + seed) + Math.sin(y * 1.1 + seed * 3) + n * 1.5) > 0.9) ch = ['s', 't', 'u', 'v'][Math.min(3, idx)];
+      g[y + 1][x + 1] = ch;
+    }
+    outline(g, 'o');
+    return rows(g);
+  }
+  function slab(g, x0, x1, y0, y1, base) {
+    for (var y = y0; y <= y1; y++) for (var x = x0; x <= x1; x++) {
+      var t = x1 === x0 ? 0.5 : (x - x0) / (x1 - x0);
+      var idx = base + (t < 0.3 ? 1 : t > 0.7 ? -1 : 0) + (y === y0 ? 1 : 0) - (y === y1 && y1 > y0 ? 1 : 0);
+      g[y][x] = String(clamp(idx, 1, 5));
+    }
+  }
+  function makeLantern() {
+    var g = mkGrid(15, 19), x;
+    slab(g, 7, 7, 1, 1, 4); slab(g, 6, 8, 2, 2, 3);
+    slab(g, 5, 9, 3, 3, 3); slab(g, 3, 11, 4, 4, 3); slab(g, 1, 13, 5, 5, 3);
+    slab(g, 4, 10, 6, 9, 3);
+    for (var wy = 7; wy <= 8; wy++) for (x = 5; x <= 9; x++) g[wy][x] = (x >= 6 && x <= 8) ? 'Y' : 'y';
+    slab(g, 3, 11, 10, 10, 3); slab(g, 6, 8, 11, 13, 3);
+    slab(g, 4, 10, 14, 14, 3); slab(g, 2, 12, 15, 16, 3);
+    outline(g, 'o');
+    return rows(g);
+  }
+  var LANTERN = makeLantern();
+
+  /* ---------- the bank, painted once ---------- */
+  var landBuf = new Uint8ClampedArray(W * H * 4);   /* alpha 0 where the water is */
+  function lput(x, y, c) {
+    if (x < 0 || y < 0 || x >= W || y >= H) return;
+    var j = (y * W + x) * 4;
+    landBuf[j] = c[0]; landBuf[j + 1] = c[1]; landBuf[j + 2] = c[2]; landBuf[j + 3] = 255;
+  }
+  function lblit(spr, ax, ay) {
+    var w = spr[0].length, h = spr.length;
+    var ox = ax - Math.floor(w / 2), oy = ay - (h - 1);
+    for (var r = 0; r < h; r++) for (var c = 0; c < w; c++) {
+      var ch = spr[r].charAt(c);
+      if (ch === '.') continue;
+      lput(ox + c, oy + r, PAL[ch]);
+    }
+  }
+  var lamps = [];
+  function buildBank() {
+    var x, y, c;
+    var G = [hex('#3f7a58'), hex('#4f9068'), hex('#5f9f78'), hex('#76b58b')];
+    for (y = 0; y < H; y++) for (x = 0; x < W; x++) {
+      var d = depthMap[y * W + x];
+      if (d < 1) continue;
+      var n = hash2(x + 5, y + 3) % 23;
+      var tone = n === 0 ? 3 : n < 4 ? 0 : n < 12 ? 1 : 2;
+      c = G[tone];
+      if (d < 1.045) c = mix(hex('#8a7355'), hex('#6d5a42'), (hash2(x, y) % 4) / 4);      /* muddy rim */
+      else if (d < 1.07) c = mix(c, hex('#6d5a42'), 0.45);
+      lput(x, y, c);
+    }
+    /* shore stones */
+    var r = rng(5);
+    var stones = [makeStone(13, 9, 11, true), makeStone(10, 7, 12, false), makeStone(15, 10, 13, true), makeStone(9, 7, 14, false)];
+    var placed = [];
+    for (var i = 0; i < 26; i++) {
+      var th = (i / 26) * Math.PI * 2 + r() * 0.14;
+      var rr = edgeR(th) * 1.045 + r() * 0.03;
+      var sx = Math.round(PCX + Math.cos(th) * PRX * rr), sy = Math.round(PCY + Math.sin(th) * PRY * rr);
+      placed.push([sx, sy, stones[Math.floor(r() * stones.length)]]);
+    }
+    placed.sort(function (a, b) { return a[1] - b[1]; });
+    placed.forEach(function (p) {
+      for (var yy = -2; yy <= 2; yy++) for (var xx = -6; xx <= 6; xx++) {
+        var j = ((p[1] + yy) * W + (p[0] + xx)) * 4;
+        if (p[1] + yy >= 0 && p[1] + yy < H && p[0] + xx >= 0 && p[0] + xx < W && landBuf[j + 3] && (xx * xx) / 36 + (yy * yy) / 5 <= 1) {
+          landBuf[j] *= 0.8; landBuf[j + 1] *= 0.8; landBuf[j + 2] *= 0.8;
+        }
+      }
+      lblit(p[2], p[0], p[1] + 3);
+    });
+    /* tufts of grass in the corners */
+    for (i = 0; i < 90; i++) {
+      var gx = Math.floor(r() * W), gy = Math.floor(r() * H);
+      if (depthMap[gy * W + gx] < 1.12) continue;
+      lput(gx, gy, hex('#8bc79b')); lput(gx, gy - 1, hex('#6fae85')); lput(gx + 1, gy - 1, hex('#6fae85'));
+    }
+    /* a cherry tree in the top left corner */
+    var BL = [hex('#d9809b'), hex('#ee9fb6'), hex('#f6bccb'), hex('#fbd6df'), hex('#fff0f4')];
+    var blossoms = [[14, 11, 13, 9], [178, 108, 13, 9]];
+    blossoms.forEach(function (b, bi) {
+      for (var py = b[1] - b[3] - 1; py <= b[1] + b[3] + 1; py++) for (var px = b[0] - b[2] - 1; px <= b[0] + b[2] + 1; px++) {
+        var dx = (px - b[0]) / b[2], dy = (py - b[1]) / b[3];
+        var wob = noise(px, py, 30 + bi);
+        if (dx * dx + dy * dy + (wob - 0.5) * 0.5 > 1) continue;
+        var vv = 0.6 - 0.32 * dx - 0.5 * dy + (wob - 0.5) * 0.7;
+        var idx = clamp(Math.floor(vv * 5), 0, 4);
+        if (wob > 0.95) idx = 4;
+        lput(px, py, BL[idx]);
+      }
+    });
+    /* reeds with cattails */
+    [[26, 96], [166, 24], [150, 100]].forEach(function (rp, ri) {
+      for (var k = 0; k < 6; k++) {
+        var bx = rp[0] + k * 2 - 5, h = 12 + ((k * 7 + ri * 3) % 7), lean = (k - 3) * 0.35;
+        for (var s = 0; s < h; s++) lput(Math.round(bx + lean * s * 0.5), rp[1] - s, s > h - 3 ? hex('#6fae85') : hex('#4a8a64'));
+        if (k % 3 === 1) { for (var cy = 0; cy < 4; cy++) { lput(Math.round(bx + lean * (h - 4) * 0.5), rp[1] - h + 1 - cy, hex('#6a4a30')); lput(Math.round(bx + lean * (h - 4) * 0.5) + 1, rp[1] - h + 1 - cy, hex('#4d3624')); } }
+      }
+    });
+    /* two stone lanterns by the water */
+    [[24, 112], [170, 14]].forEach(function (lp) {
+      lblit(LANTERN, lp[0], lp[1]);
+      lamps.push({ x: lp[0], y: lp[1] - 10 });
+    });
+  }
+  buildBank();
+
+  /* ---------- time of day (same cycle as the Zen Garden) ---------- */
+  var DAWN = { tint: [1.0, 0.82, 0.70], dark: 0.35, sky: [250, 190, 150] };
+  var DAY = { tint: [1, 1, 1], dark: 0, sky: [200, 232, 244] };
+  var NIGHT = { tint: [0.42, 0.52, 0.78], dark: 1, sky: [90, 120, 170] };
+  var KEYS = [
+    { t: 0.00, p: DAWN }, { t: 0.14, p: DAY }, { t: 0.38, p: DAY }, { t: 0.50, p: DAWN },
+    { t: 0.62, p: NIGHT }, { t: 0.88, p: NIGHT }, { t: 1.00, p: DAWN }
+  ];
+  function keyAt(t) {
+    t = t - Math.floor(t);
+    for (var i = 0; i < KEYS.length - 1; i++) {
+      var a = KEYS[i], b = KEYS[i + 1];
+      if (t >= a.t && t <= b.t) {
+        var s = smooth((t - a.t) / (b.t - a.t));
+        return { tint: mix(a.p.tint, b.p.tint, s), dark: lerp(a.p.dark, b.p.dark, s), sky: mix(a.p.sky, b.p.sky, s) };
+      }
+    }
+    return DAY;
+  }
+  var TIME_MODES = [['auto', 'Auto', null], ['day', 'Day', 0.25], ['dusk', 'Dusk', 0.5], ['night', 'Night', 0.75]];
+  var timeMode = 0;
+  var now0 = new Date();
+  var clockT = (((now0.getHours() + now0.getMinutes() / 60) - 6 + 24) % 24) / 24;
+  var simSeconds = 0;
+  function currentT() {
+    var fixed = TIME_MODES[timeMode][2];
+    if (fixed !== null) return fixed;
+    return clockT + (reduceMotion ? 0 : simSeconds / CYCLE_SECONDS);
+  }
+
+  /* ---------- the koi ---------- */
+  var NSEG = 14, SEG_GAP = 2.0;
+  var RAD = [3.5, 4.1, 4.5, 4.6, 4.4, 4.0, 3.6, 3.2, 2.8, 2.4, 2.0, 1.7, 1.4, 1.1];
+  var WHITE = hex('#f6f0e4'), ORANGE = hex('#ea7a2c'), RED = hex('#d6452a'), BLACK = hex('#2a2428'), GOLD = hex('#e8b448'), CREAM = hex('#f0d9a8');
+  var KINDS = ['kohaku', 'sanke', 'ogon', 'kohaku', 'shiro', 'sanke', 'ogon', 'kohaku', 'sanke'];
+  var fish = [];
+  var food = [];
+  var ripples = [];
+  var eaten = 0;
+  var koiCount = 5;
+
+  function makePattern(kind, rand) {
+    var cols = [], i;
+    for (i = 0; i < NSEG; i++) cols.push(WHITE);
+    if (kind === 'ogon') { for (i = 0; i < NSEG; i++) cols[i] = i < 2 ? CREAM : GOLD; }
+    else if (kind === 'shiro') { cols[0] = RED; for (i = 5; i < 8; i++) cols[i] = ORANGE; }
+    else {
+      var patches = 2 + Math.floor(rand() * 2);
+      for (var p = 0; p < patches; p++) {
+        var start = 1 + Math.floor(rand() * 9), len = 2 + Math.floor(rand() * 3);
+        for (i = start; i < Math.min(NSEG - 2, start + len); i++) cols[i] = ORANGE;
+      }
+      if (kind === 'kohaku' && rand() < 0.7) { cols[0] = RED; cols[1] = RED; }
+      if (kind === 'sanke') { for (i = 2; i < NSEG - 2; i++) if (cols[i] === WHITE && rand() < 0.2) cols[i] = BLACK; }
+    }
+    return cols;
+  }
+  function spawnFish(i) {
+    var rand = rng(100 + i * 17);
+    var ang = rand() * 6.28, r = rand() * 0.5;
+    var x = PCX + Math.cos(ang) * PRX * r, y = PCY + Math.sin(ang) * PRY * r;
+    var h = rand() * 6.28;
+    var f = { x: x, y: y, h: h, speed: 8 + rand() * 4, turn: 0, wait: 0, wob: rand() * 6.28, size: 0.9 + rand() * 0.25, cols: makePattern(KINDS[i % KINDS.length], rand), seg: [], idle: rand() * 3 };
+    for (var k = 0; k < NSEG; k++) f.seg.push({ x: x - Math.cos(h) * k * SEG_GAP, y: y - Math.sin(h) * k * SEG_GAP });
+    return f;
+  }
+  function setKoi(n) {
+    koiCount = clamp(n, 3, 9);
+    while (fish.length < koiCount) fish.push(spawnFish(fish.length));
+    while (fish.length > koiCount) fish.pop();
+  }
+
+  function angDiff(a, b) { var d = b - a; while (d > Math.PI) d -= Math.PI * 2; while (d < -Math.PI) d += Math.PI * 2; return d; }
+  function nearestFood(f) {
+    var best = null, bd = 80 * 80;
+    for (var i = 0; i < food.length; i++) {
+      if (food[i].sink > 0.7) continue;
+      var dx = food[i].x - f.x, dy = food[i].y - f.y, d = dx * dx + dy * dy;
+      if (d < bd) { bd = d; best = food[i]; }
+    }
+    return best;
+  }
+  function updateFish(dt) {
+    var slow = reduceMotion ? 0.55 : 1;
+    for (var i = 0; i < fish.length; i++) {
+      var f = fish[i];
+      var target = null, want = f.h;
+      var fd = nearestFood(f);
+      var cruise = f.speed;
+      if (fd) {
+        want = Math.atan2(fd.y - f.y, fd.x - f.x);
+        cruise = f.speed * 1.9;
+        var ex = fd.x - f.x, ey = fd.y - f.y;
+        if (ex * ex + ey * ey < 14) {
+          fd.sink = 2;
+          eaten++;
+          ripples.push({ x: fd.x, y: fd.y, r: 1, age: 0, life: 1.3, s: 0.7 });
+          sfx.eat();
+        }
+      } else {
+        f.wait -= dt;
+        if (f.wait <= 0) { f.turn = (Math.random() - 0.5) * 1.6; f.wait = 0.8 + Math.random() * 2.2; }
+        want = f.h + f.turn * 0.4;
+        var gap = pondD(f.x + Math.cos(f.h) * 14, f.y + Math.sin(f.h) * 14);
+        if (gap > 0.82) { want = Math.atan2(PCY - f.y, PCX - f.x) + (f.turn * 0.3); cruise = f.speed * 0.8; }
+        /* keep apart from the others */
+        for (var j = 0; j < fish.length; j++) {
+          if (j === i) continue;
+          var ox = f.x - fish[j].x, oy = f.y - fish[j].y, od = ox * ox + oy * oy;
+          if (od < 150) want = Math.atan2(oy, ox);
+        }
+        if (f.idle > 0) { f.idle -= dt; cruise *= 0.6; }
+      }
+      var dh = angDiff(f.h, want);
+      f.h += clamp(dh, -2.2 * dt, 2.2 * dt);
+      f.wob += dt * (3 + cruise * 0.35);
+      var sp = cruise * slow;
+      var nx = f.x + Math.cos(f.h) * sp * dt, ny = f.y + Math.sin(f.h) * sp * dt;
+      if (pondD(nx, ny) < 0.93) { f.x = nx; f.y = ny; }
+      else { f.h += 1.5 * dt * 4; }
+      /* the body follows the head */
+      var prev = { x: f.x, y: f.y };
+      f.seg[0].x = f.x; f.seg[0].y = f.y;
+      for (var k = 1; k < NSEG; k++) {
+        var s = f.seg[k];
+        var dx2 = prev.x - s.x, dy2 = prev.y - s.y;
+        var dd = Math.sqrt(dx2 * dx2 + dy2 * dy2) || 1;
+        var sway = Math.sin(f.wob - k * 0.55) * 0.16 * (k / NSEG);
+        s.x = prev.x - (dx2 / dd) * SEG_GAP + (-dy2 / dd) * sway;
+        s.y = prev.y - (dy2 / dd) * SEG_GAP + (dx2 / dd) * sway;
+        prev = s;
+      }
+    }
+  }
+  function updateFood(dt) {
+    for (var i = food.length - 1; i >= 0; i--) {
+      var p = food[i];
+      p.age += dt;
+      if (p.age > 9 && p.sink < 0.7) p.sink = 0.7;
+      if (p.sink >= 0.7) p.sink += dt * 0.9;
+      if (p.sink > 2.2) food.splice(i, 1);
+    }
+  }
+  function updateRipples(dt) {
+    for (var i = ripples.length - 1; i >= 0; i--) {
+      var r = ripples[i];
+      r.age += dt; r.r += dt * (reduceMotion ? 9 : 16) * r.s;
+      if (r.age > r.life) ripples.splice(i, 1);
+    }
+  }
+
+  function dropFood(x, y) {
+    if (!inPond(x, y, 0.02)) return false;
+    if (food.length >= MAX_FOOD) food.shift();
+    food.push({ x: x + (Math.random() - 0.5) * 3, y: y + (Math.random() - 0.5) * 3, age: 0, sink: 0 });
+    ripples.push({ x: x, y: y, r: 1, age: 0, life: 1.1, s: 0.6 });
+    sfx.plop();
+    return true;
+  }
+  function touchWater(x, y) {
+    if (!inPond(x, y, 0.02)) return false;
+    ripples.push({ x: x, y: y, r: 1, age: 0, life: 1.9, s: 1 });
+    ripples.push({ x: x, y: y, r: -4, age: 0, life: 2.1, s: 1 });
+    for (var i = 0; i < fish.length; i++) {
+      var dx = fish[i].x - x, dy = fish[i].y - y, d = Math.sqrt(dx * dx + dy * dy);
+      if (d < 36) { fish[i].h = Math.atan2(dy, dx); fish[i].idle = 0; fish[i].wait = 1.2; }
+    }
+    sfx.drop();
+    return true;
+  }
+
+  /* ---------- lily pads and the little things on the water ---------- */
+  var pads = [];
+  (function () {
+    var r = rng(9);
+    var spots = [[52, 40], [64, 78], [132, 34], [146, 76], [104, 94], [38, 62], [118, 62]];
+    spots.forEach(function (s, i) { pads.push({ x: s[0], y: s[1], r: 5 + r() * 3, rot: r() * 6.28, ph: r() * 6.28, flower: i === 1 || i === 3 || i === 5 }); });
+  })();
+  var petalList = [];
+  (function () {
+    var r = rng(21);
+    for (var i = 0; i < 12; i++) petalList.push({ x: r() * W, y: r() * H, vx: 0.8 + r() * 1.5, vy: 0.4 + r() * 0.8, ph: r() * 6.28 });
+  })();
+  var flies = [];
+  (function () {
+    var r = rng(13);
+    for (var i = 0; i < 16; i++) flies.push({ bx: 10 + r() * 172, by: 8 + r() * 108, ax: 4 + r() * 9, ay: 2 + r() * 6, fx: 0.0004 + r() * 0.0006, fy: 0.0005 + r() * 0.0007, ph: r() * 6.28, fr: 0.6 + r() });
+  })();
+  var sparkles = [];
+  (function () {
+    var r = rng(33);
+    for (var i = 0; i < 26; i++) {
+      var x, y;
+      do { x = Math.floor(14 + r() * 164); y = Math.floor(12 + r() * 100); } while (pondD(x, y) > 0.9);
+      sparkles.push({ x: x, y: y, ph: r() * 6.28 });
+    }
+  })();
+
+  /* ---------- painting ---------- */
+  var SHALLOW = [96, 184, 170], MID = [48, 132, 138], DEEP = [24, 82, 104];
+  function paintWater(key, ms) {
+    var t = ms * 0.001;
+    for (var y = 0; y < H; y++) {
+      for (var x = 0; x < W; x++) {
+        var i = y * W + x, d = depthMap[i];
+        if (d >= 1) continue;
+        var f = smooth((d - 0.15) / 0.8);
+        var c = f < 0.5 ? mix(DEEP, MID, f * 2) : mix(MID, SHALLOW, (f - 0.5) * 2);
+        /* a glint of sky toward the top left */
+        var sk = clamp(1 - (x * 0.5 + y * 0.9) / 150, 0, 1) * 0.22;
+        var r0 = c[0] + (key.sky[0] - c[0]) * sk, g0 = c[1] + (key.sky[1] - c[1]) * sk, b0 = c[2] + (key.sky[2] - c[2]) * sk;
+        /* slow moving light on the bottom */
+        var n = Math.sin(x * 0.33 + t * 0.8 + Math.sin(y * 0.21 + t * 0.5) * 2) + Math.sin(y * 0.41 - t * 0.7 + x * 0.14);
+        var lift = n > 1.55 ? 16 : n > 1.2 ? 7 : n < -1.6 ? -9 : 0;
+        var j = i * 4;
+        var o = (bayer(x, y) - 0.5) * 6;
+        buf[j] = Math.round((r0 + lift + o) / 4) * 4; buf[j + 1] = Math.round((g0 + lift + o) / 4) * 4; buf[j + 2] = Math.round((b0 + lift + o) / 4) * 4;
+        lit[i] = 1;
+      }
+    }
+  }
+  function paintLand() {
+    for (var i = 0; i < W * H; i++) {
+      var j = i * 4;
+      if (landBuf[j + 3]) {
+        buf[j] = landBuf[j]; buf[j + 1] = landBuf[j + 1]; buf[j + 2] = landBuf[j + 2];
+        lit[i] = 1;
+      }
+    }
+  }
+  var SHADOW = [10, 40, 52];
+  function shadowDisc(x, y, r, a) {
+    for (var yy = Math.floor(y - r); yy <= Math.ceil(y + r); yy++) for (var xx = Math.floor(x - r); xx <= Math.ceil(x + r); xx++) {
+      if (xx < 0 || yy < 0 || xx >= W || yy >= H || depthMap[yy * W + xx] >= 1) continue;
+      var dx = xx - x, dy = yy - y;
+      if (dx * dx + dy * dy <= r * r) blendPx(xx, yy, SHADOW, a);
+    }
+  }
+  function paintShadows() {
+    for (var i = 0; i < pads.length; i++) {
+      var p = pads[i], bob = reduceMotion ? 0 : Math.sin(p.ph) * 0.4;
+      shadowDisc(p.x + 2, p.y + 3 + bob, p.r, 0.22);
+    }
+    for (var k = 0; k < fish.length; k++) {
+      var f = fish[k];
+      for (var s = 0; s < NSEG; s += 2) shadowDisc(f.seg[s].x + 2.5, f.seg[s].y + 3.5, RAD[s] * f.size * 0.9, 0.16);
+    }
+  }
+  function disc(x, y, r, col, shade) {
+    var x0 = Math.floor(x - r), x1 = Math.ceil(x + r), y0 = Math.floor(y - r), y1 = Math.ceil(y + r);
+    for (var yy = y0; yy <= y1; yy++) for (var xx = x0; xx <= x1; xx++) {
+      if (xx < 0 || yy < 0 || xx >= W || yy >= H) continue;
+      var dx = xx - x, dy = yy - y, dd = dx * dx + dy * dy;
+      if (dd > r * r) continue;
+      var nx = dx / r, ny = dy / r;
+      var lum = 0.86 + 0.26 * (-0.5 * nx - 0.6 * ny);
+      if (dd > (r - 1) * (r - 1)) lum *= 0.82;
+      lum *= shade;
+      var j = (yy * W + xx) * 4;
+      buf[j] = clamp(col[0] * lum, 0, 255); buf[j + 1] = clamp(col[1] * lum, 0, 255); buf[j + 2] = clamp(col[2] * lum, 0, 255);
+      lit[yy * W + xx] = 1;
+    }
+  }
+  function paintFish() {
+    var order = fish.slice().sort(function (a, b) { return a.y - b.y; });
+    for (var i = 0; i < order.length; i++) {
+      var f = order[i], k;
+      var tail = f.seg[NSEG - 1], pre = f.seg[NSEG - 3];
+      var tdx = tail.x - pre.x, tdy = tail.y - pre.y, tl = Math.sqrt(tdx * tdx + tdy * tdy) || 1;
+      tdx /= tl; tdy /= tl;
+      var side = Math.sin(f.wob - NSEG * 0.55) * 2.6;
+      /* tail fin: a soft fan */
+      for (var q = 0; q < 14; q++) {
+        var u = q / 13, len = 4 + u * 5;
+        var fx = tail.x + tdx * len + (-tdy) * (side * u + (u - 0.5) * 6 * (0.4 + u)), fy = tail.y + tdy * len + tdx * (side * u + (u - 0.5) * 6 * (0.4 + u));
+        for (var ss = 0; ss <= 3; ss++) {
+          var m = ss / 3;
+          blendPx(lerp(tail.x, fx, m), lerp(tail.y, fy, m), f.cols[NSEG - 3] === BLACK ? WHITE : f.cols[NSEG - 3], 0.5 - m * 0.2);
+        }
+      }
+      /* pectoral fins */
+      var hd = f.seg[2], hp = f.seg[1];
+      var hx = hd.x - hp.x, hy = hd.y - hp.y, hl = Math.sqrt(hx * hx + hy * hy) || 1; hx /= hl; hy /= hl;
+      var flap = Math.sin(f.wob * 1.3) * 1.2;
+      for (var sd = -1; sd <= 1; sd += 2) {
+        for (var fs = 1; fs <= 4; fs++) {
+          blendPx(hd.x + (-hy) * sd * (RAD[2] * 0.8 + fs * 0.6 + flap * sd * 0.3) - hx * fs * 0.9, hd.y + hx * sd * (RAD[2] * 0.8 + fs * 0.6 + flap * sd * 0.3) - hy * fs * 0.9, WHITE, 0.55);
+        }
+      }
+      /* the body, tail to head so the head sits on top */
+      for (k = NSEG - 1; k >= 0; k--) {
+        var sg = f.seg[k];
+        var col = f.cols[k];
+        disc(sg.x, sg.y, RAD[k] * f.size, col, 1);
+      }
+      /* eyes */
+      var h0 = f.seg[0], h1 = f.seg[1];
+      var ex = h0.x - h1.x, ey = h0.y - h1.y, el = Math.sqrt(ex * ex + ey * ey) || 1; ex /= el; ey /= el;
+      put(h0.x + (-ey) * 2.3 + ex * 0.8, h0.y + ex * 2.3 + ey * 0.8, [20, 14, 18], true);
+      put(h0.x - (-ey) * 2.3 + ex * 0.8, h0.y - ex * 2.3 + ey * 0.8, [20, 14, 18], true);
+    }
+  }
+  var PAD_G = [hex('#2f6b49'), hex('#3f8a5c'), hex('#5aa872'), hex('#86c98c')];
+  function paintPads(ms) {
+    for (var i = 0; i < pads.length; i++) {
+      var p = pads[i], bob = reduceMotion ? 0 : Math.sin(ms * 0.0008 + p.ph) * 0.4;
+      var cx = p.x, cy = p.y + bob;
+      for (var yy = Math.floor(cy - p.r); yy <= Math.ceil(cy + p.r); yy++) for (var xx = Math.floor(cx - p.r); xx <= Math.ceil(cx + p.r); xx++) {
+        var dx = xx - cx, dy = yy - cy, dd = dx * dx + dy * dy;
+        if (dd > p.r * p.r) continue;
+        var a = Math.atan2(dy, dx) - p.rot;
+        while (a < -Math.PI) a += Math.PI * 2;
+        while (a > Math.PI) a -= Math.PI * 2;
+        if (Math.abs(a) < 0.22 && dd > 2) continue;                            /* the notch */
+        var nx = dx / p.r, ny = dy / p.r;
+        var v = 0.55 - 0.4 * nx - 0.5 * ny + (noise(xx, yy, 40) - 0.5) * 0.25;
+        var tone = clamp(Math.floor(v * 4), 0, 3);
+        if (Math.abs(Math.sin(a * 4)) > 0.96 && dd > 4) tone = Math.min(3, tone + 1);        /* veins */
+        if (dd > (p.r - 1) * (p.r - 1)) tone = Math.max(0, tone - 1);
+        put(xx, yy, PAD_G[tone], true);
+      }
+      if (p.flower) {
+        var petals = ['#f9c7d6', '#f4a9c0', '#fde4ec'];
+        for (var k = 0; k < 8; k++) {
+          var pa = k / 8 * Math.PI * 2;
+          put(cx + Math.cos(pa) * 2.6, cy + Math.sin(pa) * 2.6, hex(petals[k % 3]), true);
+          put(cx + Math.cos(pa + 0.4) * 1.7, cy + Math.sin(pa + 0.4) * 1.7, hex(petals[(k + 1) % 3]), true);
+        }
+        put(cx, cy, hex('#f5cf5b'), true); put(cx + 1, cy, hex('#e8b448'), true); put(cx, cy + 1, hex('#e8b448'), true);
+      }
+    }
+  }
+  function paintFood() {
+    for (var i = 0; i < food.length; i++) {
+      var p = food[i];
+      var a = p.sink < 0.7 ? 1 : clamp(1 - (p.sink - 0.7) / 1.5, 0, 1);
+      var bob = Math.sin(p.age * 3 + i) * 0.3;
+      blendPx(p.x, p.y + bob, [214, 134, 66], a);
+      blendPx(p.x + 1, p.y + bob, [236, 176, 96], a * 0.9);
+      blendPx(p.x, p.y + bob + 1, [160, 90, 44], a * 0.8);
+    }
+  }
+  function paintRipples() {
+    for (var i = 0; i < ripples.length; i++) {
+      var r = ripples[i];
+      if (r.r < 0.5) continue;
+      var a = (1 - r.age / r.life) * 0.55;
+      var steps = Math.ceil(r.r * 6.3 * 1.3);
+      for (var s = 0; s < steps; s++) {
+        var ang = s / steps * Math.PI * 2;
+        var x = r.x + Math.cos(ang) * r.r, y = r.y + Math.sin(ang) * r.r * 0.92;
+        var xr = Math.round(x), yr = Math.round(y);
+        if (xr < 0 || yr < 0 || xr >= W || yr >= H || depthMap[yr * W + xr] >= 1) continue;
+        blendPx(xr, yr, [230, 250, 250], a * (0.55 + 0.45 * Math.sin(ang * 2 + r.age)));
+        if (r.r > 5) blendPx(Math.round(r.x + Math.cos(ang) * (r.r - 2)), Math.round(r.y + Math.sin(ang) * (r.r - 2) * 0.92), [200, 235, 240], a * 0.3);
+      }
+    }
+  }
+  function lightingPass(key) {
+    var tr = key.tint[0], tg = key.tint[1], tb = key.tint[2];
+    for (var i = 0; i < W * H; i++) {
+      if (!lit[i]) continue;
+      var j = i * 4;
+      buf[j] = buf[j] * tr; buf[j + 1] = buf[j + 1] * tg; buf[j + 2] = buf[j + 2] * tb;
+    }
+  }
+  var WARM = [255, 190, 110], FLAME = [255, 216, 120];
+  function glowPass(key, ms) {
+    if (key.dark < 0.15) return;
+    for (var n = 0; n < lamps.length; n++) {
+      var L = lamps[n];
+      var fl = reduceMotion ? 1 : 0.88 + 0.12 * Math.sin(ms * 0.008 + n * 2.3);
+      var R = 28;
+      for (var y = L.y - R; y <= L.y + R; y++) for (var x = L.x - R; x <= L.x + R; x++) {
+        if (x < 0 || y < 0 || x >= W || y >= H) continue;
+        var d = Math.sqrt((x - L.x) * (x - L.x) + ((y - L.y) * 1.4) * ((y - L.y) * 1.4));
+        if (d >= R) continue;
+        var i = y * W + x;
+        if (!lit[i]) continue;
+        var k = (1 - d / R);
+        k = k * k * key.dark * 0.6 * fl;
+        var j = i * 4;
+        buf[j] = Math.min(255, buf[j] + WARM[0] * k);
+        buf[j + 1] = Math.min(255, buf[j + 1] + WARM[1] * k);
+        buf[j + 2] = Math.min(255, buf[j + 2] + WARM[2] * k * 0.8);
+      }
+      if (key.dark > 0.2) { for (var wy = 0; wy < 2; wy++) for (var wx = -2; wx <= 2; wx++) put(L.x + wx, L.y + wy, wx === 0 ? [255, 238, 170] : FLAME, false); }
+    }
+    /* stars and a moon glint on the water */
+    for (var s = 0; s < sparkles.length; s++) {
+      var sp = sparkles[s];
+      var a = key.dark * Math.max(0, Math.sin(ms * 0.0017 + sp.ph));
+      if (reduceMotion) a = key.dark * 0.4;
+      if (a < 0.1) continue;
+      blendPx(sp.x, sp.y, [236, 244, 255], a * 0.8);
+      blendPx(sp.x - 1, sp.y, [236, 244, 255], a * 0.3); blendPx(sp.x + 1, sp.y, [236, 244, 255], a * 0.3);
+    }
+  }
+  function fireflyPass(key, ms) {
+    if (reduceMotion || key.dark < 0.3) return;
+    for (var i = 0; i < flies.length; i++) {
+      var f = flies[i];
+      var x = f.bx + Math.sin(ms * f.fx + f.ph) * f.ax;
+      var y = f.by + Math.cos(ms * f.fy + f.ph * 1.7) * f.ay;
+      var a = key.dark * key.dark * (0.25 + 0.75 * Math.max(0, Math.sin(ms * 0.0028 * f.fr + f.ph)));
+      if (a < 0.05) continue;
+      blendPx(x, y, [210, 255, 160], a);
+      blendPx(x - 1, y, [210, 255, 160], a * 0.3); blendPx(x + 1, y, [210, 255, 160], a * 0.3);
+      blendPx(x, y - 1, [210, 255, 160], a * 0.3); blendPx(x, y + 1, [210, 255, 160], a * 0.3);
+    }
+  }
+  function petalPass(key, ms) {
+    if (reduceMotion) return;
+    var vis = 1 - key.dark * 0.85;
+    if (vis < 0.12) return;
+    for (var i = 0; i < petalList.length; i++) {
+      var p = petalList[i];
+      var x = (p.x + ms * 0.001 * p.vx * 4 + Math.sin(ms * 0.0011 + p.ph) * 4) % W;
+      var y = (p.y + ms * 0.001 * p.vy * 4) % H;
+      blendPx(x, y, [247, 188, 203], 0.9 * vis);
+      blendPx(x + 1, y, [247, 188, 203], 0.5 * vis);
+    }
+  }
+
+  /* ---------- pointer, keyboard, tools ---------- */
+  var tool = 'feed';
+  var hover = { x: 0, y: 0, on: false };
+  var kb = { x: 96, y: 62, on: false };
+  var dragging = false;
+  var lastDrop = null;
+  var HINTS = {
+    feed: 'Tap or drag over the water to scatter food. The koi will come to eat.',
+    touch: 'Tap the water to make ripples. The koi may swim away.'
+  };
+  var hintEl = document.getElementById('hint');
+  var toolButtons = document.querySelectorAll('[data-tool]');
+  function setTool(name) {
+    tool = name;
+    for (var i = 0; i < toolButtons.length; i++) toolButtons[i].setAttribute('aria-pressed', toolButtons[i].getAttribute('data-tool') === name ? 'true' : 'false');
+    hintEl.textContent = HINTS[name];
+  }
+  for (var tb = 0; tb < toolButtons.length; tb++) {
+    toolButtons[tb].addEventListener('click', function (e) { setTool(e.currentTarget.getAttribute('data-tool')); });
+  }
+  function toGame(e) {
+    var r = canvas.getBoundingClientRect();
+    return { x: Math.floor((e.clientX - r.left) * W / r.width), y: Math.floor((e.clientY - r.top) * H / r.height) };
+  }
+  function act(p, isStart) {
+    if (tool === 'feed') {
+      if (isStart || !lastDrop || Math.abs(p.x - lastDrop.x) + Math.abs(p.y - lastDrop.y) >= 6) {
+        if (dropFood(p.x, p.y)) lastDrop = { x: p.x, y: p.y };
+      }
+    } else if (isStart) touchWater(p.x, p.y);
+  }
+  canvas.addEventListener('pointerdown', function (e) {
+    if (e.button !== undefined && e.button > 0) return;
+    e.preventDefault();
+    try { canvas.setPointerCapture(e.pointerId); } catch (err) {}
+    dragging = true; kb.on = false; lastDrop = null;
+    var p = toGame(e);
+    hover = { x: p.x, y: p.y, on: e.pointerType === 'mouse' };
+    act(p, true);
+  });
+  canvas.addEventListener('pointermove', function (e) {
+    var p = toGame(e);
+    hover = { x: p.x, y: p.y, on: e.pointerType === 'mouse' };
+    if (dragging) { e.preventDefault(); act(p, false); }
+  });
+  function endDrag() { dragging = false; lastDrop = null; }
+  canvas.addEventListener('pointerup', endDrag);
+  canvas.addEventListener('pointercancel', endDrag);
+  canvas.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') hover.on = false; });
+  canvas.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+  canvas.addEventListener('focus', function () { kb.on = true; });
+  canvas.addEventListener('blur', function () { kb.on = false; });
+  canvas.addEventListener('keydown', function (e) {
+    var step = e.shiftKey ? 4 : 2, mx = 0, my = 0;
+    if (e.key === 'ArrowLeft') mx = -step;
+    else if (e.key === 'ArrowRight') mx = step;
+    else if (e.key === 'ArrowUp') my = -step;
+    else if (e.key === 'ArrowDown') my = step;
+    else if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); act({ x: kb.x, y: kb.y }, true); return; }
+    else return;
+    e.preventDefault();
+    kb.x = clamp(kb.x + mx, 2, W - 3);
+    kb.y = clamp(kb.y + my, 2, H - 3);
+  });
+
+  var koiBtn = document.getElementById('koi');
+  koiBtn.addEventListener('click', function () {
+    setKoi(koiCount >= 9 ? 3 : koiCount + 1);
+    koiBtn.textContent = 'Koi: ' + koiCount;
+    save();
+  });
+  var timeBtn = document.getElementById('time');
+  timeBtn.addEventListener('click', function () {
+    timeMode = (timeMode + 1) % TIME_MODES.length;
+    timeBtn.textContent = 'Time: ' + TIME_MODES[timeMode][1];
+  });
+  function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify({ v: 1, n: koiCount })); } catch (e) {} }
+  function load() {
+    try {
+      var d = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
+      if (d && d.v === 1 && isFinite(+d.n)) return clamp(Math.round(+d.n), 3, 9);
+    } catch (e) {}
+    return 5;
+  }
+
+  /* ---------- sound (off until asked) ---------- */
+  var audio = { ctx: null, master: null, noise: null, on: false, timer: 0 };
+  var sfx = {
+    plop: function () { if (audio.on && audio.ctx) tone(420, 0.14, 'sine', 0.18, 180); },
+    eat: function () { if (audio.on && audio.ctx) { tone(300 + Math.random() * 120, 0.1, 'sine', 0.14, 130); burst(0.08, 0.1, 1800); } },
+    drop: function () { if (audio.on && audio.ctx) { tone(520, 0.3, 'sine', 0.12, 260); tone(780, 0.22, 'sine', 0.06, 390); } }
+  };
+  function tone(freq, dur, type, vol, slideTo) {
+    var c = audio.ctx, t = c.currentTime;
+    var o = c.createOscillator(), g = c.createGain();
+    o.type = type; o.frequency.setValueAtTime(freq, t);
+    if (slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, t + dur);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol, t + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(audio.master);
+    o.start(t); o.stop(t + dur + 0.05);
+  }
+  function burst(dur, vol, freq) {
+    var c = audio.ctx, t = c.currentTime;
+    var src = c.createBufferSource(), f = c.createBiquadFilter(), g = c.createGain();
+    src.buffer = audio.noise; f.type = 'bandpass'; f.frequency.value = freq; f.Q.value = 0.8;
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol, t + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    src.connect(f); f.connect(g); g.connect(audio.master);
+    src.start(t, Math.random()); src.stop(t + dur + 0.05);
+  }
+  function audioInit() {
+    if (audio.ctx) return true;
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return false;
+    try {
+      var c = new AC();
+      audio.ctx = c;
+      audio.master = c.createGain(); audio.master.gain.value = 0.6; audio.master.connect(c.destination);
+      var n = c.sampleRate * 2, b = c.createBuffer(1, n, c.sampleRate), d = b.getChannelData(0), lastv = 0;
+      for (var i = 0; i < n; i++) { lastv = (lastv + 0.02 * (Math.random() * 2 - 1)) / 1.02; d[i] = lastv * 3.5; }
+      audio.noise = b;
+      var src = c.createBufferSource(); src.buffer = b; src.loop = true;
+      var lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 380;
+      var g = c.createGain(); g.gain.value = 0.07;
+      src.connect(lp); lp.connect(g); g.connect(audio.master);
+      src.start();
+      return true;
+    } catch (e) { audio.ctx = null; return false; }
+  }
+  var NOTES = [392, 440, 523.25, 587.33, 659.25, 784];
+  function ambient() {
+    clearTimeout(audio.timer);
+    if (!audio.on) return;
+    audio.timer = setTimeout(function () {
+      if (audio.on && audio.ctx && !document.hidden) tone(NOTES[Math.floor(Math.random() * NOTES.length)], 2.6, 'sine', 0.045);
+      ambient();
+    }, 5000 + Math.random() * 9000);
+  }
+  var soundBtn = document.getElementById('sound');
+  soundBtn.addEventListener('click', function () {
+    if (!audio.on) {
+      if (!audioInit()) { soundBtn.textContent = 'No sound here'; return; }
+      audio.on = true;
+      if (audio.ctx.resume) audio.ctx.resume();
+      soundBtn.textContent = 'Sound: on';
+      soundBtn.setAttribute('aria-pressed', 'true');
+      tone(659.25, 1.2, 'sine', 0.08);
+      ambient();
+    } else {
+      audio.on = false;
+      clearTimeout(audio.timer);
+      soundBtn.textContent = 'Sound: off';
+      soundBtn.setAttribute('aria-pressed', 'false');
+    }
+  });
+
+  /* ---------- drawing the frame ---------- */
+  function paintCursor(ms) {
+    var white = [255, 252, 244];
+    if (hover.on) {
+      var rr = tool === 'feed' ? 3 : 5;
+      for (var a = 0; a < 16; a++) blendPx(hover.x + Math.cos(a / 16 * 6.283) * rr, hover.y + Math.sin(a / 16 * 6.283) * rr, white, 0.8);
+    }
+    if (kb.on) {
+      var blink = Math.floor(ms / 400) % 2 === 0;
+      var col = blink ? [255, 255, 255] : [183, 65, 14];
+      put(kb.x, kb.y, col, false);
+      put(kb.x - 2, kb.y, col, false); put(kb.x + 2, kb.y, col, false);
+      put(kb.x, kb.y - 2, col, false); put(kb.x, kb.y + 2, col, false);
+    }
+  }
+  function render(ms) {
+    var key = keyAt(currentT());
+    paintWater(key, ms);
+    paintShadows();
+    paintFish();
+    paintPads(ms);
+    paintFood();
+    paintRipples();
+    paintLand();
+    lightingPass(key);
+    glowPass(key, ms);
+    fireflyPass(key, ms);
+    petalPass(key, ms);
+    paintCursor(ms);
+    ctx.putImageData(image, 0, 0);
+  }
+
+  /* ---------- size on screen ---------- */
+  function fit() {
+    var holder = canvas.parentNode;
+    var page = holder.parentNode;
+    var availW = Math.min(960, page.clientWidth - 20 - 2 * Math.max(4, Math.min(10, window.innerWidth * 0.012)));
+    var byW = availW >= 2 * W ? Math.floor(availW / W) : Math.max(1, availW / W);
+    var scaleN = byW;
+    if (byW >= 2) {
+      var byH = Math.floor((window.innerHeight - 230) / H);
+      scaleN = Math.min(byW, Math.max(2, byH));
+    }
+    canvas.style.width = Math.round(W * scaleN) + 'px';
+    canvas.style.height = Math.round(H * scaleN) + 'px';
+  }
+  window.addEventListener('resize', fit);
+  window.addEventListener('orientationchange', fit);
+  fit();
+
+  /* ---------- go ---------- */
+  setKoi(load());
+  koiBtn.textContent = 'Koi: ' + koiCount;
+  var lastFrame = 0, lastMs = 0;
+  function frame(ms) {
+    if (ms - lastFrame >= 32) {
+      var dt = lastMs ? Math.min((ms - lastMs) / 1000, 0.1) : 0.032;
+      lastMs = ms;
+      if (TIME_MODES[timeMode][2] === null) simSeconds += dt;
+      lastFrame = ms;
+      updateFish(dt); updateFood(dt); updateRipples(dt);
+      render(ms);
+    }
+    requestAnimationFrame(frame);
+  }
+  render(0);
+  requestAnimationFrame(frame);
+  window.__koi = {
+    render: render,
+    fish: function () { return fish.length; },
+    food: function () { return food.length; },
+    eaten: function () { return eaten; },
+    drop: function (x, y) { return dropFood(x, y); }
+  };
+})();
+</script>
+</body>
+</html>
