@@ -168,6 +168,40 @@ window.BLOG_POSTS = [
       { "h": "What I build" },
       "Outside work I build things that put those two sides together. In 2025 I started building Winston, a personal AI assistant written in Python on top of the Claude API, controlled through Telegram, and it runs on my own machine. Deskmate is a Telegram bot that answers staff questions about company policy using a business's own documents, and there is a build guide for Winston too. I've also put together a set of practical security templates for small businesses. All of it is on my Gumroad store.",
       "This blog is where I write about all of it: what I build, what breaks, and what I learn. There is also a weekly digest of AI and security news for people who run small businesses and do not have time to follow it."
-    ]
+    ],
+    tr: {
+      vi: {
+        title: "Về tôi: từ sàn bán lẻ đến bảo mật CNTT",
+        tag: "Về tôi",
+        summary: "Tôi là ai, tôi đã làm việc ở đâu, và vì sao một người làm vận hành đang chuyển sang bảo mật CNTT và xây công cụ AI cho doanh nghiệp nhỏ.",
+        body: [
+          "Tôi là Raymond Doan, sống ở Perth, Tây Úc. Ban ngày tôi là phó cửa hàng trưởng tại một cửa hàng Macpac, cùng điều hành hoạt động hằng ngày và một đội khoảng 10 người. Thời gian còn lại tôi dành để xây phần mềm, học về bảo mật và làm vài sản phẩm nhỏ cho những người điều hành doanh nghiệp nhỏ.",
+          { "h": "Xuất phát điểm của tôi" },
+          "Sự nghiệp của tôi bắt đầu ở mảng ngân hàng bán lẻ tại Thành phố Hồ Chí Minh, nơi việc kiểm tra danh tính, thanh toán chính xác và xử lý cẩn thận dữ liệu khách hàng đơn giản là một phần của công việc. Sau đó tôi làm trợ lý riêng cho tổng giám đốc của một công ty sản xuất, rồi tự điều hành một doanh nghiệp nhỏ về dịch vụ và thương mại ở Việt Nam trong ba năm. Năm 2018, tôi chuyển sang ngành bán lẻ tại Courts ở Singapore và đi lên từ nhân viên bán hàng đến Phó cửa hàng trưởng, dẫn dắt một đội 17 người. Bây giờ tôi đang ở Macpac.",
+          "Suốt chặng đường đó, tôi vẫn làm cùng một kiểu việc: giữ cho hồ sơ chính xác, viết quy trình mà mọi người thực sự làm theo, và nhận ra khi có điều gì đó không khớp. Ở Courts, tôi đã làm lại quy trình kiểm kê trong bộ phận của mình và đưa mức hao hụt hàng tồn kho xuống 0%, đồng thời thiết kế một chương trình đào tạo giúp nhân viên mới thành thạo hoàn toàn trong ba tháng. Đó là công việc vận hành, nhưng cũng chính là những thói quen hằng ngày mà bảo mật phải dựa vào.",
+          { "h": "Mảng bảo mật" },
+          "Tôi có bằng Thạc sĩ Thương mại (Master of Commerce), chuyên ngành Hệ thống thông tin và Công nghệ, của Đại học Curtin, với các môn học về an ninh mạng, bảo mật mạng và pháp y máy tính. Trong các buổi thực hành, tôi phân tích lưu lượng mạng bằng Wireshark, dùng Snort và OSSEC để phát hiện xâm nhập, và phân tích ổ đĩa lẫn bộ nhớ bằng WinHex và Kali Linux. Tôi đang chuẩn bị để lấy chứng chỉ CompTIA Security+, và đang tìm một vị trí đầu vào hoặc dành cho người mới tốt nghiệp trong lĩnh vực bảo mật CNTT tại Perth, trong lúc vẫn làm việc ở Macpac.",
+          { "h": "Những gì tôi xây dựng" },
+          "Ngoài giờ làm việc, tôi xây những thứ kết hợp hai mảng đó lại với nhau. Năm 2025, tôi bắt đầu xây Winston, một trợ lý AI cá nhân viết bằng Python trên nền Claude API, điều khiển qua Telegram và chạy trên chính máy của tôi. Deskmate là một bot Telegram trả lời câu hỏi của nhân viên về chính sách công ty, dựa trên chính các tài liệu của doanh nghiệp đó, và cũng có một cuốn hướng dẫn cách xây Winston. Tôi cũng đã tổng hợp một bộ mẫu tài liệu bảo mật thiết thực cho doanh nghiệp nhỏ. Tất cả đều có trên cửa hàng Gumroad của tôi.",
+          "Blog này là nơi tôi viết về tất cả những điều đó: tôi xây gì, cái gì hỏng, và tôi học được gì. Ngoài ra còn có bản tin hằng tuần tóm tắt tin tức AI và bảo mật, dành cho những người điều hành doanh nghiệp nhỏ mà không có thời gian theo dõi."
+        ]
+      },
+      es: {
+        title: "Sobre mí: del comercio minorista a la seguridad informática",
+        tag: "Sobre mí",
+        summary: "Quién soy, dónde he trabajado y por qué una persona de operaciones está dando el salto a la seguridad informática y a crear herramientas de IA para negocios pequeños.",
+        body: [
+          "Soy Raymond Doan y vivo en Perth, Australia Occidental. De día soy el segundo al mando en una tienda de Macpac, donde ayudo a dirigir las operaciones diarias y a un equipo de unas 10 personas. El resto de mi tiempo lo dedico a crear software, estudiar seguridad y hacer unos cuantos productos pequeños para quienes dirigen negocios pequeños.",
+          { "h": "De dónde vengo" },
+          "Mi carrera empezó en la banca minorista de Ciudad Ho Chi Minh, donde las verificaciones de identidad, los pagos exactos y el manejo cuidadoso de los datos de los clientes eran simplemente parte del trabajo. Después fui asistente personal del director general de una empresa manufacturera y luego dirigí durante tres años mi propio pequeño negocio de servicios y comercio en Vietnam. En 2018 pasé al comercio minorista en Courts, en Singapur, y fui ascendiendo de asesor de ventas a gerente adjunto de tienda, al frente de un equipo de 17 personas. Ahora estoy en Macpac.",
+          "En todo ese camino seguí haciendo el mismo tipo de trabajo: mantener los registros exactos, escribir procedimientos que la gente realmente sigue y notar cuando algo no cuadra. En Courts rehíce el proceso de conteo de inventario de mi departamento y reduje la merma de inventario a 0%, y diseñé un programa de capacitación que llevó a los nuevos empleados a dominar el puesto por completo en tres meses. Eso es trabajo de operaciones, pero también son los hábitos diarios de los que depende la seguridad.",
+          { "h": "El lado de la seguridad" },
+          "Tengo un máster en Comercio (Master of Commerce), con especialización en Sistemas de Información y Tecnología, por la Universidad Curtin, con materias de ciberseguridad, seguridad de redes e informática forense. En los laboratorios analicé tráfico con Wireshark, trabajé con Snort y OSSEC para la detección de intrusiones e hice análisis de discos y de memoria con WinHex y Kali Linux. Me estoy preparando para obtener la certificación CompTIA Security+ y busco un puesto de nivel inicial o para recién graduados en seguridad informática en Perth mientras sigo trabajando en Macpac.",
+          { "h": "Lo que construyo" },
+          "Fuera del trabajo construyo cosas que unen esos dos lados. En 2025 empecé a construir Winston, un asistente personal de IA escrito en Python sobre la API de Claude, controlado por Telegram y que funciona en mi propio equipo. Deskmate es un bot de Telegram que responde las preguntas del personal sobre las políticas de la empresa usando los propios documentos del negocio, y también hay una guía para construir Winston. Además, armé un conjunto de plantillas de seguridad prácticas para negocios pequeños. Todo está en mi tienda de Gumroad.",
+          "Este blog es donde escribo sobre todo eso: lo que construyo, lo que falla y lo que aprendo. También hay un resumen semanal de noticias de IA y seguridad para quienes dirigen negocios pequeños y no tienen tiempo de seguirlas."
+        ]
+      }
+    }
   }
 ];
