@@ -150,6 +150,21 @@ noscript p { text-align: center; color: var(--muted); }
 .pick.done::after { content: ' \2713'; }
 .ptitle { font: 400 10px/1.6 var(--pixel); text-align: center; margin: 0; color: var(--muted); }
 @media (prefers-reduced-motion: reduce) { .solved .cell.win { animation: none; } }
+
+.how { width: 100%; max-width: 640px; background: var(--sand); border: 3px solid var(--ink); box-shadow: 0 4px 0 var(--ink); padding: 0 16px; }
+.how summary { font: 400 10px/1.6 var(--pixel); padding: 14px 0; cursor: pointer; list-style: none; }
+.how summary::-webkit-details-marker { display: none; }
+.how summary::before { content: '+ '; }
+.how[open] summary::before { content: '- '; }
+.how summary:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+.how ol { margin: 0 0 12px; padding-left: 22px; font-size: 15px; }
+.how li { margin: 0 0 8px; }
+.how .ex { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; padding: 4px 0 16px; font-family: 'IBM Plex Mono', 'Courier New', monospace; font-size: 13px; text-align: center; }
+.how .exg { display: grid; grid-template-columns: 22px repeat(3, 26px); grid-template-rows: 22px repeat(3, 26px); align-items: center; justify-items: center; }
+.how .exg i { width: 26px; height: 26px; border: 1px solid #cdbfae; background: #fffaf2; display: block; }
+.how .exg i.f { background: var(--ink); }
+.how .exg b { font-weight: 500; }
+.how .cap { display: block; margin-top: 6px; color: var(--muted); font-size: 13px; }
 </style>
 </head>
 <body>
@@ -176,8 +191,23 @@ noscript p { text-align: center; color: var(--muted); }
 
   <div class="picker" id="picker" role="group" aria-label="Choose a puzzle"></div>
 
+  <details class="how" id="how">
+    <summary>How to play</summary>
+    <ol>
+      <li>Each picture is hidden in the grid. The numbers beside every row and above every column tell you where to fill in squares.</li>
+      <li>A number is a run of filled squares in a row. <b>3</b> means three filled squares side by side. <b>2 1</b> means a run of 2, then at least one empty square, then a run of 1.</li>
+      <li>Tap or drag to fill squares. Use <b>Mark X</b> (or right-click) to mark squares you know are empty. Marks are only notes, they do not count.</li>
+      <li>A number turns grey when its line is right. Start with big numbers and with lines that are full or empty. Every picture can be solved by logic, so you never need to guess.</li>
+      <li>Stuck? <b>Hint</b> fixes one square for you, and <b>Undo</b> takes back your last move.</li>
+    </ol>
+    <div class="ex">
+      <div><div class="exg"><span></span><b>1</b><b>3</b><b>1</b><b>1</b><i></i><i></i><i></i><b>3</b><i></i><i></i><i></i><b>1</b><i></i><i></i><i></i></div><span class="cap">Start</span></div>
+      <div><div class="exg"><span></span><b>1</b><b>3</b><b>1</b><b>1</b><i></i><i class="f"></i><i></i><b>3</b><i class="f"></i><i class="f"></i><i class="f"></i><b>1</b><i></i><i class="f"></i><i></i></div><span class="cap">Solved: a plus sign</span></div>
+    </div>
+  </details>
+
   <p class="hint" id="status" aria-live="polite"></p>
-  <p class="hint">Numbers show runs of filled cells in each row and column. Drag to paint. Right-click, or use Mark X, to rule a cell out. Keys: arrows move, space fills, X marks.</p>
+  <p class="hint">Keyboard: arrows move, space fills, X marks.</p>
   <p class="foot">A small game by <a href="index.html">Raymond Doan</a>. More in the <a href="arcade.html">Arcade</a>.</p>
   <noscript><p>This game needs JavaScript. Turn it on and reload the page.</p></noscript>
 </div>
@@ -619,6 +649,10 @@ noscript p { text-align: center; color: var(--muted); }
       soundBtn.setAttribute('aria-pressed', 'false');
     }
   });
+
+  /* ---------- how to play: open for new players ---------- */
+  var how = document.getElementById('how');
+  if (Object.keys(save.solved).length === 0 && how) how.open = true;
 
   /* ---------- go ---------- */
   loadPuzzle(find(save.cur));
