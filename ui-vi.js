@@ -31,7 +31,7 @@ window.I18N_UI.vi = {
   "arcade.play": "Chơi ngay →",
   "arcade.tag.learn": "Học hỏi",
   "arcade.tag.relax": "Thư giãn",
-  "arcade.zen.desc": "Cào hoặc vẽ tự do trên cát, đặt đá, cây thông và đèn lồng, rồi xem ngày dần chuyển sang đêm. Không điểm số, không bấm giờ, không có gì để thua.",
+  "arcade.zen.desc": "Cào cát, đặt đá, cây thông và đèn lồng, rồi xem ngày dần chuyển sang đêm. Không điểm số, không bấm giờ, không có gì để thua.",
   "art.caption": "Winston: một trung tâm, nhiều agent chuyên biệt",
   "art.career": "Sự nghiệp",
   "art.dev": "Dev",

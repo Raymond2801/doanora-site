@@ -32,7 +32,7 @@ window.I18N_UI.es = {
   "arcade.play": "Jugar ahora →",
   "arcade.tag.learn": "Aprender",
   "arcade.tag.relax": "Relajarse",
-  "arcade.zen.desc": "Rastrilla o dibuja en la arena, coloca piedras, pinos y farolillos, y mira cómo el día se convierte en noche. Sin puntuación, sin cronómetro, nada que perder.",
+  "arcade.zen.desc": "Rastrilla la arena, coloca piedras, pinos y farolillos, y mira cómo el día se convierte en noche. Sin puntuación, sin cronómetro, nada que perder.",
   "art.caption": "Winston: un centro, agentes especializados",
   "art.career": "Carrera",
   "art.dev": "Dev",

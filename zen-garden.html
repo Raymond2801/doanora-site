@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Zen Garden | Raymond Doan</title>
-<meta name="description" content="A small 16-bit zen garden. Rake or draw in the sand, place stones, pines and lanterns, and watch the day turn to night.">
+<meta name="description" content="A small 16-bit zen garden. Rake the sand, place stones, pines and lanterns, and watch the day turn to night.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600&family=Press+Start+2P&display=swap">
@@ -126,12 +126,11 @@ noscript p { text-align: center; color: var(--muted); }
   </header>
 
   <div class="cabinet">
-    <canvas id="garden" width="192" height="124" tabindex="0" role="application" aria-label="Zen garden. Drag to rake or draw in the sand. With a keyboard, use the arrow keys to move and the space bar to rake or place."></canvas>
+    <canvas id="garden" width="192" height="124" tabindex="0" role="application" aria-label="Zen garden. Drag to rake the sand. With a keyboard, use the arrow keys to move and the space bar to rake or place."></canvas>
   </div>
 
   <div class="tools" role="toolbar" aria-label="Garden tools">
     <button class="pbtn" type="button" data-tool="rake" aria-pressed="true">Rake</button>
-    <button class="pbtn" type="button" data-tool="draw" aria-pressed="false">Draw</button>
     <button class="pbtn" type="button" data-tool="stone" aria-pressed="false">Stone</button>
     <button class="pbtn" type="button" data-tool="pine" aria-pressed="false">Pine</button>
     <button class="pbtn" type="button" data-tool="lantern" aria-pressed="false">Lantern</button>
@@ -431,8 +430,6 @@ noscript p { text-align: center; color: var(--muted); }
 
   var tineCount = 5;
   var TINE_GAP = 3;
-  var brush = 2;                         /* the drawing stick: 1, 2 or 3 */
-  var BRUSH_R = [0.5, 1.1, 1.8];
   var eraseSize = 5;                     /* eraser radius */
   /* Smooths a band as wide as the rake, across the direction of travel. */
   function clearBand(qx, qy, dx, dy) {
@@ -456,22 +453,6 @@ noscript p { text-align: center; color: var(--muted); }
       if (getSand(rx, ry) === 0) setSand(rx, ry, 2);
     }
   }
-  /* Free drawing: a stick that cuts one groove wherever it goes. */
-  function stampStick(qx, qy) {
-    var r = BRUSH_R[brush - 1];
-    for (var y = Math.floor(qy - r); y <= Math.ceil(qy + r); y++) for (var x = Math.floor(qx - r); x <= Math.ceil(qx + r); x++) {
-      var dx = x - qx, dy = y - qy;
-      if (dx * dx + dy * dy <= r * r + 0.3) setSand(x, y, 1);
-    }
-  }
-  function ridgePass(x0, y0, x1, y1) {
-    for (var y = Math.floor(Math.min(y0, y1)) - 4; y <= Math.ceil(Math.max(y0, y1)) + 4; y++) {
-      for (var x = Math.floor(Math.min(x0, x1)) - 4; x <= Math.ceil(Math.max(x0, x1)) + 4; x++) {
-        if (getSand(x, y) === 0 && getSand(x - 1, y - 1) === 1) setSand(x, y, 2);
-      }
-    }
-  }
-
   /* ---------- objects ---------- */
   var objs = [];
   var KIND = { stone: 's', pine: 'p', lantern: 'l' };
@@ -918,7 +899,6 @@ noscript p { text-align: center; color: var(--muted); }
 
   var HINTS = {
     rake: 'Drag across the sand to rake it.',
-    draw: 'Drag to draw in the sand with a stick. Write a word, sketch a face, anything you like.',
     stone: 'Tap the sand to place a stone. Rings of sand grow around it.',
     pine: 'Tap to plant a pine on a patch of moss.',
     lantern: 'Tap to set a stone lantern. It lights up at dusk.',
@@ -929,7 +909,6 @@ noscript p { text-align: center; color: var(--muted); }
   var sizeBtn = document.getElementById('size');
   function sizeLabel() {
     if (tool === 'rake') { sizeBtn.disabled = false; sizeBtn.textContent = 'Tines: ' + tineCount; }
-    else if (tool === 'draw') { sizeBtn.disabled = false; sizeBtn.textContent = 'Stick: ' + brush; }
     else if (tool === 'erase') { sizeBtn.disabled = false; sizeBtn.textContent = 'Eraser: ' + (eraseSize === 3 ? 'S' : eraseSize === 5 ? 'M' : 'L'); }
     else { sizeBtn.disabled = true; sizeBtn.textContent = 'Size'; }
   }
@@ -944,7 +923,6 @@ noscript p { text-align: center; color: var(--muted); }
   }
   sizeBtn.addEventListener('click', function () {
     if (tool === 'rake') tineCount = tineCount === 3 ? 5 : tineCount === 5 ? 7 : 3;
-    else if (tool === 'draw') brush = brush === 3 ? 1 : brush + 1;
     else if (tool === 'erase') eraseSize = eraseSize === 3 ? 5 : eraseSize === 5 ? 8 : 3;
     sizeLabel();
   });
@@ -972,25 +950,10 @@ noscript p { text-align: center; color: var(--muted); }
     dirty();
   }
 
-  function drawTo(p) {
-    if (!last) { last = { x: p.x, y: p.y }; stampStick(p.x, p.y); ridgePass(p.x, p.y, p.x, p.y); dirty(); return; }
-    var dx = p.x - last.x, dy = p.y - last.y;
-    var len = Math.sqrt(dx * dx + dy * dy);
-    if (len < 0.5) return;
-    for (var s = 0; s <= len; s += 0.4) stampStick(last.x + dx / len * s, last.y + dy / len * s);
-    ridgePass(last.x, last.y, p.x, p.y);
-    last = { x: p.x, y: p.y };
-    sfx.rake(len * 0.7);
-    dirty();
-  }
-
   function useTool(p, isStart) {
     if (tool === 'rake') {
       if (isStart) { snap(); last = { x: p.x, y: p.y }; dir = { x: 1, y: 0 }; started = false; }
       else rakeTo(p);
-    } else if (tool === 'draw') {
-      if (isStart) { snap(); last = null; }
-      drawTo(p);
     } else if (tool === 'erase') {
       if (isStart) snap();
       var hit = removeAt(p.x, p.y);
@@ -1039,7 +1002,7 @@ noscript p { text-align: center; color: var(--muted); }
     else if (e.key === 'ArrowDown') my = step;
     else if (e.key === ' ' || e.key === 'Enter') {
       e.preventDefault();
-      if (tool === 'rake' || tool === 'draw') {
+      if (tool === 'rake') {
         kb.down = !kb.down;
         last = null; started = false;
         if (kb.down) useTool({ x: kb.x, y: kb.y }, true);
@@ -1179,9 +1142,6 @@ noscript p { text-align: center; color: var(--muted); }
           var off = (k - (tineCount - 1) / 2) * TINE_GAP;
           blendPx(p.x + nx * off, p.y + ny * off, white, 0.85);
         }
-      } else if (tool === 'draw') {
-        var rr = BRUSH_R[brush - 1] + 1.4;
-        for (var q = 0; q < 12; q++) blendPx(p.x + Math.cos(q / 12 * 6.283) * rr, p.y + Math.sin(q / 12 * 6.283) * rr, white, 0.85);
       } else if (tool === 'erase') {
         var er = eraseSize + 1;
         for (var a = 0; a < 20; a++) blendPx(p.x + Math.cos(a / 20 * 6.283) * er, p.y + Math.sin(a / 20 * 6.283) * er, white, 0.8);
