@@ -1,0 +1,874 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Phishing Hunter | Raymond Doan</title>
+<meta name="description" content="A relaxed retro game: ten messages, safe or phishing? A short explanation after every answer. No timer, no lives.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600&family=Press+Start+2P&display=swap">
+<style>
+:root {
+  color-scheme: light;
+  --cream: #f6f1ea;
+  --sand: #efe6d8;
+  --ink: #241208;
+  --muted: #6b5847;
+  --rust: #b7410e;
+  --terra: #c06c47;
+  --teal: #28616c;
+  --teal-dark: #1d4750;
+  --neptune: #7fbb9e;
+  --on-accent: #fffaf6;
+  --pixel: 'Press Start 2P', 'Courier New', monospace;
+  --mono: 'IBM Plex Mono', 'Courier New', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.page {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 14px 10px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.bar { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px 14px; flex-wrap: wrap; }
+h1 { font: 400 clamp(13px, 3.4vw, 22px)/1.4 var(--pixel); margin: 0; flex: 1 1 auto; text-align: center; letter-spacing: 0.02em; }
+.pbtn {
+  font: 400 10px/1 var(--pixel);
+  color: var(--ink);
+  background: var(--sand);
+  border: 3px solid var(--ink);
+  border-radius: 0;
+  padding: 13px 12px;
+  min-height: 44px;
+  box-shadow: 0 4px 0 var(--ink);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
+}
+.pbtn:hover { background: #fffaf2; }
+.pbtn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--ink); }
+.pbtn:focus-visible { outline: 3px solid var(--neptune); outline-offset: 3px; }
+.pbtn[disabled] { opacity: 0.45; cursor: default; transform: none; box-shadow: 0 4px 0 var(--ink); }
+.pbtn[aria-pressed="true"] { background: var(--rust); color: var(--on-accent); }
+.pbtn.big { font-size: 12px; min-height: 54px; padding: 16px 22px; }
+.pbtn.safe { background: var(--teal); color: var(--on-accent); }
+.pbtn.fish { background: var(--rust); color: var(--on-accent); }
+.pbtn.safe:hover { background: #2f7480; }
+.pbtn.fish:hover { background: #c94c16; }
+
+.monitor {
+  width: 100%;
+  max-width: 900px;
+  background: var(--sand);
+  border: 4px solid var(--ink);
+  border-radius: 22px;
+  padding: clamp(8px, 2.4vw, 20px) clamp(8px, 2.4vw, 20px) clamp(14px, 3vw, 26px);
+  box-shadow: 8px 8px 0 var(--terra);
+  position: relative;
+}
+.monitor::after {
+  content: "";
+  position: absolute;
+  right: clamp(14px, 3vw, 28px);
+  bottom: clamp(4px, 1.2vw, 10px);
+  width: 10px; height: 10px;
+  background: var(--neptune);
+  border: 2px solid var(--ink);
+  box-shadow: 0 0 8px var(--neptune);
+}
+.screen {
+  position: relative;
+  background: var(--teal-dark);
+  border: 4px solid var(--ink);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.5);
+}
+.screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0) 0 2px, rgba(0, 0, 0, 0.08) 2px 4px),
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 58%, rgba(0, 0, 0, 0.32) 100%);
+}
+.menubar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--ink);
+  color: var(--cream);
+  font: 400 9px/1.6 var(--pixel);
+  padding: 8px 12px;
+}
+.menubar b { font-weight: 400; color: var(--neptune); }
+.desk {
+  min-height: 430px;
+  padding: clamp(10px, 2.6vw, 20px);
+  background-color: var(--teal);
+  background-image:
+    linear-gradient(45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.05) 75%),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.05) 75%);
+  background-size: 4px 4px;
+  background-position: 0 0, 2px 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.win {
+  background: var(--cream);
+  border: 3px solid var(--ink);
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.4);
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.win-title {
+  background: var(--rust);
+  color: var(--on-accent);
+  font: 400 9px/1.6 var(--pixel);
+  padding: 8px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.win-title .dots { display: inline-flex; gap: 4px; }
+.win-title .dots i { width: 8px; height: 8px; background: var(--cream); display: block; }
+.win-body { padding: 14px 16px 16px; }
+.field { font: 400 14px/1.5 var(--mono); margin: 0 0 4px; max-width: none; overflow-wrap: anywhere; }
+.field .k { color: var(--muted); display: inline-block; min-width: 6em; }
+.field.subject { font-weight: 500; }
+.rule { border: 0; border-top: 2px dashed rgba(36, 18, 8, 0.3); margin: 10px 0 12px; }
+.msg p { margin: 0 0 0.8em; font-size: 15.5px; max-width: none; }
+.msg p:last-child { margin-bottom: 0; }
+.msg .bubble { background: #e4eadf; border: 2px solid var(--ink); padding: 10px 12px; max-width: 34em; }
+.linkbtn {
+  display: inline-block;
+  font: 600 14px/1.3 'IBM Plex Sans', sans-serif;
+  color: var(--on-accent);
+  background: var(--teal);
+  padding: 8px 14px;
+  border: 2px solid var(--ink);
+  margin: 2px 0 0;
+}
+.status { margin-top: 12px; padding: 6px 8px; background: var(--ink); color: var(--cream); font: 400 12.5px/1.5 var(--mono); overflow-wrap: anywhere; }
+.status .k { color: var(--neptune); }
+.attach { margin-top: 12px; font: 400 13px/1.5 var(--mono); border: 2px solid var(--ink); display: inline-block; padding: 6px 10px; background: #fff; overflow-wrap: anywhere; }
+.flag { background: #ffd9c7; outline: 2px solid var(--rust); outline-offset: 1px; }
+.actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.actions .pbtn { flex: 1 1 200px; max-width: 280px; }
+.result .win-title { background: var(--teal); }
+.result.bad .win-title { background: var(--ink); }
+.verdict { font: 400 13px/1.6 var(--pixel); margin: 0 0 10px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.verdict canvas { image-rendering: crisp-edges; image-rendering: pixelated; width: 96px; height: 56px; flex: none; }
+.was { font: 500 14px/1.5 var(--mono); margin: 0 0 8px; }
+.why { margin: 0 0 10px; font-size: 15.5px; max-width: none; }
+.clues { margin: 0 0 14px; padding: 0; list-style: none; display: grid; gap: 6px; }
+.clues li { position: relative; padding-left: 1.5em; font-size: 15px; }
+.clues li::before { content: ""; position: absolute; left: 0; top: 0.5em; width: 0.6em; height: 0.6em; background: var(--rust); }
+.clues.good li::before { background: var(--teal); }
+.center { text-align: center; }
+.center .win-body { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 22px 18px 24px; }
+.title-big { font: 400 clamp(16px, 4.2vw, 26px)/1.4 var(--pixel); margin: 0; }
+.center p { margin: 0; max-width: 34em; }
+.list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; text-align: left; }
+.list li { position: relative; padding-left: 1.5em; }
+.list li::before { content: ""; position: absolute; left: 0; top: 0.5em; width: 0.6em; height: 0.6em; background: var(--rust); }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; width: 100%; max-width: 30em; }
+.stat { border: 3px solid var(--ink); background: #fff; padding: 10px 6px; }
+.stat b { display: block; font: 400 15px/1.4 var(--pixel); }
+.stat span { font: 400 12px/1.4 var(--mono); color: var(--muted); }
+.rank { font: 400 14px/1.6 var(--pixel); color: var(--rust); margin: 0; }
+.tips { max-width: 66ch; width: 100%; background: var(--sand); border: 3px solid var(--ink); padding: 14px 18px; }
+.tips h2 { font: 400 11px/1.6 var(--pixel); margin: 0 0 10px; }
+.tips ol { margin: 0; padding-left: 1.3em; display: grid; gap: 6px; }
+.foot { font-size: 14px; color: var(--muted); text-align: center; margin: 0; }
+.foot a, .center a { color: var(--rust); }
+noscript p { text-align: center; color: var(--muted); }
+@media (max-width: 520px) {
+  .pbtn { padding: 12px 9px; font-size: 9px; }
+  .pbtn.big { font-size: 11px; padding: 14px 12px; }
+  .desk { min-height: 0; }
+  .win-body { padding: 12px 12px 14px; }
+  .stats { grid-template-columns: 1fr; }
+}
+@keyframes flick { 0%, 100% { opacity: 1; } 50% { opacity: 0.97; } }
+@media (prefers-reduced-motion: no-preference) {
+  .screen > .desk { animation: flick 0.18s steps(2) infinite; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pbtn:active { transform: none; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="bar">
+    <a class="pbtn" href="arcade.html">&larr; Arcade</a>
+    <h1>PHISHING HUNTER</h1>
+    <button class="pbtn" id="sound" type="button" aria-pressed="false">Sound: off</button>
+  </header>
+
+  <div class="monitor">
+    <div class="screen" id="screen">
+      <div class="menubar" id="menubar" hidden></div>
+      <div class="desk" id="desk"></div>
+    </div>
+  </div>
+
+  <section class="tips" aria-labelledby="tips-h">
+    <h2 id="tips-h">THREE QUICK CHECKS</h2>
+    <ol>
+      <li><strong>Who really sent it?</strong> Read the address, not just the name beside it.</li>
+      <li><strong>Where does the link go?</strong> Check the real address before you click, and use https.</li>
+      <li><strong>What does it want?</strong> Urgency, secrecy, passwords, codes, gift cards and quick payments are red flags.</li>
+    </ol>
+  </section>
+
+  <p class="foot">A small game by <a href="index.html">Raymond Doan</a>. More in the <a href="arcade.html">Arcade</a>.</p>
+  <noscript><p>This game needs JavaScript. Turn it on and reload the page.</p></noscript>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var ROUNDS = 10;
+  var STORE_KEY = 'rd-phishing-hunter-v1';
+
+  /* Every brand, person and address below is made up. The ".example" ending is reserved for examples
+     and cannot belong to a real site. A message is phishing when "phish" is true. "flag" names the parts
+     to highlight once the player has answered. */
+  var EMAILS = [
+    {
+      id: 'bank-lock', type: 'email', phish: true,
+      name: 'Corvane Bank Security', addr: 'security@corvane-support.example',
+      subject: 'URGENT: Your account will be locked in 24 hours',
+      body: ['Dear customer,', 'We noticed unusual activity on your account. To avoid permanent suspension you must confirm your details within 24 hours.'],
+      link: { text: 'Verify my account', url: 'http://corvane-verify.example/login' },
+      flag: ['from', 'link'],
+      clues: ['A deadline and a threat to rush you', 'The sender domain is corvane-support.example, not corvane.example', 'A generic greeting instead of your name'],
+      why: 'Banks do not threaten to lock you out by email. Open the bank app, or type its address yourself, instead of using the link.'
+    },
+    {
+      id: 'parcel-fee', type: 'email', phish: true,
+      name: 'ParcelHop Delivery', addr: 'track@parcelhop-notice.example',
+      subject: 'Delivery failed: pay A$2.95 to reschedule',
+      body: ['We could not deliver your parcel today.', 'Pay a small redelivery fee within 12 hours or it will be sent back.'],
+      link: { text: 'Pay redelivery fee', url: 'http://parcelhop-fee.example/pay' },
+      flag: ['from', 'link'],
+      clues: ['A parcel you may not be expecting', 'A tiny fee, which is really a way to collect your card details', 'Odd domains that are not parcelhop.example'],
+      why: 'Scammers ask for a small amount because it feels harmless. The payment page then keeps your card number.'
+    },
+    {
+      id: 'it-password', type: 'email', phish: true,
+      name: 'Harbourlight IT Helpdesk', addr: 'helpdesk@harbourlight-it.example',
+      subject: 'Your password expires today',
+      body: ['Your network password expires at 5 pm today.', 'Sign in below to keep your current password.'],
+      link: { text: 'Keep my password', url: 'http://harbourlight-passwords.example/reset' },
+      flag: ['from', 'link'],
+      clues: ['Your real IT team writes from harbourlight.example', 'A same day deadline', 'The link leaves your company domain and uses http'],
+      why: 'A fake sign in page collects whatever you type. If a password really is expiring, change it from your usual sign in page.'
+    },
+    {
+      id: 'ceo-gift', type: 'email', phish: true,
+      name: 'Marcus Rowe (CEO)', addr: 'marcus.rowe.ceo@mailbox-secure.example',
+      subject: 'Quick favour',
+      body: ['Are you at your desk? I am in a meeting and cannot take calls.', 'I need you to buy 5 gift cards worth A$100 each for a client. Send me the codes by reply and I will pay you back today.', 'Keep this between us for now.'],
+      link: null,
+      flag: ['from'],
+      clues: ['Pressure and secrecy together', 'Gift card codes are the scammer favourite, they cannot be traced', 'A boss writing from an outside address and refusing a call'],
+      why: 'This is a classic impersonation scam. Check with the real person by phone or in person before you spend anything.'
+    },
+    {
+      id: 'invoice-exe', type: 'email', phish: true,
+      name: 'Brightwell Accounts', addr: 'accounts@brightwell-supplies.example',
+      subject: 'Overdue invoice 88213',
+      body: ['Your invoice is overdue.', 'Please see the attached document and pay today to avoid late fees.'],
+      link: null, attach: 'Invoice_88213.pdf.exe',
+      flag: ['from', 'attach'],
+      clues: ['The file ends in .exe, so it is a program and not a PDF', 'The sender domain is not brightwell.example', 'Pressure to pay today'],
+      why: 'Attackers add a fake .pdf before the real ending. Never open a program that arrives by email.'
+    },
+    {
+      id: 'stream-card', type: 'email', phish: true,
+      name: 'Streamly Billing', addr: 'billing@streamly-account.example',
+      subject: 'Payment declined. Update your card now',
+      body: ['We could not take your last payment.', 'Your account will be closed unless you update your card details.'],
+      link: { text: 'Update card', url: 'http://streamly-billing.example/update' },
+      flag: ['from', 'link'],
+      clues: ['A threat to close your account', 'The link is http, not https, and not on streamly.example', 'The sender domain is not streamly.example'],
+      why: 'If a payment really failed, you will see it when you sign in to the service yourself. Do not use the link.'
+    },
+    {
+      id: 'prize', type: 'email', phish: true,
+      name: 'Lucky Rewards', addr: 'winner@lucky-rewards.example',
+      subject: 'You have won a A$500 voucher!',
+      body: ['Congratulations! You were picked at random.', 'Claim your prize within 2 hours or it will go to someone else.'],
+      link: { text: 'Claim my voucher', url: 'http://lucky-rewards.example/claim' },
+      flag: ['link'],
+      clues: ['A prize for a contest you never entered', 'A very short deadline', 'Nothing explains who is giving it away or why'],
+      why: 'Real prizes do not come with a two hour countdown. The form usually asks for personal and card details.'
+    },
+    {
+      id: 'tax-refund', type: 'email', phish: true,
+      name: 'Revenue Office Refunds', addr: 'refund@revenue-office-refunds.example',
+      subject: 'You are due a refund of A$482.10',
+      body: ['After reviewing your return we owe you a refund.', 'Enter your bank details to receive it today.'],
+      link: { text: 'Receive my refund', url: 'http://revenue-refund.example/claim' },
+      flag: ['from', 'link'],
+      clues: ['A tax office already holds your bank details if it owes you money', 'It asks for bank details by email', 'Unfamiliar domains for a government office'],
+      why: 'Government offices do not ask you to type bank details into a link from an email.'
+    },
+    {
+      id: 'cloud-share', type: 'email', phish: true,
+      name: 'Cloudnest', addr: 'share@cloudnest-docs.example',
+      subject: 'Dan shared "Q4 Budget" with you',
+      body: ['Dan Pereira shared a document with you.', 'Open it to view.'],
+      link: { text: 'Open document', url: 'http://cloudnest-view.example/q4-budget' },
+      flag: ['from', 'link'],
+      clues: ['The sender domain is cloudnest-docs.example, not cloudnest.example', 'The link goes to a different, non secure address', 'A vague message with no detail only Dan would know'],
+      why: 'Shares are a common disguise. If you expect a file from Dan, ask him, or open Cloudnest yourself and look there.'
+    },
+    {
+      id: 'qr-mfa', type: 'email', phish: true,
+      name: 'Harbourlight IT Security', addr: 'security@harbourlight-mfa.example',
+      subject: 'Action required: re-register your sign in app',
+      body: ['Your authenticator app will stop working tomorrow.', 'Scan the code below with your phone camera to re-register.', '[ QR code image ]'],
+      link: null,
+      flag: ['from'],
+      clues: ['A QR code hides the real address of the link', 'An unexpected request about your sign in security', 'The sender domain is not harbourlight.example'],
+      why: 'QR codes let attackers slip past link checks. Re-registering never starts from a surprise email.'
+    },
+    {
+      id: 'sms-parcel', type: 'sms', phish: true,
+      name: '+61 400 555 019', addr: '',
+      subject: '',
+      body: ['ParcelHop: your package is on hold. Confirm your address now: http://parcelhop-confirm.example'],
+      link: null,
+      flag: ['body'],
+      clues: ['A number you do not know, not a company sender', 'A link that is not parcelhop.example', 'Pressure to act right now'],
+      why: 'Text message scams copy delivery companies. If you are waiting for a parcel, check the tracking page you already know.'
+    },
+    {
+      id: 'lookalike', type: 'email', phish: true,
+      name: 'Marcus Rowe', addr: 'marcus.rowe@harbourllght.example',
+      subject: 'Re: Contract changes',
+      body: ['Hi, I have updated the supplier contract. Please review it and sign today, the supplier is waiting.'],
+      link: { text: 'Review contract', url: 'http://harbourlight-docs.example/contract' },
+      flag: ['from', 'link'],
+      clues: ['The domain harbourllght.example has two l letters and no i', 'The link goes to a different address', 'Pressure to sign today'],
+      why: 'One changed letter is easy to miss. Slow down and read sender addresses letter by letter when money or contracts are involved.'
+    },
+    {
+      id: 'callback', type: 'email', phish: true,
+      name: 'Defendsoft Billing', addr: 'billing@defendsoft-renewal.example',
+      subject: 'Your plan renewed: A$349.99',
+      body: ['Thank you for renewing your protection plan.', 'If you did not make this purchase, call 1800 555 0142 within 24 hours to cancel.'],
+      link: null, attach: 'Receipt_4471.pdf',
+      flag: ['from', 'body'],
+      clues: ['A large charge for something you never bought', 'A phone number to call instead of a link, so you speak to the scammer', 'A deadline and an unfamiliar sender domain'],
+      why: 'The goal is to get you on the phone and then talk you into handing over remote access or payment details.'
+    },
+
+    {
+      id: 'bank-statement', type: 'email', phish: false,
+      name: 'Corvane Bank', addr: 'no-reply@corvane.example',
+      subject: 'Your October statement is ready',
+      body: ['Your statement is ready in the Corvane app.', 'You can also sign in at corvane.example. We will never ask for your password or PIN by email.'],
+      link: null,
+      flag: [],
+      clues: ['The sender domain matches the bank', 'No pressure and no deadline', 'It asks for nothing and points you to the app'],
+      why: 'A plain notice that asks you to do nothing risky. When in doubt, you can still open the app yourself.'
+    },
+    {
+      id: 'shop-shipped', type: 'email', phish: false,
+      name: 'Shopnook Orders', addr: 'orders@shopnook.example',
+      subject: 'Your order SN-48213 has shipped',
+      body: ['Thanks for your order.', 'Your desk lamp left our warehouse today and should arrive in 3 to 5 days. You can track it in your Shopnook account.'],
+      link: { text: 'View my orders', url: 'https://shopnook.example/orders' },
+      flag: [],
+      clues: ['It matches an order you placed, with an order number', 'The sender and the link both use shopnook.example over https', 'Nothing asks for money, passwords or codes'],
+      why: 'If you do not remember ordering anything, do not click. Visit the shop directly and check your account.'
+    },
+    {
+      id: 'it-maintenance', type: 'email', phish: false,
+      name: 'Harbourlight IT', addr: 'it@harbourlight.example',
+      subject: 'Planned maintenance this Saturday, 2 am to 4 am',
+      body: ['The file server will be offline for updates.', 'No action is needed from you.'],
+      link: null,
+      flag: [],
+      clues: ['The sender is on your company domain', 'It asks you to do nothing', 'No link and no urgency'],
+      why: 'Routine notices from the real IT team are usually short, specific and ask for nothing.'
+    },
+    {
+      id: 'boss-meeting', type: 'email', phish: false,
+      name: 'Marcus Rowe', addr: 'marcus.rowe@harbourlight.example',
+      subject: 'Team meeting moved to 2 pm',
+      body: ['Hi all, today\'s team meeting is now at 2 pm in the main meeting room.', 'See you then.'],
+      link: null,
+      flag: [],
+      clues: ['The correct company domain', 'An ordinary, low stakes request', 'No link, no money, no secrecy'],
+      why: 'Not every message from the boss is a trick. This one asks for nothing but your time.'
+    },
+    {
+      id: 'supplier-invoice', type: 'email', phish: false,
+      name: 'Brightwell Accounts', addr: 'billing@brightwell.example',
+      subject: 'Invoice 5521 for October',
+      body: ['Hi, your October invoice is attached.', 'Our bank details have not changed. Payment is due in 30 days.'],
+      link: null, attach: 'Invoice-5521.pdf',
+      flag: [],
+      clues: ['The sender domain matches the supplier you know', 'An ordinary PDF with the usual 30 day terms', 'No pressure and no change to payment details'],
+      why: 'It is the bank detail change that should worry you with invoices. Here nothing is different from normal.'
+    },
+    {
+      id: 'stream-news', type: 'email', phish: false,
+      name: 'Streamly', addr: 'hello@streamly.example',
+      subject: 'New episodes this week',
+      body: ['Three new shows land on Thursday. Here is what is coming.', 'You can unsubscribe at any time in your account settings.'],
+      link: { text: 'See what is new', url: 'https://streamly.example/new' },
+      flag: [],
+      clues: ['The sender and link use streamly.example', 'It is a newsletter and asks for no details', 'An easy way to unsubscribe'],
+      why: 'Marketing email is annoying, not dangerous, when the domain is right and nothing asks for personal data.'
+    },
+    {
+      id: 'calendar', type: 'email', phish: false,
+      name: 'Priya Nair', addr: 'priya.nair@harbourlight.example',
+      subject: 'Invitation: project check-in, Thursday 10 am',
+      body: ['Hi, I set up a short check-in for the new rota.', 'Join on the meeting room screen, or use the usual link.'],
+      link: { text: 'Join check-in', url: 'https://meet.harbourlight.example/checkin' },
+      flag: [],
+      clues: ['A colleague on the company domain', 'The link stays on harbourlight.example over https', 'The topic fits your real work'],
+      why: 'It comes from inside the company and matches your usual routine. A quick message to Priya would settle any doubt.'
+    },
+    {
+      id: 'login-code', type: 'email', phish: false,
+      name: 'Chatterbox', addr: 'no-reply@chatterbox.example',
+      subject: 'Your login code',
+      body: ['Your Chatterbox login code is 482 913. It expires in 10 minutes.', 'If you did not try to sign in, ignore this message.'],
+      link: null,
+      flag: [],
+      clues: ['There is no link to click', 'The domain matches', 'It only helps someone who also has your password'],
+      why: 'Expect a code like this only when you have just tried to sign in. Never read it out to anyone who contacts you.'
+    },
+    {
+      id: 'sms-code', type: 'sms', phish: false,
+      name: 'Corvane', addr: '',
+      subject: '',
+      body: ['Your Corvane code is 308142. Never share this code. Corvane will never call to ask for it.'],
+      link: null,
+      flag: [],
+      clues: ['It gives a code and asks for nothing back', 'It warns you not to share the code', 'No link at all'],
+      why: 'The danger would be a caller asking you to read the code out. This message does not do that.'
+    },
+    {
+      id: 'reset-asked', type: 'email', phish: false,
+      name: 'Chatterbox', addr: 'no-reply@chatterbox.example',
+      subject: 'Reset your password',
+      body: ['You asked to reset your password. Use the button below within 1 hour.', 'If this was not you, ignore this message and your password stays the same.'],
+      link: { text: 'Reset password', url: 'https://chatterbox.example/reset' },
+      flag: [],
+      clues: ['You just asked for it', 'The sender and link use chatterbox.example over https', 'Ignoring it changes nothing'],
+      why: 'A reset email is safe when you started the reset. If you did not, ignore it and sign in the usual way.'
+    },
+    {
+      id: 'cloud-summary', type: 'email', phish: false,
+      name: 'Cloudnest', addr: 'no-reply@cloudnest.example',
+      subject: 'Your weekly storage summary',
+      body: ['You used 42 percent of your storage this week.', 'Nothing needs your attention.'],
+      link: { text: 'Open my account', url: 'https://cloudnest.example/account' },
+      flag: [],
+      clues: ['The right domain on both the sender and the link', 'A routine summary with no request', 'No urgency'],
+      why: 'A dull, predictable message from the right address is exactly what real mail looks like.'
+    },
+    {
+      id: 'shop-sale', type: 'email', phish: false,
+      name: 'Shopnook', addr: 'news@shopnook.example',
+      subject: 'Spring sale starts Friday',
+      body: ['Free shipping on orders over A$60 until Sunday.', 'You are getting this because you signed up for our newsletter. Unsubscribe any time.'],
+      link: { text: 'Unsubscribe', url: 'https://shopnook.example/unsubscribe' },
+      flag: [],
+      clues: ['Matching domain', 'A normal sales offer with no personal details requested', 'A working unsubscribe link on the same domain'],
+      why: 'Sales emails are pushy by nature, but a matching domain and no request for data keeps this one safe.'
+    },
+    {
+      id: 'welcome-pack', type: 'email', phish: false,
+      name: 'Harbourlight People Team', addr: 'people@harbourlight.example',
+      subject: 'Welcome pack and first day details',
+      body: ['Welcome to the team. Your first day starts at 9 am at the main office.', 'Bring photo ID for the front desk. We do not need any documents by email.'],
+      link: null,
+      flag: [],
+      clues: ['The company domain', 'It tells you not to send documents by email', 'No link and no pressure'],
+      why: 'Good senders tell you what they will never ask for. That habit is a mark of a real organisation.'
+    }
+  ];
+  window.PH_EMAILS = EMAILS;
+
+  /* ---------- small helpers ---------- */
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text !== undefined && text !== null) n.textContent = text;
+    return n;
+  }
+  function shuffle(list) {
+    var a = list.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function has(list, v) { return list.indexOf(v) >= 0; }
+
+  var desk = document.getElementById('desk');
+  var menubar = document.getElementById('menubar');
+
+  var S = { round: 0, score: 0, streak: 0, bestStreak: 0, correct: 0, deck: [], answered: false, open: false };
+  var best = 0;
+  try { best = parseInt(localStorage.getItem(STORE_KEY), 10) || 0; } catch (e) {}
+  function saveBest() { try { localStorage.setItem(STORE_KEY, String(best)); } catch (e) {} }
+
+  /* ---------- the little fish ---------- */
+  var FISH = [
+    '....ooooo....', 'o..ooRRRRoo..', 'oo.oRRRRRRRo.', 'ooooRRRRRWKRo',
+    'ooooRRRRRRRRo', 'oo.oRRRRRRRo.', 'o..ooRRRRoo..', '....ooooo....'
+  ];
+  var FISH_COLORS = { o: '#241208', R: '#d9824f', W: '#ffffff', K: '#241208' };
+  function drawFish(canvas, mood) {
+    var c = canvas.getContext('2d');
+    if (!c) return;
+    c.clearRect(0, 0, canvas.width, canvas.height);
+    var ox = 4, oy = 4;
+    var r, k;
+    if (mood === 'bad') {
+      c.fillStyle = '#6b5847';
+      c.fillRect(ox + 11, 0, 1, oy + 3);
+      c.fillRect(ox + 11, oy + 2, 2, 1);
+    }
+    for (r = 0; r < FISH.length; r++) {
+      for (k = 0; k < FISH[r].length; k++) {
+        var ch = FISH[r].charAt(k);
+        if (ch === '.') continue;
+        var col = FISH_COLORS[ch];
+        if (mood === 'bad' && ch === 'W') col = '#d9824f';
+        c.fillStyle = col;
+        c.fillRect(ox + k, oy + r, 1, 1);
+      }
+    }
+    if (mood === 'good') {
+      c.fillStyle = '#f2c46b';
+      var sp = [[0, 1], [22, 2], [20, 11], [2, 12], [17, 0]];
+      for (k = 0; k < sp.length; k++) { c.fillRect(sp[k][0], sp[k][1], 1, 1); }
+      c.fillRect(21, 2, 1, 1); c.fillRect(23, 2, 1, 1); c.fillRect(22, 1, 1, 1); c.fillRect(22, 3, 1, 1);
+    }
+  }
+
+  /* ---------- sound (off until asked) ---------- */
+  var audio = { ctx: null, on: false };
+  function blip(freq, start, dur, type, vol) {
+    var c = audio.ctx, t = c.currentTime + start;
+    var o = c.createOscillator(), g = c.createGain();
+    o.type = type; o.frequency.setValueAtTime(freq, t);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol, t + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(c.destination);
+    o.start(t); o.stop(t + dur + 0.05);
+  }
+  var sfx = {
+    good: function () { if (audio.on) { blip(523, 0, 0.1, 'square', 0.05); blip(784, 0.1, 0.16, 'square', 0.05); } },
+    bad: function () { if (audio.on) { blip(196, 0, 0.18, 'square', 0.05); blip(147, 0.16, 0.24, 'square', 0.05); } },
+    tick: function () { if (audio.on) blip(660, 0, 0.05, 'square', 0.03); },
+    end: function () { if (audio.on) { blip(523, 0, 0.12, 'square', 0.05); blip(659, 0.12, 0.12, 'square', 0.05); blip(784, 0.24, 0.12, 'square', 0.05); blip(1047, 0.36, 0.3, 'square', 0.05); } }
+  };
+  var soundBtn = document.getElementById('sound');
+  soundBtn.addEventListener('click', function () {
+    if (!audio.on) {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) { soundBtn.textContent = 'No sound here'; return; }
+      try { if (!audio.ctx) audio.ctx = new AC(); if (audio.ctx.resume) audio.ctx.resume(); } catch (e) { soundBtn.textContent = 'No sound here'; return; }
+      audio.on = true;
+      soundBtn.textContent = 'Sound: on';
+      soundBtn.setAttribute('aria-pressed', 'true');
+      sfx.tick();
+    } else {
+      audio.on = false;
+      soundBtn.textContent = 'Sound: off';
+      soundBtn.setAttribute('aria-pressed', 'false');
+    }
+  });
+
+  /* ---------- screens ---------- */
+  function clearDesk() {
+    while (desk.firstChild) desk.removeChild(desk.firstChild);
+  }
+  function titleBar(left, right) {
+    var bar = el('div', 'win-title');
+    bar.appendChild(el('span', null, left));
+    if (right) bar.appendChild(el('span', null, right));
+    else { var d = el('span', 'dots'); d.appendChild(el('i')); d.appendChild(el('i')); d.appendChild(el('i')); bar.appendChild(d); }
+    return bar;
+  }
+  function updateMenubar() {
+    while (menubar.firstChild) menubar.removeChild(menubar.firstChild);
+    var items = [['HUNTER OS 1.0', ''], ['ROUND ', S.round + ' / ' + ROUNDS], ['SCORE ', String(S.score)], ['STREAK ', 'x' + S.streak]];
+    items.forEach(function (it) {
+      var s = el('span', null, it[0]);
+      if (it[1]) s.appendChild(el('b', null, it[1]));
+      menubar.appendChild(s);
+    });
+    menubar.hidden = false;
+  }
+
+  function showStart() {
+    S.open = false;
+    menubar.hidden = true;
+    clearDesk();
+    var win = el('div', 'win center');
+    win.appendChild(titleBar('WELCOME.EXE'));
+    var body = el('div', 'win-body');
+    body.appendChild(el('h2', 'title-big', 'SAFE OR PHISHING?'));
+    var fish = el('canvas');
+    fish.width = 28; fish.height = 16;
+    fish.style.cssText = 'width:112px;height:64px;image-rendering:pixelated';
+    drawFish(fish, 'idle');
+    body.appendChild(fish);
+    var list = el('ul', 'list');
+    ['Ten messages land in your inbox. Decide if each one is safe or phishing.',
+     'No timer. No lives. Take your time.',
+     'You get a short explanation after every answer.',
+     'Every brand and address here is made up.'].forEach(function (t) { list.appendChild(el('li', null, t)); });
+    body.appendChild(list);
+    var go = el('button', 'pbtn big fish', 'START');
+    go.type = 'button';
+    go.addEventListener('click', startGame);
+    body.appendChild(go);
+    if (best > 0) body.appendChild(el('p', 'was', 'Best score: ' + best));
+    win.appendChild(body);
+    desk.appendChild(win);
+    go.focus();
+  }
+
+  function startGame() {
+    var phish = shuffle(EMAILS.filter(function (m) { return m.phish; })).slice(0, ROUNDS / 2);
+    var safe = shuffle(EMAILS.filter(function (m) { return !m.phish; })).slice(0, ROUNDS / 2);
+    S.deck = shuffle(phish.concat(safe));
+    S.round = 0; S.score = 0; S.streak = 0; S.bestStreak = 0; S.correct = 0;
+    sfx.tick();
+    nextRound();
+  }
+
+  var mailWin = null;
+  var current = null;
+  var answerBtns = [];
+
+  function field(label, value, cls) {
+    var p = el('p', 'field' + (cls ? ' ' + cls : ''));
+    p.appendChild(el('span', 'k', label));
+    var v = el('span', 'v', value);
+    p.appendChild(v);
+    return { p: p, v: v };
+  }
+
+  function nextRound() {
+    S.open = true;
+    S.answered = false;
+    current = S.deck[S.round];
+    S.round++;
+    updateMenubar();
+    clearDesk();
+    var m = current;
+    var isSms = m.type === 'sms';
+    var win = el('div', 'win');
+    win.appendChild(titleBar(isSms ? 'MESSAGES.EXE' : 'INBOX.EXE', 'message ' + S.round + ' of ' + ROUNDS));
+    var body = el('div', 'win-body');
+    body.setAttribute('tabindex', '-1');
+    var fromText = isSms ? m.name : m.name + ' <' + m.addr + '>';
+    var from = field('From:', fromText);
+    body.appendChild(from.p);
+    m._from = from.v;
+    if (!isSms) body.appendChild(field('Subject:', m.subject, 'subject').p);
+    body.appendChild(el('hr', 'rule'));
+    var msg = el('div', 'msg');
+    var wrap = isSms ? el('div', 'bubble') : msg;
+    m.body.forEach(function (t) { wrap.appendChild(el('p', null, t)); });
+    if (isSms) msg.appendChild(wrap);
+    m._body = wrap;
+    if (m.link) {
+      var lb = el('span', 'linkbtn', m.link.text);
+      msg.appendChild(lb);
+    }
+    body.appendChild(msg);
+    m._attach = null; m._status = null;
+    if (m.attach) {
+      var at = el('div', 'attach', 'Attachment: ' + m.attach);
+      body.appendChild(at);
+      m._attach = at;
+    }
+    if (m.link) {
+      var st = el('div', 'status');
+      st.appendChild(el('span', 'k', 'Link goes to: '));
+      var u = el('span', null, m.link.url);
+      st.appendChild(u);
+      body.appendChild(st);
+      m._status = st;
+    }
+    win.appendChild(body);
+    desk.appendChild(win);
+    mailWin = win;
+
+    var actions = el('div', 'actions');
+    var safeBtn = el('button', 'pbtn big safe', 'SAFE (S)');
+    var fishBtn = el('button', 'pbtn big fish', 'PHISHING (P)');
+    safeBtn.type = 'button'; fishBtn.type = 'button';
+    safeBtn.addEventListener('click', function () { answer(false); });
+    fishBtn.addEventListener('click', function () { answer(true); });
+    actions.appendChild(safeBtn); actions.appendChild(fishBtn);
+    desk.appendChild(actions);
+    answerBtns = [safeBtn, fishBtn];
+    body.focus({ preventScroll: true });
+    if (window.scrollTo && S.round > 1) { try { screenTop(); } catch (e) {} }
+  }
+  function screenTop() {
+    var r = document.getElementById('screen').getBoundingClientRect();
+    if (r.top < 0) window.scrollBy(0, r.top - 10);
+  }
+
+  function answer(saidPhish) {
+    if (!S.open || S.answered) return;
+    S.answered = true;
+    var m = current;
+    var ok = saidPhish === m.phish;
+    var gain = 0;
+    if (ok) {
+      S.streak++; S.correct++;
+      if (S.streak > S.bestStreak) S.bestStreak = S.streak;
+      gain = 100 + Math.min(100, (S.streak - 1) * 25);
+      S.score += gain;
+      sfx.good();
+    } else {
+      S.streak = 0;
+      sfx.bad();
+    }
+    updateMenubar();
+    answerBtns.forEach(function (b) { b.disabled = true; });
+    if (m.phish) {
+      if (has(m.flag, 'from') && m._from) m._from.className += ' flag';
+      if (has(m.flag, 'attach') && m._attach) m._attach.className += ' flag';
+      if (has(m.flag, 'link') && m._status) m._status.lastChild.className = 'flag';
+      if (has(m.flag, 'body') && m._body) m._body.className += ' flag';
+    }
+
+    var res = el('div', 'win result' + (ok ? '' : ' bad'));
+    res.appendChild(titleBar('RESULT.EXE'));
+    var body = el('div', 'win-body');
+    body.setAttribute('aria-live', 'polite');
+    var verdict = el('p', 'verdict');
+    var fish = el('canvas');
+    fish.width = 28; fish.height = 16;
+    drawFish(fish, ok ? 'good' : 'bad');
+    verdict.appendChild(fish);
+    verdict.appendChild(el('span', null, ok ? 'CORRECT! +' + gain : 'NOT QUITE'));
+    body.appendChild(verdict);
+    body.appendChild(el('p', 'was', 'This message was ' + (m.phish ? 'PHISHING.' : 'SAFE.')));
+    body.appendChild(el('p', 'why', m.why));
+    var cl = el('ul', 'clues' + (m.phish ? '' : ' good'));
+    m.clues.forEach(function (t) { cl.appendChild(el('li', null, t)); });
+    body.appendChild(cl);
+    var last = S.round >= ROUNDS;
+    var next = el('button', 'pbtn big', last ? 'SEE RESULTS (Enter)' : 'NEXT (Enter)');
+    next.type = 'button';
+    next.addEventListener('click', function () { if (last) showResult(); else { sfx.tick(); nextRound(); } });
+    body.appendChild(next);
+    res.appendChild(body);
+    desk.appendChild(res);
+    next.focus({ preventScroll: true });
+    try { res.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); } catch (e) { }
+  }
+
+  var RANKS = [
+    [10, 'INBOX GUARDIAN', 'Not one got past you.'],
+    [8, 'PHISH HUNTER', 'Very sharp. Only a tricky one or two slipped through.'],
+    [6, 'SHARP EYED ANGLER', 'Solid. Look a little harder at sender addresses and link targets.'],
+    [4, 'LEARNING THE WATERS', 'A good start. Every scammer relies on you rushing.'],
+    [0, 'FRESH BAIT', 'Everyone starts here. Play again and watch the senders and the links.']
+  ];
+
+  function showResult() {
+    S.open = false;
+    sfx.end();
+    if (S.score > best) { best = S.score; saveBest(); }
+    updateMenubar();
+    clearDesk();
+    var rank = RANKS.filter(function (r) { return S.correct >= r[0]; })[0];
+    var win = el('div', 'win center');
+    win.appendChild(titleBar('SCORE.EXE'));
+    var body = el('div', 'win-body');
+    body.setAttribute('tabindex', '-1');
+    body.appendChild(el('p', 'rank', rank[1]));
+    body.appendChild(el('h2', 'title-big', S.correct + ' OF ' + ROUNDS));
+    body.appendChild(el('p', null, rank[2]));
+    var stats = el('div', 'stats');
+    [['SCORE', String(S.score)], ['BEST STREAK', 'x' + S.bestStreak], ['BEST SCORE', String(best)]].forEach(function (s) {
+      var box = el('div', 'stat');
+      box.appendChild(el('b', null, s[1]));
+      box.appendChild(el('span', null, s[0]));
+      stats.appendChild(box);
+    });
+    body.appendChild(stats);
+    var again = el('button', 'pbtn big fish', 'PLAY AGAIN');
+    again.type = 'button';
+    again.addEventListener('click', startGame);
+    body.appendChild(again);
+    var more = el('p');
+    more.appendChild(document.createTextNode('Want a checklist for your own team? See the '));
+    var a = el('a', null, 'SME security templates');
+    a.href = 'products.html#sme';
+    more.appendChild(a);
+    more.appendChild(document.createTextNode('.'));
+    body.appendChild(more);
+    win.appendChild(body);
+    desk.appendChild(win);
+    again.focus({ preventScroll: true });
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    var k = e.key;
+    var onButton = document.activeElement && document.activeElement.tagName === 'BUTTON';
+    if (S.open && !S.answered) {
+      if (k === 's' || k === 'S') { e.preventDefault(); answer(false); }
+      else if (k === 'p' || k === 'P') { e.preventDefault(); answer(true); }
+    }
+  });
+
+  var fishPreview = null;
+  showStart();
+})();
+</script>
+</body>
+</html>
