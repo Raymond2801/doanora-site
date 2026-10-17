@@ -62,6 +62,7 @@ window.I18N_UI.es = {
   "blogprev.news.p": "Un resumen semanal de noticias de IA y seguridad informática de todo el mundo, con sus fuentes, empezará aquí pronto.",
   "blogprev.open": "Abrir el blog →",
   "brand.sub": "Sistemas IA · Seguridad",
+  "built.arcade": "Jugar en el Arcade →",
   "built.h": "Lo que he construido",
   "built.koko": "Un juego de plataformas para practicar la lectoescritura, basado en el currículo NAPLAN.",
   "built.math": "Un juego de defensa de torres con matemáticas que se juega en el navegador, probado por mi propio hijo. Sin instalar nada: abre la página y juega.",

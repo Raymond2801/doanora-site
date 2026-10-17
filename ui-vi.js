@@ -61,6 +61,7 @@ window.I18N_UI.vi = {
   "blogprev.news.p": "Bản tin hằng tuần về AI và bảo mật CNTT trên thế giới, kèm nguồn, sẽ sớm có mặt ở đây.",
   "blogprev.open": "Mở blog →",
   "brand.sub": "Hệ thống AI · Bảo mật",
+  "built.arcade": "Chơi trong khu Arcade →",
   "built.h": "Những gì tôi đã xây",
   "built.koko": "Một game platformer rèn kỹ năng đọc viết, xây dựng xoay quanh chương trình NAPLAN.",
   "built.math": "Một game thủ thành bằng toán học chạy ngay trên trình duyệt, do chính con trai tôi chơi thử. Không cần cài đặt, chỉ cần mở trang và chơi.",
