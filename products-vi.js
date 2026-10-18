@@ -494,5 +494,63 @@ window.I18N_PRODUCTS.vi = {
       label: "Mua trên Gumroad",
       note: "Gumroad xử lý thanh toán và tải xuống."
     }
+  },
+
+  "sme-essential-eight-quick-start-kit": {
+    short: "Essential Eight của ASD bằng ngôn ngữ dễ hiểu, kèm bảng tự đánh giá và kế hoạch 90 ngày.",
+    tagline: "Essential Eight của Cơ quan Tín hiệu Úc (ASD) bằng ngôn ngữ dễ hiểu, kèm một sổ tính tự tính mức độ của bạn và kế hoạch 90 ngày để lấp các khoảng trống.",
+    row: "Essential Eight bằng ngôn ngữ dễ hiểu cho Mức độ trưởng thành 1 và 2: sổ tính tự đánh giá, kế hoạch 90 ngày và câu chữ dành cho công ty bảo hiểm của bạn. Tệp Word và Excel chỉnh sửa được.",
+    intro: [
+      "Các công ty bảo hiểm an ninh mạng, khách hàng lớn và bên mua của chính phủ giờ đều hỏi doanh nghiệp nhỏ cùng một câu: bạn đang ở đâu so với Essential Eight? Hầu hết chủ doanh nghiệp chưa từng thấy danh sách này, và mô hình chính thức thì được viết cho chuyên gia.",
+      "Bộ này chuyển Essential Eight của Cơ quan Tín hiệu Úc (mô hình tháng 11 năm 2023) sang ngôn ngữ dễ hiểu. Bạn có một sổ tính tự tính mức độ của bạn, một danh sách các khoảng trống theo thứ tự hợp lý, một kế hoạch 90 ngày, cùng câu chữ có sẵn cho công ty bảo hiểm, nhân viên và đơn vị hỗ trợ IT của bạn. Bạn có thể thiết lập xong trong khoảng nửa ngày, không cần thuê tư vấn.",
+      "Bao gồm Mức độ trưởng thành 1 và Mức độ trưởng thành 2. Mức 1 là nơi ASD gợi ý doanh nghiệp nhỏ nên bắt đầu. Mức 2 là mức nhiều công ty bảo hiểm và khách hàng lớn yêu cầu. Mức 3 không nằm trong bộ này."
+    ],
+    sections: [
+      {
+        h: "Bên trong có gì",
+        list: [
+          "Hướng dẫn bắt đầu (Word): thiết lập mọi thứ trong năm bước, kèm danh sách các mục có thể tùy chỉnh ở một chỗ",
+          "Hướng dẫn ngôn ngữ dễ hiểu (Word): cả tám biện pháp bảo vệ được giải thích ở Mức 1 và Mức 2, kèm lý do kẻ tấn công thích những khoảng trống này, các việc làm nhanh có hiệu quả, câu hỏi nên đặt cho đơn vị hỗ trợ IT, và bằng chứng cần lưu lại",
+          "Sổ tính tự đánh giá (Excel): một bài Quét nhanh 10 câu hỏi, rồi 71 mục kiểm tra bằng ngôn ngữ dễ hiểu (39 cho Mức 1, 32 cho Mức 2). Sổ tự tính mức độ của bạn cho từng biện pháp và tổng thể, và liệt kê mọi khoảng trống theo thứ tự hợp lý",
+          "Kế hoạch nâng cấp và bằng chứng (Word): kế hoạch 90 ngày, sổ ghi bằng chứng, vai trò, nhịp rà soát, biểu mẫu ngoại lệ và nhật ký đánh giá lại",
+          "Câu chữ và câu hỏi (Word): chuẩn bị cho bảng câu hỏi của công ty bảo hiểm, câu hỏi cho đơn vị hỗ trợ IT, thông báo cho nhân viên, các dòng chính sách, câu chữ cho khách hàng và hồ sơ dự thầu, một thẻ sự cố một trang và một buổi họp nhóm 20 phút",
+          "Ví dụ hoàn chỉnh (Word), phần thưởng thêm: một doanh nghiệp giả định đi từ những câu trả lời đầu tiên đến Mức 1 trong 90 ngày, với mọi biểu mẫu đã điền sẵn, để bạn thấy thành quả hoàn chỉnh trông như thế nào"
+        ]
+      },
+      {
+        h: "Cách thực hiện",
+        steps: [
+          "Điền tên công ty, người phụ trách bảo mật và chủ doanh nghiệp của bạn.",
+          "Làm bài Quét nhanh 10 phút, rồi đọc hướng dẫn.",
+          "Trả lời các mục kiểm tra cùng đơn vị hỗ trợ IT, dùng ví dụ hoàn chỉnh làm mẫu.",
+          "Chép các khoảng trống đầu tiên vào kế hoạch 90 ngày và giao cho mỗi việc một người phụ trách và một ngày hoàn thành.",
+          "Lưu bằng chứng cho mỗi câu trả lời Có, và chạy lại bài đánh giá mỗi quý."
+        ],
+        after: "Mức độ tổng thể của bạn là kết quả thấp nhất trong tám biện pháp bảo vệ, và sổ tính cho thấy điều này một cách trung thực, để bạn biết nên dồn sức vào đâu trước."
+      },
+      {
+        h: "Dành cho ai",
+        p: ["Chủ doanh nghiệp nhỏ, quản lý văn phòng và người phụ trách IT tại Úc muốn có một cách rõ ràng, lặp lại được để đạt và chứng minh Essential Eight Mức 1 hoặc Mức 2."]
+      },
+      {
+        h: "Định dạng",
+        p: ["Năm tài liệu Word (.docx) chỉnh sửa được và một sổ tính Excel (.xlsx) chỉnh sửa được. Dùng được trong Microsoft Word, Microsoft Excel và LibreOffice. Chỉ dùng công thức chuẩn: không macro, không tiện ích bổ sung và không cần tài khoản."]
+      },
+      {
+        h: "Cần biết thêm",
+        p: ["Đây là một hướng dẫn độc lập. Nó không liên kết với và không được Cơ quan Tín hiệu Úc hay Chính phủ Úc chứng nhận. Được viết theo mô hình mức độ trưởng thành Essential Eight tháng 11 năm 2023, vì vậy hãy xem cyber.gov.au nếu cần bản mới hơn. Tự đánh giá không phải là kiểm toán, và không có chứng chỉ Essential Eight. Đây là hướng dẫn chung, không phải tư vấn pháp lý. Dùng cho doanh nghiệp của riêng bạn: vui lòng không bán lại hay chia sẻ các tệp này."]
+      }
+    ],
+    facts: [
+      ["Định dạng", "5 tài liệu Word (.docx) và 1 sổ tính Excel (.xlsx)"],
+      ["Dùng được trong", "Word, Excel, LibreOffice"],
+      ["Bao gồm", "Essential Eight Mức độ trưởng thành 1 và 2"],
+      ["Thời gian thiết lập", "Khoảng nửa ngày"],
+      ["Thiết lập", "Không macro, không tiện ích bổ sung, không cần tài khoản"]
+    ],
+    cta: {
+      label: "Mua trên Gumroad",
+      note: "Gumroad xử lý thanh toán và tải xuống."
+    }
   }
 };

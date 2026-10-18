@@ -494,5 +494,63 @@ window.I18N_PRODUCTS.es = {
       label: "Comprar en Gumroad",
       note: "Gumroad se encarga del pago y de la descarga."
     }
+  },
+
+  "sme-essential-eight-quick-start-kit": {
+    short: "El Essential Eight de la ASD en lenguaje claro, con una autoevaluación y un plan de 90 días.",
+    tagline: "El Essential Eight de la Dirección de Señales de Australia (ASD) en lenguaje claro, con un libro que calcula tu nivel y un plan de 90 días para cerrar las brechas.",
+    row: "El Essential Eight en lenguaje claro para el Nivel de madurez 1 y el Nivel 2: un libro de autoevaluación, un plan de 90 días y textos para tu aseguradora. Archivos editables de Word y Excel.",
+    intro: [
+      "Las aseguradoras de ciberseguridad, los clientes grandes y los compradores del gobierno ahora hacen la misma pregunta a las pequeñas empresas: ¿cómo te comparas con el Essential Eight? La mayoría de los dueños nunca ha visto la lista, y el modelo oficial está escrito para especialistas.",
+      "Este kit convierte el Essential Eight de la Dirección de Señales de Australia (modelo de noviembre de 2023) en lenguaje claro. Obtienes un libro que calcula tu nivel por ti, una lista de brechas en un orden sensato, un plan de 90 días y textos listos para tu aseguradora, tu equipo y tu proveedor de IT. Puedes dejarlo listo en medio día, sin contratar a un consultor.",
+      "Cubre el Nivel de madurez 1 y el Nivel de madurez 2. El Nivel 1 es donde la ASD sugiere que empiecen las pequeñas empresas. El Nivel 2 es lo que piden muchas aseguradoras y clientes grandes. El Nivel 3 no está incluido."
+    ],
+    sections: [
+      {
+        h: "Qué incluye",
+        list: [
+          "Guía de inicio (Word): deja todo listo en cinco pasos, con las opciones que puedes cambiar reunidas en un solo lugar",
+          "Guía en lenguaje claro (Word): las ocho protecciones explicadas en el Nivel 1 y el Nivel 2, con la razón por la que a los atacantes les encanta cada brecha, mejoras rápidas, preguntas para tu proveedor de IT y las pruebas que debes conservar",
+          "Libro de autoevaluación (Excel): un Escaneo rápido de 10 preguntas y luego 71 verificaciones en lenguaje claro (39 para el Nivel 1, 32 para el Nivel 2). Calcula tu nivel para cada protección y en total, y enumera cada brecha en un orden sensato",
+          "Plan de mejora y evidencias (Word): un plan de 90 días, un registro de evidencias, roles, un ritmo de revisión, un formulario de excepciones y un registro de reevaluación",
+          "Textos y preguntas (Word): preparación para el cuestionario de la aseguradora, preguntas para tu proveedor de IT, avisos para el personal, frases de política, textos para clientes y licitaciones, una tarjeta de incidentes de una página y una reunión de equipo de 20 minutos",
+          "Ejemplo resuelto (Word), de regalo: una empresa inventada llevada desde las primeras respuestas hasta el Nivel 1 en 90 días, con cada formulario ya completado, para que veas cómo se ve el trabajo terminado"
+        ]
+      },
+      {
+        h: "Cómo funciona",
+        steps: [
+          "Completa el nombre de tu empresa, tu responsable de seguridad y tu propietario.",
+          "Haz el Escaneo rápido de 10 minutos y luego lee la guía.",
+          "Responde las verificaciones con tu proveedor de IT, usando el ejemplo resuelto como guía.",
+          "Copia las primeras brechas en el plan de 90 días y asigna a cada una un responsable y una fecha.",
+          "Guarda la prueba de cada Sí y repite la evaluación cada trimestre."
+        ],
+        after: "Tu nivel general es el resultado más bajo entre las ocho protecciones, y el libro lo muestra con honestidad, para que sepas dónde poner primero tu esfuerzo."
+      },
+      {
+        h: "Para quién es",
+        p: ["Dueños de pequeñas empresas, gerentes de oficina y líderes de IT en Australia que quieren una forma clara y repetible de alcanzar y demostrar el Nivel 1 o el Nivel 2 del Essential Eight."]
+      },
+      {
+        h: "Formato",
+        p: ["Cinco documentos de Word (.docx) editables y un libro de Excel (.xlsx) editable. Funciona en Microsoft Word, Microsoft Excel y LibreOffice. Solo fórmulas estándar: sin macros, sin complementos y sin necesidad de cuenta."]
+      },
+      {
+        h: "Para tener en cuenta",
+        p: ["Es una guía independiente. No está afiliada ni respaldada por la Dirección de Señales de Australia ni por el Gobierno de Australia. Está escrita según el modelo de madurez del Essential Eight de noviembre de 2023, así que revisa cyber.gov.au por si hay algo más reciente. Una autoevaluación no es una auditoría, y no existe un certificado del Essential Eight. Esto es orientación general, no asesoría legal. Para uso en tu propio negocio: por favor no revender ni compartir los archivos."]
+      }
+    ],
+    facts: [
+      ["Formato", "5 documentos Word (.docx) y 1 libro Excel (.xlsx)"],
+      ["Funciona en", "Word, Excel, LibreOffice"],
+      ["Cubre", "Essential Eight, Nivel de madurez 1 y 2"],
+      ["Tiempo de puesta en marcha", "Alrededor de medio día"],
+      ["Configuración", "Sin macros, sin complementos, sin cuenta"]
+    ],
+    cta: {
+      label: "Comprar en Gumroad",
+      note: "Gumroad se encarga del pago y de la descarga."
+    }
   }
 };

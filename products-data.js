@@ -651,7 +651,78 @@ window.PRODUCTS = [
     gumroad: {
       permalink: "nihkc",
       name: "SME AI Usage Policy and Tool Vetting Kit",
-      hash: "76e12398e156"
+      hash: "dfab006db428"
+    }
+  },
+
+  {
+    slug: "sme-essential-eight-quick-start-kit",
+    name: "SME Essential Eight Quick-Start Kit",
+    kind: "Template",
+    audience: "SME",
+    status: "live",
+    price: "A$15",
+    short: "The ASD Essential Eight in plain English, with a self-assessment and 90-day plan.",
+    tagline: "The Australian Signals Directorate's Essential Eight in plain English, with a workbook that works out your level and a 90-day plan to close the gaps.",
+    row: "The Essential Eight in plain English for Maturity Level 1 and Level 2: a self-assessment workbook, a 90-day plan and wording for your insurer. Editable Word and Excel files.",
+    intro: [
+      "Cyber insurers, larger customers and government buyers now ask small businesses the same question: how do you stack up against the Essential Eight? Most owners have never seen the list, and the official model is written for specialists.",
+      "This kit turns the Australian Signals Directorate's Essential Eight (November 2023 model) into plain English. You get a workbook that works out your level for you, a gap list in a sensible order, a 90-day plan, and ready-made wording for your insurer, your staff and your IT provider. You can set it up in about half a day, without hiring a consultant.",
+      "Covers Maturity Level 1 and Level 2. Level 1 is where ASD suggests small businesses start. Level 2 is what many insurers and larger customers ask for. Level 3 is not covered."
+    ],
+    sections: [
+      {
+        h: "What's inside",
+        list: [
+          "Start Here guide (Word): set everything up in five steps, with the settings you can change listed in one place",
+          "Plain English Guide (Word): all eight protections explained at Level 1 and Level 2, with why attackers love the gap, quick wins, questions to ask your IT provider, and the proof to keep",
+          "Self-Assessment Workbook (Excel): a 10-question Quick Scan, then 71 plain-English checks (39 for Level 1, 32 for Level 2). It works out your level for each protection and overall, and lists every gap in a sensible order",
+          "Uplift Plan and Evidence (Word): a 90-day plan, an evidence register, roles, a review rhythm, an exception form and a re-assessment log",
+          "Wording and Questions (Word): insurer questionnaire prep, questions for your IT provider, staff notices, policy lines, wording for customers and tenders, a one-page incident card and a 20-minute team briefing",
+          "Worked Example (Word), a bonus: one made-up business taken from first answers to Level 1 in 90 days, with every form filled in, so you can see what finished work looks like"
+        ]
+      },
+      {
+        h: "How it works",
+        steps: [
+          "Fill in your company, Security Lead and Owner names.",
+          "Take the 10-minute Quick Scan, then read the guide.",
+          "Answer the checks with your IT provider, using the worked example as a guide.",
+          "Copy the first gaps into the 90-day plan and give each one an owner and a date.",
+          "Keep proof for every Yes, and re-run the assessment every quarter."
+        ],
+        after: "Your overall level is the lowest result across the eight protections, and the workbook shows this honestly, so you know where to put your effort first."
+      },
+      {
+        h: "Who it is for",
+        p: ["Small business owners, office managers and IT leads in Australia who want a clear, repeatable way to reach and show Essential Eight Level 1 or Level 2."]
+      },
+      {
+        h: "Format",
+        p: ["Five editable Word documents (.docx) and an editable Excel workbook (.xlsx). Works in Microsoft Word, Microsoft Excel and LibreOffice. Standard formulas only: no macros, no add-ins and no account needed."]
+      },
+      {
+        h: "Good to know",
+        p: ["An independent guide. It is not affiliated with or endorsed by the Australian Signals Directorate or the Australian Government. Written against the Essential Eight maturity model of November 2023, so check cyber.gov.au for anything newer. A self-assessment is not an audit, and there is no Essential Eight certificate. General guidance, not legal advice. For use in your own business: please do not resell or share the files."]
+      }
+    ],
+    facts: [
+      ["Format", "5 Word documents (.docx) and 1 Excel workbook (.xlsx)"],
+      ["Works in", "Word, Excel, LibreOffice"],
+      ["Covers", "Essential Eight Maturity Level 1 and Level 2"],
+      ["Setup time", "About half a day"],
+      ["Setup", "No macros, no add-ins, no account"]
+    ],
+    cta: {
+      label: "Get it on Gumroad",
+      url: "https://raymonddoan.gumroad.com/l/cbayzq",
+      note: "Checkout and download are handled by Gumroad."
+    },
+    related: ["sme-security-starter-kit", "sme-ai-usage-policy-tool-vetting-kit", "sme-security-incident-response-runbook"],
+    gumroad: {
+      permalink: "cbayzq",
+      name: "SME Essential Eight Quick-Start Kit",
+      hash: "eb2c15c2ea77"
     }
   }
 ];
