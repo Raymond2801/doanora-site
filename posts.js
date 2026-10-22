@@ -31,7 +31,7 @@
    English is the source text. A translation must have the same body, item for item (a paragraph for a
    paragraph, a subheading for a subheading, a list with the same number of items, a table with the same
    rows and columns); if it does not, the page shows the English post with a note. A translated picture
-   can give its own alt and cap (and fig and mob, for a diagram redrawn in that language).
+   can give its own alt and cap (and fig, size, mob and msize, for a diagram redrawn in that language).
    Source titles and links are not translated. A post with no translation shows in English in every language.
 
    A post goes live only after Raymond approves the draft. */
@@ -80,7 +80,7 @@ window.BLOG_POSTS = [
         "alt": "The frame stays the same: memory, tools, an executor that runs the tool the model asks for, and an approval flow with human approval before irreversible actions. Only the model changes. The hosted cloud model used today, the Claude API, can be swapped for a local model: LM Studio on my laptop, reached through an OpenAI-style endpoint.",
         "cap": "Swapping the brain · frame unchanged"
       },
-      "Everything in the shaded frame stays as it is, and only the model changes. The solid line is how Winston runs today; the dashed line is the swap I would test.",
+      "Everything in the shaded frame stays as it is, and only the model outside it changes. The solid line is how Winston runs today; the dashed line is the swap I would test.",
       "Because LM Studio exposes an OpenAI-style endpoint, this is often a matter of pointing the client at a different address. In Winston's case it is more work. My code calls the Claude API directly in about nine places, so I would first need an abstraction layer and a round of retesting.",
       {
         "fig": "img/cloud-or-local-three-setups.svg", "size": [760, 512],
@@ -170,7 +170,261 @@ window.BLOG_POSTS = [
       { "title": "LM Studio: API changelog", "url": "https://lmstudio.ai/docs/developer/api-changelog" },
       { "title": "LM Studio blog: LM Studio as an MCP host", "url": "https://www.lmstudio.ai/blog/mcp" },
       { "title": "AI SDK docs: LM Studio with the OpenAI-compatible provider", "url": "https://ai-sdk.dev/providers/openai-compatible-providers/lmstudio" }
-    ]
+    ],
+    tr: {
+      vi: {
+        title: "Đám mây hay cục bộ? Vì sao tôi (chưa) đổi bộ não của Winston",
+        tag: "Phân tích",
+        summary: "Vì sao tôi tạm thời giữ bộ não của Winston trên một mô hình đám mây, nghiên cứu nói gì về các mô hình cục bộ, và điều gì sẽ khiến tôi đổi ý.",
+        body: [
+          "Tạm thời tôi giữ bộ não của Winston trên một mô hình đám mây và không thay đổi gì. Winston là trợ lý AI cá nhân do tôi xây dựng: nó sống trong Telegram, chạy trên laptop của tôi và dùng Claude qua API.",
+          "Tôi tự hỏi điều gì sẽ thay đổi nếu bộ não đó chạy cục bộ, trong một công cụ như LM Studio. Tôi cân nhắc các đánh đổi và xem nghiên cứu nói gì. Bài này trình bày lập luận của tôi, và điều gì sẽ khiến tôi đổi ý.",
+          { "h": "Hai cách chạy một AI" },
+          "Một trợ lý như Winston là một mô hình cộng với hệ thống bao quanh nó, còn một ứng dụng chat cục bộ thường chỉ là mô hình.",
+          {
+            "fig": "img/cloud-or-local-two-ways-vi.svg", "size": [760, 540],
+            "mob": "img/cloud-or-local-two-ways-mobile-vi.svg", "msize": [360, 728],
+            "alt": "Hai sơ đồ. Trên: bạn trò chuyện thẳng với một mô hình cục bộ trong cửa sổ chat; nó chỉ có kiến thức đóng băng, không có bộ nhớ và không có công cụ. Dưới: bạn trò chuyện với một hệ thống qua Telegram. Hệ thống thêm bộ nhớ, chạy các công cụ như email, tệp và lời nhắc, và hỏi một mô hình đám mây chỉ viết văn bản chứ không bao giờ chạy gì.",
+            "cap": "Chat cục bộ và trợ lý tích hợp · ai nói chuyện với ai"
+          },
+          "Trên: một mô hình đứng riêng. Dưới: một mô hình có hệ thống bao quanh, và chỉ hệ thống mới chạm tới bộ nhớ và công cụ.",
+          "**Một trợ lý tích hợp (như Winston).** Trước khi mô hình nhìn thấy tin nhắn của tôi, hệ thống đính kèm bộ nhớ của tôi, cuộc trò chuyện gần đây và danh sách các công cụ (email, tệp, lời nhắc). Cả gói đó được gửi tới một mô hình đám mây lớn, và mô hình quyết định trả lời hay yêu cầu một công cụ. Nếu nó yêu cầu, thì hệ thống, chứ không phải mô hình, sẽ chạy công cụ và chuyển kết quả trở lại.",
+          "**Một mô hình cục bộ trong cửa sổ chat (như chat của LM Studio).** Tin nhắn của tôi đi tới một mô hình nhỏ hơn chạy ngay trên máy tính của tôi, không cần internet. Nó trả lời từ những gì đã học trong quá trình huấn luyện, bị đóng băng tại một thời điểm. Ở chế độ cơ bản này không có bộ nhớ giữa các cuộc chat và không có công cụ.",
+          "Chính sự khác biệt duy nhất đó giải thích phần lớn những gì mọi người nhận thấy:",
+          { "ul": [
+            "**Hành động.** Một mô hình chỉ tạo ra văn bản. Để gửi một email thật cần có phần mềm bao quanh thực hiện yêu cầu.",
+            "**Bộ nhớ.** Mô hình không nhớ gì giữa các cuộc trò chuyện. Hệ thống lưu bộ nhớ và đặt nó trở lại trước mặt mô hình mỗi lần.",
+            "**Phần cứng.** Một mô hình nhỏ, đã được nén có thể nằm gọn trong bộ nhớ của một laptop bình thường. Một mô hình lưu trữ trên đám mây thì không đòi hỏi gì ở phần cứng của bạn.",
+            "**Độ cập nhật.** Mọi mô hình đều bị đóng băng ở thời điểm huấn luyện, kể cả mô hình đám mây. Một trợ lý có cảm giác luôn cập nhật vì hệ thống lấy thông tin mới và đưa nó vào prompt."
+          ] },
+          "Tuy nhiên, LM Studio không chỉ là một cửa sổ chat:",
+          { "ul": [
+            "Nó có thể chạy một máy chủ cục bộ nói được API kiểu OpenAI.",
+            "Nó đã thêm tính năng gọi công cụ và hàm vào tháng 1 năm 2025.",
+            "Nó trở thành một MCP host vào tháng 6 năm 2025.",
+            "Nó hỏi xác nhận trước khi một lệnh gọi công cụ chạy, trừ khi bạn chọn luôn cho phép."
+          ] },
+          "Vì vậy, câu “LM Studio chỉ là chat” mô tả cách phần lớn mọi người dùng nó, chứ không phải những gì nó làm được.",
+          { "h": "Ý tưởng kết hợp: giữ khung, đổi bộ não" },
+          "Về lý thuyết, tôi có thể giữ nguyên mọi thứ làm nên Winston và chỉ thay bộ não. Bộ nhớ, công cụ, bộ thực thi và luồng phê duyệt ở lại; mô hình đám mây đi ra và một mô hình cục bộ đi vào.",
+          {
+            "fig": "img/cloud-or-local-swap-brain-vi.svg", "size": [760, 336],
+            "mob": "img/cloud-or-local-swap-brain-mobile-vi.svg", "msize": [360, 564],
+            "alt": "Phần khung giữ nguyên: bộ nhớ, công cụ, một bộ thực thi chạy công cụ mà mô hình yêu cầu, và một luồng phê duyệt với sự phê duyệt của con người trước các hành động không thể hoàn tác. Chỉ mô hình thay đổi. Mô hình đám mây được lưu trữ đang dùng hiện nay, tức Claude API, có thể được đổi sang một mô hình cục bộ: LM Studio trên laptop của tôi, kết nối qua một endpoint kiểu OpenAI.",
+            "cap": "Đổi bộ não · phần khung giữ nguyên"
+          },
+          "Mọi thứ trong khung tô màu giữ nguyên, và chỉ mô hình nằm ngoài khung thay đổi. Đường nét liền là cách Winston chạy hiện nay; đường nét đứt là sự hoán đổi mà tôi sẽ thử nghiệm.",
+          "Vì LM Studio cung cấp một endpoint kiểu OpenAI, việc này thường chỉ là trỏ client sang một địa chỉ khác. Với Winston thì tốn công hơn. Mã của tôi gọi thẳng Claude API ở khoảng chín chỗ, nên trước hết tôi cần một lớp trừu tượng hóa và một đợt kiểm thử lại.",
+          {
+            "fig": "img/cloud-or-local-three-setups-vi.svg", "size": [760, 512],
+            "mob": "img/cloud-or-local-three-setups-mobile-vi.svg", "msize": [360, 768],
+            "alt": "Bảng so sánh ba cách thiết lập: chat cục bộ ở chế độ cơ bản, Winston hiện tại với bộ não đám mây, và Winston với bộ não cục bộ. Hành động trong đời thực: chat cục bộ không, chỉ có văn bản; Winston hiện tại có, qua các công cụ; với bộ não cục bộ một phần, qua công cụ nhưng cần thử trước. Nhớ giữa các cuộc chat: không, bắt đầu lại từ đầu; có, hệ thống lưu lại; có, hệ thống lưu lại. Có thông tin mới nhất: không, kiến thức đóng băng; có, hệ thống lấy về; có, hệ thống lấy về. Chạy khi không có mạng: có; không; một phần, mô hình có nhưng Telegram không. Mô hình chạy trên máy tôi: có; không, chạy từ xa; có, dùng chung laptop với Winston.",
+            "cap": "Ba cách thiết lập cạnh nhau · mỗi cách làm được gì"
+          },
+          "Ba hàng đầu đến từ hệ thống, không phải từ mô hình. Hai hàng cuối phụ thuộc vào nơi mô hình chạy.",
+          { "h": "Nghiên cứu nói gì" },
+          "Quan niệm phổ biến cho rằng các mô hình cục bộ không gọi công cụ một cách đáng tin cậy. Hai nghiên cứu gần đây cho thấy bức tranh tinh tế hơn.",
+          "**AgentFloor**, một bản thảo (preprint) trên arXiv, đã thử nghiệm 16 mô hình open-weight, từ 0,27B đến 32B tham số, so với GPT-5 qua 16.542 lượt chạy có chấm điểm:",
+          { "ul": [
+            "Mô hình open-weight tốt nhất, gemma4:26b, nhìn chung tương đương GPT-5 về mặt thống kê, với khoảng 60% tác vụ hoàn thành ở cả hai.",
+            "Theo cách tính của các tác giả, mỗi tác vụ đạt yêu cầu tốn ít hơn khoảng 15 lần trên phần cứng Mac tự lưu trữ, và gemma4:26b hoàn thành nhanh hơn khoảng 2,5 lần.",
+            "Khoảng cách xuất hiện ở khâu lập kế hoạch dài hạn (long-horizon), nơi GPT-5 đạt tỷ lệ 10% còn gemma4:26b là 0%. Cả hai đều không đáng tin ở đó.",
+            "Lời khuyên của các tác giả: dùng mô hình nhỏ cho các hành động thường ngày, dùng mô hình hàng đầu (frontier) cho những tác vụ cần lập kế hoạch sâu hơn."
+          ] },
+          "**Một nghiên cứu về một framework tự động hóa nhà thông minh đã được triển khai** dùng hai bản cài đặt Home Assistant thật. Nó thử nghiệm chín mô hình, từ 0,8B đến một mô hình hàng đầu được lưu trữ trên đám mây, trên năm điểm gọi và 2.520 lệnh gọi có chấm điểm:",
+          { "ul": [
+            "Mô hình cục bộ tốt nhất không thể phân biệt về mặt thống kê với các mô hình lưu trữ trên đám mây ở bốn trong năm điểm gọi. Chỉ riêng việc sinh mã mới tách biệt được chúng.",
+            "Độ chính xác không phải là toàn bộ câu chuyện khi hành động: một mô hình nhỏ, Gemma4 E2B, đã thực hiện 87,2% yêu cầu dành cho những thiết bị mà nơi lắp đặt đó không có, trong khi một mô hình khác từ chối mọi yêu cầu nhận được.",
+            "Khi dùng thực tế, chỉ dùng mô hình lưu trữ trên đám mây cho hai điểm gọi dạng sinh nội dung cho kết quả ngang với dùng nó cho tất cả, mà chỉ tốn 28% chi phí, trên một mẫu nhỏ (mỗi bên 39/43)."
+          ] },
+          "Vì vậy câu hỏi hữu ích không phải là liệu một mô hình cục bộ có gọi được công cụ hay không. Mà là tôi có thể tin tưởng giao cho nó những lệnh gọi nào, và chuyện gì xảy ra khi nó sai.",
+          { "h": "Cân nhắc cho Winston" },
+          "Đám mây có lợi thế về lập kế hoạch và về thành tích thực tế mà tôi đã có. Cục bộ có lợi thế về độ ổn định, quyền riêng tư và chi phí cho mỗi lệnh gọi. Đây là cách điều đó diễn ra với Winston.",
+          { "table": {
+            "head": ["Yếu tố", "Bộ não cục bộ", "Bộ não đám mây (hiện tại)"],
+            "rows": [
+              ["Độ ổn định", "Tôi quyết định khi nào mô hình thay đổi, nên không có gì dịch chuyển bên dưới tôi", "Một bản nâng cấp có thể làm đổi hành vi: khi chuyển sang Sonnet 5, chế độ suy nghĩ thích ứng được bật sẵn, và sáu trong chín điểm gọi API của tôi bị lỗi cho đến khi tôi sửa"],
+              ["Quyền riêng tư", "Nội dung tin nhắn nằm lại trên laptop của tôi", "Nội dung tin nhắn đi tới nhà cung cấp, nên tôi dựa vào điều khoản dữ liệu của họ"],
+              ["Chi phí", "Không mất phí cho mỗi lệnh gọi, nhưng phần cứng và tiền điện là của tôi", "Trả theo token, với giới hạn lịch sử và prompt caching đã giúp cắt giảm chi phí"],
+              ["Hành động an toàn", "Chưa được chứng minh với Winston, và phải được thử cho từng mô hình, từng tác vụ", "Thành tích thực tế mà tôi có, và Winston vẫn bổ sung thêm bước phê duyệt và xác minh bên trên"],
+              ["Lập kế hoạch nhiều bước", "Yếu hơn: tỷ lệ đạt của mô hình mở tốt nhất ở nhóm tác vụ dài hạn của AgentFloor là 0%", "Mạnh hơn, dù tỷ lệ đạt của GPT-5 ở cùng nhóm đó cũng chỉ 10%"],
+              ["Phần cứng và bảo trì", "Cạnh tranh bộ nhớ với Winston trên cùng một laptop, và là thêm một dịch vụ phải để mắt tới", "Không có gì phải chạy thêm"],
+              ["Khả năng chịu lỗi", "Vẫn trả lời được khi API ngừng hoạt động, dù Telegram vẫn cần internet", "Ngừng hoạt động khi API hoặc kết nối của tôi bị gián đoạn"]
+            ]
+          } },
+          { "h": "Điều gì thực sự đã hỏng" },
+          "Không có sự cố thật nào của Winston bắt nguồn từ việc mô hình đám mây không sẵn sàng hay yếu kém. Đây là những gì đã hỏng trong thực tế:",
+          { "ol": [
+            "**Hai lần chết lặng lẽ hồi tháng 7.** Pin của chiếc laptop trước đã chai, và Winston chết hai lần khi mất điện lưới. Giờ có một công tắc báo động ngoài (dead-man's switch) cảnh báo tôi khi Winston im lặng; nó giúp tôi biết nhanh nhưng không ngăn được sự cố.",
+            "**Một bản sao “ma” của Winston.** Sau một lần khởi động lại, chiếc laptop cũ chạy lại các tác vụ khởi động của nó và chạy một phiên bản thứ hai. Tôi đã tắt chúng vĩnh viễn.",
+            "**Một email bị hỏng.** Một ký tự gạch đứng (|) trong dòng tiêu đề làm lệch các trường trong định dạng lệnh của tôi. Phần nội dung sau đó bị đọc như một đường dẫn tệp, và không có gì được đính kèm. Lỗi nằm ở định dạng tôi đã thiết kế, không phải ở mô hình.",
+            "**Một sự cố DNS ngắn hồi tháng 9.** Telegram tự kết nối lại, nhưng các lệnh gọi Claude API vẫn tiếp tục thất bại vì tiến trình chạy dài ngày cứ giữ một kết nối đã chết. Chỉ khởi động lại mới xử lý được, và việc dạy tiến trình tự thay mới các kết nối hỏng vẫn nằm trong danh sách việc cần làm về độ tin cậy của tôi.",
+            "**Bản nâng cấp Sonnet 5.** Chế độ suy nghĩ thích ứng được bật sẵn, nên một số phản hồi có thêm một khối suy nghĩ. Sáu trong chín điểm gọi API của tôi giả định đó là văn bản thuần và bị lỗi. Cách sửa chỉ là code bình thường: lọc lấy các khối văn bản."
+          ] },
+          "Bốn trong số này không liên quan gì đến việc mô hình nào ngồi ở giữa. Một bộ não cục bộ sẽ không ngăn được việc mất điện, bản sao ma, ký tự gạch đứng hay kết nối đã chết.",
+          "Sự cố thứ năm là điểm thật sự duy nhất có lợi cho cục bộ, vì một mô hình đóng băng không bao giờ tự thay đổi bên dưới bạn. Ngay cả ở đó, cách khắc phục cũng là kỹ thuật chứ không phải một bộ não khác.",
+          { "h": "Quyết định của tôi: tạm thời không thay đổi" },
+          "Tôi giữ Winston trên mô hình đám mây, vì lý lẽ cho việc chuyển đổi vẫn chưa được đo lường. Tôi có bốn lý do.",
+          { "ol": [
+            "**Winston hành động trong thế giới thực.** Một hành động sai tốn kém hơn một đoạn văn yếu hơn. Tôi chưa có bằng chứng nào cho thấy một mô hình cục bộ xử lý việc đó an toàn trên các tác vụ của tôi.",
+            "**Lợi ích có thật nhưng không cấp bách.** Một mô hình cục bộ nhìn chung sẽ rẻ hơn cho mỗi lệnh gọi và giữ dữ liệu trên thiết bị. Nhưng giới hạn lịch sử và prompt caching đã cắt giảm lượng token Winston dùng, và cả chi phí lẫn quyền riêng tư đều chưa buộc tôi phải hành động.",
+            "**Vấn đề thật của tôi nằm ở vận hành.** Những sự cố tôi thực sự gặp đều đến từ code, quy trình và cách thiết lập của chính tôi, như phần trước cho thấy.",
+            "**Thay đổi cần một lý do đã được đo lường.** Thói quen bảo mật áp dụng ở đây: bạn không thay đổi một hệ thống đang chạy tốt chỉ vì linh cảm."
+          ] },
+          "Để rõ ràng, tôi không chống cục bộ: lần thử đầu tiên của Winston dùng OpenClaw và Ollama trên một laptop M1 8 GB. Tôi bỏ nó sau những lỗi dai dẳng và xây lại trên Claude API. Chiếc máy đó không phải phép thử công bằng cho phần cứng ngày nay.",
+          { "h": "Điều gì sẽ khiến tôi đổi ý" },
+          "Tôi sẽ xem xét lại quyết định này nếu một trong những điều sau xảy ra:",
+          { "ul": [
+            "**Một tác nhân cụ thể.** Dữ liệu bắt buộc phải ở lại trên thiết bị, hoặc những vấn đề đã đo lường được về chi phí hay độ sẵn sàng của API.",
+            "**Bằng chứng từ lưu lượng thực của tôi.** Chạy một mô hình cục bộ ở chế độ shadow trong một đến hai tuần. Nó thấy cùng các yêu cầu như Claude nhưng đầu ra chỉ được ghi lại, và tôi so sánh tính hợp lệ của định dạng lệnh, việc chọn công cụ và các lần từ chối.",
+            "**Một bước đầu nhỏ.** Chỉ chuyển các lệnh gọi rủi ro thấp, như bản tóm tắt buổi sáng hay lần kiểm tra email định kỳ, sang mô hình cục bộ. Mọi thứ tác động ra thế giới thực vẫn ở lại với mô hình đám mây."
+          ] },
+          "Dù mô hình nào ngồi ở giữa, ba chốt chặn an toàn vẫn giữ nguyên: con người phê duyệt trước các hành động không thể hoàn tác, xác minh sau khi hành động và một nhật ký kiểm toán chỉ ghi thêm (append-only). Winston đã có xác minh và nhật ký kiểm toán cho email, cùng phê duyệt và nhật ký kiểm toán cho các dự án được giao.",
+          { "h": "Năm câu hỏi cần kiểm tra trước khi đổi mô hình" },
+          "Nếu bạn tự chạy một trợ lý, đây là những câu hỏi tôi sẽ trả lời trước khi đổi bộ não của nó:",
+          { "ol": [
+            "**Nó có thực hiện hành động không thể hoàn tác không?** Nếu có, hãy thử xem mô hình mới hành động ra sao, chứ không chỉ xem nó trả lời hay đến đâu.",
+            "**Có dữ liệu nào bắt buộc phải ở lại trên thiết bị không?** Nếu có, cục bộ có thể là đáp án duy nhất chấp nhận được, bất kể các bài đánh giá hiệu năng nói gì.",
+            "**Bạn đã đo vấn đề chi phí hay độ sẵn sàng chưa?** Hãy xem hóa đơn và nhật ký của chính bạn trước khi cho rằng nó có thật.",
+            "**Ai sẽ vận hành và theo dõi một hệ thống thứ hai?** Mỗi dịch vụ thêm vào là thêm một thứ có thể hỏng một cách lặng lẽ.",
+            "**Bạn đã thử trên chính các tác vụ của mình chưa?** Các bài đánh giá hiệu năng công khai chỉ là điểm xuất phát, không phải phán quyết."
+          ] },
+          { "h": "Điểm rút ra" },
+          { "ul": [
+            "Mô hình là bộ não, còn hệ thống bao quanh nó mới là thứ làm nên một trợ lý hữu ích.",
+            "“Cục bộ” không còn nghĩa là “không có công cụ”, nhưng việc hành động an toàn phải được thử cho từng mô hình và từng tác vụ.",
+            "Điểm số tổng hợp có thể che đi những lỗi quan trọng nhất khi phần mềm hành động thay bạn.",
+            "Hãy sửa vấn đề bạn thực sự có, và đo lường trước khi chuyển."
+          ] }
+        ]
+      },
+      es: {
+        title: "¿Nube o local? Por qué (todavía) no voy a cambiar el cerebro de Winston",
+        tag: "Análisis",
+        summary: "Por qué, por ahora, mantengo el cerebro de Winston en un modelo en la nube, qué dice la investigación sobre los modelos locales y qué me haría cambiar de opinión.",
+        body: [
+          "Por ahora mantengo el cerebro de Winston en un modelo en la nube y no cambio nada. Winston es el asistente personal de IA que construí: vive en Telegram, funciona en mi laptop y usa Claude a través de la API.",
+          "Me pregunté qué cambiaría si ese cerebro funcionara en local, en algo como LM Studio. Sopesé las ventajas y desventajas y revisé qué dice la investigación. Esta entrada recoge el razonamiento y lo que me haría cambiar de opinión.",
+          { "h": "Dos formas de ejecutar una IA" },
+          "Un asistente como Winston es un modelo más el sistema que lo rodea, mientras que una aplicación de chat local suele ser solo el modelo.",
+          {
+            "fig": "img/cloud-or-local-two-ways-es.svg", "size": [760, 540],
+            "mob": "img/cloud-or-local-two-ways-mobile-es.svg", "msize": [360, 728],
+            "alt": "Dos diagramas. Arriba: hablas directamente con un modelo local en una ventana de chat; solo tiene conocimiento congelado, sin memoria ni herramientas. Abajo: hablas con un sistema a través de Telegram. El sistema añade memoria, ejecuta herramientas como el correo, los archivos y los recordatorios, y consulta a un modelo en la nube que solo escribe texto y nunca ejecuta nada.",
+            "cap": "Chat local frente a asistente integrado · quién habla con quién"
+          },
+          "Arriba: un modelo solo. Abajo: un modelo con un sistema a su alrededor, y solo el sistema toca la memoria y las herramientas.",
+          "**Un asistente integrado (como Winston).** Antes de que el modelo vea mi mensaje, el sistema le adjunta mi memoria, la conversación reciente y una lista de herramientas (correo, archivos, recordatorios). Ese paquete va a un modelo grande en la nube, que decide si responde o pide una herramienta. Si la pide, es el sistema, no el modelo, quien ejecuta la herramienta y devuelve el resultado.",
+          "**Un modelo local en una ventana de chat (como el chat de LM Studio).** Mi mensaje va a un modelo más pequeño que se ejecuta en mi propio equipo, sin necesidad de internet. Responde con lo que aprendió en el entrenamiento, congelado en un momento dado. En este modo básico no hay memoria entre chats ni herramientas.",
+          "Esa única diferencia explica la mayor parte de lo que la gente nota:",
+          { "ul": [
+            "**Actuar.** Un modelo solo produce texto. Enviar un correo de verdad requiere software a su alrededor que ejecute la petición.",
+            "**Memoria.** Los modelos no recuerdan nada entre conversaciones. El sistema guarda la memoria y se la vuelve a poner delante al modelo cada vez.",
+            "**Hardware.** Un modelo pequeño y comprimido cabe en la memoria de una laptop normal. Un modelo alojado no necesita nada de tu hardware.",
+            "**Actualidad.** Todo modelo está congelado en la fecha de su entrenamiento, también los de la nube. Un asistente parece estar al día porque el sistema obtiene información reciente y la coloca en el prompt."
+          ] },
+          "Aun así, LM Studio es más que una ventana de chat:",
+          { "ul": [
+            "Puede ejecutar un servidor local que habla la API al estilo de OpenAI.",
+            "Añadió las llamadas a herramientas y funciones en enero de 2025.",
+            "Se convirtió en host de MCP en junio de 2025.",
+            "Pide confirmación antes de ejecutar una llamada a una herramienta, a menos que elijas permitirlo siempre."
+          ] },
+          "Así que «LM Studio es solo un chat» describe cómo lo usa la mayoría, no lo que puede hacer.",
+          { "h": "La idea híbrida: mantener la estructura y cambiar el cerebro" },
+          "En teoría puedo conservar todo lo que hace de Winston lo que es y reemplazar solo el cerebro. La memoria, las herramientas, el ejecutor y el flujo de aprobación se quedan; el modelo en la nube sale y entra un modelo local.",
+          {
+            "fig": "img/cloud-or-local-swap-brain-es.svg", "size": [760, 336],
+            "mob": "img/cloud-or-local-swap-brain-mobile-es.svg", "msize": [360, 596],
+            "alt": "La estructura se mantiene: memoria, herramientas, un ejecutor que ejecuta la herramienta que pide el modelo y un flujo de aprobación con aprobación humana antes de las acciones irreversibles. Solo cambia el modelo. El modelo alojado en la nube que se usa hoy, la API de Claude, puede sustituirse por un modelo local: LM Studio en mi laptop, al que se accede mediante un endpoint estilo OpenAI.",
+            "cap": "Cambiar el cerebro · la estructura no cambia"
+          },
+          "Todo lo que está dentro del recuadro sombreado se queda como está, y solo cambia el modelo que queda fuera de él. La línea continua es cómo funciona Winston hoy; la línea discontinua es el cambio que probaría.",
+          "Como LM Studio expone un endpoint al estilo de OpenAI, muchas veces basta con apuntar el cliente a otra dirección. En el caso de Winston es más trabajo. Mi código llama directamente a la API de Claude en unos nueve sitios, así que primero necesitaría una capa de abstracción y una ronda de nuevas pruebas.",
+          {
+            "fig": "img/cloud-or-local-three-setups-es.svg", "size": [760, 512],
+            "mob": "img/cloud-or-local-three-setups-mobile-es.svg", "msize": [360, 768],
+            "alt": "Tabla que compara tres configuraciones: un chat local en modo básico, Winston hoy con un cerebro en la nube y Winston con un cerebro local. Actúa en el mundo real: el chat local no, solo texto; Winston hoy sí, con herramientas; con un cerebro local en parte, con herramientas pero hay que probarlo antes. Recuerda entre chats: no, empieza de cero; sí, lo guarda el sistema; sí, lo guarda el sistema. Tiene información actual: no, entrenamiento congelado; sí, el sistema la obtiene; sí, el sistema la obtiene. Funciona sin internet: sí; no; en parte, el modelo sí pero Telegram no. Modelo en mi hardware: sí; no, está alojado; sí, comparte la laptop con Winston.",
+            "cap": "Tres configuraciones lado a lado · qué puede hacer cada una"
+          },
+          "Las tres primeras filas vienen del sistema, no del modelo. Las dos últimas dependen de dónde se ejecuta el modelo.",
+          { "h": "Qué dice la investigación" },
+          "La sabiduría popular dice que los modelos locales no pueden llamar a herramientas de forma fiable. Dos estudios recientes sugieren que el panorama tiene más matices.",
+          "**AgentFloor**, un preprint de arXiv, probó 16 modelos de pesos abiertos (open-weight), de 0,27B a 32B parámetros, frente a GPT-5 en 16.542 ejecuciones puntuadas:",
+          { "ul": [
+            "El mejor modelo de pesos abiertos, gemma4:26b, fue estadísticamente equivalente a GPT-5 en conjunto, con un 60% de tareas completadas en ambos.",
+            "Según las cuentas de los autores, cada tarea superada costó unas 15 veces menos en hardware Mac autoalojado, y gemma4:26b la terminó unas 2,5 veces más rápido.",
+            "La brecha apareció en la planificación de largo plazo (long-horizon), donde GPT-5 tuvo una tasa de éxito del 10% y gemma4:26b del 0%. Ninguno es fiable ahí.",
+            "El consejo de los autores: modelos pequeños para las acciones rutinarias y modelos de frontera para las tareas que exigen una planificación más profunda."
+          ] },
+          "**Un estudio de un framework de domótica ya desplegado** usó dos instalaciones reales de Home Assistant. Probó nueve modelos, desde 0,8B hasta un modelo de frontera alojado, en cinco puntos de llamada y 2.520 llamadas puntuadas:",
+          { "ul": [
+            "El mejor modelo local fue estadísticamente indistinguible de los modelos alojados en cuatro de los cinco puntos de llamada. Solo la generación de código los separó.",
+            "La precisión no lo era todo al actuar: un modelo pequeño, Gemma4 E2B, llevó a cabo el 87,2% de las peticiones de dispositivos que la instalación no tenía, mientras que otro rechazó todas las peticiones que recibió.",
+            "En uso real, usar el modelo alojado solo para los dos puntos generativos igualó a usarlo para todo con el 28% del gasto, en una muestra pequeña (39/43 cada uno)."
+          ] },
+          "Así que la pregunta útil no es si un modelo local puede llamar a herramientas. Es con qué llamadas puedo confiar en él y qué pasa cuando se equivoca.",
+          { "h": "Sopesándolo para Winston" },
+          "La nube lleva ventaja en planificación y en el historial que ya tengo. Lo local lleva ventaja en estabilidad, privacidad y costo por llamada. Así se traduce eso en el caso de Winston.",
+          { "table": {
+            "head": ["Factor", "Cerebro local", "Cerebro en la nube (hoy)"],
+            "rows": [
+              ["Estabilidad", "Yo decido cuándo cambia el modelo, así que nada se mueve bajo mis pies", "Una actualización puede cambiar el comportamiento: al pasar a Sonnet 5 se activó por defecto el pensamiento adaptativo y seis de mis nueve puntos de llamada a la API fallaron hasta que los arreglé"],
+              ["Privacidad", "El contenido de los mensajes se queda en mi laptop", "El contenido de los mensajes va al proveedor, así que dependo de sus condiciones de datos"],
+              ["Costo", "Sin tarifa por llamada, pero el hardware y la electricidad corren por mi cuenta", "Se paga por token, y los límites de historial y el prompt caching ya lo recortan"],
+              ["Actuar con seguridad", "Sin demostrar para Winston, y hay que probarlo por modelo y por tarea", "El historial que tengo, y Winston añade de todos modos aprobación y verificación por encima"],
+              ["Planificación de varios pasos", "Más débil: la tasa de éxito del mejor modelo abierto en el nivel de largo plazo de AgentFloor fue del 0%", "Más fuerte, aunque la tasa de éxito de GPT-5 en ese mismo nivel fue de solo el 10%"],
+              ["Hardware y mantenimiento", "Compite con Winston por la memoria de la misma laptop y es un servicio más que vigilar", "Nada extra que ejecutar"],
+              ["Resiliencia", "Sigue respondiendo si la API se cae, aunque Telegram sigue necesitando internet", "Deja de funcionar cuando se cae la API o mi conexión"]
+            ]
+          } },
+          { "h": "Lo que realmente falló" },
+          "Ninguno de los fallos reales de Winston se debió a que el modelo en la nube no estuviera disponible o fuera débil. Esto es lo que salió mal en la práctica:",
+          { "ol": [
+            "**Dos muertes silenciosas en julio.** La batería de mi laptop anterior estaba degradada y Winston murió dos veces cuando se cortó la corriente de la red eléctrica. Ahora un interruptor de hombre muerto (dead-man's switch) externo me avisa cuando Winston se queda en silencio, lo que me informa rápido pero no evita el problema.",
+            "**Una copia fantasma de Winston.** Tras un reinicio, la laptop vieja volvió a lanzar sus tareas de inicio y ejecutó una segunda instancia. Las desactivé definitivamente.",
+            "**Un correo roto.** Un carácter de barra vertical (|) en el asunto desplazó los campos de mi formato de comandos. El cuerpo se leyó entonces como una ruta de archivo y no se adjuntó nada. El fallo estaba en el formato que yo diseñé, no en el modelo.",
+            "**Una caída breve del DNS en septiembre.** Telegram se reconectó solo, pero las llamadas a la API de Claude siguieron fallando porque el proceso de larga duración se aferraba a una conexión muerta. Solo un reinicio lo resolvió, y enseñar al proceso a reciclar sus propias conexiones defectuosas sigue en mi lista de fiabilidad.",
+            "**La actualización a Sonnet 5.** El pensamiento adaptativo venía activado por defecto, así que algunas respuestas incluían un bloque de pensamiento. Seis de mis nueve puntos de llamada a la API suponían texto plano y fallaron. La solución fue código corriente: filtrar los bloques de texto."
+          ] },
+          "Cuatro de estos no tienen nada que ver con qué modelo esté en el medio. Un cerebro local no habría evitado el corte de corriente, la copia fantasma, el carácter de barra vertical ni la conexión muerta.",
+          "El quinto es el único punto realmente a favor de lo local, porque un modelo congelado nunca cambia bajo tus pies. Incluso ahí, la reparación fue de ingeniería y no un cerebro distinto.",
+          { "h": "Mi decisión: por ahora, sin cambios" },
+          "Mantengo Winston en el modelo en la nube porque el argumento para cambiar no se ha medido. Tengo cuatro razones.",
+          { "ol": [
+            "**Winston actúa en el mundo real.** Una acción equivocada cuesta más que un párrafo más flojo. Todavía no tengo pruebas de que un modelo local lo maneje con seguridad en mis tareas.",
+            "**La ventaja es real, pero no urgente.** Un modelo local sería, en general, más barato por llamada y mantendría los datos en el dispositivo. Pero los límites de historial y el prompt caching ya han recortado el consumo de tokens de Winston, y ni el costo ni la privacidad han obligado a decidir.",
+            "**Mis problemas reales son operativos.** Los fallos que de verdad he tenido vinieron de mi propio código, proceso y configuración, como muestra la sección anterior.",
+            "**El cambio necesita una razón medida.** Aplican los hábitos de seguridad: no se cambia un sistema que funciona por una corazonada."
+          ] },
+          "Para que conste, no estoy en contra de lo local: el primer intento de Winston usaba OpenClaw y Ollama en una laptop M1 de 8 GB. Lo abandoné tras errores persistentes y lo reconstruí sobre la API de Claude. Esa máquina no es una prueba justa del hardware actual.",
+          { "h": "Qué me haría cambiar de opinión" },
+          "Volvería a revisar esta decisión si ocurriera cualquiera de estas cosas:",
+          { "ul": [
+            "**Un detonante concreto.** Datos que deban quedarse en el dispositivo, o problemas medidos con el costo o la disponibilidad de la API.",
+            "**Pruebas con mi propio tráfico.** Ejecutar un modelo local en modo sombra (shadow) durante una o dos semanas. Ve las mismas peticiones que Claude, pero sus salidas solo se registran, y comparo la validez del formato de comandos, la elección de herramientas y los rechazos.",
+            "**Un primer paso pequeño.** Enviar al modelo local solo las llamadas de bajo riesgo, como el resumen de la mañana o la revisión rutinaria del correo. Todo lo que actúa sobre el mundo se queda con el modelo en la nube."
+          ] },
+          "Sea cual sea el modelo que esté en el medio, se mantienen tres salvaguardas: aprobación humana antes de las acciones irreversibles, verificación después de actuar y un registro de auditoría de solo anexado (append-only). Winston ya tiene verificación y registro de auditoría para el correo, y aprobación más registro de auditoría para los proyectos delegados.",
+          { "h": "Cinco preguntas antes de cambiar un modelo" },
+          "Si ejecutas tu propio asistente, estas son las preguntas que yo respondería antes de cambiarle el cerebro:",
+          { "ol": [
+            "**¿Realiza acciones irreversibles?** Si es así, prueba cómo actúa el nuevo modelo, no solo qué tan bien responde.",
+            "**¿Debe algún dato quedarse en el dispositivo?** Si es así, lo local puede ser la única respuesta aceptable, digan lo que digan los benchmarks.",
+            "**¿Has medido el problema de costo o de disponibilidad?** Mira tus propias facturas y registros antes de dar por hecho que es real.",
+            "**¿Quién va a ejecutar y vigilar un segundo sistema?** Cada servicio extra es una cosa más que puede fallar en silencio.",
+            "**¿Has probado con tus propias tareas?** Los benchmarks públicos son un punto de partida, no un veredicto."
+          ] },
+          { "h": "Conclusiones" },
+          { "ul": [
+            "El modelo es el cerebro, y el sistema que lo rodea es lo que hace útil a un asistente.",
+            "«Local» ya no significa «sin herramientas», pero actuar con seguridad hay que probarlo por modelo y por tarea.",
+            "Las puntuaciones agregadas pueden ocultar los fallos que más importan cuando el software actúa por ti.",
+            "Arregla el problema que de verdad tienes y mide antes de cambiar."
+          ] }
+        ]
+      }
+    }
   },
   {
     type: "blog",

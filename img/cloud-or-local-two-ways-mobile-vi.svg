@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" font-family="'IBM Plex Sans', 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif" viewBox="0 0 360 728" role="img" aria-label="Chat cục bộ chỉ là một mô hình; trợ lý là mô hình cộng với một hệ thống" font-size="13">
+<defs>
+<marker id="hub-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M0 0L10 5L0 10z" fill="#857261"/>
+</marker>
+</defs>
+<text x="16" y="28" font-size="14" font-weight="600" fill="#241208">Chat cục bộ chỉ là một mô hình;</text>
+<text x="16" y="47" font-size="14" font-weight="600" fill="#241208">trợ lý là mô hình cộng với một hệ thống</text>
+<text x="16" y="84" font-weight="600" fill="#241208">Mô hình cục bộ trong cửa sổ chat</text>
+<text x="16" y="101" font-weight="600" fill="#241208">(như chat của LM Studio)</text>
+<g>
+<rect x="100" y="114" width="160" height="52" rx="8" fill="none" stroke="#857261" stroke-width="1.25"/>
+<text x="180" y="136" text-anchor="middle" font-weight="600" fill="#241208">Bạn</text>
+<text x="180" y="152" text-anchor="middle" font-size="11.5" fill="#6b5847">(cửa sổ chat)</text>
+</g>
+<g>
+<path d="M180 166V206" fill="none" stroke="#857261" stroke-width="1.25" marker-start="url(#hub-arrow)" marker-end="url(#hub-arrow)"/>
+<text x="190" y="190" font-size="11.5" fill="#6b5847">tin nhắn, câu trả lời</text>
+</g>
+<g>
+<rect x="80" y="206" width="200" height="72" rx="8" fill="#b7410e" fill-opacity="0.12" stroke="#b7410e" stroke-width="2"/>
+<text x="180" y="230" text-anchor="middle" font-weight="600" fill="#241208">Mô hình cục bộ</text>
+<text x="180" y="246" text-anchor="middle" font-size="11.5" fill="#241208">chỉ có kiến thức đóng băng</text>
+<text x="180" y="262" text-anchor="middle" font-size="11.5" fill="#241208">không bộ nhớ, không công cụ</text>
+</g>
+<line x1="16" y1="300" x2="344" y2="300" stroke="#d3c6b5"/>
+<text x="16" y="326" font-weight="600" fill="#241208">Trợ lý tích hợp (như Winston)</text>
+<g>
+<rect x="100" y="342" width="160" height="52" rx="8" fill="none" stroke="#857261" stroke-width="1.25"/>
+<text x="180" y="364" text-anchor="middle" font-weight="600" fill="#241208">Bạn</text>
+<text x="180" y="380" text-anchor="middle" font-size="11.5" fill="#6b5847">(Telegram)</text>
+</g>
+<g>
+<path d="M180 394V432" fill="none" stroke="#857261" stroke-width="1.25" marker-start="url(#hub-arrow)" marker-end="url(#hub-arrow)"/>
+<text x="190" y="417" font-size="11.5" fill="#6b5847">tin nhắn, phản hồi</text>
+</g>
+<g>
+<rect x="12" y="432" width="336" height="72" rx="8" fill="#28616c" fill-opacity="0.12" stroke="#28616c" stroke-width="2"/>
+<text x="180" y="456" text-anchor="middle" font-weight="600" fill="#241208">Hệ thống</text>
+<text x="180" y="472" text-anchor="middle" font-size="11.5" fill="#241208">thêm bộ nhớ và công cụ</text>
+<text x="180" y="488" text-anchor="middle" font-size="11.5" fill="#241208">chạy công cụ, gửi câu trả lời</text>
+</g>
+<g>
+<path d="M64 504V552" fill="none" stroke="#857261" stroke-width="1.25" marker-start="url(#hub-arrow)" marker-end="url(#hub-arrow)"/>
+<text x="72" y="525" font-size="11.5" fill="#6b5847">thêm</text>
+<text x="72" y="539" font-size="11.5" fill="#6b5847">bộ nhớ</text>
+</g>
+<g>
+<path d="M180 504V552" fill="none" stroke="#857261" stroke-width="1.25" marker-start="url(#hub-arrow)" marker-end="url(#hub-arrow)"/>
+<text x="188" y="525" font-size="11.5" fill="#6b5847">hỏi,</text>
+<text x="188" y="539" font-size="11.5" fill="#6b5847">nhận trả lời</text>
+</g>
+<g>
+<path d="M296 504V552" fill="none" stroke="#857261" stroke-width="1.25" marker-start="url(#hub-arrow)" marker-end="url(#hub-arrow)"/>
+<text x="304" y="525" font-size="11.5" fill="#6b5847">chạy</text>
+<text x="304" y="539" font-size="11.5" fill="#6b5847">công cụ</text>
+</g>
+<g>
+<rect x="12" y="552" width="104" height="100" rx="8" fill="none" stroke="#857261" stroke-width="1.25"/>
+<text x="64" y="574" text-anchor="middle" font-weight="600" fill="#241208">Bộ nhớ</text>
+<text x="64" y="590" text-anchor="middle" font-size="11.5" fill="#6b5847">ghi chú và</text>
+<text x="64" y="606" text-anchor="middle" font-size="11.5" fill="#6b5847">chat gần đây</text>
+</g>
+<g>
+<rect x="128" y="552" width="104" height="100" rx="8" fill="#b7410e" fill-opacity="0.12" stroke="#b7410e" stroke-width="2"/>
+<text x="180" y="574" text-anchor="middle" font-weight="600" fill="#241208">Mô hình</text>
+<text x="180" y="590" text-anchor="middle" font-weight="600" fill="#241208">đám mây</text>
+<text x="180" y="606" text-anchor="middle" font-size="11.5" fill="#241208">chỉ viết văn</text>
+<text x="180" y="622" text-anchor="middle" font-size="11.5" fill="#241208">bản, không</text>
+<text x="180" y="638" text-anchor="middle" font-size="11.5" fill="#241208">chạy gì cả</text>
+</g>
+<g>
+<rect x="244" y="552" width="104" height="100" rx="8" fill="none" stroke="#857261" stroke-width="1.25"/>
+<text x="296" y="574" text-anchor="middle" font-weight="600" fill="#241208">Công cụ</text>
+<text x="296" y="590" text-anchor="middle" font-size="11.5" fill="#6b5847">email, tệp,</text>
+<text x="296" y="606" text-anchor="middle" font-size="11.5" fill="#6b5847">lời nhắc</text>
+</g>
+<g>
+<rect x="16" y="680" width="14" height="14" rx="3" fill="#28616c" fill-opacity="0.12" stroke="#28616c" stroke-width="2"/>
+<text x="38" y="691" font-size="11.5" fill="#6b5847">Hệ thống: phần khung bao quanh mô hình</text>
+<rect x="16" y="702" width="14" height="14" rx="3" fill="#b7410e" fill-opacity="0.12" stroke="#b7410e" stroke-width="2"/>
+<text x="38" y="713" font-size="11.5" fill="#6b5847">Mô hình: bộ não, chỉ biết viết văn bản</text>
+</g>
+</svg>

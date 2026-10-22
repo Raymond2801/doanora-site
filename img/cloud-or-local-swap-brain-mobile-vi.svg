@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" font-family="'IBM Plex Sans', 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif" viewBox="0 0 360 564" role="img" aria-label="Chỉ đổi bộ não; phần khung giữ nguyên" font-size="13">
+<defs>
+<marker id="swap-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M0 0L10 5L0 10z" fill="#857261"/>
+</marker>
+</defs>
+<text x="16" y="28" font-size="14" font-weight="600" fill="#241208">Chỉ đổi bộ não;</text>
+<text x="16" y="47" font-size="14" font-weight="600" fill="#241208">phần khung giữ nguyên</text>
+<g>
+<rect x="12" y="64" width="336" height="226" rx="8" fill="#28616c" fill-opacity="0.12" stroke="#28616c" stroke-width="2"/>
+<text x="28" y="88" font-weight="600" fill="#241208">Phần khung giữ nguyên</text>
+</g>
+<g>
+<rect x="28" y="104" width="148" height="80" rx="8" fill="none" stroke="#857261" stroke-width="1.25"/>
+<text x="102" y="126" text-anchor="middle" font-weight="600" fill="#241208">Bộ nhớ</text>
+<text x="102" y="142" text-anchor="middle" font-size="11.5" fill="#241208">ghi chú và cuộc</text>
+<text x="102" y="158" text-anchor="middle" font-size="11.5" fill="#241208">trò chuyện gần đây</text>
+</g>
+<g>
+<rect x="184" y="104" width="148" height="80" rx="8" fill="none" stroke="#857261" stroke-width="1.25"/>
+<text x="258" y="126" text-anchor="middle" font-weight="600" fill="#241208">Công cụ</text>
+<text x="258" y="142" text-anchor="middle" font-size="11.5" fill="#241208">email, tệp,</text>
+<text x="258" y="158" text-anchor="middle" font-size="11.5" fill="#241208">lời nhắc</text>
+</g>
+<g>
+<rect x="28" y="194" width="148" height="80" rx="8" fill="none" stroke="#857261" stroke-width="1.25"/>
+<text x="102" y="216" text-anchor="middle" font-weight="600" fill="#241208">Bộ thực thi</text>
+<text x="102" y="232" text-anchor="middle" font-size="11.5" fill="#241208">chạy công cụ mà</text>
+<text x="102" y="248" text-anchor="middle" font-size="11.5" fill="#241208">mô hình yêu cầu</text>
+</g>
+<g>
+<rect x="184" y="194" width="148" height="80" rx="8" fill="none" stroke="#857261" stroke-width="1.25"/>
+<text x="258" y="216" text-anchor="middle" font-weight="600" fill="#241208">Luồng phê duyệt</text>
+<text x="258" y="232" text-anchor="middle" font-size="11.5" fill="#241208">người phê duyệt</text>
+<text x="258" y="248" text-anchor="middle" font-size="11.5" fill="#241208">trước các hành động</text>
+<text x="258" y="264" text-anchor="middle" font-size="11.5" fill="#241208">không thể hoàn tác</text>
+</g>
+<path d="M90 290V350" fill="none" stroke="#857261" stroke-width="1.25" marker-end="url(#swap-arrow)"/>
+<path d="M270 290V350" fill="none" stroke="#857261" stroke-width="1.25" stroke-dasharray="4 4" marker-end="url(#swap-arrow)"/>
+<text x="98" y="324" font-size="11.5" fill="#6b5847">gọi mô hình</text>
+<text x="262" y="324" text-anchor="end" font-size="11.5" fill="#6b5847">địa chỉ mới</text>
+<g>
+<rect x="12" y="350" width="156" height="112" rx="8" fill="#b7410e" fill-opacity="0.12" stroke="#b7410e" stroke-width="2"/>
+<text x="90" y="374" text-anchor="middle" font-weight="600" fill="#241208">Mô hình đám mây</text>
+<text x="90" y="390" text-anchor="middle" font-weight="600" fill="#241208">(hiện tại)</text>
+<text x="90" y="410" text-anchor="middle" font-size="11.5" fill="#241208">Claude API</text>
+<text x="90" y="426" text-anchor="middle" font-size="11.5" fill="#241208">được lưu trữ,</text>
+<text x="90" y="442" text-anchor="middle" font-size="11.5" fill="#241208">khỏi phải chạy</text>
+</g>
+<g>
+<rect x="192" y="350" width="156" height="112" rx="8" fill="#b7410e" fill-opacity="0.12" stroke="#b7410e" stroke-width="2"/>
+<text x="270" y="374" text-anchor="middle" font-weight="600" fill="#241208">Mô hình cục bộ</text>
+<text x="270" y="390" text-anchor="middle" font-weight="600" fill="#241208">(tùy chọn)</text>
+<text x="270" y="410" text-anchor="middle" font-size="11.5" fill="#241208">LM Studio, trên</text>
+<text x="270" y="426" text-anchor="middle" font-size="11.5" fill="#241208">laptop của tôi</text>
+<text x="270" y="442" text-anchor="middle" font-size="11.5" fill="#241208">endpoint kiểu OpenAI</text>
+</g>
+<path d="M90 462V488H270V462" fill="none" stroke="#857261" stroke-width="1.25" marker-start="url(#swap-arrow)" marker-end="url(#swap-arrow)"/>
+<text x="180" y="480" text-anchor="middle" font-size="11.5" fill="#6b5847">đổi bộ não</text>
+<g>
+<rect x="16" y="516" width="14" height="14" rx="3" fill="#28616c" fill-opacity="0.12" stroke="#28616c" stroke-width="2"/>
+<text x="38" y="527" font-size="11.5" fill="#6b5847">Hệ thống: phần khung bao quanh mô hình</text>
+<rect x="16" y="538" width="14" height="14" rx="3" fill="#b7410e" fill-opacity="0.12" stroke="#b7410e" stroke-width="2"/>
+<text x="38" y="549" font-size="11.5" fill="#6b5847">Mô hình: bộ não</text>
+</g>
+</svg>

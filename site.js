@@ -176,6 +176,9 @@
       ['fig', 'mob', 'alt', 'cap'].forEach(function (k) {
         if (typeof item[k] === 'string' && item[k]) c[k] = item[k];
       });
+      ['size', 'msize'].forEach(function (k) {
+        if (sizeOf(item[k])) c[k] = item[k];
+      });
       return c;
     });
     return out;

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" font-family="'IBM Plex Sans', 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif" viewBox="0 0 360 728" role="img" aria-label="Un chat local es solo un modelo; un asistente es un modelo más un sistema" font-size="13">
+<defs>
+<marker id="hub-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M0 0L10 5L0 10z" fill="#857261"/>
+</marker>
+</defs>
+<text x="16" y="28" font-size="14" font-weight="600" fill="#241208">Un chat local es solo un modelo;</text>
+<text x="16" y="47" font-size="14" font-weight="600" fill="#241208">un asistente es un modelo más un sistema</text>
+<text x="16" y="84" font-weight="600" fill="#241208">Modelo local en una ventana de chat</text>
+<text x="16" y="101" font-weight="600" fill="#241208">(como el chat de LM Studio)</text>
+<g>
+<rect x="100" y="114" width="160" height="52" rx="8" fill="none" stroke="#857261" stroke-width="1.25"/>
+<text x="180" y="136" text-anchor="middle" font-weight="600" fill="#241208">Tú</text>
+<text x="180" y="152" text-anchor="middle" font-size="11.5" fill="#6b5847">(ventana de chat)</text>
+</g>
+<g>
+<path d="M180 166V206" fill="none" stroke="#857261" stroke-width="1.25" marker-start="url(#hub-arrow)" marker-end="url(#hub-arrow)"/>
+<text x="190" y="190" font-size="11.5" fill="#6b5847">mensaje, respuesta</text>
+</g>
+<g>
+<rect x="80" y="206" width="200" height="72" rx="8" fill="#b7410e" fill-opacity="0.12" stroke="#b7410e" stroke-width="2"/>
+<text x="180" y="230" text-anchor="middle" font-weight="600" fill="#241208">Modelo local</text>
+<text x="180" y="246" text-anchor="middle" font-size="11.5" fill="#241208">solo conocimiento congelado</text>
+<text x="180" y="262" text-anchor="middle" font-size="11.5" fill="#241208">sin memoria ni herramientas</text>
+</g>
+<line x1="16" y1="300" x2="344" y2="300" stroke="#d3c6b5"/>
+<text x="16" y="326" font-weight="600" fill="#241208">Asistente integrado (como Winston)</text>
+<g>
+<rect x="100" y="342" width="160" height="52" rx="8" fill="none" stroke="#857261" stroke-width="1.25"/>
+<text x="180" y="364" text-anchor="middle" font-weight="600" fill="#241208">Tú</text>
+<text x="180" y="380" text-anchor="middle" font-size="11.5" fill="#6b5847">(Telegram)</text>
+</g>
+<g>
+<path d="M180 394V432" fill="none" stroke="#857261" stroke-width="1.25" marker-start="url(#hub-arrow)" marker-end="url(#hub-arrow)"/>
+<text x="190" y="417" font-size="11.5" fill="#6b5847">mensaje, respuesta</text>
+</g>
+<g>
+<rect x="12" y="432" width="336" height="72" rx="8" fill="#28616c" fill-opacity="0.12" stroke="#28616c" stroke-width="2"/>
+<text x="180" y="456" text-anchor="middle" font-weight="600" fill="#241208">El sistema</text>
+<text x="180" y="472" text-anchor="middle" font-size="11.5" fill="#241208">añade memoria y herramientas</text>
+<text x="180" y="488" text-anchor="middle" font-size="11.5" fill="#241208">ejecuta herramientas, responde</text>
+</g>
+<g>
+<path d="M64 504V552" fill="none" stroke="#857261" stroke-width="1.25" marker-start="url(#hub-arrow)" marker-end="url(#hub-arrow)"/>
+<text x="72" y="525" font-size="11.5" fill="#6b5847">añade</text>
+<text x="72" y="539" font-size="11.5" fill="#6b5847">memoria</text>
+</g>
+<g>
+<path d="M180 504V552" fill="none" stroke="#857261" stroke-width="1.25" marker-start="url(#hub-arrow)" marker-end="url(#hub-arrow)"/>
+<text x="188" y="525" font-size="11.5" fill="#6b5847">consulta,</text>
+<text x="188" y="539" font-size="11.5" fill="#6b5847">respuesta</text>
+</g>
+<g>
+<path d="M296 504V552" fill="none" stroke="#857261" stroke-width="1.25" marker-start="url(#hub-arrow)" marker-end="url(#hub-arrow)"/>
+<text x="304" y="525" font-size="11.5" fill="#6b5847">ejecuta</text>
+</g>
+<g>
+<rect x="12" y="552" width="104" height="100" rx="8" fill="none" stroke="#857261" stroke-width="1.25"/>
+<text x="64" y="574" text-anchor="middle" font-weight="600" fill="#241208">Memoria</text>
+<text x="64" y="590" text-anchor="middle" font-size="11.5" fill="#6b5847">notas y</text>
+<text x="64" y="606" text-anchor="middle" font-size="11.5" fill="#6b5847">chat reciente</text>
+</g>
+<g>
+<rect x="128" y="552" width="104" height="100" rx="8" fill="#b7410e" fill-opacity="0.12" stroke="#b7410e" stroke-width="2"/>
+<text x="180" y="574" text-anchor="middle" font-weight="600" fill="#241208">Modelo en</text>
+<text x="180" y="590" text-anchor="middle" font-weight="600" fill="#241208">la nube</text>
+<text x="180" y="606" text-anchor="middle" font-size="11.5" fill="#241208">solo escribe</text>
+<text x="180" y="622" text-anchor="middle" font-size="11.5" fill="#241208">texto, nunca</text>
+<text x="180" y="638" text-anchor="middle" font-size="11.5" fill="#241208">ejecuta nada</text>
+</g>
+<g>
+<rect x="244" y="552" width="104" height="100" rx="8" fill="none" stroke="#857261" stroke-width="1.25"/>
+<text x="296" y="574" text-anchor="middle" font-weight="600" fill="#241208">Herramientas</text>
+<text x="296" y="590" text-anchor="middle" font-size="11.5" fill="#6b5847">correo,</text>
+<text x="296" y="606" text-anchor="middle" font-size="11.5" fill="#6b5847">archivos y</text>
+<text x="296" y="622" text-anchor="middle" font-size="11.5" fill="#6b5847">recordatorios</text>
+</g>
+<g>
+<rect x="16" y="680" width="14" height="14" rx="3" fill="#28616c" fill-opacity="0.12" stroke="#28616c" stroke-width="2"/>
+<text x="38" y="691" font-size="11.5" fill="#6b5847">Sistema: la estructura que rodea al modelo</text>
+<rect x="16" y="702" width="14" height="14" rx="3" fill="#b7410e" fill-opacity="0.12" stroke="#b7410e" stroke-width="2"/>
+<text x="38" y="713" font-size="11.5" fill="#6b5847">Modelo: el cerebro, que solo escribe texto</text>
+</g>
+</svg>
