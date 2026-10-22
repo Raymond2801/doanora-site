@@ -121,16 +121,38 @@
     return out;
   }
 
-  /* Body items are paragraphs (strings) or headings ({ h }). A translated body must match item for item. */
+  /* Body items (see posts.js): a string is a paragraph; an object is a subheading { h }, a list { ul } or
+     { ol }, a table { table: { head, rows } } or a picture { fig, ... }. kindOf names what an item is. */
+  function kindOf(x) {
+    if (typeof x === 'string') return 'p';
+    if (!x || typeof x !== 'object') return '';
+    if (x.h) return 'h';
+    if (Array.isArray(x.ul)) return 'ul';
+    if (Array.isArray(x.ol)) return 'ol';
+    if (x.table && typeof x.table === 'object') return 'table';
+    if (x.fig) return 'fig';
+    return '';
+  }
+
+  /* A translated body must match the English one item for item: the same kinds, and the same number of
+     list entries, table columns and table rows. */
   function sameBody(tr, en) {
     en = Array.isArray(en) ? en : [];
     if (!Array.isArray(tr) || tr.length !== en.length) return false;
     for (var i = 0; i < en.length; i++) {
-      var a = tr[i];
-      var b = en[i];
-      if (typeof a === 'string' && typeof b === 'string') continue;
-      if (a && b && typeof a === 'object' && typeof b === 'object' && a.h && b.h) continue;
-      return false;
+      var k = kindOf(en[i]);
+      if (!k || kindOf(tr[i]) !== k) return false;
+      if (k === 'ul' || k === 'ol') {
+        if (tr[i][k].length !== en[i][k].length) return false;
+      } else if (k === 'table') {
+        var a = tr[i].table;
+        var b = en[i].table;
+        if (!Array.isArray(a.head) || !Array.isArray(a.rows) || !Array.isArray(b.head) || !Array.isArray(b.rows)) return false;
+        if (a.head.length !== b.head.length || a.rows.length !== b.rows.length) return false;
+        for (var j = 0; j < b.rows.length; j++) {
+          if (!Array.isArray(a.rows[j]) || !Array.isArray(b.rows[j]) || a.rows[j].length !== b.rows[j].length) return false;
+        }
+      }
     }
     return true;
   }
@@ -146,8 +168,134 @@
     out.title = tr.title;
     if (post.summary && tr.summary) out.summary = tr.summary;
     if (post.tag && tr.tag) out.tag = tr.tag;
-    out.body = tr.body;
+    out.body = tr.body.map(function (item, i) {
+      var en = post.body[i];
+      if (kindOf(en) !== 'fig') return item;
+      /* A translated picture keeps the English file and sizes unless the translation names its own. */
+      var c = copyOf(en);
+      ['fig', 'mob', 'alt', 'cap'].forEach(function (k) {
+        if (typeof item[k] === 'string' && item[k]) c[k] = item[k];
+      });
+      return c;
+    });
     return out;
+  }
+
+  /* ---------- post body ---------- */
+
+  /* Text with **bold** runs: split on the markers and build <strong> nodes. Markers that do not pair up
+     are shown as written. */
+  function richText(node, text) {
+    var s = String(text);
+    var parts = s.split('**');
+    if (parts.length % 2 === 0) {
+      node.appendChild(document.createTextNode(s));
+      return node;
+    }
+    parts.forEach(function (part, i) {
+      if (!part) return;
+      node.appendChild(i % 2 ? el('strong', null, part) : document.createTextNode(part));
+    });
+    return node;
+  }
+
+  /* Pictures come from the site's own img/ folder only. */
+  function safeImage(p) {
+    var s = String(p || '');
+    return /^img\/[A-Za-z0-9._-]+\.(?:svg|png|jpe?g|webp|gif)$/i.test(s) ? s : null;
+  }
+
+  function sizeOf(a) {
+    return Array.isArray(a) && a[0] > 0 && a[1] > 0 ? [Math.round(a[0]), Math.round(a[1])] : null;
+  }
+
+  /* { fig: "img/x.svg", size: [w, h], mob: "img/x-mobile.svg", msize: [w, h], alt: "...", cap: "..." }
+     mob is an optional layout for narrow screens (700px or less). */
+  function figureNode(item) {
+    var src = safeImage(item.fig);
+    if (!src) return null;
+    var fig = el('figure');
+    var pic = el('picture');
+    var small = safeImage(item.mob);
+    if (small) {
+      var source = document.createElement('source');
+      source.setAttribute('media', '(max-width: 720px)');
+      source.setAttribute('srcset', small);
+      var ms = sizeOf(item.msize);
+      if (ms) { source.setAttribute('width', ms[0]); source.setAttribute('height', ms[1]); }
+      pic.appendChild(source);
+      fig.className = 'has-mobile';
+    }
+    var img = document.createElement('img');
+    img.src = src;
+    img.alt = typeof item.alt === 'string' ? item.alt : '';
+    var sz = sizeOf(item.size);
+    if (sz) { img.setAttribute('width', sz[0]); img.setAttribute('height', sz[1]); }
+    pic.appendChild(img);
+    fig.appendChild(pic);
+    if (item.cap) fig.appendChild(el('figcaption', null, item.cap));
+    return fig;
+  }
+
+  /* { table: { head: ["A", "B"], rows: [["row title", "cell"]] } }. The first cell of each row is its title.
+     On narrow screens each row turns into a small card; data-label carries the column name for that layout. */
+  function tableNode(tb) {
+    var head = Array.isArray(tb.head) ? tb.head : [];
+    var rows = Array.isArray(tb.rows) ? tb.rows : [];
+    var wrap = el('div', 'table-wrap');
+    var table = el('table');
+    table.setAttribute('role', 'table');
+    if (head.length) {
+      var thead = el('thead');
+      var hr = el('tr');
+      hr.setAttribute('role', 'row');
+      head.forEach(function (h) {
+        var th = el('th', null, h);
+        th.setAttribute('scope', 'col');
+        th.setAttribute('role', 'columnheader');
+        hr.appendChild(th);
+      });
+      thead.appendChild(hr);
+      table.appendChild(thead);
+    }
+    var tbody = el('tbody');
+    rows.forEach(function (r) {
+      if (!Array.isArray(r)) return;
+      var tr = el('tr');
+      tr.setAttribute('role', 'row');
+      r.forEach(function (cell, i) {
+        var td;
+        if (i === 0) {
+          td = el('th');
+          td.setAttribute('scope', 'row');
+          td.setAttribute('role', 'rowheader');
+        } else {
+          td = el('td');
+          td.setAttribute('role', 'cell');
+          if (head[i]) td.setAttribute('data-label', head[i]);
+        }
+        tr.appendChild(richText(td, cell));
+      });
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    wrap.appendChild(table);
+    return wrap;
+  }
+
+  /* One body item as a DOM node, or null if it is not a known kind. */
+  function bodyNode(item) {
+    var k = kindOf(item);
+    if (k === 'p') return richText(el('p'), item);
+    if (k === 'h') return el('h2', null, item.h);
+    if (k === 'ul' || k === 'ol') {
+      var list = el(k);
+      item[k].forEach(function (li) { list.appendChild(richText(el('li'), li)); });
+      return list;
+    }
+    if (k === 'table') return tableNode(item.table);
+    if (k === 'fig') return figureNode(item);
+    return null;
   }
 
   /* ---------- data ---------- */
@@ -241,6 +389,7 @@
     el: el,
     safeUrl: safeUrl,
     postRow: postRow,
+    bodyNode: bodyNode,
     emptyState: emptyState,
     dot: DOT
   };

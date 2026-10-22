@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" font-family="'IBM Plex Sans', 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif" viewBox="0 0 360 752" role="img" aria-label="The system adds memory and action; where the model runs sets the rest" font-size="13">
+<text x="16" y="28" font-size="14" font-weight="600" fill="#241208">The system adds memory and action;</text>
+<text x="16" y="47" font-size="14" font-weight="600" fill="#241208">where the model runs sets the rest</text>
+<g>
+<rect x="12" y="62" width="108" height="52" rx="8" fill="#b7410e" fill-opacity="0.12" stroke="#b7410e" stroke-width="2"/>
+<text x="66" y="84" text-anchor="middle" font-size="12.5" font-weight="600" fill="#241208">Local chat</text>
+<text x="66" y="100" text-anchor="middle" font-size="11.5" fill="#241208">(basic mode)</text>
+</g>
+<g>
+<rect x="126" y="62" width="108" height="52" rx="8" fill="#28616c" fill-opacity="0.12" stroke="#28616c" stroke-width="2"/>
+<text x="180" y="84" text-anchor="middle" font-size="12.5" font-weight="600" fill="#241208">Winston today</text>
+<text x="180" y="100" text-anchor="middle" font-size="11.5" fill="#241208">(cloud brain)</text>
+</g>
+<g>
+<rect x="240" y="62" width="108" height="52" rx="8" fill="#28616c" fill-opacity="0.12" stroke="#28616c" stroke-width="2"/>
+<text x="294" y="84" text-anchor="middle" font-size="12.5" font-weight="600" fill="#241208">Winston with</text>
+<text x="294" y="100" text-anchor="middle" font-size="11.5" fill="#241208">a local brain</text>
+</g>
+<text x="12" y="138" font-size="11.5" font-weight="600" fill="#6b5847">What the system adds</text>
+<g>
+<text x="12" y="162" fill="#241208">Acts on the world</text>
+<g>
+<g>
+<circle cx="66" cy="186" r="7" fill="none" stroke="#241208" stroke-width="1.5"/>
+</g>
+<text x="66" y="208" text-anchor="middle" font-size="11.5" fill="#241208">text only</text>
+</g>
+<g>
+<g>
+<circle cx="180" cy="186" r="7" fill="#241208" stroke="#241208" stroke-width="1.5"/>
+</g>
+<text x="180" y="208" text-anchor="middle" font-size="11.5" fill="#241208">through tools</text>
+</g>
+<g>
+<g>
+<circle cx="294" cy="186" r="7" fill="none" stroke="#241208" stroke-width="1.5"/>
+<path d="M294 179A7 7 0 0 1 294 193Z" fill="#241208"/>
+</g>
+<text x="294" y="208" text-anchor="middle" font-size="11.5" fill="#241208">through tools,</text>
+<text x="294" y="222" text-anchor="middle" font-size="11.5" fill="#241208">test it first</text>
+</g>
+</g>
+<line x1="12" y1="236" x2="348" y2="236" stroke="#d3c6b5"/>
+<g>
+<text x="12" y="252" fill="#241208">Remembers between chats</text>
+<g>
+<g>
+<circle cx="66" cy="276" r="7" fill="none" stroke="#241208" stroke-width="1.5"/>
+</g>
+<text x="66" y="298" text-anchor="middle" font-size="11.5" fill="#241208">starts fresh</text>
+</g>
+<g>
+<g>
+<circle cx="180" cy="276" r="7" fill="#241208" stroke="#241208" stroke-width="1.5"/>
+</g>
+<text x="180" y="298" text-anchor="middle" font-size="11.5" fill="#241208">system</text>
+<text x="180" y="312" text-anchor="middle" font-size="11.5" fill="#241208">stores it</text>
+</g>
+<g>
+<g>
+<circle cx="294" cy="276" r="7" fill="#241208" stroke="#241208" stroke-width="1.5"/>
+</g>
+<text x="294" y="298" text-anchor="middle" font-size="11.5" fill="#241208">system</text>
+<text x="294" y="312" text-anchor="middle" font-size="11.5" fill="#241208">stores it</text>
+</g>
+</g>
+<line x1="12" y1="326" x2="348" y2="326" stroke="#d3c6b5"/>
+<g>
+<text x="12" y="342" fill="#241208">Has current information</text>
+<g>
+<g>
+<circle cx="66" cy="366" r="7" fill="none" stroke="#241208" stroke-width="1.5"/>
+</g>
+<text x="66" y="388" text-anchor="middle" font-size="11.5" fill="#241208">frozen training</text>
+</g>
+<g>
+<g>
+<circle cx="180" cy="366" r="7" fill="#241208" stroke="#241208" stroke-width="1.5"/>
+</g>
+<text x="180" y="388" text-anchor="middle" font-size="11.5" fill="#241208">system</text>
+<text x="180" y="402" text-anchor="middle" font-size="11.5" fill="#241208">fetches it</text>
+</g>
+<g>
+<g>
+<circle cx="294" cy="366" r="7" fill="#241208" stroke="#241208" stroke-width="1.5"/>
+</g>
+<text x="294" y="388" text-anchor="middle" font-size="11.5" fill="#241208">system</text>
+<text x="294" y="402" text-anchor="middle" font-size="11.5" fill="#241208">fetches it</text>
+</g>
+</g>
+<text x="12" y="438" font-size="11.5" font-weight="600" fill="#6b5847">What depends on where the model runs</text>
+<g>
+<text x="12" y="466" fill="#241208">Works without internet</text>
+<g>
+<g>
+<circle cx="66" cy="490" r="7" fill="#241208" stroke="#241208" stroke-width="1.5"/>
+</g>
+<text x="66" y="512" text-anchor="middle" font-size="11.5" fill="#241208">yes</text>
+</g>
+<g>
+<g>
+<circle cx="180" cy="490" r="7" fill="none" stroke="#241208" stroke-width="1.5"/>
+</g>
+<text x="180" y="512" text-anchor="middle" font-size="11.5" fill="#241208">no</text>
+</g>
+<g>
+<g>
+<circle cx="294" cy="490" r="7" fill="none" stroke="#241208" stroke-width="1.5"/>
+<path d="M294 483A7 7 0 0 1 294 497Z" fill="#241208"/>
+</g>
+<text x="294" y="512" text-anchor="middle" font-size="11.5" fill="#241208">model yes,</text>
+<text x="294" y="526" text-anchor="middle" font-size="11.5" fill="#241208">Telegram no</text>
+</g>
+</g>
+<line x1="12" y1="540" x2="348" y2="540" stroke="#d3c6b5"/>
+<g>
+<text x="12" y="556" fill="#241208">Model on my hardware</text>
+<g>
+<g>
+<circle cx="66" cy="580" r="7" fill="#241208" stroke="#241208" stroke-width="1.5"/>
+</g>
+<text x="66" y="602" text-anchor="middle" font-size="11.5" fill="#241208">yes</text>
+</g>
+<g>
+<g>
+<circle cx="180" cy="580" r="7" fill="none" stroke="#241208" stroke-width="1.5"/>
+</g>
+<text x="180" y="602" text-anchor="middle" font-size="11.5" fill="#241208">no, it is</text>
+<text x="180" y="616" text-anchor="middle" font-size="11.5" fill="#241208">hosted</text>
+</g>
+<g>
+<g>
+<circle cx="294" cy="580" r="7" fill="#241208" stroke="#241208" stroke-width="1.5"/>
+</g>
+<text x="294" y="602" text-anchor="middle" font-size="11.5" fill="#241208">yes, shares</text>
+<text x="294" y="616" text-anchor="middle" font-size="11.5" fill="#241208">the laptop with</text>
+<text x="294" y="630" text-anchor="middle" font-size="11.5" fill="#241208">Winston</text>
+</g>
+</g>
+<g>
+<rect x="12" y="672" width="14" height="14" rx="3" fill="#b7410e" fill-opacity="0.12" stroke="#b7410e" stroke-width="2"/>
+<text x="34" y="683" font-size="11.5" fill="#6b5847">A model on its own</text>
+<rect x="12" y="694" width="14" height="14" rx="3" fill="#28616c" fill-opacity="0.12" stroke="#28616c" stroke-width="2"/>
+<text x="34" y="705" font-size="11.5" fill="#6b5847">A model with a system around it</text>
+</g>
+<g>
+<g>
+<circle cx="19" cy="730" r="7" fill="#241208" stroke="#241208" stroke-width="1.5"/>
+</g>
+<text x="32" y="734" font-size="11.5" fill="#6b5847">yes</text>
+<g>
+<circle cx="78" cy="730" r="7" fill="none" stroke="#241208" stroke-width="1.5"/>
+<path d="M78 723A7 7 0 0 1 78 737Z" fill="#241208"/>
+</g>
+<text x="91" y="734" font-size="11.5" fill="#6b5847">partly, or still to test</text>
+<g>
+<circle cx="290" cy="730" r="7" fill="none" stroke="#241208" stroke-width="1.5"/>
+</g>
+<text x="303" y="734" font-size="11.5" fill="#6b5847">no</text>
+</g>
+</svg>

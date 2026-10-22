@@ -17,12 +17,161 @@
      }
    }
 
+   Besides a paragraph and a subheading, a body can hold:
+     { "ul": [ "Item", "Item" ] }       a bulleted list
+     { "ol": [ "Item", "Item" ] }       a numbered list
+     { "table": { "head": [ "A", "B" ], "rows": [ [ "Row title", "Cell" ] ] } }
+                                        a table; the first cell of each row is the row title
+     { "fig": "img/name.svg", "size": [ 760, 540 ], "alt": "What it shows", "cap": "Caption",
+       "mob": "img/name-mobile.svg", "msize": [ 360, 712 ] }
+                                        a picture from the img/ folder; mob is an optional layout for screens
+                                        720px wide or less (a diagram with small text needs one)
+   In a paragraph, list item or table cell, **double asterisks** make bold text.
+
    English is the source text. A translation must have the same body, item for item (a paragraph for a
-   paragraph, a subheading for a subheading); if it does not, the page shows the English post with a note.
+   paragraph, a subheading for a subheading, a list with the same number of items, a table with the same
+   rows and columns); if it does not, the page shows the English post with a note. A translated picture
+   can give its own alt and cap (and fig and mob, for a diagram redrawn in that language).
    Source titles and links are not translated. A post with no translation shows in English in every language.
 
    A post goes live only after Raymond approves the draft. */
 window.BLOG_POSTS = [
+  {
+    type: "blog",
+    slug: "cloud-or-local-winston-brain",
+    title: "Cloud or local? Why I'm not changing Winston's brain (yet)",
+    date: "2026-10-22",
+    tag: "Analysis",
+    summary: "Why I'm keeping Winston's brain on a cloud model for now, what the research says about local models, and what would change my mind.",
+    body: [
+      "I'm keeping Winston's brain on a cloud model for now and changing nothing. Winston is the personal AI assistant I built: it lives in Telegram, runs on my laptop and uses Claude through the API.",
+      "I asked what would change if that brain ran locally, in something like LM Studio. I weighed the trade-offs and checked what the research says. This post covers the reasoning, and what would change my mind.",
+      { "h": "Two ways to run an AI" },
+      "An assistant like Winston is a model plus the system around it, while a local chat app is usually just the model.",
+      {
+        "fig": "img/cloud-or-local-two-ways.svg", "size": [760, 540],
+        "mob": "img/cloud-or-local-two-ways-mobile.svg", "msize": [360, 712],
+        "alt": "Two diagrams. Top: you talk straight to a local model in a chat window; it has frozen training only, no memory and no tools. Bottom: you talk to a system through Telegram. The system adds memory, runs tools such as email, files and reminders, and asks a cloud model that only writes text and never runs anything.",
+        "cap": "Local chat vs integrated assistant · who talks to whom"
+      },
+      "Top: a model on its own. Bottom: a model with a system around it, and only the system touches memory and tools.",
+      "**An integrated assistant (like Winston).** Before the model sees my message, the system attaches my memory, the recent conversation and a list of tools (email, files, reminders). That bundle goes to a large cloud model, which decides whether to answer or ask for a tool. If it asks, the system, not the model, runs the tool and passes back the result.",
+      "**A local model in a chat window (like LM Studio's chat).** My message goes to a smaller model running on my own computer, with no internet needed. It answers from what it learned in training, frozen at a point in time. In this basic mode there is no memory between chats and no tools.",
+      "That single difference explains most of what people notice:",
+      { "ul": [
+        "**Acting.** A model only produces text. Sending a real email takes software around it that carries out the request.",
+        "**Memory.** Models remember nothing between conversations. The system stores memory and puts it back in front of the model every time.",
+        "**Hardware.** A small, compressed model fits in an ordinary laptop's memory. A hosted model needs nothing from your hardware.",
+        "**Freshness.** Every model is frozen at its training date, cloud ones included. An assistant feels current because the system fetches fresh information and places it in the prompt."
+      ] },
+      "LM Studio is more than a chat window, though:",
+      { "ul": [
+        "It can run a local server that speaks the OpenAI-style API.",
+        "It added tool and function calling in January 2025.",
+        "It became an MCP host in June 2025.",
+        "It asks for confirmation before a tool call runs, unless you choose to always allow it."
+      ] },
+      "So 'LM Studio equals chat only' describes how most people use it, not what it can do.",
+      { "h": "The hybrid idea: keep the frame, swap the brain" },
+      "In theory I can keep everything that makes Winston what it is and replace only the brain. The memory, tools, executor and approval flow stay; the cloud model goes out and a local model comes in.",
+      {
+        "fig": "img/cloud-or-local-swap-brain.svg", "size": [760, 336],
+        "mob": "img/cloud-or-local-swap-brain-mobile.svg", "msize": [360, 548],
+        "alt": "The frame stays the same: memory, tools, an executor that runs the tool the model asks for, and an approval flow with human approval before irreversible actions. Only the model changes. The hosted cloud model used today, the Claude API, can be swapped for a local model: LM Studio on my laptop, reached through an OpenAI-style endpoint.",
+        "cap": "Swapping the brain · frame unchanged"
+      },
+      "Everything in the shaded frame stays as it is, and only the model changes. The solid line is how Winston runs today; the dashed line is the swap I would test.",
+      "Because LM Studio exposes an OpenAI-style endpoint, this is often a matter of pointing the client at a different address. In Winston's case it is more work. My code calls the Claude API directly in about nine places, so I would first need an abstraction layer and a round of retesting.",
+      {
+        "fig": "img/cloud-or-local-three-setups.svg", "size": [760, 512],
+        "mob": "img/cloud-or-local-three-setups-mobile.svg", "msize": [360, 752],
+        "alt": "Table comparing three setups: a local chat in basic mode, Winston today with a cloud brain, and Winston with a local brain. Acts on the world: local chat no, text only; Winston today yes, through tools; with a local brain partly, through tools but test it first. Remembers between chats: no, starts fresh; yes, the system stores it; yes, the system stores it. Has current information: no, frozen training; yes, the system fetches it; yes, the system fetches it. Works without internet: yes; no; partly, the model yes but Telegram no. Model on my hardware: yes; no, it is hosted; yes, it shares the laptop with Winston.",
+        "cap": "Three setups side by side · what each can do"
+      },
+      "The first three rows come from the system, not the model. The last two depend on where the model runs.",
+      { "h": "What the research says" },
+      "The folk wisdom says local models can't call tools reliably. Two recent studies suggest the picture is more nuanced.",
+      "**AgentFloor**, an arXiv preprint, tested 16 open-weight models, from 0.27B to 32B parameters, against GPT-5 across 16,542 scored runs:",
+      { "ul": [
+        "The best open-weight model, gemma4:26b, was statistically equivalent to GPT-5 overall, at about 60% task completion for both.",
+        "By the authors' accounting, each passed task cost about 15 times less on self-hosted Mac hardware, and gemma4:26b finished it about 2.5 times faster.",
+        "The gap appeared in long-horizon planning, where GPT-5 had a 10% pass rate and gemma4:26b 0%. Neither is reliable there.",
+        "The authors' advice: small models for routine actions, frontier models for tasks that need deeper planning."
+      ] },
+      "**A study of a deployed home-automation framework** used two real Home Assistant installations. It tested nine models, from 0.8B up to a hosted frontier model, on five call sites and 2,520 scored calls:",
+      { "ul": [
+        "The best local model was statistically indistinguishable from the hosted models at four of the five call sites. Only code generation separated them.",
+        "Accuracy was not the whole story when acting: one small model, Gemma4 E2B, carried out 87.2% of requests for devices the site did not own, while another refused every request it received.",
+        "In live use, hosting just the two generative sites matched hosting everything for 28% of the spend, on a small sample (39/43 each)."
+      ] },
+      "So the useful question is not whether a local model can call tools. It is which calls I can trust it with, and what happens when it is wrong.",
+      { "h": "Weighing it for Winston" },
+      "Cloud has the edge on planning and on the track record I already have. Local has the edge on stability, privacy and per-call cost. Here is how that plays out for Winston.",
+      { "table": {
+        "head": ["Factor", "Local brain", "Cloud brain (today)"],
+        "rows": [
+          ["Stability", "I decide when the model changes, so nothing shifts underneath me", "An upgrade can change behaviour: moving to Sonnet 5 turned on adaptive thinking by default, and six of my nine API call sites crashed until I fixed them"],
+          ["Privacy", "Message contents stay on my laptop", "Message contents go to the provider, so I rely on their data terms"],
+          ["Cost", "No per-call fee, but the hardware and electricity are mine", "Pay per token, with history caps and prompt caching already trimming it"],
+          ["Acting safely", "Unproven for Winston, and has to be tested per model and per task", "The track record I have, and Winston adds approval and verification on top anyway"],
+          ["Multi-step planning", "Weaker: the best open model's pass rate on AgentFloor's long-horizon tier was 0%", "Stronger, though GPT-5's pass rate on the same tier was only 10%"],
+          ["Hardware and upkeep", "Competes with Winston for memory on the same laptop, and is one more service to watch", "Nothing extra to run"],
+          ["Resilience", "Still answers if the API is down, although Telegram still needs internet", "Stops working when the API or my connection is down"]
+        ]
+      } },
+      { "h": "What actually broke" },
+      "None of Winston's real failures came down to the cloud model being unavailable or weak. Here is what went wrong in practice:",
+      { "ol": [
+        "**Two silent deaths in July.** My previous laptop's battery had degraded, and Winston died twice when mains power was lost. An external dead-man's switch now alerts me when Winston goes quiet, which tells me quickly but does not prevent the problem.",
+        "**A ghost copy of Winston.** After a reboot, the old laptop restarted its startup jobs and ran a second instance. I disabled them for good.",
+        "**A broken email.** A pipe character in a subject line shifted the fields in my command format. The body was then read as a file path, and nothing attached. The fault was in the format I had designed, not in the model.",
+        "**A brief DNS outage in September.** Telegram reconnected by itself, but Claude API calls kept failing because the long-running process held on to a dead connection. Only a restart cleared it, and teaching the process to recycle its own bad connections is still on my reliability list.",
+        "**The Sonnet 5 upgrade.** Adaptive thinking was on by default, so some replies included a thinking block. Six of my nine API call sites assumed plain text and crashed. The fix was ordinary code: filter for text blocks."
+      ] },
+      "Four of these have nothing to do with which model sits in the middle. A local brain would not have prevented the power loss, the ghost copy, the pipe character or the dead connection.",
+      "The fifth is the one real point in local's favour, because a frozen model never changes under you. Even there, the repair was engineering rather than a different brain.",
+      { "h": "My decision: no change for now" },
+      "I'm keeping Winston on the cloud model, because the case for switching has not been measured. I have four reasons.",
+      { "ol": [
+        "**Winston acts in the real world.** A wrong action costs more than a weaker paragraph. I have no evidence yet that a local model handles it safely on my tasks.",
+        "**The upside is real but not urgent.** A local model would generally be cheaper per call and would keep data on the device. But history caps and prompt caching have already trimmed Winston's token use, and neither cost nor privacy has forced the issue.",
+        "**My real problems are operational.** The failures I have actually had came from my own code, process and setup, as the previous section shows.",
+        "**Change needs a measured reason.** Security habits apply: you do not change a working system on a hunch."
+      ] },
+      "For the record, I am not anti-local: Winston's first attempt used OpenClaw and Ollama on an 8 GB M1 laptop. I abandoned it after persistent errors and rebuilt on the Claude API. That machine is not a fair test of today's hardware.",
+      { "h": "What would change my mind" },
+      "I would revisit this decision if any of these happened:",
+      { "ul": [
+        "**A concrete trigger.** Data that must stay on the device, or measured problems with API cost or availability.",
+        "**Evidence from my own traffic.** Run a local model in shadow mode for one to two weeks. It sees the same requests as Claude but its outputs are only logged, and I compare command-format validity, tool choice and refusals.",
+        "**A small first step.** Route only low-risk calls, such as the morning digest or the routine email check, to the local model. Anything that acts on the world stays with the cloud model."
+      ] },
+      "Whatever model sits in the middle, three guardrails stay: human approval before irreversible actions, verification after acting and an append-only audit log. Winston already has verification and an audit log for email, and approval plus an audit log for delegated projects.",
+      { "h": "A five-question check before swapping a model" },
+      "If you run your own assistant, these are the questions I would answer before changing its brain:",
+      { "ol": [
+        "**Does it take irreversible actions?** If so, test how the new model acts, not just how well it answers.",
+        "**Must any data stay on the device?** If yes, local may be the only acceptable answer, whatever the benchmarks say.",
+        "**Have you measured the cost or availability problem?** Look at your own bills and logs before assuming it is real.",
+        "**Who will run and monitor a second system?** Every extra service is one more thing that can fail quietly.",
+        "**Have you tested on your own tasks?** Public benchmarks are a starting point, not a verdict."
+      ] },
+      { "h": "Takeaways" },
+      { "ul": [
+        "The model is the brain, and the system around it is what makes an assistant useful.",
+        "'Local' no longer means 'no tools', but acting safely has to be tested per model and per task.",
+        "Aggregate scores can hide the failures that matter most when software acts for you.",
+        "Fix the problem you actually have, and measure before you move."
+      ] }
+    ],
+    sources: [
+      { "title": "arXiv: AgentFloor (preprint 2605.00334)", "url": "https://arxiv.org/pdf/2605.00334" },
+      { "title": "NeurIPS 2026 listing: Not Every Call Needs a Frontier Model: Per-Call-Site Evaluation of Small Language Models in a Deployed Agentic Home-Automation System", "url": "https://neurips.cc/virtual/2026/171273" },
+      { "title": "LM Studio: API changelog", "url": "https://lmstudio.ai/docs/developer/api-changelog" },
+      { "title": "LM Studio blog: LM Studio as an MCP host", "url": "https://www.lmstudio.ai/blog/mcp" },
+      { "title": "AI SDK docs: LM Studio with the OpenAI-compatible provider", "url": "https://ai-sdk.dev/providers/openai-compatible-providers/lmstudio" }
+    ]
+  },
   {
     type: "blog",
     slug: "two-bugs-after-model-upgrade",

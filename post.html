@@ -115,11 +115,8 @@
   var body = S.el('div', 'post-body');
   if (englishOnly) body.setAttribute('lang', 'en');
   (Array.isArray(post.body) ? post.body : []).forEach(function (item) {
-    if (typeof item === 'string') {
-      body.appendChild(S.el('p', null, item));
-    } else if (item && item.h) {
-      body.appendChild(S.el('h2', null, item.h));
-    }
+    var node = S.bodyNode(item);
+    if (node) body.appendChild(node);
   });
   articleEl.appendChild(body);
 
