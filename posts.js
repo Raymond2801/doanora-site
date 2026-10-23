@@ -44,8 +44,8 @@ window.BLOG_POSTS = [
     tag: "Analysis",
     summary: "Why I'm keeping Winston's brain on a cloud model for now, what the research says about local models, and what would change my mind.",
     body: [
-      "I'm keeping Winston's brain on a cloud model for now and changing nothing. Winston is the personal AI assistant I built: it lives in Telegram, runs on my laptop and uses Claude through the API.",
-      "I asked what would change if that brain ran locally, in something like LM Studio. I weighed the trade-offs and checked what the research says. This post covers the reasoning, and what would change my mind.",
+      "It started with a TikTok. A creator was talking about LM Studio, an app that runs AI models on your own computer, and I got curious. I wanted to understand what it can really do and how it compares with Winston, the personal AI assistant I built. Winston lives in Telegram, runs on my laptop and uses Claude through the API.",
+      "That led to a bigger question: could I combine the two? I weighed the trade-offs and checked what the research says. My answer for now is to keep Winston's brain on a cloud model and change nothing. This post covers the reasoning, and what would change my mind.",
       { "h": "Two ways to run an AI" },
       "An assistant like Winston is a model plus the system around it, while a local chat app is usually just the model.",
       {
@@ -177,8 +177,8 @@ window.BLOG_POSTS = [
         tag: "Phân tích",
         summary: "Vì sao tôi tạm thời giữ bộ não của Winston trên một mô hình đám mây, nghiên cứu nói gì về các mô hình cục bộ, và điều gì sẽ khiến tôi đổi ý.",
         body: [
-          "Tạm thời tôi giữ bộ não của Winston trên một mô hình đám mây và không thay đổi gì. Winston là trợ lý AI cá nhân do tôi xây dựng: nó sống trong Telegram, chạy trên laptop của tôi và dùng Claude qua API.",
-          "Tôi tự hỏi điều gì sẽ thay đổi nếu bộ não đó chạy cục bộ, trong một công cụ như LM Studio. Tôi cân nhắc các đánh đổi và xem nghiên cứu nói gì. Bài này trình bày lập luận của tôi, và điều gì sẽ khiến tôi đổi ý.",
+          "Mọi chuyện bắt đầu từ một video TikTok. Một TikToker nói về LM Studio, ứng dụng chạy mô hình AI ngay trên máy tính của mình, và tôi tò mò. Tôi muốn hiểu nó thật sự làm được gì và so với Winston, trợ lý AI cá nhân tôi tự xây, thì thế nào. Winston sống trong Telegram, chạy trên laptop của tôi và dùng Claude qua API.",
+          "Từ đó nảy ra câu hỏi lớn hơn: có thể kết hợp cả hai không? Tôi cân nhắc các đánh đổi và xem nghiên cứu nói gì. Câu trả lời hiện giờ là giữ bộ não của Winston trên mô hình đám mây và không đổi gì. Bài này trình bày lý do, và điều gì sẽ khiến tôi đổi ý.",
           { "h": "Hai cách chạy một AI" },
           "Một trợ lý như Winston là một mô hình cộng với hệ thống bao quanh nó, còn một ứng dụng chat cục bộ thường chỉ là mô hình.",
           {
@@ -303,8 +303,8 @@ window.BLOG_POSTS = [
         tag: "Análisis",
         summary: "Por qué, por ahora, mantengo el cerebro de Winston en un modelo en la nube, qué dice la investigación sobre los modelos locales y qué me haría cambiar de opinión.",
         body: [
-          "Por ahora mantengo el cerebro de Winston en un modelo en la nube y no cambio nada. Winston es el asistente personal de IA que construí: vive en Telegram, funciona en mi laptop y usa Claude a través de la API.",
-          "Me pregunté qué cambiaría si ese cerebro funcionara en local, en algo como LM Studio. Sopesé las ventajas y desventajas y revisé qué dice la investigación. Esta entrada recoge el razonamiento y lo que me haría cambiar de opinión.",
+          "Todo empezó con un TikTok. Un creador hablaba de LM Studio, una aplicación que ejecuta modelos de IA en tu propio equipo, y me dio curiosidad. Quería entender qué puede hacer de verdad y cómo se compara con Winston, el asistente personal de IA que construí. Winston vive en Telegram, funciona en mi laptop y usa Claude a través de la API.",
+          "De ahí surgió una pregunta más grande: ¿podría combinar los dos? Sopesé las ventajas y desventajas y revisé qué dice la investigación. Por ahora mi respuesta es mantener el cerebro de Winston en un modelo en la nube y no cambiar nada. Esta entrada recoge el razonamiento y lo que me haría cambiar de opinión.",
           { "h": "Dos formas de ejecutar una IA" },
           "Un asistente como Winston es un modelo más el sistema que lo rodea, mientras que una aplicación de chat local suele ser solo el modelo.",
           {
