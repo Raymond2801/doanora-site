@@ -71,6 +71,73 @@ function other(where, en, s) {
   if (p.length) bad.push(where + ': ' + p.join(', ') + ' | ' + s.slice(0, 60));
 }
 
+/* ---- body item kinds (mirrors site.js and i18n-check.js): paragraph, subheading, list, table, picture ---- */
+function kindOf(x) {
+  if (typeof x === 'string') return 'p';
+  if (!x || typeof x !== 'object') return '';
+  if (x.h) return 'h';
+  if (Array.isArray(x.ul)) return 'ul';
+  if (Array.isArray(x.ol)) return 'ol';
+  if (x.table && typeof x.table === 'object') return 'table';
+  if (x.fig) return 'fig';
+  return '';
+}
+function safeImage(p) { return /^img\/[A-Za-z0-9._-]+\.(?:svg|png|jpe?g|webp|gif)$/i.test(String(p || '')); }
+function goodSize(a) { return Array.isArray(a) && a.length === 2 && a[0] > 0 && a[1] > 0; }
+function onlyKeys(o, allowed) { return Object.keys(o).every(function (k) { return allowed.indexOf(k) >= 0; }); }
+function imgExists(p) { return !repoDir || fs.existsSync(path.join(path.resolve(repoDir), p)); }
+/* The texts an item holds as [suffix, text] pairs, or a problem string. requireFig: the English picture needs size, alt (and msize with mob). */
+function itemTexts(b, requireFig) {
+  var k = kindOf(b);
+  var out = [];
+  var problem = null;
+  if (k === 'p') out.push(['', b]);
+  else if (k === 'h') { if (typeof b.h !== 'string' || Object.keys(b).length !== 1) problem = 'a subheading must be just { h: "text" }'; else out.push(['.h', b.h]); }
+  else if (k === 'ul' || k === 'ol') {
+    if (!onlyKeys(b, [k]) || !b[k].length || !b[k].every(function (t) { return typeof t === 'string'; })) problem = 'a list must be { ' + k + ': [ "text", ... ] } with at least one entry';
+    else b[k].forEach(function (t, j) { out.push(['.' + k + '[' + j + ']', t]); });
+  } else if (k === 'table') {
+    var t = b.table;
+    if (!onlyKeys(b, ['table']) || !onlyKeys(t, ['head', 'rows']) || !Array.isArray(t.head) || !t.head.length || !Array.isArray(t.rows) || !t.rows.length) problem = 'a table must be { table: { head: [ ... ], rows: [ [ ... ], ... ] } }';
+    else {
+      t.head.forEach(function (c, j) { if (typeof c !== 'string') problem = 'a table head cell must be text'; else out.push(['.table.head[' + j + ']', c]); });
+      t.rows.forEach(function (r, i) {
+        if (!Array.isArray(r) || r.length !== t.head.length) problem = problem || ('table row ' + i + ' needs ' + t.head.length + ' cells');
+        else r.forEach(function (c, j) { if (typeof c !== 'string') problem = problem || 'a table cell must be text'; else out.push(['.table.rows[' + i + '][' + j + ']', c]); });
+      });
+    }
+  } else if (k === 'fig') {
+    if (!onlyKeys(b, ['fig', 'size', 'mob', 'msize', 'alt', 'cap'])) problem = 'a picture may only have fig, size, mob, msize, alt and cap';
+    else if (typeof b.fig !== 'string' || !safeImage(b.fig)) problem = 'fig must be a file in img/ (letters, digits, . _ - only)';
+    else if (!imgExists(b.fig)) problem = 'fig points to ' + b.fig + ', which is not in the site folder';
+    else if (requireFig && !goodSize(b.size)) problem = 'size must be [width, height]';
+    else if (b.size !== undefined && !goodSize(b.size)) problem = 'size must be [width, height]';
+    else if (b.mob !== undefined && (typeof b.mob !== 'string' || !safeImage(b.mob) || !imgExists(b.mob))) problem = 'mob must be an existing file in img/';
+    else if (b.msize !== undefined && !goodSize(b.msize)) problem = 'msize must be [width, height]';
+    else if (b.mob !== undefined && requireFig && !goodSize(b.msize)) problem = 'a picture with mob needs msize [width, height]';
+    else if (requireFig && (typeof b.alt !== 'string' || !b.alt)) problem = 'a picture needs alt text';
+    else {
+      if (typeof b.alt === 'string' && b.alt) out.push(['.alt', b.alt]);
+      else if (b.alt !== undefined) problem = 'alt must be text';
+      if (typeof b.cap === 'string' && b.cap) out.push(['.cap', b.cap]);
+      else if (b.cap !== undefined) problem = 'cap must be text';
+    }
+  } else problem = 'must be a paragraph (text), a subheading ({ h }), a list ({ ul } or { ol }), a table ({ table }) or a picture ({ fig })';
+  return { kind: k, texts: out, bad: problem };
+}
+/* The translation must match the English item for item: same kind, same list length, same table columns and rows. */
+function sameShape(en, tr) {
+  var k = kindOf(en);
+  if (kindOf(tr) !== k) return 'must be the same kind as the English (' + (k === 'p' ? 'a paragraph' : k === 'h' ? 'a subheading { h }' : k) + ')';
+  if (k === 'ul' || k === 'ol') { if (tr[k].length !== en[k].length) return 'needs ' + en[k].length + ' list entries, has ' + tr[k].length; }
+  if (k === 'table') {
+    var a = tr.table, b = en.table;
+    if (!Array.isArray(a.head) || !Array.isArray(a.rows) || a.head.length !== b.head.length || a.rows.length !== b.rows.length) return 'needs ' + b.head.length + ' columns and ' + b.rows.length + ' rows';
+    for (var j = 0; j < b.rows.length; j++) { if (!Array.isArray(a.rows[j]) || a.rows[j].length !== b.rows[j].length) return 'row ' + j + ' needs ' + b.rows[j].length + ' cells'; }
+  }
+  return '';
+}
+
 function main() {
   var posts;
   try { posts = load(path.resolve(file || '')); } catch (e) { console.log('FAIL cannot read ' + file + ': ' + e.message); process.exitCode = 1; return; }
@@ -92,16 +159,18 @@ function main() {
   var heads = 0;
   body.forEach(function (b, i) {
     var w = 'body[' + i + ']';
-    if (typeof b === 'string') { paras++; english(w, b); }
-    else if (b && typeof b === 'object' && typeof b.h === 'string' && Object.keys(b).length === 1) { heads++; english(w + '.h', b.h); }
-    else bad.push(w + ': must be a paragraph (text) or a subheading ({ h: "..." })');
+    var r = itemTexts(b, true);
+    if (r.bad) { bad.push(w + ': ' + r.bad); return; }
+    if (r.kind === 'p') paras++;
+    if (r.kind === 'h') heads++;
+    r.texts.forEach(function (t) { english(w + t[0], t[1]); });
   });
   if (type === 'blog' && (paras < 4 || paras > 7)) warn.push('a blog post should have 4 to 7 paragraphs, this one has ' + paras);
   if (type === 'news') {
     if (heads < 1 || heads > 5) warn.push('a news post should have 1 to 5 subheadings (one per story), this one has ' + heads);
     if (body.length && typeof body[0] !== 'string') warn.push('a news post should start with a short lead paragraph');
     body.forEach(function (b, i) {
-      if (typeof b !== 'string' && typeof body[i + 1] !== 'string') warn.push('body[' + i + ']: a subheading should be followed by a paragraph');
+      if (kindOf(b) === 'h' && (kindOf(body[i + 1]) === 'h' || kindOf(body[i + 1]) === '')) warn.push('body[' + i + ']: a subheading should be followed by a paragraph');
     });
   }
 
@@ -152,12 +221,18 @@ function main() {
     body.forEach(function (x, i) {
       var y = tb[i];
       var w = l + '.body[' + i + ']';
-      if (typeof x === 'string') {
-        if (typeof y !== 'string') bad.push(w + ': must be a paragraph (text)');
-        else { other(w, x, y); all.push(y); }
-      } else if (x && typeof x === 'object' && typeof x.h === 'string') {
-        if (!y || typeof y !== 'object' || typeof y.h !== 'string') bad.push(w + ': must be a subheading ({ h: "..." })');
-        else { other(w + '.h', x.h, y.h); all.push(y.h); }
+      if (kindOf(x) === '') return;
+      var shape = sameShape(x, y);
+      if (shape) { bad.push(w + ': ' + shape); return; }
+      var ry = itemTexts(y, false);
+      if (ry.bad) { bad.push(w + ': ' + ry.bad); return; }
+      var rx = itemTexts(x, false);
+      var enBy = {};
+      rx.texts.forEach(function (e) { enBy[e[0]] = e[1]; });
+      ry.texts.forEach(function (e) { other(w + e[0], enBy[e[0]], e[1]); all.push(e[1]); });
+      if (ry.kind === 'fig') {
+        if (y.alt === undefined) warn.push(w + ': the picture has no translated alt text, so ' + l + ' readers get the English alt');
+        if (x.cap && y.cap === undefined) warn.push(w + ': the picture has no translated caption, so ' + l + ' readers get the English caption');
       }
     });
     if (l === 'vi' && !hasVi(all.filter(text).join(' '))) bad.push('vi: the text has no Vietnamese accents (write real Vietnamese letters)');

@@ -42,9 +42,89 @@ def norm(href):
     return re.sub(r'\?lang=(en|vi|es)', '', href or '')
 
 
+def kind_of(x):
+    if isinstance(x, str):
+        return 'p'
+    if not isinstance(x, dict):
+        return ''
+    if x.get('h'):
+        return 'h'
+    if isinstance(x.get('ul'), list):
+        return 'ul'
+    if isinstance(x.get('ol'), list):
+        return 'ol'
+    if isinstance(x.get('table'), dict):
+        return 'table'
+    if x.get('fig'):
+        return 'fig'
+    return ''
+
+
+def bold(s):
+    # the site turns **x** into <strong>x</strong>; markers that do not pair up are shown as written
+    parts = s.split('**')
+    return s if len(parts) % 2 == 0 else ''.join(parts)
+
+
+def size_of(a):
+    return [round(a[0]), round(a[1])] if isinstance(a, list) and len(a) == 2 and a[0] > 0 and a[1] > 0 else None
+
+
 def view(entry, lang):
     src = entry if lang == 'en' else entry['tr'][lang]
-    return {'title': src['title'], 'tag': src.get('tag', ''), 'summary': src.get('summary', ''), 'body': src['body']}
+    body = src['body']
+    if lang != 'en':
+        # a translated picture keeps the English file and sizes unless the translation names its own (site.js localizePost)
+        merged = []
+        for en_item, item in zip(entry['body'], body):
+            if kind_of(en_item) != 'fig':
+                merged.append(item)
+                continue
+            c = dict(en_item)
+            for k in ('fig', 'mob', 'alt', 'cap'):
+                if isinstance(item.get(k), str) and item[k]:
+                    c[k] = item[k]
+            for k in ('size', 'msize'):
+                if size_of(item.get(k)):
+                    c[k] = item[k]
+            merged.append(c)
+        body = merged
+    return {'title': src['title'], 'tag': src.get('tag', ''), 'summary': src.get('summary', ''), 'body': body}
+
+
+def want_item(b):
+    k = kind_of(b)
+    if k == 'p':
+        return ['P', bold(b)]
+    if k == 'h':
+        return ['H2', b['h']]
+    if k in ('ul', 'ol'):
+        return [k.upper(), [bold(t) for t in b[k]]]
+    if k == 'table':
+        t = b['table']
+        return ['TABLE', {'head': t['head'], 'rows': [[bold(c) for c in r] for r in t['rows']]}]
+    if k == 'fig':
+        return ['FIGURE', {'src': b['fig'], 'alt': b.get('alt', ''), 'cap': b.get('cap') or None, 'size': size_of(b.get('size')),
+                           'mob': b.get('mob'), 'msize': size_of(b.get('msize'))}]
+    return ['?', None]
+
+
+GOT_JS = """() => Array.from(document.querySelectorAll('.post-body > *')).map(n => {
+  const num = v => v === null ? null : Number(v);
+  if (n.tagName === 'UL' || n.tagName === 'OL') return [n.tagName, Array.from(n.children).map(li => li.textContent)];
+  if (n.classList.contains('table-wrap')) {
+    const t = n.querySelector('table');
+    return ['TABLE', {head: Array.from(t.querySelectorAll('thead th')).map(c => c.textContent),
+                      rows: Array.from(t.querySelectorAll('tbody tr')).map(r => Array.from(r.children).map(c => c.textContent))}];
+  }
+  if (n.tagName === 'FIGURE') {
+    const img = n.querySelector('img'), src = n.querySelector('source'), cap = n.querySelector('figcaption');
+    const wh = (e, a, b) => e && e.getAttribute(a) !== null ? [num(e.getAttribute(a)), num(e.getAttribute(b))] : null;
+    return ['FIGURE', {src: img.getAttribute('src'), alt: img.getAttribute('alt'), cap: cap ? cap.textContent : null,
+                       size: wh(img, 'width', 'height'), mob: src ? src.getAttribute('srcset') : null, msize: wh(src, 'width', 'height')}];
+  }
+  return [n.tagName, n.textContent];
+})"""
 
 
 def kind(entry):
@@ -92,9 +172,16 @@ with sync_playwright() as pw:
                 h1 = page.locator('h1').first.inner_text() if page.locator('h1').count() else ''
                 check(page.locator('h1').count() == 1 and h1 == v['title'], at + ': heading', h1)
                 check(page.title() == v['title'] + ' | Raymond Doan', at + ': tab title', page.title())
-                got = page.evaluate("""() => Array.from(document.querySelectorAll('.post-body > *')).map(n => [n.tagName, n.textContent])""")
-                want = [['P', b] if isinstance(b, str) else ['H2', b['h']] for b in v['body']]
+                got = page.evaluate(GOT_JS)
+                want = [want_item(b) for b in v['body']]
                 check(got == want, at + ': body matches item for item (%d items)' % len(want), '%d got vs %d wanted' % (len(got), len(want)))
+                if got != want and len(got) == len(want):
+                    for gi, (g, w2) in enumerate(zip(got, want)):
+                        if g != w2:
+                            print('  item %d: got %s | wanted %s' % (gi, str(g)[:200], str(w2)[:200]))
+                            break
+                for fig in page.query_selector_all('.post-body figure img'):
+                    check(fig.evaluate('i => i.complete && i.naturalWidth > 0'), at + ': picture loads', fig.get_attribute('src'))
                 meta = page.locator('article .meta').first.inner_text()
                 check(v['tag'] in meta, at + ': tag shown', meta)
                 check(page.locator('article .note').count() == 0, at + ': no "only available in English" note')

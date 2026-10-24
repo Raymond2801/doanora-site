@@ -10,12 +10,12 @@ The hash is the SHA-256 of the exact file bytes (`sha256sum`), first 12 hex char
 
 | File | SHA-256 | What it does |
 | --- | --- | --- |
-| tr-check.js | efa1fca2d783 | Checks one blog or news entry: English text, Vietnamese and Spanish translations. |
+| tr-check.js | 8631185d7bce | Checks one blog or news entry: English text, Vietnamese and Spanish translations. |
 | entry-tools.js | afabc002df71 | Converts an entry file to JSON; builds throwaway sample entries for a dry run. |
 | build-posts.js | d2f7f5869514 | Adds entries at the start of posts.js and proves the old posts did not change. |
 | i18n-check.js | 6b9bfc2c0800 | Checks translations, house text rules and markup safety for the whole site. |
 | smoke.py | c95d7c54487d | Opens every page in three languages in a headless browser (Playwright). |
-| render-check.py | 7dfefe99e715 | Checks that new posts show correctly on the post, blog and home pages. |
+| render-check.py | db0573f3f94c | Checks that new posts show correctly on the post, blog and home pages. |
 
 ## Order of use
 
