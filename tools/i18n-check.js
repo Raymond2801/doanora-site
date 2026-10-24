@@ -269,6 +269,78 @@ LANGS.forEach(function (l) {
 });
 
 /* ---- 3. posts ---- */
+/* ---- body items: the site (site.js) accepts a paragraph, a subheading { h }, a list { ul } or { ol },
+   a table { table: { head, rows } } and a picture { fig, size, alt, cap, mob, msize }. kindOf and the
+   same-shape rule below mirror site.js, so a post the site shows is a post this checker accepts. ---- */
+function kindOf(x) {
+  if (typeof x === 'string') return 'p';
+  if (!x || typeof x !== 'object') return '';
+  if (x.h) return 'h';
+  if (Array.isArray(x.ul)) return 'ul';
+  if (Array.isArray(x.ol)) return 'ol';
+  if (x.table && typeof x.table === 'object') return 'table';
+  if (x.fig) return 'fig';
+  return '';
+}
+
+function safeImage(p) { return /^img\/[A-Za-z0-9._-]+\.(?:svg|png|jpe?g|webp|gif)$/i.test(String(p || '')); }
+function goodSize(a) { return Array.isArray(a) && a.length === 2 && a[0] > 0 && a[1] > 0; }
+function onlyKeys(o, allowed) { return Object.keys(o).every(function (k) { return allowed.indexOf(k) >= 0; }); }
+
+/* The texts an item holds, as [where, text] pairs, or a problem string when the item is malformed. */
+function itemTexts(b, requireFig) {
+  var k = kindOf(b);
+  var out = [];
+  var bad = null;
+  if (k === 'p') out.push(['', b]);
+  else if (k === 'h') { if (typeof b.h !== 'string' || Object.keys(b).length !== 1) bad = 'a subheading must be just { h: "text" }'; else out.push(['.h', b.h]); }
+  else if (k === 'ul' || k === 'ol') {
+    if (!onlyKeys(b, [k]) || !b[k].length || !b[k].every(function (t) { return typeof t === 'string'; })) bad = 'a list must be { ' + k + ': [ "text", ... ] } with at least one entry';
+    else b[k].forEach(function (t, j) { out.push(['.' + k + '[' + j + ']', t]); });
+  } else if (k === 'table') {
+    var t = b.table;
+    if (!onlyKeys(b, ['table']) || !onlyKeys(t, ['head', 'rows']) || !Array.isArray(t.head) || !t.head.length || !Array.isArray(t.rows) || !t.rows.length) bad = 'a table must be { table: { head: [ ... ], rows: [ [ ... ], ... ] } }';
+    else {
+      t.head.forEach(function (c, j) { if (typeof c !== 'string') bad = 'a table head cell must be text'; else out.push(['.table.head[' + j + ']', c]); });
+      t.rows.forEach(function (r, i) {
+        if (!Array.isArray(r) || r.length !== t.head.length) bad = bad || ('table row ' + i + ' needs ' + t.head.length + ' cells');
+        else r.forEach(function (c, j) { if (typeof c !== 'string') bad = bad || 'a table cell must be text'; else out.push(['.table.rows[' + i + '][' + j + ']', c]); });
+      });
+    }
+  } else if (k === 'fig') {
+    if (!onlyKeys(b, ['fig', 'size', 'mob', 'msize', 'alt', 'cap'])) bad = 'a picture may only have fig, size, mob, msize, alt and cap';
+    else if (typeof b.fig !== 'string' || !safeImage(b.fig)) bad = 'fig must be a file in img/ (letters, digits, . _ - only)';
+    else if (!exists(b.fig)) bad = 'fig points to ' + b.fig + ', which is not in the site folder';
+    else if (requireFig && !goodSize(b.size)) bad = 'size must be [width, height]';
+    else if (b.size !== undefined && !goodSize(b.size)) bad = 'size must be [width, height]';
+    else if (b.mob !== undefined && (typeof b.mob !== 'string' || !safeImage(b.mob) || !exists(b.mob))) bad = 'mob must be an existing file in img/';
+    else if (b.msize !== undefined && !goodSize(b.msize)) bad = 'msize must be [width, height]';
+    else if (b.mob !== undefined && requireFig && !goodSize(b.msize)) bad = 'a picture with mob needs msize [width, height]';
+    else if (requireFig && (typeof b.alt !== 'string' || !b.alt)) bad = 'a picture needs alt text';
+    else {
+      if (typeof b.alt === 'string' && b.alt) out.push(['.alt', b.alt]);
+      else if (b.alt !== undefined) bad = 'alt must be text';
+      if (typeof b.cap === 'string' && b.cap) out.push(['.cap', b.cap]);
+      else if (b.cap !== undefined) bad = 'cap must be text';
+    }
+  } else bad = 'must be a paragraph (text), a subheading ({ h }), a list ({ ul } or { ol }), a table ({ table }) or a picture ({ fig })';
+  return { kind: k, texts: out, bad: bad };
+}
+
+/* The translation must have the same kinds item for item, the same number of list entries, and the same
+   table columns and rows (site.js sameBody). */
+function sameShape(en, tr) {
+  var k = kindOf(en);
+  if (kindOf(tr) !== k) return 'must be ' + (k === 'p' ? 'a paragraph (text)' : k === 'h' ? 'a subheading ({ h })' : k === 'fig' ? 'a picture ({ fig })' : 'the same kind as the English (' + k + ')');
+  if (k === 'ul' || k === 'ol') { if (tr[k].length !== en[k].length) return 'needs ' + en[k].length + ' list entries, has ' + tr[k].length; }
+  if (k === 'table') {
+    var a = tr.table, b = en.table;
+    if (!Array.isArray(a.head) || !Array.isArray(a.rows) || a.head.length !== b.head.length || a.rows.length !== b.rows.length) return 'needs ' + b.head.length + ' columns and ' + b.rows.length + ' rows';
+    for (var j = 0; j < b.rows.length; j++) { if (!Array.isArray(a.rows[j]) || a.rows[j].length !== b.rows[j].length) return 'row ' + j + ' needs ' + b.rows[j].length + ' cells'; }
+  }
+  return '';
+}
+
 function englishPost(post, seenSlugs) {
   var name = 'posts.js ' + post.slug;
   var type = post.type;
@@ -289,9 +361,10 @@ function englishPost(post, seenSlugs) {
   if (!body.length) fail(name + ': body must be a list with at least one item');
   body.forEach(function (b, i) {
     var w = name + '.body[' + i + ']';
-    if (typeof b === 'string') englishCheck(w, b);
-    else if (b && typeof b === 'object' && typeof b.h === 'string' && Object.keys(b).length === 1) englishCheck(w + '.h', b.h);
-    else { checks++; fail(w + ': must be a paragraph (text) or a subheading ({ h })'); }
+    var it = itemTexts(b, true);
+    checks++;
+    if (it.bad) { fail(w + ': ' + it.bad); return; }
+    it.texts.forEach(function (t) { englishCheck(w + t[0], t[1]); });
   });
   var src = post.sources;
   checks++;
@@ -351,13 +424,15 @@ posts.forEach(function (post) {
     if (tb.length !== en.length) { fail(name + '.body: needs ' + en.length + ' items, has ' + tb.length); return; }
     en.forEach(function (b, i) {
       var t = tb[i];
-      if (typeof b === 'string') {
-        if (typeof t !== 'string') fail(name + '.body[' + i + ']: must be a paragraph (string)');
-        else ruleCheck(name + '.body[' + i + ']', t);
-      } else if (b && b.h) {
-        if (!t || typeof t !== 'object' || !t.h) fail(name + '.body[' + i + ']: must be a subheading ({ h })');
-        else ruleCheck(name + '.body[' + i + '].h', t.h);
-      }
+      var w = name + '.body[' + i + ']';
+      if (!kindOf(b)) return; /* the English item is already reported above */
+      var diff = sameShape(b, t);
+      checks++;
+      if (diff) { fail(w + ': ' + diff); return; }
+      var it = itemTexts(t, false);
+      checks++;
+      if (it.bad) { fail(w + ': ' + it.bad); return; }
+      it.texts.forEach(function (x) { ruleCheck(w + x[0], x[1]); });
     });
   });
 });
