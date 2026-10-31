@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" font-family="'IBM Plex Sans', 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif" viewBox="0 0 760 244" role="img" aria-label="Ba biện pháp tôi đã thêm. 1. Trước khi gửi: Nội dung có rỗng không? Nếu có, từ chối gửi. 2. Gửi: Email đi ra qua Gmail. 3. Đọc lại: Lấy thư từ Gmail và so với bản tôi đã duyệt. Luôn luôn: Ghi mỗi lần gửi vào nhật ký chỉ ghi thêm." font-size="13">
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M0 0L10 5L0 10z" fill="#857261"/>
+</marker>
+</defs>
+<text x="24" y="34" font-size="15" font-weight="600" fill="#241208">Ba biện pháp tôi đã thêm</text>
+<g transform="translate(0,0)">
+<g>
+<rect x="24.0" y="56" width="157.0" height="164" rx="8" fill="#b7410e" fill-opacity="0.12" stroke="#b7410e" stroke-width="2"/>
+<g transform="translate(80.5,70)" fill="none" stroke="#b7410e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4L37 10V22C37 31 30 38 22 41C14 38 7 31 7 22V10Z"/><path d="M15 22L20 27L29 16"/></g>
+<text x="102.5" y="144" text-anchor="middle" font-size="13" font-weight="600" fill="#241208">1. Trước khi gửi</text>
+<text x="102.5" y="164" text-anchor="middle" font-size="12" fill="#241208">Nội dung có rỗng</text>
+<text x="102.5" y="180" text-anchor="middle" font-size="12" fill="#241208">không? Nếu có, từ</text>
+<text x="102.5" y="196" text-anchor="middle" font-size="12" fill="#241208">chối gửi</text>
+</g>
+<path d="M183.0 138.0L207.0 138.0" stroke="#857261" stroke-width="1.5" fill="none" marker-end="url(#ar)"/>
+<g>
+<rect x="209.0" y="56" width="157.0" height="164" rx="8" fill="#857261" fill-opacity="0.12" stroke="#857261" stroke-width="2"/>
+<g transform="translate(265.5,70)" fill="none" stroke="#857261" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="36" height="24" rx="3"/><path d="M4 12L22 25L40 12"/></g>
+<text x="287.5" y="144" text-anchor="middle" font-size="13" font-weight="600" fill="#241208">2. Gửi</text>
+<text x="287.5" y="164" text-anchor="middle" font-size="12" fill="#241208">Email đi ra qua</text>
+<text x="287.5" y="180" text-anchor="middle" font-size="12" fill="#241208">Gmail</text>
+</g>
+<path d="M368.0 138.0L392.0 138.0" stroke="#857261" stroke-width="1.5" fill="none" marker-end="url(#ar)"/>
+<g>
+<rect x="394.0" y="56" width="157.0" height="164" rx="8" fill="#2f7a5a" fill-opacity="0.12" stroke="#2f7a5a" stroke-width="2"/>
+<g transform="translate(450.5,70)" fill="none" stroke="#2f7a5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="19" cy="19" r="11"/><path d="M27 27L38 38" stroke-width="3.5"/></g>
+<text x="472.5" y="144" text-anchor="middle" font-size="13" font-weight="600" fill="#241208">3. Đọc lại</text>
+<text x="472.5" y="164" text-anchor="middle" font-size="12" fill="#241208">Lấy thư từ Gmail</text>
+<text x="472.5" y="180" text-anchor="middle" font-size="12" fill="#241208">và so với bản tôi</text>
+<text x="472.5" y="196" text-anchor="middle" font-size="12" fill="#241208">đã duyệt</text>
+</g>
+<text x="565.0" y="145.0" text-anchor="middle" font-size="22" font-weight="600" fill="#857261">+</text>
+<g>
+<rect x="579.0" y="56" width="157.0" height="164" rx="8" fill="#28616c" fill-opacity="0.12" stroke="#28616c" stroke-width="2"/>
+<g transform="translate(635.5,70)" fill="none" stroke="#28616c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="5" width="28" height="34" rx="3"/><path d="M15 15H31M15 22H31M15 29H25"/></g>
+<text x="657.5" y="144" text-anchor="middle" font-size="13" font-weight="600" fill="#241208">Luôn luôn</text>
+<text x="657.5" y="164" text-anchor="middle" font-size="12" fill="#241208">Ghi mỗi lần gửi</text>
+<text x="657.5" y="180" text-anchor="middle" font-size="12" fill="#241208">vào nhật ký chỉ</text>
+<text x="657.5" y="196" text-anchor="middle" font-size="12" fill="#241208">ghi thêm</text>
+</g>
+
+</g>
+</svg>

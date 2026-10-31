@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" font-family="'IBM Plex Sans', 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif" viewBox="0 0 760 244" role="img" aria-label="Winston puede enviar correos en mi nombre. Winston: Mi propio asistente de IA, hecho con Claude Code. Acceso: Tiene la sesión iniciada en mi cuenta de Gmail. Resultado: Puede enviar correos en mi nombre, así que es un usuario con privilegios." font-size="13">
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M0 0L10 5L0 10z" fill="#857261"/>
+</marker>
+</defs>
+<text x="24" y="34" font-size="15" font-weight="600" fill="#241208">Winston puede enviar correos en mi nombre</text>
+<g transform="translate(0,0)">
+<g>
+<rect x="24.0" y="56" width="210.66666666666666" height="164" rx="8" fill="#28616c" fill-opacity="0.12" stroke="#28616c" stroke-width="2"/>
+<g transform="translate(107.33333333333331,70)" fill="none" stroke="#28616c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="14" width="28" height="20" rx="5"/><circle cx="16" cy="24" r="2.5" fill="#28616c"/><circle cx="28" cy="24" r="2.5" fill="#28616c"/><path d="M22 14V8"/><circle cx="22" cy="5" r="2"/></g>
+<text x="129.33333333333331" y="144" text-anchor="middle" font-size="13" font-weight="600" fill="#241208">Winston</text>
+<text x="129.33333333333331" y="164" text-anchor="middle" font-size="12" fill="#241208">Mi propio asistente de IA,</text>
+<text x="129.33333333333331" y="180" text-anchor="middle" font-size="12" fill="#241208">hecho con Claude Code</text>
+</g>
+<path d="M242.66666666666666 138.0L266.66666666666663 138.0" stroke="#857261" stroke-width="1.5" fill="none" marker-end="url(#ar)"/>
+<g>
+<rect x="274.66666666666663" y="56" width="210.66666666666666" height="164" rx="8" fill="#b7410e" fill-opacity="0.12" stroke="#b7410e" stroke-width="2"/>
+<g transform="translate(357.99999999999994,70)" fill="none" stroke="#b7410e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="22" r="7"/><path d="M20 22H38M32 22V29M38 22V28"/></g>
+<text x="379.99999999999994" y="144" text-anchor="middle" font-size="13" font-weight="600" fill="#241208">Acceso</text>
+<text x="379.99999999999994" y="164" text-anchor="middle" font-size="12" fill="#241208">Tiene la sesión iniciada</text>
+<text x="379.99999999999994" y="180" text-anchor="middle" font-size="12" fill="#241208">en mi cuenta de Gmail</text>
+</g>
+<path d="M493.33333333333326 138.0L517.3333333333333 138.0" stroke="#857261" stroke-width="1.5" fill="none" marker-end="url(#ar)"/>
+<g>
+<rect x="525.3333333333333" y="56" width="210.66666666666666" height="164" rx="8" fill="#857261" fill-opacity="0.12" stroke="#857261" stroke-width="2"/>
+<g transform="translate(608.6666666666666,70)" fill="none" stroke="#857261" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="36" height="24" rx="3"/><path d="M4 12L22 25L40 12"/></g>
+<text x="630.6666666666666" y="144" text-anchor="middle" font-size="13" font-weight="600" fill="#241208">Resultado</text>
+<text x="630.6666666666666" y="164" text-anchor="middle" font-size="12" fill="#241208">Puede enviar correos en mi</text>
+<text x="630.6666666666666" y="180" text-anchor="middle" font-size="12" fill="#241208">nombre, así que es un</text>
+<text x="630.6666666666666" y="196" text-anchor="middle" font-size="12" fill="#241208">usuario con privilegios</text>
+</g>
+
+</g>
+</svg>

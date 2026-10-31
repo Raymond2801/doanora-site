@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" font-family="'IBM Plex Sans', 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif" viewBox="0 0 360 416" role="img" aria-label="Prevent, record, verify. Prevent: Stop a bad action before it happens. Record: Keep evidence to investigate afterwards. Verify: Check the result from the outside, not on the system's word." font-size="13">
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M0 0L10 5L0 10z" fill="#857261"/>
+</marker>
+</defs>
+<text x="24" y="34" font-size="15" font-weight="600" fill="#241208">Prevent, record, verify</text>
+<g transform="translate(0,0)">
+<g>
+<rect x="24" y="58" width="312" height="86" rx="8" fill="#b7410e" fill-opacity="0.12" stroke="#b7410e" stroke-width="2"/>
+<g transform="translate(40,79.0)" fill="none" stroke="#b7410e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4L37 10V22C37 31 30 38 22 41C14 38 7 31 7 22V10Z"/><path d="M15 22L20 27L29 16"/></g>
+<text x="100" y="84" text-anchor="start" font-size="13" font-weight="600" fill="#241208">Prevent</text>
+<text x="100" y="104" text-anchor="start" font-size="12" fill="#241208">Stop a bad action before it</text>
+<text x="100" y="120" text-anchor="start" font-size="12" fill="#241208">happens</text>
+</g>
+
+<g>
+<rect x="24" y="174" width="312" height="86" rx="8" fill="#28616c" fill-opacity="0.12" stroke="#28616c" stroke-width="2"/>
+<g transform="translate(40,195.0)" fill="none" stroke="#28616c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="5" width="28" height="34" rx="3"/><path d="M15 15H31M15 22H31M15 29H25"/></g>
+<text x="100" y="200" text-anchor="start" font-size="13" font-weight="600" fill="#241208">Record</text>
+<text x="100" y="220" text-anchor="start" font-size="12" fill="#241208">Keep evidence to investigate</text>
+<text x="100" y="236" text-anchor="start" font-size="12" fill="#241208">afterwards</text>
+</g>
+
+<g>
+<rect x="24" y="290" width="312" height="102" rx="8" fill="#2f7a5a" fill-opacity="0.12" stroke="#2f7a5a" stroke-width="2"/>
+<g transform="translate(40,319.0)" fill="none" stroke="#2f7a5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="19" cy="19" r="11"/><path d="M27 27L38 38" stroke-width="3.5"/></g>
+<text x="100" y="316" text-anchor="start" font-size="13" font-weight="600" fill="#241208">Verify</text>
+<text x="100" y="336" text-anchor="start" font-size="12" fill="#241208">Check the result from the</text>
+<text x="100" y="352" text-anchor="start" font-size="12" fill="#241208">outside, not on the system's</text>
+<text x="100" y="368" text-anchor="start" font-size="12" fill="#241208">word</text>
+</g>
+
+</g>
+</svg>

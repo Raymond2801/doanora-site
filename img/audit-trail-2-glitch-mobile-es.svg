@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" font-family="'IBM Plex Sans', 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif" viewBox="0 0 360 416" role="img" aria-label="Cómo salió mal un correo. Lo que yo quería: Un asunto, un mensaje y un adjunto, cada uno en su lugar. Lo que Winston leyó: Un carácter en el asunto lo partió en dos, así que cada campo se movió un lugar. Lo que salió: Un correo con contenido equivocado y sin adjunto." font-size="13">
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M0 0L10 5L0 10z" fill="#857261"/>
+</marker>
+</defs>
+<text x="24" y="34" font-size="15" font-weight="600" fill="#241208">Cómo salió mal un correo</text>
+<g transform="translate(0,0)">
+<g>
+<rect x="24" y="58" width="312" height="86" rx="8" fill="#857261" fill-opacity="0.12" stroke="#857261" stroke-width="2"/>
+<g transform="translate(40,79.0)" fill="none" stroke="#857261" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="8" width="32" height="8" rx="2"/><rect x="6" y="19" width="32" height="8" rx="2"/><rect x="6" y="30" width="32" height="8" rx="2"/></g>
+<text x="100" y="84" text-anchor="start" font-size="13" font-weight="600" fill="#241208">Lo que yo quería</text>
+<text x="100" y="104" text-anchor="start" font-size="12" fill="#241208">Un asunto, un mensaje y un</text>
+<text x="100" y="120" text-anchor="start" font-size="12" fill="#241208">adjunto, cada uno en su lugar</text>
+</g>
+<path d="M180 145.0L180 169.0" stroke="#857261" stroke-width="1.5" fill="none" marker-end="url(#ar)"/>
+<g>
+<rect x="24" y="174" width="312" height="102" rx="8" fill="#b7410e" fill-opacity="0.12" stroke="#b7410e" stroke-width="2"/>
+<g transform="translate(40,203.0)" fill="none" stroke="#b7410e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="8" width="14" height="8" rx="2"/><rect x="24" y="8" width="14" height="8" rx="2"/><rect x="12" y="19" width="32" height="8" rx="2"/><rect x="12" y="30" width="32" height="8" rx="2" stroke-dasharray="3 3"/></g>
+<text x="100" y="200" text-anchor="start" font-size="13" font-weight="600" fill="#241208">Lo que Winston leyó</text>
+<text x="100" y="220" text-anchor="start" font-size="12" fill="#241208">Un carácter en el asunto lo</text>
+<text x="100" y="236" text-anchor="start" font-size="12" fill="#241208">partió en dos, así que cada</text>
+<text x="100" y="252" text-anchor="start" font-size="12" fill="#241208">campo se movió un lugar</text>
+</g>
+<path d="M180 277.0L180 301.0" stroke="#857261" stroke-width="1.5" fill="none" marker-end="url(#ar)"/>
+<g>
+<rect x="24" y="306" width="312" height="86" rx="8" fill="#b7410e" fill-opacity="0.12" stroke="#b7410e" stroke-width="2"/>
+<g transform="translate(40,327.0)" fill="none" stroke="#b7410e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="36" height="24" rx="3"/><path d="M4 12L22 25L40 12"/><circle cx="35" cy="32" r="8" fill="#f6f1ea" stroke="#b7410e"/><path d="M31 28L39 36M39 28L31 36" stroke="#b7410e"/></g>
+<text x="100" y="332" text-anchor="start" font-size="13" font-weight="600" fill="#241208">Lo que salió</text>
+<text x="100" y="352" text-anchor="start" font-size="12" fill="#241208">Un correo con contenido</text>
+<text x="100" y="368" text-anchor="start" font-size="12" fill="#241208">equivocado y sin adjunto</text>
+</g>
+
+</g>
+</svg>

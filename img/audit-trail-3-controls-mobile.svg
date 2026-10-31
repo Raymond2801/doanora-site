@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" font-family="'IBM Plex Sans', 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif" viewBox="0 0 360 516" role="img" aria-label="Three controls I added. 1. Before sending: Is the body empty? If yes, refuse to send. 2. Send: The email goes out through Gmail. 3. Read it back: Fetch it from Gmail and compare with what I approved. Always: Write every send in a log that is only added to." font-size="13">
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M0 0L10 5L0 10z" fill="#857261"/>
+</marker>
+</defs>
+<text x="24" y="34" font-size="15" font-weight="600" fill="#241208">Three controls I added</text>
+<g transform="translate(0,0)">
+<g>
+<rect x="24" y="58" width="312" height="86" rx="8" fill="#b7410e" fill-opacity="0.12" stroke="#b7410e" stroke-width="2"/>
+<g transform="translate(40,79.0)" fill="none" stroke="#b7410e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4L37 10V22C37 31 30 38 22 41C14 38 7 31 7 22V10Z"/><path d="M15 22L20 27L29 16"/></g>
+<text x="100" y="84" text-anchor="start" font-size="13" font-weight="600" fill="#241208">1. Before sending</text>
+<text x="100" y="104" text-anchor="start" font-size="12" fill="#241208">Is the body empty? If yes,</text>
+<text x="100" y="120" text-anchor="start" font-size="12" fill="#241208">refuse to send</text>
+</g>
+<path d="M180 145.0L180 169.0" stroke="#857261" stroke-width="1.5" fill="none" marker-end="url(#ar)"/>
+<g>
+<rect x="24" y="174" width="312" height="86" rx="8" fill="#857261" fill-opacity="0.12" stroke="#857261" stroke-width="2"/>
+<g transform="translate(40,195.0)" fill="none" stroke="#857261" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="36" height="24" rx="3"/><path d="M4 12L22 25L40 12"/></g>
+<text x="100" y="200" text-anchor="start" font-size="13" font-weight="600" fill="#241208">2. Send</text>
+<text x="100" y="220" text-anchor="start" font-size="12" fill="#241208">The email goes out through</text>
+<text x="100" y="236" text-anchor="start" font-size="12" fill="#241208">Gmail</text>
+</g>
+<path d="M180 261.0L180 285.0" stroke="#857261" stroke-width="1.5" fill="none" marker-end="url(#ar)"/>
+<g>
+<rect x="24" y="290" width="312" height="86" rx="8" fill="#2f7a5a" fill-opacity="0.12" stroke="#2f7a5a" stroke-width="2"/>
+<g transform="translate(40,311.0)" fill="none" stroke="#2f7a5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="19" cy="19" r="11"/><path d="M27 27L38 38" stroke-width="3.5"/></g>
+<text x="100" y="316" text-anchor="start" font-size="13" font-weight="600" fill="#241208">3. Read it back</text>
+<text x="100" y="336" text-anchor="start" font-size="12" fill="#241208">Fetch it from Gmail and compare</text>
+<text x="100" y="352" text-anchor="start" font-size="12" fill="#241208">with what I approved</text>
+</g>
+<text x="180" y="398.0" text-anchor="middle" font-size="22" font-weight="600" fill="#857261">+</text>
+<g>
+<rect x="24" y="406" width="312" height="86" rx="8" fill="#28616c" fill-opacity="0.12" stroke="#28616c" stroke-width="2"/>
+<g transform="translate(40,427.0)" fill="none" stroke="#28616c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="5" width="28" height="34" rx="3"/><path d="M15 15H31M15 22H31M15 29H25"/></g>
+<text x="100" y="432" text-anchor="start" font-size="13" font-weight="600" fill="#241208">Always</text>
+<text x="100" y="452" text-anchor="start" font-size="12" fill="#241208">Write every send in a log that</text>
+<text x="100" y="468" text-anchor="start" font-size="12" fill="#241208">is only added to</text>
+</g>
+
+</g>
+</svg>

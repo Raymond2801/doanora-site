@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" font-family="'IBM Plex Sans', 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif" viewBox="0 0 360 432" role="img" aria-label="Một email đã đi sai như thế nào. Điều tôi muốn: Một tiêu đề, một nội dung và một tệp đính kèm, mỗi thứ một chỗ. Điều Winston đọc được: Một ký tự trong tiêu đề tách nó làm đôi, nên mọi trường lệch đi một chỗ. Điều đã gửi đi: Một email nội dung sai và không có tệp đính kèm." font-size="13">
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M0 0L10 5L0 10z" fill="#857261"/>
+</marker>
+</defs>
+<text x="24" y="34" font-size="15" font-weight="600" fill="#241208">Một email đã đi sai như thế nào</text>
+<g transform="translate(0,0)">
+<g>
+<rect x="24" y="58" width="312" height="102" rx="8" fill="#857261" fill-opacity="0.12" stroke="#857261" stroke-width="2"/>
+<g transform="translate(40,87.0)" fill="none" stroke="#857261" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="8" width="32" height="8" rx="2"/><rect x="6" y="19" width="32" height="8" rx="2"/><rect x="6" y="30" width="32" height="8" rx="2"/></g>
+<text x="100" y="84" text-anchor="start" font-size="13" font-weight="600" fill="#241208">Điều tôi muốn</text>
+<text x="100" y="104" text-anchor="start" font-size="12" fill="#241208">Một tiêu đề, một nội dung và</text>
+<text x="100" y="120" text-anchor="start" font-size="12" fill="#241208">một tệp đính kèm, mỗi thứ một</text>
+<text x="100" y="136" text-anchor="start" font-size="12" fill="#241208">chỗ</text>
+</g>
+<path d="M180 161.0L180 185.0" stroke="#857261" stroke-width="1.5" fill="none" marker-end="url(#ar)"/>
+<g>
+<rect x="24" y="190" width="312" height="102" rx="8" fill="#b7410e" fill-opacity="0.12" stroke="#b7410e" stroke-width="2"/>
+<g transform="translate(40,219.0)" fill="none" stroke="#b7410e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="8" width="14" height="8" rx="2"/><rect x="24" y="8" width="14" height="8" rx="2"/><rect x="12" y="19" width="32" height="8" rx="2"/><rect x="12" y="30" width="32" height="8" rx="2" stroke-dasharray="3 3"/></g>
+<text x="100" y="216" text-anchor="start" font-size="13" font-weight="600" fill="#241208">Điều Winston đọc được</text>
+<text x="100" y="236" text-anchor="start" font-size="12" fill="#241208">Một ký tự trong tiêu đề tách nó</text>
+<text x="100" y="252" text-anchor="start" font-size="12" fill="#241208">làm đôi, nên mọi trường lệch đi</text>
+<text x="100" y="268" text-anchor="start" font-size="12" fill="#241208">một chỗ</text>
+</g>
+<path d="M180 293.0L180 317.0" stroke="#857261" stroke-width="1.5" fill="none" marker-end="url(#ar)"/>
+<g>
+<rect x="24" y="322" width="312" height="86" rx="8" fill="#b7410e" fill-opacity="0.12" stroke="#b7410e" stroke-width="2"/>
+<g transform="translate(40,343.0)" fill="none" stroke="#b7410e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="36" height="24" rx="3"/><path d="M4 12L22 25L40 12"/><circle cx="35" cy="32" r="8" fill="#f6f1ea" stroke="#b7410e"/><path d="M31 28L39 36M39 28L31 36" stroke="#b7410e"/></g>
+<text x="100" y="348" text-anchor="start" font-size="13" font-weight="600" fill="#241208">Điều đã gửi đi</text>
+<text x="100" y="368" text-anchor="start" font-size="12" fill="#241208">Một email nội dung sai và không</text>
+<text x="100" y="384" text-anchor="start" font-size="12" fill="#241208">có tệp đính kèm</text>
+</g>
+
+</g>
+</svg>

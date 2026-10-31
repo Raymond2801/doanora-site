@@ -37,6 +37,140 @@
    A post goes live only after Raymond approves the draft. */
 window.BLOG_POSTS = [
   {
+    type: "blog",
+    slug: "audit-trail-for-an-ai-that-sends-email",
+    title: "What an AI that sends my email taught me about audit trails",
+    date: "2026-10-31",
+    tag: "AI Security",
+    summary: "After one of Winston's emails went out wrong, I added a pre-send check, a read-back and an append-only log, and learned that the checks need testing too.",
+    body: [
+      "Winston, the assistant I run for myself, can send email from my Gmail account. That makes it a privileged user, even though I wrote every part of it with Claude Code. In September one of its emails went out wrong, and fixing that taught me more about basic security controls than I expected.",
+      {
+        "fig": "img/audit-trail-1-assistant.svg", "size": [760, 244],
+        "mob": "img/audit-trail-1-assistant-mobile.svg", "msize": [360, 400],
+        "alt": "Winston can send email as me. Winston: My own AI assistant, built with Claude Code. Access: It is signed in to my Gmail account. Result: It can send email in my name, so it is a privileged user."
+      },
+      "The failure was boring. Winston packs an email command into plain text, and a subject line containing a certain character shifted the fields. The email went out with the wrong content and no attachment. Nobody attacked anything. But the shape of the bug worries me: an agent acted on its own reading of an instruction, and nothing stood between that reading and the send.",
+      {
+        "fig": "img/audit-trail-2-glitch.svg", "size": [760, 244],
+        "mob": "img/audit-trail-2-glitch-mobile.svg", "msize": [360, 432],
+        "alt": "How one email went out wrong. What I meant: A subject, a message and an attachment, each in its own place. What Winston read: A character in the subject split it in two, so every field moved one place. What went out: An email with the wrong content and no attachment."
+      },
+      "So I added three controls. A pre-send check refuses to send if the body is empty, and it has already stopped one bad email. A post-send check fetches the message back from Gmail and compares it with what I approved. Every send is also written to an append-only log, so I can reconstruct what the assistant did without relying on its own account of it.",
+      {
+        "fig": "img/audit-trail-3-controls.svg", "size": [760, 260],
+        "mob": "img/audit-trail-3-controls-mobile.svg", "msize": [360, 516],
+        "alt": "Three controls I added. 1. Before sending: Is the body empty? If yes, refuse to send. 2. Send: The email goes out through Gmail. 3. Read it back: Fetch it from Gmail and compare with what I approved. Always: Write every send in a log that is only added to."
+      },
+      "Then the controls turned out to have bugs of their own. The post-send check kept reporting an empty subject on emails that were fine, because my code compared a header name with different capitalisation from the one Gmail sends back. The email was correct and my verifier was wrong. I only knew because I opened the real inbox and looked. A control you have not tested against reality is a guess.",
+      {
+        "fig": "img/audit-trail-4-checker.svg", "size": [760, 260],
+        "mob": "img/audit-trail-4-checker-mobile.svg", "msize": [360, 412],
+        "alt": "The checker was wrong, not the email. My check said: The subject is empty. The real inbox showed: The subject was correct. Why: Capital letters did not match: my code compared 'Subject' with a label written 'subject'."
+      },
+      "In security terms, this is the difference between preventing, recording and verifying. The pre-send check prevents. The log is the evidence you investigate from afterwards. The read-back from Gmail is an outside view of the result, so you are not taking the system's word for what it did. People in SOC and GRC roles talk about audit trails and accountability. I am moving into that field, and I learned why those words matter by watching my own software misreport its own work.",
+      {
+        "fig": "img/audit-trail-5-roles.svg", "size": [760, 244],
+        "mob": "img/audit-trail-5-roles-mobile.svg", "msize": [360, 416],
+        "alt": "Prevent, record, verify. Prevent: Stop a bad action before it happens. Record: Keep evidence to investigate afterwards. Verify: Check the result from the outside, not on the system's word."
+      },
+      "If you let an AI tool send email, post to a customer channel or change files, ask three questions. What stops a bad action before it happens? What records it afterwards in a place that is only ever added to? Who checks the result from outside the tool? If you cannot answer all three, give the tool less access until you can.",
+      {
+        "fig": "img/audit-trail-6-questions.svg", "size": [760, 290],
+        "mob": "img/audit-trail-6-questions-mobile.svg", "msize": [360, 486],
+        "alt": "Three questions for any AI tool with access. Before: What stops a bad action before it happens?. After: What records it, in a place that is only added to?. Outside: Who checks the result from outside the tool?. Cannot answer all three? Give the tool less access."
+      }
+    ],
+    tr: {
+      vi: {
+        title: "Một AI gửi email của tôi đã dạy tôi gì về dấu vết kiểm toán",
+        tag: "An ninh AI",
+        summary: "Sau khi một email của Winston gửi đi sai, tôi thêm bước kiểm tra trước khi gửi, bước đọc lại và một nhật ký chỉ ghi thêm, rồi học được rằng chính các biện pháp kiểm tra cũng cần được thử.",
+        body: [
+          "Winston, trợ lý tôi tự chạy cho mình, có thể gửi email từ tài khoản Gmail của tôi. Điều đó biến nó thành một người dùng có đặc quyền, dù toàn bộ do tôi viết cùng Claude Code. Hồi tháng 9, một email của nó gửi đi sai, và việc sửa lỗi đó dạy tôi về các biện pháp kiểm soát an ninh cơ bản nhiều hơn tôi tưởng.",
+          {
+            "fig": "img/audit-trail-1-assistant-vi.svg", "size": [760, 244],
+            "mob": "img/audit-trail-1-assistant-mobile-vi.svg", "msize": [360, 416],
+            "alt": "Winston có thể gửi email thay tôi. Winston: Trợ lý AI của riêng tôi, xây cùng Claude Code. Quyền truy cập: Nó đã đăng nhập vào tài khoản Gmail của tôi. Kết quả: Nó gửi được email nhân danh tôi, nên là người dùng có đặc quyền."
+          },
+          "Lỗi này rất tầm thường. Winston gói một lệnh gửi email thành văn bản thuần, và một dòng tiêu đề chứa một ký tự nhất định làm lệch các trường. Email đi ra với nội dung sai và không có tệp đính kèm. Không ai tấn công gì cả. Nhưng hình dạng của lỗi làm tôi lo: một agent đã hành động theo cách nó hiểu một chỉ thị, và không có gì đứng giữa cách hiểu đó và hành động gửi.",
+          {
+            "fig": "img/audit-trail-2-glitch-vi.svg", "size": [760, 244],
+            "mob": "img/audit-trail-2-glitch-mobile-vi.svg", "msize": [360, 432],
+            "alt": "Một email đã đi sai như thế nào. Điều tôi muốn: Một tiêu đề, một nội dung và một tệp đính kèm, mỗi thứ một chỗ. Điều Winston đọc được: Một ký tự trong tiêu đề tách nó làm đôi, nên mọi trường lệch đi một chỗ. Điều đã gửi đi: Một email nội dung sai và không có tệp đính kèm."
+          },
+          "Vì vậy tôi thêm ba biện pháp kiểm soát. Một bước kiểm tra trước khi gửi từ chối gửi nếu nội dung rỗng, và nó đã chặn một email hỏng. Một bước kiểm tra sau khi gửi lấy thư về từ Gmail rồi so với bản tôi đã duyệt. Mỗi lần gửi cũng được ghi vào một nhật ký chỉ ghi thêm, để tôi dựng lại trợ lý đã làm gì mà không phải dựa vào lời kể của chính nó.",
+          {
+            "fig": "img/audit-trail-3-controls-vi.svg", "size": [760, 244],
+            "mob": "img/audit-trail-3-controls-mobile-vi.svg", "msize": [360, 506],
+            "alt": "Ba biện pháp tôi đã thêm. 1. Trước khi gửi: Nội dung có rỗng không? Nếu có, từ chối gửi. 2. Gửi: Email đi ra qua Gmail. 3. Đọc lại: Lấy thư từ Gmail và so với bản tôi đã duyệt. Luôn luôn: Ghi mỗi lần gửi vào nhật ký chỉ ghi thêm."
+          },
+          "Rồi các biện pháp này hóa ra cũng có lỗi riêng. Bước kiểm tra sau khi gửi cứ báo tiêu đề rỗng với những email vẫn bình thường, vì mã của tôi so tên header với cách viết hoa khác với cách Gmail trả về. Email đúng, còn bộ kiểm tra của tôi sai. Tôi chỉ biết vì đã mở hộp thư thật ra xem. Một biện pháp kiểm soát chưa được thử với thực tế thì chỉ là phỏng đoán.",
+          {
+            "fig": "img/audit-trail-4-checker-vi.svg", "size": [760, 244],
+            "mob": "img/audit-trail-4-checker-mobile-vi.svg", "msize": [360, 396],
+            "alt": "Bộ kiểm tra sai, không phải email. Kiểm tra của tôi báo: Tiêu đề rỗng. Hộp thư thật cho thấy: Tiêu đề đúng. Vì sao: Chữ hoa không khớp: mã của tôi so 'Subject' với nhãn viết 'subject'."
+          },
+          "Theo ngôn ngữ an ninh, đây là sự khác nhau giữa ngăn chặn, ghi lại và xác minh. Bước kiểm tra trước khi gửi là ngăn chặn. Nhật ký là bằng chứng để điều tra về sau. Việc đọc lại từ Gmail là góc nhìn từ bên ngoài về kết quả, để bạn không phải tin lời hệ thống nói về việc nó đã làm. Những người làm SOC và GRC gọi đó là dấu vết kiểm toán và trách nhiệm giải trình. Tôi đang chuyển sang lĩnh vực này, và tôi hiểu vì sao những từ đó quan trọng khi nhìn phần mềm của chính mình báo cáo sai về công việc của nó.",
+          {
+            "fig": "img/audit-trail-5-roles-vi.svg", "size": [760, 244],
+            "mob": "img/audit-trail-5-roles-mobile-vi.svg", "msize": [360, 400],
+            "alt": "Ngăn chặn, ghi lại, xác minh. Ngăn chặn: Chặn hành động xấu trước khi nó xảy ra. Ghi lại: Giữ bằng chứng để điều tra về sau. Xác minh: Kiểm tra kết quả từ bên ngoài, không tin lời hệ thống."
+          },
+          "Nếu bạn để một công cụ AI gửi email, đăng lên kênh khách hàng hay thay đổi tệp, hãy hỏi ba câu. Cái gì chặn một hành động xấu trước khi nó xảy ra? Cái gì ghi lại nó sau đó, ở một nơi chỉ được thêm vào mà không sửa? Ai kiểm tra kết quả từ bên ngoài công cụ? Nếu chưa trả lời được cả ba, hãy cấp cho công cụ ít quyền hơn cho tới khi bạn trả lời được.",
+          {
+            "fig": "img/audit-trail-6-questions-vi.svg", "size": [760, 290],
+            "mob": "img/audit-trail-6-questions-mobile-vi.svg", "msize": [360, 486],
+            "alt": "Ba câu hỏi cho mọi công cụ AI có quyền truy cập. Trước: Cái gì chặn một hành động xấu trước khi nó xảy ra?. Sau: Cái gì ghi lại nó, ở nơi chỉ được thêm vào?. Bên ngoài: Ai kiểm tra kết quả từ bên ngoài công cụ?. Chưa trả lời được cả ba? Hãy cấp cho công cụ ít quyền hơn."
+          }
+        ]
+      },
+      es: {
+        title: "Lo que me enseñó una IA que envía mi correo sobre las pistas de auditoría",
+        tag: "Seguridad de IA",
+        summary: "Después de que un correo de Winston saliera mal, agregué una comprobación previa, una relectura y un log de solo adición, y aprendí que las comprobaciones también necesitan pruebas.",
+        body: [
+          "Winston, el asistente que manejo para mí, puede enviar correos desde mi cuenta de Gmail. Eso lo convierte en un usuario con privilegios, aunque yo escribí todo con Claude Code. En septiembre uno de sus correos salió mal, y arreglarlo me enseñó sobre controles básicos de seguridad más de lo que esperaba.",
+          {
+            "fig": "img/audit-trail-1-assistant-es.svg", "size": [760, 244],
+            "mob": "img/audit-trail-1-assistant-mobile-es.svg", "msize": [360, 432],
+            "alt": "Winston puede enviar correos en mi nombre. Winston: Mi propio asistente de IA, hecho con Claude Code. Acceso: Tiene la sesión iniciada en mi cuenta de Gmail. Resultado: Puede enviar correos en mi nombre, así que es un usuario con privilegios."
+          },
+          "El fallo fue aburrido. Winston empaqueta un comando de correo como texto plano, y un asunto con cierto carácter desplazó los campos. El correo salió con contenido equivocado y sin adjunto. Nadie atacó nada. Pero la forma del error me preocupa: un agente actuó según su propia lectura de una instrucción, y nada se interponía entre esa lectura y el envío.",
+          {
+            "fig": "img/audit-trail-2-glitch-es.svg", "size": [760, 260],
+            "mob": "img/audit-trail-2-glitch-mobile-es.svg", "msize": [360, 416],
+            "alt": "Cómo salió mal un correo. Lo que yo quería: Un asunto, un mensaje y un adjunto, cada uno en su lugar. Lo que Winston leyó: Un carácter en el asunto lo partió en dos, así que cada campo se movió un lugar. Lo que salió: Un correo con contenido equivocado y sin adjunto."
+          },
+          "Así que agregué tres controles. Una comprobación previa al envío se niega a enviar si el cuerpo está vacío, y ya detuvo un correo defectuoso. Una comprobación posterior al envío vuelve a traer el mensaje desde Gmail y lo compara con lo que yo aprobé. Además, cada envío se registra en un log de solo adición, para poder reconstruir lo que hizo el asistente sin depender de su propio relato.",
+          {
+            "fig": "img/audit-trail-3-controls-es.svg", "size": [760, 244],
+            "mob": "img/audit-trail-3-controls-mobile-es.svg", "msize": [360, 506],
+            "alt": "Tres controles que agregué. 1. Antes de enviar: ¿El cuerpo está vacío? Si es así, se niega a enviar. 2. Enviar: El correo sale por Gmail. 3. Releer: Lo trae de Gmail y lo compara con lo que aprobé. Siempre: Anota cada envío en un log de solo adición."
+          },
+          "Después resultó que los controles también tenían errores propios. La comprobación posterior seguía informando un asunto vacío en correos que estaban bien, porque mi código comparaba el nombre de una cabecera con una capitalización distinta a la que devuelve Gmail. El correo estaba bien y mi verificador estaba mal. Solo lo supe porque abrí la bandeja de entrada real y miré. Un control que no has probado contra la realidad es una suposición.",
+          {
+            "fig": "img/audit-trail-4-checker-es.svg", "size": [760, 276],
+            "mob": "img/audit-trail-4-checker-mobile-es.svg", "msize": [360, 428],
+            "alt": "El verificador estaba mal, no el correo. Mi comprobación decía: El asunto está vacío. La bandeja real mostraba: El asunto era correcto. Por qué: Las mayúsculas no coincidían: mi código comparaba 'Subject' con una etiqueta escrita 'subject'."
+          },
+          "En términos de seguridad, esta es la diferencia entre prevenir, registrar y verificar. La comprobación previa previene. El log es la evidencia desde la que investigas después. La relectura desde Gmail es una vista externa del resultado, para no tomar la palabra del sistema sobre lo que hizo. Quienes trabajan en SOC y GRC hablan de pistas de auditoría y rendición de cuentas. Yo me estoy moviendo hacia ese campo, y aprendí por qué importan esas palabras viendo a mi propio software informar mal de su trabajo.",
+          {
+            "fig": "img/audit-trail-5-roles-es.svg", "size": [760, 244],
+            "mob": "img/audit-trail-5-roles-mobile-es.svg", "msize": [360, 416],
+            "alt": "Prevenir, registrar, verificar. Prevenir: Detener una mala acción antes de que ocurra. Registrar: Guardar evidencia para investigar después. Verificar: Comprobar el resultado desde fuera, sin fiarse de lo que dice el sistema."
+          },
+          "Si dejas que una herramienta de IA envíe correos, publique en un canal de clientes o cambie archivos, hazte tres preguntas. ¿Qué detiene una mala acción antes de que ocurra? ¿Qué la registra después, en un lugar al que solo se añade? ¿Quién comprueba el resultado desde fuera de la herramienta? Si no puedes responder las tres, dale menos acceso a la herramienta hasta que puedas.",
+          {
+            "fig": "img/audit-trail-6-questions-es.svg", "size": [760, 306],
+            "mob": "img/audit-trail-6-questions-mobile-es.svg", "msize": [360, 486],
+            "alt": "Tres preguntas para cualquier herramienta de IA con acceso. Antes: ¿Qué detiene una mala acción antes de que ocurra?. Después: ¿Qué la registra, en un lugar al que solo se añade?. Desde fuera: ¿Quién comprueba el resultado desde fuera de la herramienta?. ¿No puedes responder las tres? Dale menos acceso a la herramienta."
+          }
+        ]
+      }
+    }
+  },
+  {
     type: "news",
     slug: "news-2026-10-31",
     title: "AI & ICT security news: week ending 31 Oct 2026",

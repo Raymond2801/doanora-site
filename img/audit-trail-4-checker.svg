@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" font-family="'IBM Plex Sans', 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif" viewBox="0 0 760 260" role="img" aria-label="The checker was wrong, not the email. My check said: The subject is empty. The real inbox showed: The subject was correct. Why: Capital letters did not match: my code compared 'Subject' with a label written 'subject'." font-size="13">
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M0 0L10 5L0 10z" fill="#857261"/>
+</marker>
+</defs>
+<text x="24" y="34" font-size="15" font-weight="600" fill="#241208">The checker was wrong, not the email</text>
+<g transform="translate(0,0)">
+<g>
+<rect x="24.0" y="56" width="210.66666666666666" height="180" rx="8" fill="#b7410e" fill-opacity="0.12" stroke="#b7410e" stroke-width="2"/>
+<g transform="translate(107.33333333333331,70)" fill="none" stroke="#b7410e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="19" cy="19" r="11"/><path d="M27 27L38 38" stroke-width="3.5"/></g>
+<text x="129.33333333333331" y="144" text-anchor="middle" font-size="13" font-weight="600" fill="#241208">My check said</text>
+<text x="129.33333333333331" y="164" text-anchor="middle" font-size="12" fill="#241208">The subject is empty</text>
+</g>
+<text x="254.66666666666666" y="151.0" text-anchor="middle" font-size="13" font-weight="600" fill="#857261">vs</text>
+<g>
+<rect x="274.66666666666663" y="56" width="210.66666666666666" height="180" rx="8" fill="#2f7a5a" fill-opacity="0.12" stroke="#2f7a5a" stroke-width="2"/>
+<g transform="translate(357.99999999999994,70)" fill="none" stroke="#2f7a5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="36" height="24" rx="3"/><path d="M4 12L22 25L40 12"/><circle cx="35" cy="32" r="8" fill="#f6f1ea" stroke="#2f7a5a"/><path d="M31 32L34 35L40 29" stroke="#2f7a5a"/></g>
+<text x="379.99999999999994" y="144" text-anchor="middle" font-size="13" font-weight="600" fill="#241208">The real inbox showed</text>
+<text x="379.99999999999994" y="164" text-anchor="middle" font-size="12" fill="#241208">The subject was correct</text>
+</g>
+<path d="M493.33333333333326 146.0L517.3333333333333 146.0" stroke="#857261" stroke-width="1.5" fill="none" marker-end="url(#ar)"/>
+<g>
+<rect x="525.3333333333333" y="56" width="210.66666666666666" height="180" rx="8" fill="#857261" fill-opacity="0.12" stroke="#857261" stroke-width="2"/>
+<g transform="translate(608.6666666666666,70)" fill="none" stroke="#857261" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="22" cy="22" r="17"/><text x="22" y="31" text-anchor="middle" font-size="24" font-weight="700" fill="#857261" stroke="none">?</text></g>
+<text x="630.6666666666666" y="144" text-anchor="middle" font-size="13" font-weight="600" fill="#241208">Why</text>
+<text x="630.6666666666666" y="164" text-anchor="middle" font-size="12" fill="#241208">Capital letters did not</text>
+<text x="630.6666666666666" y="180" text-anchor="middle" font-size="12" fill="#241208">match: my code compared</text>
+<text x="630.6666666666666" y="196" text-anchor="middle" font-size="12" fill="#241208">'Subject' with a label</text>
+<text x="630.6666666666666" y="212" text-anchor="middle" font-size="12" fill="#241208">written 'subject'</text>
+</g>
+
+</g>
+</svg>
