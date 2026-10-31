@@ -9,7 +9,8 @@ shows up as a FAIL line.
 For every post, in English, Vietnamese and Spanish, on a phone (375px) and a desktop (1280px) screen:
   post.html#<slug>: no script errors, right page language, heading, tab title, body item for item (paragraphs and
     subheadings, exact text), tag, no "only available in English" note, sources (text, link, opens in a new tab),
-    back link, no sideways scroll.
+    back link, no sideways scroll; for every picture: it loads, the browser uses the phone file (mob) at 375px and the main
+    file at 1280px, and the picture fits the screen width.
   blog.html: the post is in the list of its own type (right title, link, tag and summary) and not in the other list.
   index.html: the post is among the first 3 rows of its type in the home page preview.
 Prints one FAIL line per problem and ends with RENDER OK (exit 0) or a FAILED line (exit 1)."""
@@ -182,6 +183,15 @@ with sync_playwright() as pw:
                             break
                 for fig in page.query_selector_all('.post-body figure img'):
                     check(fig.evaluate('i => i.complete && i.naturalWidth > 0'), at + ': picture loads', fig.get_attribute('src'))
+                # the file the browser really picked: the phone layout (mob) at 375px, the main file at 1280px; and no picture wider than the screen
+                figs_want = [w[1] for w in want if w[0] == 'FIGURE']
+                figs_got = page.query_selector_all('.post-body figure')
+                for fi, (fw, fel) in enumerate(zip(figs_want, figs_got)):
+                    used = fel.query_selector('img').evaluate('i => i.currentSrc')
+                    expect = fw['mob'] if (width == 375 and fw['mob']) else fw['src']
+                    check(used == BASE + expect, at + ': picture %d uses %s' % (fi + 1, expect), used.replace(BASE, ''))
+                    box = fel.evaluate('f => { const r = f.querySelector("img").getBoundingClientRect(); return [r.left, r.right]; }')
+                    check(box[0] >= -1 and box[1] <= width + 1, at + ': picture %d fits the screen width' % (fi + 1), box)
                 meta = page.locator('article .meta').first.inner_text()
                 check(v['tag'] in meta, at + ': tag shown', meta)
                 check(page.locator('article .note').count() == 0, at + ': no "only available in English" note')
