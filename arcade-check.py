@@ -1,5 +1,5 @@
 """Arcade check. Usage: python3 -I arcade-check.py SITE_DIR
-Checks nav on all pages at several widths/languages, the Arcade page, and plays all four games."""
+Checks nav on all pages at several widths/languages, the Arcade page, and plays all five games."""
 import os, sys
 from playwright.sync_api import sync_playwright
 SITE = os.path.abspath(sys.argv[1]); BASE = 'file://' + SITE + '/'
@@ -28,7 +28,8 @@ with sync_playwright() as pw:
     ctx, p, errs = open_page(b, 'arcade.html')
     check(p.locator('a[href="zen-garden.html"]').count() >= 1 and p.locator('a[href="phishing-hunter.html"]').count() >= 1, 'arcade links to the adult games')
     check(p.locator('a[href="koi-pond.html"]').count() >= 1 and p.locator('a[href="nonogram.html"]').count() >= 1, 'arcade links to koi and nonogram')
-    check(p.locator('canvas.thumb').count() == 6, 'six thumbnails')
+    check(p.locator('a[href="dad-jokes.html"]').count() >= 1, 'arcade links to dad jokes')
+    check(p.locator('canvas.thumb').count() == 7, 'seven thumbnails')
     ctx.close()
     # Zen Garden
     ctx, p, errs = open_page(b, 'zen-garden.html')
@@ -65,6 +66,23 @@ with sync_playwright() as pw:
     p.wait_for_timeout(5000)
     check(p.evaluate('window.__koi.eaten()') > 0, 'koi: fish eat the food')
     check(not errs, 'koi: no errors', errs[:2]); ctx.close()
+    # Dad Jokes
+    ctx, p, errs = open_page(b, 'dad-jokes.html')
+    check(p.inner_text('#setup') != '' and p.locator('#punch').is_hidden(), 'dad: joke of the day shows, punchline hidden')
+    p.click('#reveal')
+    check(p.locator('#punch').is_visible() and p.inner_text('#punch') != '', 'dad: reveal shows the punchline')
+    seen = set()
+    for i in range(40):
+        p.click('#next'); seen.add(p.inner_text('#setup'))
+        if i == 0: check(p.locator('#punch').is_hidden(), 'dad: next hides the punchline again')
+    check(len(seen) >= 30, 'dad: next cycles through the jokes', len(seen))
+    p.keyboard.press('n'); p.wait_for_timeout(50)
+    check(p.locator('#punch').is_hidden(), 'dad: N key works')
+    check(not errs, 'dad: no errors', errs[:2]); ctx.close()
+    for w in (320, 1280):
+        ctx, p, errs = open_page(b, 'dad-jokes.html', w)
+        check(p.evaluate('document.documentElement.scrollWidth <= innerWidth + 1') and not errs, 'dad: no overflow at %d' % w, errs[:1])
+        ctx.close()
     # Pixel Nonogram
     ctx, p, errs = open_page(b, 'nonogram.html')
     check(p.evaluate('window.__nono.puzzles()') == 13, 'nono: 13 puzzles')

@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dad Jokes | Raymond Doan</title>
+<meta name="description" content="A new dad joke every day, plus a button for another. Read the setup, reveal the punchline, and groan. Nothing to win.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600&family=Press+Start+2P&display=swap">
+<style>
+:root {
+  color-scheme: light;
+  --cream: #f6f1ea;
+  --sand: #efe6d8;
+  --paper: #fffaf2;
+  --ink: #241208;
+  --muted: #6b5847;
+  --rust: #b7410e;
+  --teal: #28616c;
+  --neptune: #7fbb9e;
+  --on-accent: #fffaf6;
+  --pixel: 'Press Start 2P', 'Courier New', monospace;
+  --mono: 'IBM Plex Mono', 'Courier New', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 14px 12px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 10px 14px; flex-wrap: wrap; }
+h1 { font: 400 clamp(13px, 3.4vw, 20px)/1.4 var(--pixel); margin: 0; flex: 1 1 auto; text-align: center; letter-spacing: 0.02em; }
+.pbtn {
+  font: 400 10px/1 var(--pixel);
+  color: var(--ink);
+  background: var(--sand);
+  border: 3px solid var(--ink);
+  border-radius: 0;
+  padding: 13px 12px;
+  min-height: 44px;
+  box-shadow: 0 4px 0 var(--ink);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
+}
+.pbtn:hover { background: var(--paper); }
+.pbtn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--ink); }
+.pbtn:focus-visible { outline: 3px solid var(--neptune); outline-offset: 3px; }
+.pbtn[disabled] { opacity: 0.5; cursor: default; transform: none; box-shadow: 0 4px 0 var(--ink); }
+.pbtn.big { font-size: 11px; min-height: 52px; padding: 16px 20px; }
+.pbtn.rust { background: var(--rust); color: var(--on-accent); }
+.pbtn.rust:hover { background: #c94c16; }
+.pbtn.count { background: transparent; box-shadow: none; cursor: default; }
+.pbtn.count:hover { background: transparent; }
+
+.card {
+  position: relative;
+  background: var(--paper);
+  border: 3px solid var(--ink);
+  box-shadow: 0 6px 0 var(--ink);
+  padding: 26px 24px 24px;
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.label {
+  font: 400 9px/1.4 var(--pixel);
+  color: var(--teal);
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+.setup {
+  font: 600 clamp(20px, 4.6vw, 26px)/1.35 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+  margin: 0;
+  text-wrap: balance;
+}
+.punch-zone { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.punch {
+  font: 600 clamp(19px, 4.2vw, 24px)/1.35 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+  color: var(--rust);
+  margin: 0;
+  text-wrap: balance;
+}
+.punch[hidden] { display: none; }
+.punch.in { animation: fadein 0.6s ease-out both; }
+@keyframes fadein { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .punch.in { animation: none; } }
+
+.row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.note { font: 400 13px/1.6 var(--mono); color: var(--muted); margin: 0; text-align: center; }
+.foot { font-size: 14px; color: var(--muted); margin: 0; text-align: center; }
+.foot a { color: var(--rust); }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="bar">
+    <a class="pbtn" href="arcade.html">&larr; Arcade</a>
+    <h1>DAD JOKES</h1>
+    <span class="pbtn count" id="count" aria-hidden="true"></span>
+  </header>
+
+  <section class="card" aria-label="Joke">
+    <p class="label" id="label">JOKE OF THE DAY</p>
+    <p class="setup" id="setup"></p>
+    <div class="punch-zone">
+      <button class="pbtn big rust" id="reveal" type="button" aria-controls="punch" aria-expanded="false">Show the punchline</button>
+      <p class="punch" id="punch" hidden aria-live="polite"></p>
+    </div>
+  </section>
+
+  <div class="row">
+    <button class="pbtn" id="next" type="button">Another one</button>
+  </div>
+
+  <p class="note">A new joke every day, picked from your local date. Nothing is saved and nothing is scored. Keys: Space to reveal, N for another.</p>
+
+  <p class="foot">A small page by <a href="index.html">Raymond Doan</a>. More in the <a href="arcade.html">Arcade</a>.</p>
+  <noscript><p>This page needs JavaScript. Turn it on and reload the page.</p></noscript>
+</div>
+
+<script>
+(function () {
+  /* Setup and punchline pairs. Add more to the end of the list; the joke of the day
+     cycles through the whole list, so a longer list means a longer run before a repeat. */
+  var JOKES = [
+    ["Why did the cookie go to the doctor?", "Because it felt a little crumby."],
+    ["What do you call a fish wearing a bow tie?", "Sofishticated."],
+    ["Why did the scarecrow win an award?", "He was outstanding in his field."],
+    ["I'm reading a book about anti-gravity.", "It's impossible to put down."],
+    ["What do you call a lazy kangaroo?", "A pouch potato."],
+    ["Why did the bicycle fall over?", "It was two tired."],
+    ["What do you call a bear with no teeth?", "A gummy bear."],
+    ["I wanted to be a tree surgeon.", "I just never had the bark for it."],
+    ["What did the ocean say to the beach?", "Nothing. It just waved."],
+    ["Why was the maths book so sad?", "It had too many problems."],
+    ["Why did the golfer bring two pairs of pants?", "In case he got a hole in one."],
+    ["What do you call cheese that isn't yours?", "Nacho cheese."],
+    ["Why did the picture end up in jail?", "It was framed."],
+    ["Why did the broom win the race?", "It swept the competition."],
+    ["Why don't eggs tell jokes?", "They'd crack each other up."],
+    ["Why did the stadium get so hot after the game?", "All the fans left."],
+    ["What did one wall say to the other?", "I'll meet you at the corner."],
+    ["Why did the coffee file a police report?", "It got mugged."],
+    ["How do you organise a space party?", "You planet."],
+    ["I'm scared of elevators.", "So I'm taking steps to avoid them."],
+    ["What do you call a boomerang that won't come back?", "A stick."],
+    ["Why did the student eat his homework?", "The teacher said it was a piece of cake."],
+    ["Why did the banker quit his job?", "He lost interest."],
+    ["What do you call a dog that does magic?", "A Labracadabrador."],
+    ["Why can't you trust an atom?", "They make up everything."],
+    ["What's a tree's favourite drink?", "Root beer."],
+    ["Why did the tomato turn red?", "It saw the salad dressing."],
+    ["What do you call an alligator in a vest?", "An investigator."],
+    ["Why did the mushroom get invited to every party?", "He's a real fun-gi."],
+    ["What did the buffalo say when his son left for school?", "Bison."],
+    ["Why did the teddy bear say no to dessert?", "It was already stuffed."],
+    ["What do you call a sleeping bull?", "A bulldozer."]
+  ];
+
+  var N = JOKES.length;
+  var $ = function (id) { return document.getElementById(id); };
+  var setupEl = $('setup'), punchEl = $('punch'), revealBtn = $('reveal'), nextBtn = $('next');
+  var labelEl = $('label'), countEl = $('count');
+  var current = -1, deck = [];
+
+  /* Same joke for everyone on the same local date; it moves on at midnight. */
+  function todayIndex() {
+    var d = new Date();
+    var day = Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000);
+    return ((day % N) + N) % N;
+  }
+
+  /* Shuffled deck so "Another one" does not repeat until every joke has been shown. */
+  function refill() {
+    deck = [];
+    for (var i = 0; i < N; i++) deck.push(i);
+    for (var j = deck.length - 1; j > 0; j--) {
+      var k = Math.floor(Math.random() * (j + 1));
+      var t = deck[j]; deck[j] = deck[k]; deck[k] = t;
+    }
+  }
+
+  function pick() {
+    if (!deck.length) refill();
+    var i = deck.pop();
+    if (i === current && deck.length) { deck.unshift(i); i = deck.pop(); }
+    return i;
+  }
+
+  function show(i, label) {
+    current = i;
+    setupEl.textContent = JOKES[i][0];
+    punchEl.textContent = JOKES[i][1];
+    punchEl.hidden = true;
+    punchEl.classList.remove('in');
+    revealBtn.disabled = false;
+    revealBtn.textContent = 'Show the punchline';
+    revealBtn.setAttribute('aria-expanded', 'false');
+    labelEl.textContent = label;
+    countEl.textContent = (i + 1) + ' / ' + N;
+  }
+
+  function reveal() {
+    if (!punchEl.hidden) return;
+    punchEl.hidden = false;
+    void punchEl.offsetWidth;
+    punchEl.classList.add('in');
+    revealBtn.disabled = true;
+    revealBtn.textContent = 'Groan (optional)';
+    revealBtn.setAttribute('aria-expanded', 'true');
+  }
+
+  function next() {
+    show(pick(), 'ANOTHER ONE');
+  }
+
+  revealBtn.addEventListener('click', reveal);
+  nextBtn.addEventListener('click', next);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    var t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA')) return;
+    if (e.key === 'n' || e.key === 'N') { e.preventDefault(); next(); }
+    else if (e.key === ' ' && (t === document.body || t === document.documentElement)) { e.preventDefault(); reveal(); }
+  });
+
+  show(todayIndex(), 'JOKE OF THE DAY');
+})();
+</script>
+</body>
+</html>
