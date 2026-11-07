@@ -37,6 +37,128 @@
    A post goes live only after Raymond approves the draft. */
 window.BLOG_POSTS = [
   {
+    type: "blog",
+    slug: "search-cache-that-trusted-a-bad-answer",
+    title: "My search cache trusted a bad answer, and served it back to me twice",
+    date: "2026-11-07",
+    tag: "Security lessons",
+    summary: "A cache in Winston's file search saved a result nobody had checked and served it back, which is a small, harmless version of cache poisoning.",
+    body: [
+      "In September, Winston's file search gave me the wrong answer twice in a row. I asked it to find my CV. The first search came back with ten files, nearly all of them junk from other projects. I asked again and got a single file, also junk. Same question, two different wrong answers, and nothing in the replies said anything was off.",
+      { "h": "What was actually happening" },
+      "In plain words: a cache is a notebook where a program writes down an answer so it does not have to look it up again. Winston's notebook had a bad answer written in it, and from then on Winston trusted the notebook instead of looking again. Here is the technical version. Winston runs a Spotlight search on my Mac. The first search covered every folder it is allowed to look in, including a downloads folder full of other projects. The old code then saved that first result set under the keyword \"cv\" without checking that any of it matched. The second search found the saved entry and returned it. One mechanism explained both symptoms, and Claude Code traced it for me through the logs. Next to it sat a second bug: the search function accepted a location, but the calling code never passed one, so any folder I named in my request was silently ignored.",
+      { "ol": [
+        "**Search for \"cv\":** it looks in every folder, including old projects.",
+        "**Ten results:** almost all junk, and none of them checked.",
+        "**Saved as \"cv\":** stored with no check at all.",
+        "**Search again:** it gets the saved junk back."
+      ] },
+      { "h": "Why I call this a security lesson" },
+      "Picture a note on a stockroom door that says \"Cables are on shelf 3\". Whoever wrote it never checked. Every person who reads it afterwards walks to shelf 3, finds nothing, and does not think to doubt the note, because it is written down. That is what my cache did to me.",
+      "Nothing here was an attack, but the shape is the same as one. OWASP describes cache poisoning as a harmful response that gets cached and then keeps being served until the entry is purged, and it notes that caching magnifies the impact. My cache did this with no attacker involved: an unchecked result was stored once and then trusted from then on, because a saved answer looks like a verified one. The small business version is any place your systems remember something so they do not have to look it up again: saved search results, a copied list of approved suppliers, a spreadsheet of known good email addresses. Whatever goes in gets checked once, or never, and everything after inherits it.",
+      { "table": {
+        "head": ["Step", "Before: saved without a check", "After: checked before saving"],
+        "rows": [
+          ["New answer", "Could be right or wrong", "Could be right or wrong"],
+          ["Next", "Saved exactly as it came", "Checked: does it match the keyword?"],
+          ["Then", "Reused every time, even when wrong", "Saved only if it passes, so bad answers never get in"]
+        ]
+      } },
+      { "h": "What I changed" },
+      "The fixes were about checking at the door. A result is now saved only if it passes a relevance check, which means the file name has to contain the keyword. I removed the loose matching on short keys, because one of my own tests showed a one-character query matching far too much, and I added a three-character minimum. I purged the bad entry by hand. And the folder I name in a request is now used: Winston scans it directly before falling back to the wider search.",
+      { "ul": [
+        "**Check before saving:** only files that match the keyword are kept.",
+        "**Minimum length:** keywords need 3 or more characters.",
+        "**Remove the bad entry:** I purged it by hand.",
+        "**Use the named folder:** it is scanned first, then the wider search."
+      ] },
+      "Then I retested it the way I actually use it. Asking for my CV on the desktop now returns three files that really are resumes, and asking inside one named folder returns exactly the two resumes in it.",
+      { "h": "The habit I am keeping" },
+      "Validate on the way in, not only on the way out. If a result will be saved and reused, check it before it is saved, because the cheapest moment to catch a bad answer is before anything depends on it. Treat an option that does nothing as a bug too. The location setting that was accepted and ignored failed quietly, and quiet failures are worse than loud ones. I am moving into IT security, and this was a useful reminder that many failures start the way my bug did: something was trusted because it was already there."
+    ],
+    sources: [
+      { "title": "OWASP: Cache Poisoning", "url": "https://wiki.owasp.org/index.php/Cache_Poisoning" }
+    ],
+    tr: {
+      vi: {
+        title: "Bộ nhớ đệm trong tìm kiếm của tôi tin một đáp án sai, và đưa nó lại cho tôi hai lần",
+        tag: "Bài học bảo mật",
+        summary: "Một bộ nhớ đệm trong tính năng tìm tệp của Winston đã lưu một kết quả chưa ai kiểm tra rồi đưa nó lại, đây là phiên bản nhỏ và vô hại của việc đầu độc bộ nhớ đệm.",
+        body: [
+          "Hồi tháng 9, tính năng tìm tệp của Winston đưa cho tôi đáp án sai hai lần liên tiếp. Tôi nhờ nó tìm CV của mình. Lần tìm đầu trả về mười tệp, gần như toàn tệp rác từ các dự án khác. Tôi hỏi lại và chỉ nhận được một tệp, cũng là tệp rác. Cùng một câu hỏi, hai đáp án sai khác nhau, và không câu trả lời nào cho thấy có gì bất thường.",
+          { "h": "Chuyện thực sự đang xảy ra" },
+          "Nói đơn giản: bộ nhớ đệm (cache) là một cuốn sổ tay nơi chương trình ghi lại một đáp án để khỏi phải tra lại. Cuốn sổ của Winston có một đáp án sai được ghi vào, và từ đó Winston tin cuốn sổ thay vì tìm lại. Đây là phiên bản kỹ thuật. Winston chạy tìm kiếm Spotlight trên máy Mac của tôi. Lần tìm đầu quét mọi thư mục nó được phép xem, kể cả một thư mục tải xuống đầy các dự án khác. Đoạn mã cũ sau đó lưu bộ kết quả đầu tiên dưới từ khóa \"cv\" mà không kiểm tra xem có tệp nào khớp hay không. Lần tìm thứ hai thấy mục đã lưu và trả nó về. Một cơ chế giải thích cả hai triệu chứng, và Claude Code đã lần ra nó cho tôi qua nhật ký. Ngay cạnh còn một lỗi nữa: hàm tìm kiếm nhận một vị trí, nhưng đoạn mã gọi nó không bao giờ truyền vị trí vào, nên mọi thư mục tôi nêu trong yêu cầu đều bị lặng lẽ bỏ qua.",
+          { "ol": [
+            "**Tìm \"cv\":** quét mọi thư mục, kể cả dự án cũ.",
+            "**Mười kết quả:** gần như toàn rác, và không cái nào được kiểm tra.",
+            "**Lưu thành \"cv\":** được lưu mà không kiểm tra gì.",
+            "**Tìm lại:** nhận lại đúng đống rác đã lưu."
+          ] },
+          { "h": "Vì sao tôi gọi đây là một bài học bảo mật" },
+          "Hãy hình dung một tờ giấy dán trên cửa kho ghi \"Cáp ở kệ số 3\". Người viết chưa hề kiểm tra. Ai đọc xong cũng đi tới kệ số 3, không thấy gì, và không nghĩ đến chuyện nghi ngờ tờ giấy, vì nó đã được viết ra. Bộ nhớ đệm của tôi đã làm đúng như vậy với tôi.",
+          "Không có cuộc tấn công nào ở đây, nhưng hình dạng của nó giống một cuộc tấn công. OWASP mô tả việc đầu độc bộ nhớ đệm (cache poisoning) là một phản hồi có hại bị lưu vào bộ nhớ đệm rồi tiếp tục được phục vụ cho tới khi mục đó bị xóa, và lưu ý rằng bộ nhớ đệm khuếch đại tác động. Bộ nhớ đệm của tôi làm điều đó mà không cần kẻ tấn công nào: một kết quả chưa được kiểm tra được lưu một lần rồi được tin từ đó về sau, vì một đáp án đã lưu trông giống một đáp án đã được xác minh. Phiên bản cho doanh nghiệp nhỏ là bất cứ nơi nào hệ thống của bạn ghi nhớ điều gì đó để khỏi phải tra lại: kết quả tìm kiếm đã lưu, một danh sách nhà cung cấp được duyệt đã sao chép, một bảng tính các địa chỉ email \"đã biết là an toàn\". Thứ gì đi vào chỉ được kiểm tra một lần, hoặc không bao giờ, và mọi thứ sau đó thừa hưởng nó.",
+          { "table": {
+            "head": ["Bước", "Trước: lưu mà không kiểm tra", "Sau: kiểm tra trước khi lưu"],
+            "rows": [
+              ["Đáp án mới", "Có thể đúng hoặc sai", "Có thể đúng hoặc sai"],
+              ["Tiếp theo", "Lưu nguyên như khi nhận", "Kiểm tra: có khớp từ khóa không?"],
+              ["Sau đó", "Lần nào cũng được dùng lại, kể cả khi sai", "Chỉ lưu nếu qua, nên đáp án sai không lọt vào được"]
+            ]
+          } },
+          { "h": "Tôi đã thay đổi gì" },
+          "Các bản sửa đều nhằm vào việc kiểm tra ngay ở cửa vào. Một kết quả giờ chỉ được lưu nếu qua kiểm tra mức liên quan, nghĩa là tên tệp phải chứa từ khóa. Tôi bỏ kiểu khớp lỏng trên các từ khóa ngắn, vì một bài thử của chính tôi cho thấy truy vấn một ký tự khớp quá nhiều, và tôi thêm mức tối thiểu ba ký tự. Tôi xóa tay mục sai. Và thư mục tôi nêu trong yêu cầu giờ đã được dùng: Winston quét thẳng thư mục đó trước khi quay sang tìm kiếm rộng hơn.",
+          { "ul": [
+            "**Kiểm tra trước khi lưu:** chỉ giữ các tệp khớp từ khóa.",
+            "**Độ dài tối thiểu:** từ khóa phải từ 3 ký tự.",
+            "**Xóa mục sai:** tôi xóa tay.",
+            "**Dùng thư mục được nêu:** quét trước, rồi mới tìm rộng."
+          ] },
+          "Rồi tôi thử lại đúng theo cách tôi thật sự dùng. Hỏi CV của tôi trên màn hình nền giờ trả về ba tệp đúng là hồ sơ xin việc, và hỏi bên trong một thư mục được nêu tên trả về đúng hai hồ sơ nằm trong đó.",
+          { "h": "Thói quen tôi giữ lại" },
+          "Hãy kiểm tra lúc đi vào, không chỉ lúc đi ra. Nếu một kết quả sẽ được lưu và dùng lại, hãy kiểm tra nó trước khi lưu, vì thời điểm rẻ nhất để bắt một đáp án sai là trước khi có gì đó phụ thuộc vào nó. Cũng hãy coi một tùy chọn không làm gì là một lỗi. Thiết lập vị trí được nhận rồi bị bỏ qua đã hỏng một cách lặng lẽ, và hỏng lặng lẽ tệ hơn hỏng ồn ào. Tôi đang chuyển sang IT security, và đây là lời nhắc hữu ích rằng nhiều sự cố bắt đầu giống lỗi của tôi: có thứ gì đó được tin chỉ vì nó đã nằm sẵn ở đó."
+        ]
+      },
+      es: {
+        title: "Mi caché de búsqueda confió en una respuesta mala y me la devolvió dos veces",
+        tag: "Lecciones de seguridad",
+        summary: "Una caché en la búsqueda de archivos de Winston guardó un resultado que nadie había revisado y lo devolvió, una versión pequeña e inofensiva del envenenamiento de caché.",
+        body: [
+          "En septiembre, la búsqueda de archivos de Winston me dio la respuesta equivocada dos veces seguidas. Le pedí que encontrara mi CV. La primera búsqueda devolvió diez archivos, casi todos basura de otros proyectos. Volví a preguntar y obtuve un solo archivo, también basura. La misma pregunta, dos respuestas equivocadas distintas, y nada en las respuestas indicaba que algo fallara.",
+          { "h": "Qué estaba pasando en realidad" },
+          "En palabras sencillas: una caché es un cuaderno donde un programa anota una respuesta para no tener que buscarla otra vez. En el cuaderno de Winston había anotada una respuesta mala, y desde entonces Winston confió en el cuaderno en lugar de volver a buscar. Esta es la versión técnica. Winston ejecuta una búsqueda de Spotlight en mi Mac. La primera búsqueda recorrió todas las carpetas que tiene permitido mirar, incluida una carpeta de descargas llena de otros proyectos. El código antiguo guardó entonces ese primer conjunto de resultados bajo la palabra clave \"cv\" sin comprobar que alguno coincidiera. La segunda búsqueda encontró la entrada guardada y la devolvió. Un solo mecanismo explicaba los dos síntomas, y Claude Code lo rastreó por mí a través de los registros. Junto a él había un segundo error: la función de búsqueda aceptaba una ubicación, pero el código que la llamaba nunca la pasaba, así que cualquier carpeta que yo nombrara en mi petición se ignoraba en silencio.",
+          { "ol": [
+            "**Buscar \"cv\":** mira en todas las carpetas, incluidos proyectos viejos.",
+            "**Diez resultados:** casi todo basura, y ninguno revisado.",
+            "**Guardado como \"cv\":** almacenado sin ninguna revisión.",
+            "**Buscar otra vez:** devuelve la basura guardada."
+          ] },
+          { "h": "Por qué lo llamo una lección de seguridad" },
+          "Imagina una nota en la puerta de un almacén que dice \"Los cables están en el estante 3\". Quien la escribió nunca lo comprobó. Todas las personas que la leen después van al estante 3, no encuentran nada y no se les ocurre dudar de la nota, porque está escrita. Eso fue lo que mi caché me hizo a mí.",
+          "Aquí no hubo ningún ataque, pero la forma es la misma que la de uno. OWASP describe el envenenamiento de caché (cache poisoning) como una respuesta dañina que se guarda en la caché y sigue sirviéndose hasta que se elimina la entrada, y señala que la caché amplifica el impacto. Mi caché lo hizo sin ningún atacante de por medio: un resultado sin revisar se guardó una vez y desde entonces se confió en él, porque una respuesta guardada parece una respuesta verificada. La versión para un negocio pequeño es cualquier lugar donde tus sistemas recuerdan algo para no tener que buscarlo de nuevo: resultados de búsqueda guardados, una lista copiada de proveedores aprobados, una hoja de cálculo de direcciones de correo \"conocidas como seguras\". Lo que entra se revisa una vez, o nunca, y todo lo que viene después lo hereda.",
+          { "table": {
+            "head": ["Paso", "Antes: guardado sin revisar", "Después: revisado antes de guardar"],
+            "rows": [
+              ["Respuesta nueva", "Puede ser correcta o no", "Puede ser correcta o no"],
+              ["Siguiente", "Guardada tal cual llegó", "Revisada: ¿coincide con la palabra clave?"],
+              ["Luego", "Reutilizada siempre, aunque esté mal", "Guardada solo si pasa, así que las respuestas malas no entran"]
+            ]
+          } },
+          { "h": "Qué cambié" },
+          "Los arreglos consistieron en revisar en la puerta. Ahora un resultado se guarda solo si pasa una comprobación de relevancia, es decir, el nombre del archivo debe contener la palabra clave. Quité la coincidencia laxa con claves cortas, porque una de mis propias pruebas mostró que una consulta de un solo carácter coincidía con demasiado, y añadí un mínimo de tres caracteres. Eliminé a mano la entrada mala. Y ahora se usa la carpeta que nombro en una petición: Winston la revisa directamente antes de recurrir a la búsqueda más amplia.",
+          { "ul": [
+            "**Revisar antes de guardar:** solo se guardan los archivos que coinciden con la palabra clave.",
+            "**Longitud mínima:** las palabras clave necesitan 3 o más caracteres.",
+            "**Quitar la entrada mala:** la eliminé a mano.",
+            "**Usar la carpeta indicada:** se revisa primero, luego la búsqueda más amplia."
+          ] },
+          "Luego lo probé de nuevo como lo uso de verdad. Pedir mi CV en el escritorio ahora devuelve tres archivos que de verdad son currículos, y pedirlo dentro de una carpeta nombrada devuelve exactamente los dos currículos que hay en ella.",
+          { "h": "El hábito que me quedo" },
+          "Valida al entrar, no solo al salir. Si un resultado se va a guardar y reutilizar, revísalo antes de guardarlo, porque el momento más barato para detectar una mala respuesta es antes de que algo dependa de ella. Trata también como un error una opción que no hace nada. El ajuste de ubicación que se aceptaba y se ignoraba falló en silencio, y los fallos silenciosos son peores que los ruidosos. Me estoy moviendo hacia la seguridad informática, y esto fue un buen recordatorio de que muchos fallos empiezan como mi error: se confió en algo solo porque ya estaba ahí."
+        ]
+      }
+    }
+  },
+  {
     type: "news",
     slug: "news-2026-11-07",
     title: "AI & ICT security news: week ending 7 Nov 2026",
