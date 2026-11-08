@@ -477,11 +477,11 @@ window.I18N_PRODUCTS.es = {
       },
       {
         h: "Formato",
-        p: ["Cuatro documentos de Word (.docx) editables más un libro de Excel (.xlsx) editable, y un ejemplo resuelto (.docx) de regalo. Funciona en Microsoft Word, Microsoft Excel y LibreOffice. Solo fórmulas estándar: sin macros, sin complementos y sin necesidad de cuenta."]
+        p: ["Cuatro documentos de Word (.docx) editables más un libro de Excel (.xlsx) editable, y un ejemplo resuelto (.docx) de regalo. Funciona en Microsoft Word, Microsoft Excel y LibreOffice. Solo fórmulas estándar: sin macros, sin complementos y sin necesidad de cuenta. Versión 1.0, escrita en octubre de 2026."]
       },
       {
         h: "Para tener en cuenta",
-        p: ["Esto es orientación general, no asesoría legal. Las leyes de privacidad, empleo y grabación varían según el país, el estado y el sector, así que verifica lo que aplica donde operas. Para uso en tu propio negocio: por favor no revender ni compartir los archivos."]
+        p: ["Garantía de devolución de dinero de 30 días: si el kit no te resulta útil, contacta al autor dentro de los 30 días posteriores a la compra y se te reembolsará el total. Esto es orientación general, no asesoría legal. Las leyes de privacidad, empleo y grabación varían según el país, el estado y el sector, así que verifica lo que aplica donde operas. Para uso en tu propio negocio: por favor no revender ni compartir los archivos."]
       }
     ],
     facts: [
@@ -501,9 +501,9 @@ window.I18N_PRODUCTS.es = {
     tagline: "El Essential Eight de la Dirección de Señales de Australia (ASD) en lenguaje claro, con un libro que calcula tu nivel y un plan de 90 días para cerrar las brechas.",
     row: "El Essential Eight en lenguaje claro para el Nivel de madurez 1 y el Nivel 2: un libro de autoevaluación, un plan de 90 días y textos para tu aseguradora. Archivos editables de Word y Excel.",
     intro: [
-      "Las aseguradoras de ciberseguridad, los clientes grandes y los compradores del gobierno ahora hacen la misma pregunta a las pequeñas empresas: ¿cómo te comparas con el Essential Eight? La mayoría de los dueños nunca ha visto la lista, y el modelo oficial está escrito para especialistas.",
+      "Las aseguradoras de ciberseguridad, los clientes grandes y los compradores del gobierno cada vez piden a las pequeñas empresas que demuestren qué tan bien protegen sus sistemas. El Essential Eight, de la Dirección de Señales de Australia, es la lista más conocida para ello. La mayoría de los dueños nunca ha visto la lista, y el modelo oficial está escrito para especialistas.",
       "Este kit convierte el Essential Eight de la Dirección de Señales de Australia (modelo de noviembre de 2023) en lenguaje claro. Obtienes un libro que calcula tu nivel por ti, una lista de brechas en un orden sensato, un plan de 90 días y textos listos para tu aseguradora, tu equipo y tu proveedor de IT. Puedes dejarlo listo en medio día, sin contratar a un consultor.",
-      "Cubre el Nivel de madurez 1 y el Nivel de madurez 2. El Nivel 1 es donde la ASD sugiere que empiecen las pequeñas empresas. El Nivel 2 es lo que piden muchas aseguradoras y clientes grandes. El Nivel 3 no está incluido."
+      "Cubre el Nivel de madurez 1 y el Nivel de madurez 2. El Nivel 1 es donde la ASD sugiere que empiecen las pequeñas empresas. El Nivel 2 es el siguiente paso, para cuando un cliente o una licitación pide más. El Nivel 3 no está incluido."
     ],
     sections: [
       {
@@ -534,11 +534,11 @@ window.I18N_PRODUCTS.es = {
       },
       {
         h: "Formato",
-        p: ["Cinco documentos de Word (.docx) editables y un libro de Excel (.xlsx) editable. Funciona en Microsoft Word, Microsoft Excel y LibreOffice. Solo fórmulas estándar: sin macros, sin complementos y sin necesidad de cuenta."]
+        p: ["Cinco documentos de Word (.docx) editables y un libro de Excel (.xlsx) editable. Versión 1.0, octubre de 2026. Funciona en Microsoft Word, Microsoft Excel y LibreOffice. Solo fórmulas estándar: sin macros, sin complementos y sin necesidad de cuenta."]
       },
       {
         h: "Para tener en cuenta",
-        p: ["Es una guía independiente. No está afiliada ni respaldada por la Dirección de Señales de Australia ni por el Gobierno de Australia. Está escrita según el modelo de madurez del Essential Eight de noviembre de 2023, así que revisa cyber.gov.au por si hay algo más reciente. Una autoevaluación no es una auditoría, y no existe un certificado del Essential Eight. Esto es orientación general, no asesoría legal. Para uso en tu propio negocio: por favor no revender ni compartir los archivos."]
+        p: ["El precio de A$15 no incluye GST. El GST (10%) se agrega al pagar para compradores en Australia, así que el total es de unos A$16.50. Es una guía independiente. No está afiliada ni respaldada por la Dirección de Señales de Australia ni por el Gobierno de Australia. Está escrita según el modelo de madurez del Essential Eight de noviembre de 2023, así que revisa cyber.gov.au por si hay algo más reciente. Una autoevaluación no es una auditoría, y no existe un certificado del Essential Eight. Esto es orientación general, no asesoría legal. Para uso en tu propio negocio: por favor no revender ni compartir los archivos."]
       }
     ],
     facts: [

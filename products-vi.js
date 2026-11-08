@@ -477,11 +477,11 @@ window.I18N_PRODUCTS.vi = {
       },
       {
         h: "Định dạng",
-        p: ["Bốn tài liệu Word (.docx) chỉnh sửa được cùng một sổ tính Excel (.xlsx) chỉnh sửa được, và một ví dụ hoàn chỉnh (.docx) tặng kèm. Dùng được trong Microsoft Word, Microsoft Excel và LibreOffice. Chỉ dùng công thức chuẩn: không macro, không tiện ích bổ sung và không cần tài khoản."]
+        p: ["Bốn tài liệu Word (.docx) chỉnh sửa được cùng một sổ tính Excel (.xlsx) chỉnh sửa được, và một ví dụ hoàn chỉnh (.docx) tặng kèm. Dùng được trong Microsoft Word, Microsoft Excel và LibreOffice. Chỉ dùng công thức chuẩn: không macro, không tiện ích bổ sung và không cần tài khoản. Phiên bản 1.0, viết tháng 10 năm 2026."]
       },
       {
         h: "Cần biết thêm",
-        p: ["Đây là hướng dẫn chung, không phải tư vấn pháp lý. Luật về quyền riêng tư, lao động và ghi âm khác nhau theo quốc gia, bang và ngành nghề, vì vậy hãy kiểm tra quy định áp dụng ở nơi bạn hoạt động. Dùng cho doanh nghiệp của riêng bạn: vui lòng không bán lại hay chia sẻ các tệp này."]
+        p: ["Hoàn tiền trong 30 ngày: nếu bộ này không hữu ích với bạn, hãy liên hệ tác giả trong vòng 30 ngày kể từ khi mua và bạn sẽ được hoàn lại toàn bộ tiền. Đây là hướng dẫn chung, không phải tư vấn pháp lý. Luật về quyền riêng tư, lao động và ghi âm khác nhau theo quốc gia, bang và ngành nghề, vì vậy hãy kiểm tra quy định áp dụng ở nơi bạn hoạt động. Dùng cho doanh nghiệp của riêng bạn: vui lòng không bán lại hay chia sẻ các tệp này."]
       }
     ],
     facts: [
@@ -501,9 +501,9 @@ window.I18N_PRODUCTS.vi = {
     tagline: "Essential Eight của Cơ quan Tín hiệu Úc (ASD) bằng ngôn ngữ dễ hiểu, kèm một sổ tính tự tính mức độ của bạn và kế hoạch 90 ngày để lấp các khoảng trống.",
     row: "Essential Eight bằng ngôn ngữ dễ hiểu cho Mức độ trưởng thành 1 và 2: sổ tính tự đánh giá, kế hoạch 90 ngày và câu chữ dành cho công ty bảo hiểm của bạn. Tệp Word và Excel chỉnh sửa được.",
     intro: [
-      "Các công ty bảo hiểm an ninh mạng, khách hàng lớn và bên mua của chính phủ giờ đều hỏi doanh nghiệp nhỏ cùng một câu: bạn đang ở đâu so với Essential Eight? Hầu hết chủ doanh nghiệp chưa từng thấy danh sách này, và mô hình chính thức thì được viết cho chuyên gia.",
+      "Các công ty bảo hiểm an ninh mạng, khách hàng lớn và bên mua của chính phủ ngày càng hỏi doanh nghiệp nhỏ xem họ bảo vệ hệ thống của mình tốt đến đâu. Essential Eight của Cơ quan Tín hiệu Úc là danh sách được biết đến nhiều nhất cho việc này. Hầu hết chủ doanh nghiệp chưa từng thấy danh sách này, và mô hình chính thức thì được viết cho chuyên gia.",
       "Bộ này chuyển Essential Eight của Cơ quan Tín hiệu Úc (mô hình tháng 11 năm 2023) sang ngôn ngữ dễ hiểu. Bạn có một sổ tính tự tính mức độ của bạn, một danh sách các khoảng trống theo thứ tự hợp lý, một kế hoạch 90 ngày, cùng câu chữ có sẵn cho công ty bảo hiểm, nhân viên và đơn vị hỗ trợ IT của bạn. Bạn có thể thiết lập xong trong khoảng nửa ngày, không cần thuê tư vấn.",
-      "Bao gồm Mức độ trưởng thành 1 và Mức độ trưởng thành 2. Mức 1 là nơi ASD gợi ý doanh nghiệp nhỏ nên bắt đầu. Mức 2 là mức nhiều công ty bảo hiểm và khách hàng lớn yêu cầu. Mức 3 không nằm trong bộ này."
+      "Bao gồm Mức độ trưởng thành 1 và Mức độ trưởng thành 2. Mức 1 là nơi ASD gợi ý doanh nghiệp nhỏ nên bắt đầu. Mức 2 là bước tiếp theo, dành cho khi khách hàng hoặc hồ sơ thầu yêu cầu nhiều hơn. Mức 3 không nằm trong bộ này."
     ],
     sections: [
       {
@@ -534,11 +534,11 @@ window.I18N_PRODUCTS.vi = {
       },
       {
         h: "Định dạng",
-        p: ["Năm tài liệu Word (.docx) chỉnh sửa được và một sổ tính Excel (.xlsx) chỉnh sửa được. Dùng được trong Microsoft Word, Microsoft Excel và LibreOffice. Chỉ dùng công thức chuẩn: không macro, không tiện ích bổ sung và không cần tài khoản."]
+        p: ["Năm tài liệu Word (.docx) chỉnh sửa được và một sổ tính Excel (.xlsx) chỉnh sửa được. Phiên bản 1.0, tháng 10 năm 2026. Dùng được trong Microsoft Word, Microsoft Excel và LibreOffice. Chỉ dùng công thức chuẩn: không macro, không tiện ích bổ sung và không cần tài khoản."]
       },
       {
         h: "Cần biết thêm",
-        p: ["Đây là một hướng dẫn độc lập. Nó không liên kết với và không được Cơ quan Tín hiệu Úc hay Chính phủ Úc chứng nhận. Được viết theo mô hình mức độ trưởng thành Essential Eight tháng 11 năm 2023, vì vậy hãy xem cyber.gov.au nếu cần bản mới hơn. Tự đánh giá không phải là kiểm toán, và không có chứng chỉ Essential Eight. Đây là hướng dẫn chung, không phải tư vấn pháp lý. Dùng cho doanh nghiệp của riêng bạn: vui lòng không bán lại hay chia sẻ các tệp này."]
+        p: ["Giá A$15 chưa gồm GST. GST (10%) được cộng khi thanh toán với người mua tại Úc, nên tổng khoảng A$16.50. Đây là một hướng dẫn độc lập. Nó không liên kết với và không được Cơ quan Tín hiệu Úc hay Chính phủ Úc chứng nhận. Được viết theo mô hình mức độ trưởng thành Essential Eight tháng 11 năm 2023, vì vậy hãy xem cyber.gov.au nếu cần bản mới hơn. Tự đánh giá không phải là kiểm toán, và không có chứng chỉ Essential Eight. Đây là hướng dẫn chung, không phải tư vấn pháp lý. Dùng cho doanh nghiệp của riêng bạn: vui lòng không bán lại hay chia sẻ các tệp này."]
       }
     ],
     facts: [

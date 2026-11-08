@@ -629,11 +629,11 @@ window.PRODUCTS = [
       },
       {
         h: "Format",
-        p: ["Four editable Word documents (.docx) plus an editable Excel workbook (.xlsx), and a bonus worked example (.docx). Works in Microsoft Word, Microsoft Excel and LibreOffice. Standard formulas only: no macros, no add-ins and no account needed."]
+        p: ["Four editable Word documents (.docx) plus an editable Excel workbook (.xlsx), and a bonus worked example (.docx). Works in Microsoft Word, Microsoft Excel and LibreOffice. Standard formulas only: no macros, no add-ins and no account needed. Version 1.0, written October 2026."]
       },
       {
         h: "Good to know",
-        p: ["General guidance, not legal advice. Privacy, employment and recording laws differ by country, state and industry, so check what applies where you operate. For use in your own business: please do not resell or share the files."]
+        p: ["30-day money back guarantee: if the kit is not useful to you, contact the author within 30 days of buying and you will be refunded in full. General guidance, not legal advice. Privacy, employment and recording laws differ by country, state and industry, so check what applies where you operate. For use in your own business: please do not resell or share the files."]
       }
     ],
     facts: [
@@ -651,7 +651,7 @@ window.PRODUCTS = [
     gumroad: {
       permalink: "nihkc",
       name: "SME AI Usage Policy and Tool Vetting Kit",
-      hash: "dfab006db428"
+      hash: "4055c205f7e6"
     }
   },
 
@@ -666,9 +666,9 @@ window.PRODUCTS = [
     tagline: "The Australian Signals Directorate's Essential Eight in plain English, with a workbook that works out your level and a 90-day plan to close the gaps.",
     row: "The Essential Eight in plain English for Maturity Level 1 and Level 2: a self-assessment workbook, a 90-day plan and wording for your insurer. Editable Word and Excel files.",
     intro: [
-      "Cyber insurers, larger customers and government buyers now ask small businesses the same question: how do you stack up against the Essential Eight? Most owners have never seen the list, and the official model is written for specialists.",
+      "Cyber insurers, larger customers and government buyers increasingly ask small businesses how well they protect their systems. The Essential Eight, from the Australian Signals Directorate, is the best-known list for it. Most owners have never seen the list, and the official model is written for specialists.",
       "This kit turns the Australian Signals Directorate's Essential Eight (November 2023 model) into plain English. You get a workbook that works out your level for you, a gap list in a sensible order, a 90-day plan, and ready-made wording for your insurer, your staff and your IT provider. You can set it up in about half a day, without hiring a consultant.",
-      "Covers Maturity Level 1 and Level 2. Level 1 is where ASD suggests small businesses start. Level 2 is what many insurers and larger customers ask for. Level 3 is not covered."
+      "Covers Maturity Level 1 and Level 2. Level 1 is where ASD suggests small businesses start. Level 2 is the next step up, for when a customer or tender asks for more. Level 3 is not covered."
     ],
     sections: [
       {
@@ -699,11 +699,11 @@ window.PRODUCTS = [
       },
       {
         h: "Format",
-        p: ["Five editable Word documents (.docx) and an editable Excel workbook (.xlsx). Works in Microsoft Word, Microsoft Excel and LibreOffice. Standard formulas only: no macros, no add-ins and no account needed."]
+        p: ["Five editable Word documents (.docx) and an editable Excel workbook (.xlsx). Works in Microsoft Word, Microsoft Excel and LibreOffice. Standard formulas only: no macros, no add-ins and no account needed. Version 1.0, October 2026."]
       },
       {
         h: "Good to know",
-        p: ["An independent guide. It is not affiliated with or endorsed by the Australian Signals Directorate or the Australian Government. Written against the Essential Eight maturity model of November 2023, so check cyber.gov.au for anything newer. A self-assessment is not an audit, and there is no Essential Eight certificate. General guidance, not legal advice. For use in your own business: please do not resell or share the files."]
+        p: ["Price: A$15 + GST. GST (10%) is added at checkout for buyers in Australia, so the total is about A$16.50. An independent guide. It is not affiliated with or endorsed by the Australian Signals Directorate or the Australian Government. Written against the Essential Eight maturity model of November 2023, so check cyber.gov.au for anything newer. A self-assessment is not an audit, and there is no Essential Eight certificate. General guidance, not legal advice. For use in your own business: please do not resell or share the files."]
       }
     ],
     facts: [
@@ -722,7 +722,7 @@ window.PRODUCTS = [
     gumroad: {
       permalink: "cbayzq",
       name: "SME Essential Eight Quick-Start Kit",
-      hash: "eb2c15c2ea77"
+      hash: "9495726bb9fb"
     }
   }
 ];
