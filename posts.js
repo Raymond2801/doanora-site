@@ -37,6 +37,75 @@
    A post goes live only after Raymond approves the draft. */
 window.BLOG_POSTS = [
   {
+    type: "blog",
+    slug: "checking-a-policy-bot-before-staff-use",
+    title: "What I would check before a policy bot answers your staff",
+    date: "2026-11-14",
+    tag: "AI Security",
+    summary: "Deskmate answers staff questions from a company's own documents, so the security work sits in three places: the documents, who can ask, and the keys behind it.",
+    body: [
+      "Deskmate is a Telegram bot I built that answers staff questions about company policy from the business's own documents. It runs for one business at a time and is deployed on Railway. Instead of searching an index, it sends the documents to the AI model along with each question. When I think about securing a bot like this, the model is the smaller part of the job. The work sits in the documents, in who can ask, and in the keys behind it.",
+      {
+        "fig": "img/policy-bot-checks.svg", "size": [760, 300],
+        "mob": "img/policy-bot-checks-mobile.svg", "msize": [360, 580],
+        "alt": "A flow from staff on Telegram to the policy bot to the AI model. The company documents feed the bot and are sent to the model with every question. Three places to check: 1, what is in the documents folder, only what every employee may read; 2, who can ask, an allowed list with leavers removed; 3, where the keys are, in secret settings with a spending cap.",
+        "cap": "Where to check a policy bot"
+      },
+      "Start with the documents. Because the whole set goes to the model with every question, anything in that set can come back out in an answer. That makes the document folder the permission boundary. A staff handbook, a leave policy and expense rules are fine for every employee to read. Salary bands, performance notes or a customer list are not, and putting them in the folder means anyone who can ask the bot can in effect read them. The rule I would follow is to load only what you would be happy to pin on the staff noticeboard.",
+      "Next, who can ask. Telegram lets anyone who has a bot's link open a conversation with it, and its documentation says the bot's own backend has to check that a user was authorized. So a policy bot needs its own list of allowed staff, and a way to remove a person on their last day. That is the same job as an offboarding checklist, applied to one more system. I am describing what any such bot needs here, not listing what a particular product already does, so check this for any bot you deploy.",
+      "Then treat what people type, and what the documents contain, as input that can steer the model. OWASP calls this prompt injection: input that changes how a model behaves in ways nobody intended, even when it is hidden from humans. Its advice for limiting the damage is to give the model the least access it needs, to keep API keys in the application rather than with the model, and to require human approval for risky actions. A bot that only reads documents and replies has very little to abuse, which is a good reason to keep a policy bot that simple. OWASP is also clear that no method is foolproof, so these steps reduce the impact rather than remove the risk.",
+      "The keys come next. A bot like this holds at least an AI service key and a Telegram token. Keep them in the hosting platform's secret settings and out of the code, set a spending cap with the AI provider, and replace them if you are ever unsure who has seen them. If someone leaves who had access to the hosting account, that counts as a reason to replace them.",
+      "Last, remember that a policy answer is not the policy. My rule of thumb for any policy bot is that it should say which document an answer came from, and that it should tell the person to ask a human when the documents do not cover the question. A confident wrong answer about leave or expenses is worse than no answer.",
+      "Before staff use a bot like this, ask four questions. What documents are in it? Who can ask, and how do I remove them? Where are the keys, and what is the spending limit? And what does it do when it does not know?"
+    ],
+    sources: [
+      { "title": "OWASP Gen AI Security Project: LLM01:2025 Prompt Injection", "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/" },
+      { "title": "Telegram: Bot Features", "url": "https://core.telegram.org/bots/features" }
+    ],
+    tr: {
+      vi: {
+        title: "Điều tôi sẽ kiểm tra trước khi để một bot chính sách trả lời nhân viên của bạn",
+        tag: "Bảo mật AI",
+        summary: "Deskmate trả lời câu hỏi của nhân viên từ chính tài liệu của công ty, nên công việc bảo mật nằm ở ba chỗ: tài liệu, ai được hỏi, và các khóa phía sau.",
+        body: [
+          "Deskmate là một bot Telegram tôi đã xây để trả lời câu hỏi của nhân viên về chính sách công ty, dựa trên chính tài liệu của doanh nghiệp. Nó chạy cho một doanh nghiệp mỗi lần và được triển khai trên Railway. Thay vì tìm trong một chỉ mục, nó gửi toàn bộ tài liệu cho mô hình AI cùng với mỗi câu hỏi. Khi nghĩ về việc bảo vệ một bot như vậy, mô hình là phần nhỏ hơn của công việc. Phần việc nằm ở tài liệu, ở việc ai được hỏi, và ở các khóa phía sau.",
+          {
+            "fig": "img/policy-bot-checks-vi.svg", "size": [760, 300],
+            "mob": "img/policy-bot-checks-mobile-vi.svg", "msize": [360, 580],
+            "alt": "Luồng từ nhân viên trên Telegram tới bot chính sách rồi tới mô hình AI. Tài liệu của công ty cấp cho bot và được gửi cho mô hình cùng mỗi câu hỏi. Ba chỗ cần kiểm: 1, trong thư mục tài liệu có gì, chỉ những gì mọi nhân viên được đọc; 2, ai được hỏi, danh sách cho phép và gỡ người đã nghỉ việc; 3, khóa nằm ở đâu, trong cài đặt bí mật và có hạn mức chi tiêu.",
+            "cap": "Chỗ cần kiểm trong một bot chính sách"
+          },
+          "Bắt đầu từ tài liệu. Vì cả bộ tài liệu được gửi cho mô hình với mỗi câu hỏi, bất cứ thứ gì trong bộ đó đều có thể quay ra trong một câu trả lời. Điều đó biến thư mục tài liệu thành ranh giới phân quyền. Sổ tay nhân viên, chính sách nghỉ phép và quy định chi phí thì mọi nhân viên đọc được. Bậc lương, ghi chú đánh giá hiệu suất hay danh sách khách hàng thì không, và đưa chúng vào thư mục nghĩa là bất kỳ ai hỏi được bot đều thực tế đọc được chúng. Quy tắc tôi sẽ theo là chỉ nạp những gì bạn vui lòng dán lên bảng tin của nhân viên.",
+          "Tiếp theo, ai được hỏi. Telegram cho phép bất kỳ ai có đường dẫn của bot mở một cuộc trò chuyện với nó, và tài liệu của Telegram nói rằng phần backend của chính bot phải kiểm tra người dùng có được phép hay không. Vì vậy một bot chính sách cần danh sách nhân viên được phép của riêng nó, và cách gỡ một người vào ngày làm việc cuối cùng của họ. Đó là cùng một việc với danh sách kiểm tra khi nhân viên nghỉ việc, áp dụng cho thêm một hệ thống. Ở đây tôi đang nói bot nào cũng cần gì, chứ không liệt kê một sản phẩm cụ thể đã có gì, nên hãy kiểm tra điều này với bất kỳ bot nào bạn triển khai.",
+          "Sau đó hãy coi những gì người ta gõ vào, và những gì có trong tài liệu, là đầu vào có thể lái mô hình. OWASP gọi đây là tấn công chèn lệnh (prompt injection): đầu vào làm mô hình hành xử theo cách không ai định trước, kể cả khi nó bị giấu khỏi mắt người. Lời khuyên của họ để hạn chế thiệt hại là cho mô hình quyền truy cập tối thiểu nó cần, giữ khóa API trong ứng dụng thay vì ở phía mô hình, và yêu cầu con người phê duyệt các hành động rủi ro. Một bot chỉ đọc tài liệu và trả lời thì có rất ít thứ để lạm dụng, đó là lý do tốt để giữ một bot chính sách đơn giản như vậy. OWASP cũng nói rõ không có phương pháp nào là tuyệt đối, nên các bước này giảm tác động chứ không xóa được rủi ro.",
+          "Tiếp đến là các khóa. Một bot như vậy giữ ít nhất một khóa dịch vụ AI và một mã Telegram. Hãy để chúng trong phần cài đặt bí mật của nền tảng lưu trữ, không để trong mã, đặt hạn mức chi tiêu với nhà cung cấp AI, và thay chúng nếu bạn không chắc ai đã thấy chúng. Nếu một người từng có quyền vào tài khoản lưu trữ rời đi, đó là một lý do để thay chúng.",
+          "Cuối cùng, hãy nhớ rằng một câu trả lời về chính sách không phải là chính sách. Quy tắc của tôi với mọi bot chính sách là nó nên nói rõ câu trả lời đến từ tài liệu nào, và nên bảo người hỏi tìm một người thật khi tài liệu không bao phủ câu hỏi. Một câu trả lời sai mà đầy tự tin về nghỉ phép hay chi phí còn tệ hơn không trả lời.",
+          "Trước khi nhân viên dùng một bot như vậy, hãy hỏi bốn câu. Trong đó có những tài liệu nào? Ai được hỏi, và tôi gỡ họ thế nào? Khóa nằm ở đâu, và hạn mức chi tiêu là bao nhiêu? Và nó làm gì khi không biết?"
+        ]
+      },
+      es: {
+        title: "Qué revisaría antes de dejar que un bot de políticas responda a tu personal",
+        tag: "Seguridad de la IA",
+        summary: "Deskmate responde las preguntas del personal a partir de los documentos de la propia empresa, así que el trabajo de seguridad está en tres lugares: los documentos, quién puede preguntar y las claves que hay detrás.",
+        body: [
+          "Deskmate es un bot de Telegram que construí para responder las preguntas del personal sobre las políticas de la empresa, a partir de los propios documentos del negocio. Funciona para un solo negocio a la vez y está desplegado en Railway. En lugar de buscar en un índice, envía los documentos al modelo de IA junto con cada pregunta. Cuando pienso en cómo proteger un bot así, el modelo es la parte más pequeña del trabajo. El trabajo está en los documentos, en quién puede preguntar y en las claves que hay detrás.",
+          {
+            "fig": "img/policy-bot-checks-es.svg", "size": [760, 300],
+            "mob": "img/policy-bot-checks-mobile-es.svg", "msize": [360, 580],
+            "alt": "Un flujo del personal en Telegram al bot de políticas y al modelo de IA. Los documentos de la empresa alimentan al bot y se envían al modelo con cada pregunta. Tres puntos que revisar: 1, qué hay en la carpeta de documentos, solo lo que todo empleado puede leer; 2, quién puede preguntar, una lista permitida y dar de baja a quien se va; 3, dónde están las claves, en ajustes secretos y con un tope de gasto.",
+            "cap": "Dónde revisar un bot de políticas"
+          },
+          "Empieza por los documentos. Como todo el conjunto va al modelo con cada pregunta, cualquier cosa de ese conjunto puede salir en una respuesta. Eso convierte la carpeta de documentos en el límite de permisos. Un manual del empleado, una política de licencias y las reglas de gastos pueden leerlos todos los empleados. Las escalas salariales, las notas de desempeño o una lista de clientes no, y ponerlas en la carpeta significa que cualquiera que pueda preguntarle al bot puede, en la práctica, leerlas. La regla que seguiría es cargar solo lo que te daría igual colgar en el tablón de anuncios del personal.",
+          "Después, quién puede preguntar. Telegram permite que cualquiera que tenga el enlace de un bot abra una conversación con él, y su documentación dice que el propio backend del bot debe comprobar que un usuario estaba autorizado. Por eso un bot de políticas necesita su propia lista de personal permitido y una forma de dar de baja a alguien el último día. Es el mismo trabajo que una lista de verificación de salidas, aplicado a un sistema más. Aquí describo lo que necesita cualquier bot de este tipo, no lo que ya hace un producto concreto, así que revisa esto en cualquier bot que despliegues.",
+          "Luego, trata lo que la gente escribe, y lo que contienen los documentos, como una entrada que puede dirigir al modelo. OWASP lo llama inyección de prompts (prompt injection): una entrada que cambia el comportamiento de un modelo de maneras que nadie pretendía, incluso cuando está oculta a los ojos humanos. Su consejo para limitar el daño es darle al modelo el mínimo acceso que necesita, mantener las claves de API en la aplicación y no junto al modelo, y exigir aprobación humana para las acciones de riesgo. Un bot que solo lee documentos y responde tiene muy poco que abusar, y es una buena razón para mantener un bot de políticas así de simple. OWASP también deja claro que ningún método es infalible, así que estos pasos reducen el impacto pero no eliminan el riesgo.",
+          "Las claves vienen después. Un bot así guarda al menos una clave del servicio de IA y un token de Telegram. Guárdalas en los ajustes secretos de la plataforma de alojamiento y fuera del código, fija un tope de gasto con el proveedor de IA y cámbialas si alguna vez no estás seguro de quién las ha visto. Si se va alguien que tenía acceso a la cuenta de alojamiento, es una razón para cambiarlas.",
+          "Por último, recuerda que una respuesta sobre una política no es la política. Mi regla general para cualquier bot de políticas es que diga de qué documento salió una respuesta y que le diga a la persona que consulte a un humano cuando los documentos no cubren la pregunta. Una respuesta equivocada y muy segura sobre licencias o gastos es peor que ninguna respuesta.",
+          "Antes de que el personal use un bot así, hazte cuatro preguntas. ¿Qué documentos tiene? ¿Quién puede preguntar y cómo doy de baja a alguien? ¿Dónde están las claves y cuál es el tope de gasto? ¿Y qué hace cuando no sabe?"
+        ]
+      }
+    }
+  },
+  {
     type: "news",
     slug: "news-2026-11-14",
     title: "AI & ICT security news: week ending 14 Nov 2026",
