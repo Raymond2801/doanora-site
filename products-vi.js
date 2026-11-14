@@ -538,7 +538,7 @@ window.I18N_PRODUCTS.vi = {
       },
       {
         h: "Cần biết thêm",
-        p: ["Giá A$15 chưa gồm GST. GST (10%) được cộng khi thanh toán với người mua tại Úc, nên tổng khoảng A$16.50. Đây là một hướng dẫn độc lập. Nó không liên kết với và không được Cơ quan Tín hiệu Úc hay Chính phủ Úc chứng nhận. Được viết theo mô hình mức độ trưởng thành Essential Eight tháng 11 năm 2023, vì vậy hãy xem cyber.gov.au nếu cần bản mới hơn. Tự đánh giá không phải là kiểm toán, và không có chứng chỉ Essential Eight. Đây là hướng dẫn chung, không phải tư vấn pháp lý. Dùng cho doanh nghiệp của riêng bạn: vui lòng không bán lại hay chia sẻ các tệp này."]
+        p: ["Giá {price} chưa gồm GST. GST (10%) được cộng khi thanh toán với người mua tại Úc, nên tổng khoảng 16,50 đô la Úc. Đây là một hướng dẫn độc lập. Nó không liên kết với và không được Cơ quan Tín hiệu Úc hay Chính phủ Úc chứng nhận. Được viết theo mô hình mức độ trưởng thành Essential Eight tháng 11 năm 2023, vì vậy hãy xem cyber.gov.au nếu cần bản mới hơn. Tự đánh giá không phải là kiểm toán, và không có chứng chỉ Essential Eight. Đây là hướng dẫn chung, không phải tư vấn pháp lý. Dùng cho doanh nghiệp của riêng bạn: vui lòng không bán lại hay chia sẻ các tệp này."]
       }
     ],
     facts: [

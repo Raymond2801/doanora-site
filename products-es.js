@@ -538,7 +538,7 @@ window.I18N_PRODUCTS.es = {
       },
       {
         h: "Para tener en cuenta",
-        p: ["El precio de A$15 no incluye GST. El GST (10%) se agrega al pagar para compradores en Australia, así que el total es de unos A$16.50. Es una guía independiente. No está afiliada ni respaldada por la Dirección de Señales de Australia ni por el Gobierno de Australia. Está escrita según el modelo de madurez del Essential Eight de noviembre de 2023, así que revisa cyber.gov.au por si hay algo más reciente. Una autoevaluación no es una auditoría, y no existe un certificado del Essential Eight. Esto es orientación general, no asesoría legal. Para uso en tu propio negocio: por favor no revender ni compartir los archivos."]
+        p: ["El precio de {price} no incluye GST. El GST (10%) se agrega al pagar para compradores en Australia, así que el total es de unos 16.50 dólares australianos. Es una guía independiente. No está afiliada ni respaldada por la Dirección de Señales de Australia ni por el Gobierno de Australia. Está escrita según el modelo de madurez del Essential Eight de noviembre de 2023, así que revisa cyber.gov.au por si hay algo más reciente. Una autoevaluación no es una auditoría, y no existe un certificado del Essential Eight. Esto es orientación general, no asesoría legal. Para uso en tu propio negocio: por favor no revender ni compartir los archivos."]
       }
     ],
     facts: [
