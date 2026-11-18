@@ -37,6 +37,113 @@
    A post goes live only after Raymond approves the draft. */
 window.BLOG_POSTS = [
   {
+    type: "news",
+    slug: "news-2026-11-18",
+    title: "AI & ICT security news: week ending 18 Nov 2026",
+    date: "2026-11-18",
+    tag: "Weekly digest",
+    summary: "A ScreenConnect add-on that accepted a blank key, N-able N-central servers targeted after exploit code went public, and trusted vendor access used to raid customer AWS accounts.",
+    body: [
+      "This week's stories share one thread: the tools your IT provider and your software vendors use to reach your systems are themselves a way in. Three stories, each with one thing you can do.",
+      { "h": "ScreenConnect add-on: a blank key let attackers run commands on managed PCs" },
+      {
+        "fig": "img/news-2026-11-18-1-remote-support-key.svg", "size": [760, 300],
+        "alt": "A browser window, a large key and three computer screens joined by dashed lines"
+      },
+      "On 11 November, Huntress reported attacks on IT providers that use ScreenConnect, the remote support tool from ConnectWise. Huntress traced the activity to RMM+, a third-party add-on, and not to ScreenConnect itself. According to Huntress, RMM+ skips the normal user accounts and multi-factor checks and relies on a shared access key, and in versions 1.0.31 and 1.0.32 that key was blank by default, so an administrator who never set one left the door open. The attackers then pushed a toolkit Huntress calls SCKit onto managed computers, which installs a second, hidden remote access client. Huntress and BleepingComputer both put the first wave at close to 300 computers across roughly 48 organisations.",
+      "ConnectWise disabled five third-party extensions in about 400 partner environments as a precaution, and BleepingComputer notes that switching them off does not remove malware that is already installed. If your IT provider uses ScreenConnect, ask them this week whether they ran RMM+ or similar add-ons, whether they have looked for a second ScreenConnect client on your machines, and whether credentials were reset. Huntress also advises against investigating an infected machine through ScreenConnect itself.",
+      { "h": "N-able N-central: exploit code went public and servers are being targeted" },
+      {
+        "fig": "img/news-2026-11-18-2-server-patch.svg", "size": [760, 300],
+        "alt": "A stack of servers, a warning triangle and a shield with a check mark"
+      },
+      "N-central is a remote management platform that IT providers use to look after their customers' computers. Huntress says N-able took its hosted N-central offline on 9 November after a researcher disclosed 33 critical flaws, and on 11 November the researcher published two more exploit chains, named 4EverAble2Shell and Agent2Shell. According to N-able, they only work when a non-default setting called the Legacy API is switched on and reachable from the internet. The Hacker News reports that 21 servers in seven countries were found infected with a cryptocurrency miner, 19 of them already on the earlier Hotfix 2. Huntress says it has not seen this in its own partners' environments, so reports differ on how widespread it is.",
+      "N-able released Hotfix 3 on 16 November, which removes the Legacy API option. If your provider runs N-central, ask whether it is on the latest hotfix, whether the agents were upgraded as well, and whether the Legacy API was ever exposed to the internet. A miner is the visible sign, and Huntback, quoted by The Hacker News, says to treat a hit as a full compromise, not a cleanup job.",
+      { "h": "Qubole: trusted cloud access used to raid customer AWS accounts" },
+      {
+        "fig": "img/news-2026-11-18-3-cloud-trust.svg", "size": [760, 300],
+        "alt": "A cloud, an open padlock and a database linked by dashed lines"
+      },
+      "Wiz reported on 9 November that between 14 and 26 October an attacker used credentials from an AWS account associated with Qubole, a data processing service, to step into its customers' AWS accounts. Those customers had created roles that trust the Qubole account, and in most cases the roles were otherwise unused, so nobody was watching them. Wiz and BleepingComputer say the attacker pulled passwords and keys from AWS secret stores, tested them against AWS, Microsoft Entra ID and Okta, and downloaded data from storage buckets, in some cases entire buckets. BleepingComputer reports that AWS said its own services were not compromised and worked as designed.",
+      "Wiz does not give a victim count, saying only that several customer environments were hit. If you use AWS, list the outside services you have allowed into your account, delete the roles for any you no longer use, and ask whoever manages your cloud to turn on logging so you could see when a vendor account steps in. Wiz notes that a condition limiting which network addresses can use the role would have blocked every attempt it saw.",
+      { "h": "What this means for my products" },
+      "All three stories are about access you gave to someone else and then stopped watching. The SME Vendor Risk Assessment Matrix lets you list up to 30 suppliers, score the risk and send each one a vendor security questionnaire, and your IT support company and software vendors belong on that list. The SME Security Incident Response Runbook gives you first steps for a compromised account or ransomware, plus a contact list to fill in before you need it. The SME IT Onboarding & Offboarding Checklist is built for staff, but its habit of removing access you no longer need applies to vendors too."
+    ],
+    sources: [
+      { "title": "Huntress: SCKit Worm Installs Rogue ScreenConnect Clients and Session Cookie Relays Across Hundreds of Endpoints", "url": "https://www.huntress.com/blog/sckit-worm-rogue-screenconnect?setlocale=en" },
+      { "title": "BleepingComputer: Active ScreenConnect attacks breach MSPs, impact dozens of organizations", "url": "https://bleepingcomputer.com/news/security/active-screenconnect-attacks-breach-msps-impact-dozens-of-organizations" },
+      { "title": "Huntress: N-able Disables Cloud Services Following Disclosure of Able2Shell Exploit Chains", "url": "https://www.huntress.com/blog/n-able-disables-cloud-services-following-disclosure-of-able2shell-exploit-chains?setlocale=en" },
+      { "title": "The Hacker News: Hackers exploit N-central flaws", "url": "https://thehackernews.com/2026/11/hackers-exploit-n-central-flaws-to.html" },
+      { "title": "Innovate Cybersecurity: Top 10 Cybersecurity News (November 16, 2026)", "url": "https://innovatecybersecurity.com/security-threat-advisory/top-10-cybersecurity-news-november-16-2026-and-more/" },
+      { "title": "Wiz: Trusted by Default: Qubole Cross-Account Access Abused in the Wild", "url": "https://www.wiz.io/blog/qubole-cross-account-access-abused-in-the-wild" },
+      { "title": "BleepingComputer: Hackers exploit trusted AWS access to breach multiple cloud environments", "url": "https://bleepingcomputer.com/news/security/hackers-exploit-trusted-aws-access-to-breach-multiple-cloud-environments" }
+    ],
+    tr: {
+      vi: {
+        title: "Bản tin AI & an ninh mạng: tuần kết thúc ngày 18 tháng 11 năm 2026",
+        tag: "Bản tin tuần",
+        summary: "Một tiện ích bổ sung của ScreenConnect chấp nhận khóa trống, các máy chủ N-able N-central bị nhắm tới sau khi mã khai thác bị công bố, và quyền truy cập được tin cậy của một nhà cung cấp bị lợi dụng để đột nhập các tài khoản AWS của khách hàng.",
+        body: [
+          "Các tin tuần này có chung một sợi chỉ: những công cụ mà nhà cung cấp IT và nhà cung cấp phần mềm của bạn dùng để vào hệ thống của bạn cũng chính là một lối vào cho kẻ tấn công. Ba tin, mỗi tin kèm một việc bạn có thể làm.",
+          { "h": "Tiện ích bổ sung của ScreenConnect: một khóa trống cho phép kẻ tấn công chạy lệnh trên các máy được quản lý" },
+          {
+            "fig": "img/news-2026-11-18-1-remote-support-key.svg", "size": [760, 300],
+            "alt": "Một cửa sổ trình duyệt, một chiếc chìa khóa lớn và ba màn hình máy tính được nối với nhau bằng các nét đứt"
+          },
+          "Ngày 11 tháng 11, Huntress báo cáo các cuộc tấn công nhằm vào các nhà cung cấp IT dùng ScreenConnect, công cụ hỗ trợ từ xa của ConnectWise. Huntress lần theo hoạt động này tới RMM+, một tiện ích bổ sung của bên thứ ba, chứ không phải chính ScreenConnect. Theo Huntress, RMM+ bỏ qua tài khoản người dùng và các bước xác thực đa yếu tố thông thường mà dựa vào một khóa truy cập dùng chung, và ở phiên bản 1.0.31 và 1.0.32 khóa đó mặc định để trống, nên quản trị viên nào chưa đặt khóa là để ngỏ cửa. Kẻ tấn công sau đó đẩy một bộ công cụ mà Huntress gọi là SCKit lên các máy được quản lý, bộ công cụ này cài thêm một phần mềm truy cập từ xa thứ hai được giấu đi. Huntress và BleepingComputer đều ước tính đợt đầu khoảng gần 300 máy tính thuộc khoảng 48 tổ chức.",
+          "ConnectWise đã vô hiệu hóa năm tiện ích mở rộng của bên thứ ba tại khoảng 400 môi trường của đối tác như một biện pháp phòng ngừa, và BleepingComputer lưu ý rằng tắt chúng không gỡ được mã độc đã được cài. Nếu nhà cung cấp IT của bạn dùng ScreenConnect, hãy hỏi họ trong tuần này xem họ có chạy RMM+ hoặc các tiện ích tương tự không, họ đã tìm phần mềm ScreenConnect thứ hai trên máy của bạn chưa, và các thông tin đăng nhập đã được đặt lại chưa. Huntress cũng khuyên không nên điều tra một máy bị nhiễm thông qua chính ScreenConnect.",
+          { "h": "N-able N-central: mã khai thác bị công bố và các máy chủ đang bị nhắm tới" },
+          {
+            "fig": "img/news-2026-11-18-2-server-patch.svg", "size": [760, 300],
+            "alt": "Một chồng máy chủ, một tam giác cảnh báo và một chiếc khiên có dấu tích"
+          },
+          "N-central là một nền tảng quản lý từ xa mà các nhà cung cấp IT dùng để chăm sóc máy tính của khách hàng. Huntress cho biết N-able đã đưa N-central dạng lưu trữ của họ ngoại tuyến vào ngày 9 tháng 11 sau khi một nhà nghiên cứu công bố 33 lỗ hổng nghiêm trọng, và ngày 11 tháng 11 nhà nghiên cứu này công bố thêm hai chuỗi khai thác, đặt tên là 4EverAble2Shell và Agent2Shell. Theo N-able, chúng chỉ hoạt động khi một thiết lập không mặc định tên là Legacy API được bật và có thể truy cập từ internet. The Hacker News đưa tin 21 máy chủ ở bảy quốc gia bị phát hiện nhiễm một phần mềm đào tiền mã hóa, trong đó 19 máy đã cài bản vá Hotfix 2 trước đó. Huntress nói họ chưa thấy điều này trong môi trường của các đối tác của mình, nên các báo cáo khác nhau về mức độ lan rộng.",
+          "N-able phát hành Hotfix 3 vào ngày 16 tháng 11, bản này gỡ bỏ tùy chọn Legacy API. Nếu nhà cung cấp của bạn chạy N-central, hãy hỏi họ đã lên hotfix mới nhất chưa, các agent đã được nâng cấp theo chưa, và Legacy API đã từng bị mở ra internet hay chưa. Phần mềm đào tiền là dấu hiệu nhìn thấy được, và Huntback, được The Hacker News trích dẫn, nói rằng hãy coi một vụ trúng đòn là bị xâm nhập hoàn toàn, không phải việc dọn dẹp.",
+          { "h": "Qubole: quyền truy cập đám mây được tin cậy bị lợi dụng để đột nhập tài khoản AWS của khách hàng" },
+          {
+            "fig": "img/news-2026-11-18-3-cloud-trust.svg", "size": [760, 300],
+            "alt": "Một đám mây, một ổ khóa đang mở và một cơ sở dữ liệu được nối với nhau bằng các nét đứt"
+          },
+          "Ngày 9 tháng 11, Wiz báo cáo rằng từ ngày 14 đến 26 tháng 10, một kẻ tấn công đã dùng thông tin đăng nhập từ một tài khoản AWS gắn với Qubole, một dịch vụ xử lý dữ liệu, để bước vào các tài khoản AWS của khách hàng. Những khách hàng này đã tạo các vai trò (role) tin tưởng tài khoản Qubole, và trong hầu hết trường hợp các vai trò đó không dùng cho việc gì khác nên không ai theo dõi. Wiz và BleepingComputer cho biết kẻ tấn công lấy mật khẩu và khóa từ các kho bí mật của AWS, thử chúng trên AWS, Microsoft Entra ID và Okta, rồi tải dữ liệu từ các kho lưu trữ, có trường hợp tải cả kho. BleepingComputer đưa tin AWS nói các dịch vụ của chính họ không bị xâm phạm và vẫn hoạt động đúng như thiết kế.",
+          "Wiz không đưa ra số nạn nhân, chỉ nói một số môi trường khách hàng bị ảnh hưởng. Nếu bạn dùng AWS, hãy liệt kê các dịch vụ bên ngoài mà bạn đã cho vào tài khoản, xóa các vai trò của dịch vụ nào bạn không dùng nữa, và nhờ người quản lý đám mây của bạn bật nhật ký để bạn có thể thấy khi nào một tài khoản của nhà cung cấp bước vào. Wiz lưu ý rằng một điều kiện giới hạn địa chỉ mạng nào được dùng vai trò đó sẽ chặn được mọi lần thử mà họ thấy.",
+          { "h": "Điều này có nghĩa gì với các sản phẩm của tôi" },
+          "Cả ba tin đều nói về quyền truy cập bạn đã trao cho người khác rồi thôi không theo dõi nữa. SME Vendor Risk Assessment Matrix cho bạn liệt kê tới 30 nhà cung cấp, chấm điểm rủi ro và gửi cho từng bên một bảng câu hỏi bảo mật nhà cung cấp, và công ty hỗ trợ IT cùng các nhà cung cấp phần mềm của bạn nên có mặt trong danh sách đó. SME Security Incident Response Runbook cho bạn các bước đầu tiên khi một tài khoản bị xâm phạm hoặc gặp ransomware, kèm danh sách liên hệ để điền trước khi cần. SME IT Onboarding & Offboarding Checklist được làm cho nhân viên, nhưng thói quen gỡ quyền truy cập không còn cần cũng áp dụng được cho các nhà cung cấp."
+        ]
+      },
+      es: {
+        title: "Noticias de IA y seguridad TIC: semana que termina el 18 de noviembre de 2026",
+        tag: "Resumen semanal",
+        summary: "Un complemento de ScreenConnect que aceptaba una clave en blanco, servidores N-central de N-able atacados después de que se publicara código de explotación, y acceso de confianza de un proveedor usado para asaltar cuentas AWS de clientes.",
+        body: [
+          "Las noticias de esta semana comparten un hilo: las herramientas que tu proveedor de TI y tus proveedores de software usan para llegar a tus sistemas son, en sí mismas, una vía de entrada. Tres noticias, cada una con algo que puedes hacer.",
+          { "h": "Complemento de ScreenConnect: una clave en blanco permitió a los atacantes ejecutar comandos en equipos administrados" },
+          {
+            "fig": "img/news-2026-11-18-1-remote-support-key.svg", "size": [760, 300],
+            "alt": "Una ventana de navegador, una llave grande y tres pantallas de computadora unidas por líneas discontinuas"
+          },
+          "El 11 de noviembre, Huntress informó de ataques contra proveedores de TI que usan ScreenConnect, la herramienta de soporte remoto de ConnectWise. Huntress atribuyó la actividad a RMM+, un complemento de terceros, y no a ScreenConnect en sí. Según Huntress, RMM+ se salta las cuentas de usuario y las verificaciones multifactor normales y se apoya en una clave de acceso compartida, y en las versiones 1.0.31 y 1.0.32 esa clave estaba en blanco por defecto, así que un administrador que nunca la configuró dejó la puerta abierta. Los atacantes enviaron entonces un conjunto de herramientas que Huntress llama SCKit a los equipos administrados, que instala un segundo cliente de acceso remoto oculto. Huntress y BleepingComputer sitúan la primera oleada en cerca de 300 equipos en unas 48 organizaciones.",
+          "ConnectWise desactivó cinco extensiones de terceros en unos 400 entornos de socios como precaución, y BleepingComputer señala que apagarlas no elimina el malware que ya está instalado. Si tu proveedor de TI usa ScreenConnect, pregúntale esta semana si usó RMM+ o complementos parecidos, si buscó un segundo cliente de ScreenConnect en tus equipos y si se restablecieron las credenciales. Huntress también aconseja no investigar un equipo infectado a través de la propia ScreenConnect.",
+          { "h": "N-central de N-able: se publicó código de explotación y los servidores están siendo atacados" },
+          {
+            "fig": "img/news-2026-11-18-2-server-patch.svg", "size": [760, 300],
+            "alt": "Una pila de servidores, un triángulo de advertencia y un escudo con una marca de verificación"
+          },
+          "N-central es una plataforma de administración remota que los proveedores de TI usan para cuidar los equipos de sus clientes. Huntress dice que N-able dejó fuera de línea su N-central alojado el 9 de noviembre después de que un investigador divulgara 33 fallas críticas, y el 11 de noviembre el investigador publicó dos cadenas de explotación más, llamadas 4EverAble2Shell y Agent2Shell. Según N-able, solo funcionan cuando una configuración no predeterminada llamada Legacy API está activada y es accesible desde internet. The Hacker News informa de que 21 servidores en siete países aparecieron infectados con un minero de criptomonedas, 19 de ellos ya con el Hotfix 2 anterior. Huntress dice que no lo ha visto en los entornos de sus propios socios, así que los informes difieren sobre cuán extendido está.",
+          "N-able publicó el Hotfix 3 el 16 de noviembre, que elimina la opción Legacy API. Si tu proveedor usa N-central, pregúntale si está en el último hotfix, si también se actualizaron los agentes y si la Legacy API estuvo alguna vez expuesta a internet. Un minero es la señal visible, y Huntback, citado por The Hacker News, dice que hay que tratar un caso así como una intrusión total, no como una tarea de limpieza.",
+          { "h": "Qubole: acceso de confianza en la nube usado para asaltar cuentas AWS de clientes" },
+          {
+            "fig": "img/news-2026-11-18-3-cloud-trust.svg", "size": [760, 300],
+            "alt": "Una nube, un candado abierto y una base de datos unidos por líneas discontinuas"
+          },
+          "Wiz informó el 9 de noviembre de que entre el 14 y el 26 de octubre un atacante usó credenciales de una cuenta de AWS asociada a Qubole, un servicio de procesamiento de datos, para entrar en las cuentas de AWS de sus clientes. Esos clientes habían creado roles que confían en la cuenta de Qubole, y en la mayoría de los casos los roles no se usaban para nada más, así que nadie los vigilaba. Wiz y BleepingComputer dicen que el atacante sacó contraseñas y claves de los almacenes de secretos de AWS, las probó contra AWS, Microsoft Entra ID y Okta, y descargó datos de buckets de almacenamiento, en algunos casos buckets enteros. BleepingComputer informa de que AWS dijo que sus propios servicios no se vieron comprometidos y funcionaron como estaban diseñados.",
+          "Wiz no da una cifra de víctimas y solo dice que varios entornos de clientes fueron afectados. Si usas AWS, haz una lista de los servicios externos a los que has permitido entrar en tu cuenta, elimina los roles de los que ya no uses y pide a quien administra tu nube que active el registro para poder ver cuándo entra la cuenta de un proveedor. Wiz señala que una condición que limite qué direcciones de red pueden usar el rol habría bloqueado todos los intentos que vio.",
+          { "h": "Qué significa esto para mis productos" },
+          "Las tres noticias tratan de un acceso que diste a otra persona y luego dejaste de vigilar. El SME Vendor Risk Assessment Matrix te permite listar hasta 30 proveedores, puntuar el riesgo y enviar a cada uno un cuestionario de seguridad para proveedores, y tu empresa de soporte de TI y tus proveedores de software deberían estar en esa lista. El SME Security Incident Response Runbook te da los primeros pasos ante una cuenta comprometida o un ransomware, además de una lista de contactos que rellenas antes de necesitarla. El SME IT Onboarding & Offboarding Checklist está pensado para el personal, pero su hábito de quitar los accesos que ya no hacen falta también sirve para los proveedores."
+        ]
+      }
+    }
+  },
+  {
     type: "blog",
     slug: "checking-a-policy-bot-before-staff-use",
     title: "What I would check before a policy bot answers your staff",

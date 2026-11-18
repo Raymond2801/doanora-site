@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" role="img">
+<g stroke-linecap="round" stroke-linejoin="round">
+<path d="M 100 210 Q 55 210 55 172 Q 55 135 100 132 Q 110 90 160 90 Q 210 90 220 132 Q 265 136 265 172 Q 265 210 225 210 Z" fill="#28616c" fill-opacity="0.2" stroke="#28616c" stroke-width="6"/>
+<line x1="268" y1="165" x2="336" y2="190" stroke="#857261" stroke-width="4" stroke-dasharray="8 8"/>
+<path d="M 365 150 L 365 115 Q 365 80 395 80 Q 425 80 425 105" fill="none" stroke="#b7410e" stroke-width="8"/>
+<rect x="345" y="150" width="90" height="80" rx="12" fill="#f6f1ea" stroke="#b7410e" stroke-width="7"/>
+<circle cx="390" cy="182" r="9" fill="#241208"/>
+<line x1="390" y1="188" x2="390" y2="208" stroke="#241208" stroke-width="6"/>
+<line x1="442" y1="190" x2="536" y2="170" stroke="#b7410e" stroke-width="4" stroke-dasharray="8 8"/>
+<path d="M 545 80 L 545 220 Q 545 245 625 245 Q 705 245 705 220 L 705 80" fill="#f6f1ea" stroke="#241208" stroke-width="5"/>
+<ellipse cx="625" cy="80" rx="80" ry="22" fill="#7fbb9e" fill-opacity="0.5" stroke="#241208" stroke-width="5"/>
+<path d="M 545 130 Q 545 155 625 155 Q 705 155 705 130" fill="none" stroke="#857261" stroke-width="4"/>
+<path d="M 545 180 Q 545 205 625 205 Q 705 205 705 180" fill="none" stroke="#857261" stroke-width="4"/>
+</g>
+</svg>

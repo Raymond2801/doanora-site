@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" role="img">
+<g stroke-linecap="round" stroke-linejoin="round">
+<rect x="60" y="60" width="170" height="50" rx="10" fill="#f6f1ea" stroke="#241208" stroke-width="5"/>
+<circle cx="92" cy="85" r="8" fill="#7fbb9e"/>
+<rect x="60" y="125" width="170" height="50" rx="10" fill="#f6f1ea" stroke="#241208" stroke-width="5"/>
+<circle cx="92" cy="150" r="8" fill="#7fbb9e"/>
+<rect x="60" y="190" width="170" height="50" rx="10" fill="#f6f1ea" stroke="#241208" stroke-width="5"/>
+<circle cx="92" cy="215" r="8" fill="#7fbb9e"/>
+<line x1="234" y1="150" x2="322" y2="150" stroke="#857261" stroke-width="4" stroke-dasharray="8 8"/>
+<polygon points="380,60 460,200 300,200" fill="#b7410e" fill-opacity="0.25" stroke="#b7410e" stroke-width="8"/>
+<line x1="380" y1="105" x2="380" y2="150" stroke="#b7410e" stroke-width="9"/>
+<circle cx="380" cy="176" r="7" fill="#b7410e"/>
+<line x1="438" y1="150" x2="534" y2="150" stroke="#857261" stroke-width="4" stroke-dasharray="8 8"/>
+<path d="M 620 60 L 700 90 L 700 160 Q 700 220 620 250 Q 540 220 540 160 L 540 90 Z" fill="#7fbb9e" fill-opacity="0.5" stroke="#28616c" stroke-width="6"/>
+<polyline points="585,155 612,185 660,125" fill="none" stroke="#28616c" stroke-width="9"/>
+</g>
+</svg>
