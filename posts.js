@@ -37,6 +37,70 @@
    A post goes live only after Raymond approves the draft. */
 window.BLOG_POSTS = [
   {
+    type: "blog",
+    slug: "before-you-pay-the-urgent-invoice",
+    title: "Before you pay that urgent invoice: three signs and one phone call",
+    date: "2026-11-21",
+    tag: "Security lessons",
+    summary: "Fake invoices and fake requests from the boss work because paying a bill is normal, and one phone call to a number you already trust stops most of them.",
+    body: [
+      "Picture a Tuesday afternoon at a small business. An email arrives that looks like it is from the owner: can you pay this invoice today, it is urgent, I am in meetings and cannot talk. Or one from a regular supplier: our bank details have changed, please use the new account for this invoice. These are versions of the same scam, and Business Victoria's guidance notes that they rely more on social manipulation than technical tricks. They work because paying a bill is a normal thing to do.",
+      { "h": "Three signs worth a second look" },
+      "Lists from the Small Business Development Corporation in Western Australia and from Business Victoria overlap on three. First, an unexpected change of bank details, such as a supplier giving you a new account. Second, urgency or pressure: an urgent payment, or a threat of consequences if it is late. Third, a request from someone in authority, or from a team member, who would not normally ask for payments. Business Victoria also lists an email address that does not quite match, such as a domain that differs slightly from the supplier's name, and an amount that differs from previous invoices.",
+      "The sign you cannot rely on is the email looking right. Scamwatch says a fake invoice can come from the real business's address, because scammers have got into its systems, or from an address that is only slightly changed. It can sit in the same email conversation as genuine messages, and the scammer may change only the banking details and leave the rest looking real. Business Victoria says the criminal often has control of the supplier's own email account. So an email that looks right proves very little.",
+      { "h": "The one habit: ring a number you already trust" },
+      "All three sources give the same fix. Before you pay, confirm the payment details by phone with the person or business, using a number you found independently, such as the one on the company's website or in your own records, and not the number in the email. Scamwatch puts it in one line: always check payment details directly with a business before paying an emailed invoice. If the request seems to come from someone inside your own team, Business Victoria says to ring that person and tell your IT contact. The call works because it moves the check to a channel the scammer does not control, and it takes two minutes.",
+      "Make it a rule and not a judgment call: any change of bank details gets confirmed by phone, no exceptions, including when the request appears to come from the boss. A rule is easier to follow under pressure than a feeling, and the scam is built to create pressure.",
+      { "h": "If you have already paid" },
+      "The Small Business Development Corporation advises calling your bank or financial institution straight away. Scamwatch and the Small Business Development Corporation both send business email fraud reports to the Australian Cyber Security Centre through cyber.gov.au, and Scamwatch also takes scam reports. Speed matters, so do the call to the bank first and the paperwork after.",
+      { "h": "Where this shows up in my work" },
+      "One of the twelve posters in my SME Security Awareness Poster Pack is about payment fraud, written in plain English so a team with no security department can put it on the wall. The SME Security Incident Response Runbook has first-step actions for a compromised account and a key contacts list to fill in before you need it. And on this site I built a small game, Phishing Hunter, where you look at ten messages and decide whether each is safe or phishing, with a short explanation after every answer. It is a low-pressure way to practise noticing the signs above."
+    ],
+    sources: [
+      { "title": "Scamwatch (ACCC): Scam alert, fake business invoice scams", "url": "https://www.scamwatch.gov.au/about-us/news-and-alerts/scam-alert-fake-business-invoice-scams" },
+      { "title": "Small Business Development Corporation WA: Beware of business email compromise scams", "url": "https://www.smallbusiness.wa.gov.au/blog/beware-business-email-compromise-scams" },
+      { "title": "Business Victoria: How to protect your business from business email compromise (BEC)", "url": "https://business.vic.gov.au/learning-and-advice/hub/how-to-protect-your-business-from-business-email-compromise-bec" }
+    ],
+    tr: {
+      vi: {
+        title: "Trước khi bạn thanh toán hóa đơn gấp đó: ba dấu hiệu và một cuộc gọi",
+        tag: "Bài học bảo mật",
+        summary: "Hóa đơn giả và yêu cầu giả danh sếp hiệu quả vì thanh toán hóa đơn là việc bình thường, và một cuộc gọi tới số bạn đã tin cậy chặn được phần lớn chúng.",
+        body: [
+          "Hãy hình dung một chiều thứ Ba ở một doanh nghiệp nhỏ. Một email đến, trông như từ chủ doanh nghiệp: bạn thanh toán giúp hóa đơn này trong hôm nay nhé, gấp lắm, tôi đang họp và không nghe máy được. Hoặc một email từ nhà cung cấp quen: thông tin ngân hàng của chúng tôi đã đổi, vui lòng dùng tài khoản mới cho hóa đơn này. Đây là các phiên bản của cùng một trò lừa, và hướng dẫn của Business Victoria lưu ý rằng chúng dựa vào thao túng tâm lý nhiều hơn là mánh kỹ thuật. Chúng hiệu quả vì thanh toán hóa đơn là việc rất bình thường.",
+          { "h": "Ba dấu hiệu đáng nhìn lại" },
+          "Danh sách của Small Business Development Corporation ở Tây Úc và của Business Victoria trùng nhau ở ba điểm. Thứ nhất, thay đổi bất ngờ về thông tin ngân hàng, chẳng hạn nhà cung cấp đưa cho bạn một tài khoản mới. Thứ hai, sự gấp gáp hoặc áp lực: yêu cầu thanh toán gấp, hoặc đe dọa hậu quả nếu trễ. Thứ ba, yêu cầu từ một người có quyền, hoặc từ một thành viên trong nhóm, vốn không thường đề nghị thanh toán. Business Victoria còn nêu địa chỉ email không khớp hoàn toàn, chẳng hạn tên miền khác một chút so với tên nhà cung cấp, và số tiền khác với các hóa đơn trước.",
+          "Dấu hiệu bạn không thể dựa vào là việc email trông đúng. Scamwatch cho biết một hóa đơn giả có thể đến từ chính địa chỉ của doanh nghiệp thật, vì kẻ lừa đảo đã xâm nhập hệ thống của họ, hoặc từ một địa chỉ chỉ khác đi chút ít. Nó có thể nằm trong cùng chuỗi email với các thư thật, và kẻ lừa đảo có thể chỉ đổi thông tin ngân hàng và giữ nguyên phần còn lại trông như thật. Business Victoria nói tội phạm thường kiểm soát chính tài khoản email của nhà cung cấp. Vì vậy một email trông đúng chứng minh được rất ít.",
+          { "h": "Một thói quen: gọi tới số bạn đã tin cậy" },
+          "Cả ba nguồn đều đưa ra cùng một cách xử lý. Trước khi thanh toán, hãy xác nhận thông tin thanh toán bằng điện thoại với người hoặc doanh nghiệp đó, dùng số bạn tự tìm được, chẳng hạn số trên trang web của công ty hoặc trong hồ sơ của bạn, chứ không phải số trong email. Scamwatch tóm lại trong một câu: luôn kiểm tra thông tin thanh toán trực tiếp với doanh nghiệp trước khi trả một hóa đơn gửi qua email. Nếu yêu cầu có vẻ đến từ một người trong nhóm của bạn, Business Victoria nói hãy gọi cho người đó và báo cho đầu mối IT của bạn. Cuộc gọi hiệu quả vì nó chuyển việc kiểm tra sang một kênh mà kẻ lừa đảo không kiểm soát, và chỉ mất hai phút.",
+          "Hãy biến nó thành một quy tắc chứ không phải một sự cân nhắc: mọi thay đổi thông tin ngân hàng đều được xác nhận qua điện thoại, không ngoại lệ, kể cả khi yêu cầu có vẻ đến từ sếp. Một quy tắc dễ tuân theo dưới áp lực hơn một cảm giác, và trò lừa này được dựng lên để tạo áp lực.",
+          { "h": "Nếu bạn đã lỡ thanh toán" },
+          "Small Business Development Corporation khuyên gọi ngay cho ngân hàng hoặc tổ chức tài chính của bạn. Scamwatch và Small Business Development Corporation đều hướng việc báo cáo gian lận email doanh nghiệp tới Australian Cyber Security Centre qua cyber.gov.au, và Scamwatch cũng nhận báo cáo lừa đảo. Tốc độ quan trọng, nên hãy gọi ngân hàng trước và làm giấy tờ sau.",
+          { "h": "Điều này xuất hiện ở đâu trong công việc của tôi" },
+          "Một trong mười hai tấm poster trong SME Security Awareness Poster Pack của tôi nói về gian lận thanh toán, viết bằng ngôn ngữ dễ hiểu để một đội không có bộ phận bảo mật cũng dán lên tường được. SME Security Incident Response Runbook có các bước đầu tiên khi một tài khoản bị xâm phạm và một danh sách liên hệ chính để điền trước khi cần. Và trên trang này tôi làm một trò chơi nhỏ, Phishing Hunter, nơi bạn xem mười tin nhắn và quyết định cái nào an toàn, cái nào là lừa đảo, kèm lời giải thích ngắn sau mỗi câu trả lời. Đó là cách ít áp lực để luyện việc nhận ra các dấu hiệu ở trên."
+        ]
+      },
+      es: {
+        title: "Antes de pagar esa factura urgente: tres señales y una llamada",
+        tag: "Lecciones de seguridad",
+        summary: "Las facturas falsas y los falsos pedidos del jefe funcionan porque pagar una cuenta es algo normal, y una llamada a un número en el que ya confías detiene a la mayoría.",
+        body: [
+          "Imagina una tarde de martes en un negocio pequeño. Llega un correo que parece del dueño: puedes pagar esta factura hoy, es urgente, estoy en reuniones y no puedo hablar. O uno de un proveedor habitual: nuestros datos bancarios han cambiado, usa la cuenta nueva para esta factura. Son versiones de la misma estafa, y la guía de Business Victoria señala que se apoyan más en la manipulación social que en trucos técnicos. Funcionan porque pagar una cuenta es algo normal.",
+          { "h": "Tres señales que merecen una segunda mirada" },
+          "Las listas de la Small Business Development Corporation de Australia Occidental y de Business Victoria coinciden en tres. Primero, un cambio inesperado en los datos bancarios, por ejemplo un proveedor que te da una cuenta nueva. Segundo, urgencia o presión: un pago urgente, o la amenaza de consecuencias si se retrasa. Tercero, una solicitud de alguien con autoridad, o de un miembro del equipo, que normalmente no pediría pagos. Business Victoria también menciona una dirección de correo que no coincide del todo, como un dominio que difiere un poco del nombre del proveedor, y un importe distinto al de facturas anteriores.",
+          "La señal en la que no puedes confiar es que el correo se vea bien. Scamwatch dice que una factura falsa puede venir de la dirección real de la empresa, porque los estafadores han entrado en sus sistemas, o de una dirección apenas modificada. Puede estar en la misma conversación de correo que mensajes genuinos, y el estafador puede cambiar solo los datos bancarios y dejar el resto con apariencia real. Business Victoria dice que el delincuente suele controlar la propia cuenta de correo del proveedor. Por eso, un correo que se ve bien prueba muy poco.",
+          { "h": "El hábito: llama a un número en el que ya confías" },
+          "Las tres fuentes dan la misma solución. Antes de pagar, confirma los datos de pago por teléfono con la persona o la empresa, usando un número que hayas encontrado por tu cuenta, como el del sitio web de la empresa o el de tus propios registros, y no el número del correo. Scamwatch lo resume en una línea: comprueba siempre los datos de pago directamente con la empresa antes de pagar una factura enviada por correo. Si la solicitud parece venir de alguien de tu propio equipo, Business Victoria dice que llames a esa persona y avises a tu contacto de TI. La llamada funciona porque traslada la comprobación a un canal que el estafador no controla, y toma dos minutos.",
+          "Conviértelo en una regla y no en una decisión a criterio: cualquier cambio de datos bancarios se confirma por teléfono, sin excepciones, incluso cuando la solicitud parece venir del jefe. Una regla es más fácil de seguir bajo presión que una intuición, y la estafa está hecha para crear presión.",
+          { "h": "Si ya pagaste" },
+          "La Small Business Development Corporation aconseja llamar de inmediato a tu banco o institución financiera. Scamwatch y la Small Business Development Corporation dirigen los reportes de fraude por correo empresarial al Australian Cyber Security Centre a través de cyber.gov.au, y Scamwatch también recibe reportes de estafas. La rapidez importa, así que haz primero la llamada al banco y después el papeleo.",
+          { "h": "Dónde aparece esto en mi trabajo" },
+          "Uno de los doce pósters de mi SME Security Awareness Poster Pack trata sobre el fraude en pagos, escrito en lenguaje sencillo para que un equipo sin departamento de seguridad pueda ponerlo en la pared. El SME Security Incident Response Runbook incluye acciones de primeros pasos ante una cuenta comprometida y una lista de contactos clave para completar antes de necesitarla. Y en este sitio creé un pequeño juego, Phishing Hunter, donde ves diez mensajes y decides si cada uno es seguro o phishing, con una breve explicación después de cada respuesta. Es una forma sin presión de practicar el reconocimiento de las señales anteriores."
+        ]
+      }
+    }
+  },
+  {
     type: "news",
     slug: "news-2026-11-21",
     title: "AI & ICT security news: week ending 21 Nov 2026",
