@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" role="img">
+<g stroke-linecap="round" stroke-linejoin="round">
+<polygon points="60,50 170,50 210,90 210,250 60,250" fill="#f6f1ea" stroke="#241208" stroke-width="5"/>
+<polyline points="170,50 170,90 210,90" fill="none" stroke="#241208" stroke-width="4"/>
+<line x1="85" y1="130" x2="185" y2="130" stroke="#857261" stroke-width="5"/>
+<line x1="85" y1="165" x2="165" y2="165" stroke="#28616c" stroke-width="5"/>
+<line x1="85" y1="200" x2="185" y2="200" stroke="#857261" stroke-width="5"/>
+<line x1="215" y1="150" x2="290" y2="150" stroke="#857261" stroke-width="4" stroke-dasharray="8 8"/>
+<rect x="300" y="130" width="130" height="110" rx="14" fill="#b7410e" fill-opacity="0.25" stroke="#b7410e" stroke-width="7"/>
+<path d="M330 130 V90 A35 35 0 0 1 400 90" fill="none" stroke="#b7410e" stroke-width="9"/>
+<circle cx="365" cy="180" r="12" fill="#241208"/>
+<line x1="365" y1="190" x2="365" y2="215" stroke="#241208" stroke-width="8"/>
+<line x1="435" y1="180" x2="500" y2="180" stroke="#857261" stroke-width="4" stroke-dasharray="8 8"/>
+<rect x="510" y="60" width="200" height="60" rx="10" fill="#f6f1ea" stroke="#241208" stroke-width="5"/>
+<circle cx="542" cy="90" r="9" fill="#28616c"/>
+<rect x="510" y="150" width="200" height="60" rx="10" fill="#f6f1ea" stroke="#241208" stroke-width="5"/>
+<circle cx="542" cy="180" r="9" fill="#28616c"/>
+<rect x="510" y="240" width="200" height="30" rx="10" fill="#f6f1ea" stroke="#241208" stroke-width="5"/>
+</g>
+</svg>

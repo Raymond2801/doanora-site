@@ -38,6 +38,90 @@
 window.BLOG_POSTS = [
   {
     type: "news",
+    slug: "news-2026-11-21",
+    title: "AI & ICT security news: week ending 21 Nov 2026",
+    date: "2026-11-21",
+    tag: "Weekly digest",
+    summary: "A VMware vCenter flaw exploited for more than two months before a fix, and a Cisco BroadWorks bug listed as exploited nearly three months after its patch.",
+    body: [
+      "Two stories this week, and both are about the gap between a fix existing and a fix being installed. One flaw was exploited for months before any fix was released. The other had a fix for nearly three months before it was listed as exploited.",
+      { "h": "VMware vCenter: a critical flaw was exploited for more than two months before a fix" },
+      {
+        "fig": "img/news-2026-11-21-1-vcenter-key.svg", "size": [760, 300],
+        "alt": "A browser window, a stack of servers and a large key joined by dashed lines"
+      },
+      "On 19 November, Broadcom released fixes for CVE-2026-123890, a flaw in VMware vCenter, the console used to manage virtual servers. It scores 9.8 out of 10 and lets a remote attacker with no password obtain an administrator session. Google's Threat Intelligence Group and Mandiant say it was exploited from at least early September, and Mandiant says it investigated multiple incidents. Google attributes the activity to a suspected China-linked espionage group it calls Armory Castle. Help Net Security notes that Broadcom's advisory does not mention the exploitation.",
+      "According to SecurityWeek, the attackers did not start at vCenter. They first got in through a separate, recently patched zero-day in BeyondTrust Remote Support (CVE-2026-102764), moved onto the internal network, and then used the vCenter flaw to create an administrator account and forge sign-in tokens. Broadcom says there are no workarounds. Mandiant's advice, quoted by Help Net Security, is to apply the patches and also check your systems for signs of compromise. If you run vCenter yourself or through an IT provider, ask which version is running, whether it has the 19 November fix, and whether anyone has looked for signs of compromise going back to early September. Ask too whether any remote support tool can reach those servers.",
+      { "h": "Cisco BroadWorks: listed as exploited nearly three months after the fix" },
+      {
+        "fig": "img/news-2026-11-21-2-phone-system-file.svg", "size": [760, 300],
+        "alt": "A document, an open padlock and a stack of servers joined by dashed lines"
+      },
+      "Cisco BroadWorks is a platform used by phone and communications providers. On 10 November, CISA added CVE-2026-20320 to its list of known exploited vulnerabilities. Cisco had published its fix on 19 August. The flaw is an XML external entity weakness that lets a remote attacker with no login read sensitive information, and Cisco rates it 7.5 out of 10. Rescana reports that the fix is release RI.2026.07 and that Cisco lists no workaround.",
+      "CISA has not shared details of the attacks. BleepingComputer reports that a threat intelligence firm, Malbear Labs, said a Chinese-speaking actor used the flaw against a European telecom provider, and Rescana notes that this claim is unverified and that Cisco has not confirmed it. Hadrian, quoted by SC Media, says attackers are going after systems that never received the August patch, and advises rotating credentials that might have been exposed. US federal agencies must patch by 24 November, a deadline that binds only them. If you buy phone or communications services from a provider, ask whether they run BroadWorks and whether it is on release RI.2026.07.",
+      { "h": "What this means for my products" },
+      "Both stories ask you to find out what your suppliers have installed and what they would do if it went wrong. The SME Vendor Risk Assessment Matrix lets you list up to 30 suppliers, score the risk and send each one a vendor security questionnaire, so the patching question can go to your IT and phone providers in writing. The SME Security Incident Response Runbook gives you first steps for a compromised account or ransomware, plus a contact list to fill in before you need it."
+    ],
+    sources: [
+      { "title": "Help Net Security: VMware vCenter zero-day (CVE-2026-123890) exploited for months before patch", "url": "https://www.helpnetsecurity.com/2026/11/20/vmware-vcenter-zero-day-cve-2026-123890-exploited/" },
+      { "title": "SecurityWeek: Newly patched VMware vCenter flaw exploited as zero-day by Chinese APT", "url": "https://www.securityweek.com/newly-patched-vmware-vcenter-flaw-exploited-as-zero-day-by-chinese-apt/" },
+      { "title": "BleepingComputer: CISA flags Cisco BroadWorks flaw as actively exploited in attacks", "url": "https://bleepingcomputer.com/news/security/cisa-flags-cisco-broadworks-flaw-as-actively-exploited-in-attacks" },
+      { "title": "SC Media: Cisco BroadWorks flaw added to CISA's exploited vulnerabilities list", "url": "https://www.scworld.com/news/cisco-broadworks-flaw-added-to-cisas-exploited-vulnerabilities-list" },
+      { "title": "Rescana: Cisco BroadWorks CVE-2026-20320 XXE added to KEV", "url": "https://www.rescana.com/post/cisco-broadworks-cve-2026-20320-xxe-kev-patch-now" }
+    ],
+    tr: {
+      vi: {
+        title: "Bản tin AI & an ninh ICT: tuần kết thúc ngày 21/11/2026",
+        tag: "Bản tin tuần",
+        summary: "Một lỗ hổng VMware vCenter bị khai thác hơn hai tháng trước khi có bản vá, và một lỗi Cisco BroadWorks bị xếp vào danh sách đang bị khai thác gần ba tháng sau khi đã có bản vá.",
+        body: [
+          "Tuần này có hai tin, và cả hai đều nói về khoảng cách giữa việc bản vá đã có và việc bản vá được cài. Một lỗ hổng bị khai thác nhiều tháng trước khi có bản vá nào được phát hành. Lỗ hổng kia đã có bản vá gần ba tháng trước khi bị xếp vào danh sách đang bị khai thác.",
+          { "h": "VMware vCenter: một lỗ hổng nghiêm trọng bị khai thác hơn hai tháng trước khi có bản vá" },
+          {
+            "fig": "img/news-2026-11-21-1-vcenter-key.svg", "size": [760, 300],
+            "alt": "Một cửa sổ trình duyệt, một chồng máy chủ và một chiếc chìa khóa lớn nối với nhau bằng các nét đứt"
+          },
+          "Ngày 19/11, Broadcom phát hành bản vá cho CVE-2026-123890, một lỗ hổng trong VMware vCenter, bảng điều khiển dùng để quản lý các máy chủ ảo. Lỗ hổng được chấm 9,8 trên 10 và cho phép kẻ tấn công từ xa, không cần mật khẩu, lấy được phiên quản trị viên. Nhóm Google Threat Intelligence Group và Mandiant cho biết nó bị khai thác từ ít nhất đầu tháng 9, và Mandiant nói họ đã điều tra nhiều vụ việc. Google quy hoạt động này cho một nhóm gián điệp bị nghi có liên hệ với Trung Quốc mà họ gọi là Armory Castle. Help Net Security lưu ý rằng thông báo của Broadcom không nhắc tới việc lỗ hổng đã bị khai thác.",
+          "Theo SecurityWeek, kẻ tấn công không bắt đầu từ vCenter. Chúng vào trước qua một lỗ hổng zero-day riêng, vừa được vá, trong BeyondTrust Remote Support (CVE-2026-102764), di chuyển vào mạng nội bộ, rồi dùng lỗ hổng vCenter để tạo tài khoản quản trị và giả mạo mã đăng nhập. Broadcom nói không có cách xử lý tạm thời nào khác ngoài việc vá. Lời khuyên của Mandiant, do Help Net Security trích dẫn, là vá và đồng thời kiểm tra hệ thống xem có dấu hiệu bị xâm nhập không. Nếu bạn tự chạy vCenter hoặc chạy qua nhà cung cấp IT, hãy hỏi phiên bản nào đang chạy, đã có bản vá ngày 19/11 chưa, và đã có ai tìm dấu hiệu xâm nhập ngược về đầu tháng 9 chưa. Cũng hỏi xem có công cụ hỗ trợ từ xa nào truy cập được các máy chủ đó không.",
+          { "h": "Cisco BroadWorks: bị xếp vào danh sách đang bị khai thác gần ba tháng sau khi có bản vá" },
+          {
+            "fig": "img/news-2026-11-21-2-phone-system-file.svg", "size": [760, 300],
+            "alt": "Một tài liệu, một ổ khóa đang mở và một chồng máy chủ nối với nhau bằng các nét đứt"
+          },
+          "Cisco BroadWorks là nền tảng mà các nhà cung cấp dịch vụ điện thoại và truyền thông sử dụng. Ngày 10/11, CISA thêm CVE-2026-20320 vào danh sách các lỗ hổng đã biết là đang bị khai thác. Cisco đã công bố bản vá từ ngày 19/8. Lỗi này là một điểm yếu XML external entity, cho phép kẻ tấn công từ xa, không cần đăng nhập, đọc thông tin nhạy cảm, và Cisco chấm 7,5 trên 10. Rescana cho biết bản vá là bản phát hành RI.2026.07 và Cisco không nêu cách xử lý tạm thời nào.",
+          "CISA chưa chia sẻ chi tiết các vụ tấn công. BleepingComputer cho biết một hãng tình báo mối đe dọa, Malbear Labs, nói rằng một đối tượng nói tiếng Trung đã dùng lỗ hổng này nhắm vào một nhà cung cấp viễn thông châu Âu, còn Rescana lưu ý rằng nhận định này chưa được xác minh và Cisco chưa xác nhận. Hadrian, được SC Media trích dẫn, nói kẻ tấn công đang nhắm vào các hệ thống chưa nhận bản vá tháng 8, và khuyên đổi các thông tin đăng nhập có thể đã bị lộ. Các cơ quan liên bang Mỹ phải vá trước ngày 24/11, một hạn chót chỉ ràng buộc họ. Nếu bạn mua dịch vụ điện thoại hoặc truyền thông từ một nhà cung cấp, hãy hỏi họ có chạy BroadWorks không và đã lên bản phát hành RI.2026.07 chưa.",
+          { "h": "Điều này có nghĩa gì với các sản phẩm của tôi" },
+          "Cả hai tin đều đòi hỏi bạn phải tìm hiểu nhà cung cấp của mình đã cài những gì và sẽ làm gì nếu có sự cố. SME Vendor Risk Assessment Matrix cho bạn liệt kê tới 30 nhà cung cấp, chấm điểm rủi ro và gửi cho từng bên một bảng câu hỏi bảo mật nhà cung cấp, để câu hỏi về việc vá lỗi có thể gửi bằng văn bản cho các nhà cung cấp IT và điện thoại của bạn. SME Security Incident Response Runbook cho bạn các bước đầu tiên khi một tài khoản bị xâm phạm hoặc gặp ransomware, kèm danh sách liên hệ để điền trước khi cần."
+        ]
+      },
+      es: {
+        title: "Noticias de IA y seguridad TIC: semana que termina el 21 de nov de 2026",
+        tag: "Resumen semanal",
+        summary: "Una falla de VMware vCenter explotada durante más de dos meses antes de tener parche, y un error de Cisco BroadWorks incluido como explotado casi tres meses después de su parche.",
+        body: [
+          "Esta semana hay dos noticias, y ambas tratan de la distancia entre que exista un parche y que se instale. Una falla fue explotada durante meses antes de que se publicara cualquier parche. La otra tenía parche desde hacía casi tres meses cuando fue incluida como explotada.",
+          { "h": "VMware vCenter: una falla crítica fue explotada durante más de dos meses antes de tener parche" },
+          {
+            "fig": "img/news-2026-11-21-1-vcenter-key.svg", "size": [760, 300],
+            "alt": "Una ventana de navegador, una pila de servidores y una llave grande unidas por líneas discontinuas"
+          },
+          "El 19 de noviembre, Broadcom publicó correcciones para CVE-2026-123890, una falla en VMware vCenter, la consola que se usa para administrar servidores virtuales. Tiene una puntuación de 9,8 sobre 10 y permite que un atacante remoto, sin contraseña, obtenga una sesión de administrador. El Google Threat Intelligence Group y Mandiant dicen que se explotó desde al menos principios de septiembre, y Mandiant afirma que investigó varios incidentes. Google atribuye la actividad a un grupo de espionaje presuntamente vinculado a China, al que llama Armory Castle. Help Net Security señala que el aviso de Broadcom no menciona la explotación.",
+          "Según SecurityWeek, los atacantes no empezaron por vCenter. Primero entraron por un zero-day distinto, recién corregido, en BeyondTrust Remote Support (CVE-2026-102764), se movieron a la red interna y luego usaron la falla de vCenter para crear una cuenta de administrador y falsificar tokens de inicio de sesión. Broadcom dice que no hay soluciones alternativas. El consejo de Mandiant, citado por Help Net Security, es aplicar los parches y además revisar tus sistemas en busca de señales de compromiso. Si usas vCenter por tu cuenta o a través de un proveedor de TI, pregunta qué versión está en ejecución, si tiene la corrección del 19 de noviembre y si alguien ha buscado señales de compromiso desde principios de septiembre. Pregunta también si alguna herramienta de soporte remoto puede llegar a esos servidores.",
+          { "h": "Cisco BroadWorks: incluido como explotado casi tres meses después de la corrección" },
+          {
+            "fig": "img/news-2026-11-21-2-phone-system-file.svg", "size": [760, 300],
+            "alt": "Un documento, un candado abierto y una pila de servidores unidos por líneas discontinuas"
+          },
+          "Cisco BroadWorks es una plataforma que usan los proveedores de telefonía y comunicaciones. El 10 de noviembre, CISA añadió CVE-2026-20320 a su lista de vulnerabilidades conocidas como explotadas. Cisco había publicado su corrección el 19 de agosto. La falla es una debilidad de entidad externa XML que permite que un atacante remoto, sin iniciar sesión, lea información sensible, y Cisco la califica con 7,5 sobre 10. Rescana informa que la corrección es la versión RI.2026.07 y que Cisco no indica ninguna solución alternativa.",
+          "CISA no ha compartido detalles de los ataques. BleepingComputer informa que una empresa de inteligencia de amenazas, Malbear Labs, dijo que un actor de habla china usó la falla contra un proveedor de telecomunicaciones europeo, y Rescana señala que esa afirmación no está verificada y que Cisco no la ha confirmado. Hadrian, citado por SC Media, dice que los atacantes van tras sistemas que nunca recibieron el parche de agosto, y aconseja rotar las credenciales que pudieran haberse expuesto. Las agencias federales de EE. UU. deben aplicar el parche antes del 24 de noviembre, un plazo que solo las obliga a ellas. Si compras servicios de telefonía o comunicaciones a un proveedor, pregunta si usa BroadWorks y si está en la versión RI.2026.07.",
+          { "h": "Qué significa esto para mis productos" },
+          "Ambas noticias te piden averiguar qué han instalado tus proveedores y qué harían si algo saliera mal. La SME Vendor Risk Assessment Matrix te permite listar hasta 30 proveedores, puntuar el riesgo y enviar a cada uno un cuestionario de seguridad, de modo que la pregunta sobre los parches pueda llegar por escrito a tus proveedores de TI y de telefonía. El SME Security Incident Response Runbook te da los primeros pasos ante una cuenta comprometida o un ransomware, además de una lista de contactos para completar antes de necesitarla."
+        ]
+      }
+    }
+  },
+  {
+    type: "news",
     slug: "news-2026-11-18",
     title: "AI & ICT security news: week ending 18 Nov 2026",
     date: "2026-11-18",
